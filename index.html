@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chasha | چاشا</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="./public/assets/images/chasha-symbol.svg" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <style>
+      :root {
+        --bg: #020503;
+        --surface: rgba(10, 20, 15, 0.55);
+
+        --green-1: #163824;
+        --green-2: #1f5d39;
+        --green-3: #2f8f55;
+        --green-4: #54c878;
+
+        --text: #eef7f1;
+        --muted: #8ca896;
+
+        --border: rgba(84, 200, 120, 0.12);
+        --border-hover: rgba(84, 200, 120, 0.35);
+
+        --shadow: 0 40px 120px rgba(0, 0, 0, 0.75), 0 0 80px rgba(84, 200, 120, 0.08);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+
+        display: grid;
+        place-items: center;
+
+        overflow: hidden;
+
+        background: radial-gradient(circle at top, #17452d 0%, transparent 35%), radial-gradient(circle at bottom, #08130d 0%, transparent 45%), linear-gradient(#040604, #010201);
+
+        font-family: 'Cormorant Garamond', serif;
+
+        color: var(--text);
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+
+        background: radial-gradient(circle, rgba(84, 200, 120, 0.07) 1px, transparent 1px);
+
+        background-size: 38px 38px;
+
+        opacity: 0.18;
+      }
+
+      .card {
+        width: min(640px, 90vw);
+
+        position: relative;
+
+        padding: 70px 60px;
+
+        text-align: center;
+
+        background: var(--surface);
+
+        backdrop-filter: blur(30px);
+
+        border: 1px solid var(--border);
+
+        box-shadow: var(--shadow);
+
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: '';
+
+        position: absolute;
+
+        inset: -1px;
+
+        background: linear-gradient(135deg, rgba(84, 200, 120, 0.2), transparent 35%, transparent 65%, rgba(84, 200, 120, 0.12));
+
+        pointer-events: none;
+      }
+
+      .card::after {
+        content: '';
+
+        position: absolute;
+
+        width: 300px;
+        height: 300px;
+
+        background: radial-gradient(circle, rgba(84, 200, 120, 0.12), transparent 70%);
+
+        left: 50%;
+        top: -180px;
+
+        transform: translateX(-50%);
+      }
+
+      .corner {
+        position: absolute;
+
+        width: 36px;
+        height: 36px;
+
+        border: 1px solid var(--border);
+
+        transition: 0.5s;
+      }
+
+      .tl {
+        left: 14px;
+        top: 14px;
+
+        border-right: none;
+        border-bottom: none;
+      }
+
+      .tr {
+        right: 14px;
+        top: 14px;
+
+        border-left: none;
+        border-bottom: none;
+      }
+
+      .bl {
+        left: 14px;
+        bottom: 14px;
+
+        border-right: none;
+        border-top: none;
+      }
+
+      .br {
+        right: 14px;
+        bottom: 14px;
+
+        border-left: none;
+        border-top: none;
+      }
+
+      .card:hover .corner {
+        border-color: var(--border-hover);
+      }
+
+      .logo {
+        width: 80px;
+        height: 80px;
+
+        margin: auto;
+
+        border-radius: 50%;
+
+        display: grid;
+        place-items: center;
+
+        border: 1px solid rgba(84, 200, 120, 0.18);
+
+        background: rgba(84, 200, 120, 0.04);
+
+        box-shadow: 0 0 35px rgba(84, 200, 120, 0.18);
+
+        margin-bottom: 35px;
+      }
+
+      .logo::before {
+        content: '✦';
+
+        color: #66d68a;
+
+        font-size: 24px;
+      }
+
+      h1 {
+        font-family: 'Cinzel', serif;
+
+        font-weight: 500;
+
+        font-size: clamp(42px, 6vw, 62px);
+
+        letter-spacing: 0.35em;
+
+        text-transform: uppercase;
+
+        color: #f7fff9;
+
+        text-shadow: 0 0 18px rgba(84, 200, 120, 0.25);
+
+        margin-bottom: 18px;
+      }
+
+      .subtitle {
+        color: var(--muted);
+
+        font-size: 18px;
+
+        font-style: italic;
+
+        letter-spacing: 0.08em;
+
+        line-height: 1.7;
+      }
+
+      .divider {
+        width: 90px;
+        height: 1px;
+
+        margin: 35px auto;
+
+        background: linear-gradient(to right, transparent, #54c878, transparent);
+      }
+
+      .footer {
+        margin-top: 55px;
+
+        color: #4b6956;
+
+        font-size: 11px;
+
+        letter-spacing: 0.25em;
+
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 640px) {
+        .card {
+          padding: 55px 28px;
+        }
+
+        h1 {
+          letter-spacing: 0.22em;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <span class="corner tl"></span>
+      <span class="corner tr"></span>
+      <span class="corner bl"></span>
+      <span class="corner br"></span>
+
+      <div class="logo"></div>
+
+      <h1>Chasha</h1>
+
+      <p class="subtitle">Smart Restaurant Operating System</p>
+
+      <div class="divider"></div>
+
+      <div class="footer">A Product by KARA</div>
+    </div>
+  </body>
+</html>

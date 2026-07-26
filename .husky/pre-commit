@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+echo "🚀 Running Chasha pre-commit checks..."
+
+npm run npm:check
+npm run lint
+
+echo "✅ Pre-commit validation passed."

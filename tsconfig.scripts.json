@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "allowJs": true,
+    "noEmit": true
+  },
+
+  "include": ["__scripts__", "__documents__", "__plop__"]
+}

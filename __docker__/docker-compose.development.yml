@@ -1,0 +1,123 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: Kara_Backend_Production
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+
+      - APP_NAME=${APP_NAME}
+      - APP_URL=${APP_URL}
+      - PORT=${PORT}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - OPEN_API_ENABLED=${OPEN_API_ENABLED}
+      - OPEN_API_URL=${OPEN_API_URL}
+
+      - DATABASE_DIALECT=${DATABASE_DIALECT}
+      - DATABASE_LOGGING=${DATABASE_LOGGING}
+      - DATABASE_MASTER_HOST=${DATABASE_MASTER_HOST}
+      - DATABASE_MASTER_PORT=${DATABASE_MASTER_PORT}
+      - DATABASE_MASTER_USER=${DATABASE_MASTER_USER}
+      - DATABASE_MASTER_PASSWORD=${DATABASE_MASTER_PASSWORD}
+      - DATABASE_MASTER_NAME=${DATABASE_MASTER_NAME}
+      - DATABASE_SSL=${DATABASE_SSL}
+      - DATABASE_CONNECTION_TIMEOUT=${DATABASE_CONNECTION_TIMEOUT}
+      - DATABASE_QUERY_TIMEOUT=${DATABASE_QUERY_TIMEOUT}
+
+      - MYSQL_ROOT_PASSWORD=${DATABASE_MASTER_PASSWORD}
+      - MYSQL_HOST=mysql
+      - MYSQL_TCP_PORT=3306
+
+      - RABBITMQ_USER=${RABBITMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+
+      - RUN_MIGRATIONS=true
+    depends_on:
+      mysql:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: Kara_Backend_Mysql_Database
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_MASTER_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_MASTER_NAME}
+      MYSQL_USER: ${DATABASE_MASTER_USER}
+      MYSQL_PASSWORD: ${DATABASE_MASTER_PASSWORD}
+    ports:
+      - '3307:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq
+    healthcheck:
+      test: ['CMD-SHELL', 'rabbitmq-diagnostics -q ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    container_name: Kara_Backend_RabbitMq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    ports:
+      - '5673:5672'
+      - '15673:15672'
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: Kara_Backend_PhpMyAdmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 100M
+    ports:
+      - '8081:80'
+    depends_on:
+      mysql:
+        condition: service_started
+    networks:
+      - app-network
+
+  # nginx:
+  #   image: nginx:latest
+  #   container_name: kara_nginx
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #     - /etc/letsencrypt/live/api.karaflow.com/fullchain.pem:/etc/nginx/ssl/fullchain.pem:ro
+  #     - /etc/letsencrypt/live/api.karaflow.com/privkey.pem:/etc/nginx/ssl/privkey.pem:ro
+  #   depends_on:
+  #     - app
+  #   restart: always
+
+volumes:
+  mysql_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
+
+networks:
+  app-network:
+    external: true
