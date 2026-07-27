@@ -22,7 +22,7 @@
     "sourceMap": true
   },
 
-  "include": ["src"],
+  "include": ["src", "src/shared/v1/database/migrations/1785160550784-Create_Platform_Admins_With_Status.ts"],
 
   "exclude": ["dist", "node_modules"]
 }
