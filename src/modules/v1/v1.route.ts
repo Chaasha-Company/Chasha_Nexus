@@ -4,8 +4,11 @@ import { Router } from 'express';
 import { swaggerUiConfig } from '@/config/open-api/swagger-ui';
 import { openApiDocument } from '@/config/open-api';
 import { EnvValueConfig } from '@/config/env';
+import { platformAdminRouter } from './platform-admins';
 
 const router = Router();
+
+router.use('/platform-admin', platformAdminRouter);
 
 if (EnvValueConfig.OPEN_API_ENABLED) {
   router.use(EnvValueConfig.OPEN_API_URL, swaggerUi.serve, swaggerUi.setup(openApiDocument('en'), swaggerUiConfig));
