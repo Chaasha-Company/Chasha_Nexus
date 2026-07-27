@@ -5,3 +5,4 @@ export * from './translator-system';
 export * from './location-system';
 export * from './date-system';
 export * from './auth-system';
+export * from './cache-system';
