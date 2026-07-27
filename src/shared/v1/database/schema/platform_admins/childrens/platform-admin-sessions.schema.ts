@@ -22,6 +22,48 @@ export class PlatformAdminSessionsModel {
   })
   platformAdminSessionUser!: PlatformAdminsModel;
 
+  @Column({
+    name: 'platform_admin_session_refresh_token',
+    type: 'varchar',
+    length: 500,
+  })
+  platformAdminSessionRefreshToken!: string;
+
+  @Column({
+    name: 'platform_admin_session_ip_address',
+    type: 'varchar',
+    length: 45,
+    nullable: true,
+  })
+  platformAdminSessionIpAddress!: string | null;
+
+  @Column({
+    name: 'platform_admin_session_user_agent',
+    type: 'text',
+    nullable: true,
+  })
+  platformAdminSessionUserAgent!: string | null;
+
+  @Column({
+    name: 'platform_admin_session_last_activity_at',
+    type: 'timestamp',
+    nullable: true,
+  })
+  platformAdminSessionLastActivityAt!: Date | null;
+
+  @Column({
+    name: 'platform_admin_session_expires_at',
+    type: 'timestamp',
+  })
+  platformAdminSessionExpiresAt!: Date;
+
+  @Column({
+    name: 'platform_admin_session_is_active',
+    type: 'boolean',
+    default: true,
+  })
+  platformAdminSessionIsActive!: boolean;
+
   @CreateDateColumn({
     name: 'platform_admin_session_created_at',
     type: 'timestamp',

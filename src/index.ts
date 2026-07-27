@@ -10,3 +10,4 @@ export * from '@/shared/v1/database/migrations/1785161604549-Create_Business_Emp
 export * from '@/shared/v1/database/migrations/1785162096990-Create_Business_Customers';
 export * from '@/shared/v1/database/migrations/1785167640943-Add_ResetPasswordCode_Field_For_Business_Emplooye_And_Platform_Admin';
 export * from '@/shared/v1/database/migrations/1785179949938-Create_Sessions_For_Business_Employees_And_Platform_Admins';
+export * from '@/shared/v1/database/migrations/1785180629830-Add_Authentication_Fields_To_Business_Employee_Sessions';
