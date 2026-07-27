@@ -47,14 +47,7 @@ export class BusinessEmployeeStatusesModel {
   })
   businessEmployeeStatusIsSystem!: boolean;
 
-  /**
-   * Relation:
-   * business_employee_statuses.business_employee_status_id
-   *        |
-   *        ↓
-   * business_employees.business_employee_status_id
-   */
-  @OneToMany(() => BusinessEmployeesModel, (businessEmployee) => businessEmployee.businessEmployeeStatus, {
+  @OneToMany(() => BusinessEmployeesModel, (emloyee) => emloyee.businessEmployeeStatus, {
     eager: false,
   })
   businessEmployees!: BusinessEmployeesModel[];

@@ -1,6 +1,5 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-
-import { BusinessEmployeeStatusesModel } from './childrens/business-employee-statuses.schema';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BusinessEmployeeSessionsModel, BusinessEmployeeStatusesModel } from './childrens';
 
 @Entity({
   name: 'business_employees',
@@ -11,13 +10,6 @@ export class BusinessEmployeesModel {
   })
   businessEmployeeId!: string;
 
-  /**
-   * Relation:
-   * business_employee_statuses.business_employee_status_id
-   *        |
-   *        ↓
-   * business_employees.business_employee_status_id
-   */
   @Column({
     name: 'business_employee_status_id',
     type: 'uuid',
@@ -29,6 +21,9 @@ export class BusinessEmployeesModel {
     name: 'business_employee_status_id',
   })
   businessEmployeeStatus!: BusinessEmployeeStatusesModel;
+
+  @OneToMany(() => BusinessEmployeeSessionsModel, (session) => session.businessEmployeeSessionUser, { eager: false })
+  businessEmployeeSessions!: BusinessEmployeeSessionsModel[];
 
   @Column({
     name: 'business_employee_code',

@@ -1,6 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { PlatformAdminStatusesModel } from './childrens/platform-admin-statuses.schema';
+import { PlatformAdminSessionsModel, PlatformAdminStatusesModel } from './childrens';
 
 @Entity({
   name: 'platform_admins',
@@ -11,14 +11,6 @@ export class PlatformAdminsModel {
   })
   platformAdminId!: string;
 
-  /**
-   * Relation:
-   * platform_admin_statuses.platform_admin_status_id
-   *        |
-   *        |
-   *        ↓
-   * platform_admins.platform_admin_status_id
-   */
   @Column({
     name: 'platform_admin_status_id',
     type: 'uuid',
@@ -30,6 +22,9 @@ export class PlatformAdminsModel {
     name: 'platform_admin_status_id',
   })
   platformAdminStatus!: PlatformAdminStatusesModel;
+
+  @OneToMany(() => PlatformAdminSessionsModel, (session) => session.platformAdminSessionUser, { eager: false })
+  platformAdminSessions!: PlatformAdminSessionsModel[];
 
   @Column({
     name: 'platform_admin_reset_password_code',
