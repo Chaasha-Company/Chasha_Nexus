@@ -47,14 +47,6 @@ export class PlatformAdminStatusesModel {
   })
   platformAdminStatusIsSystem!: boolean;
 
-  /**
-   * Relation:
-   * platform_admin_statuses.id
-   *        |
-   *        |
-   *        ↓
-   * platform_admins.platform_admin_status_id
-   */
   @OneToMany(() => PlatformAdminsModel, (platformAdmin) => platformAdmin.platformAdminStatus, {
     eager: false,
   })
