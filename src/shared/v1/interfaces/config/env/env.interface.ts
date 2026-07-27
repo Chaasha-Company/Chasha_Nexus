@@ -15,6 +15,13 @@ export interface EnvInterface {
   KARA_TAX_NUMBER: number;
   KARA_NATIONAL_ID: number;
 
+  // =========================Chasha Info =========================
+  CHASHA_LEGAL_NAME: string;
+  CHASHA_TRADE_NAME: string;
+  CHASHA_REGISTRATION_NUMBER: number;
+  CHASHA_TAX_NUMBER: number;
+  CHASHA_NATIONAL_ID: number;
+
   // =========================Rate Limiting=========================
   API_RATE_LIMIT_WINDOW: number;
   API_RATE_LIMIT_MAX: number;

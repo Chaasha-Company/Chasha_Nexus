@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: Kara_Backend_Production
+    container_name: Chasha_Backend_Production
     restart: unless-stopped
     ports:
       - '3000:3000'
@@ -48,7 +48,7 @@ services:
 
   mysql:
     image: mysql:8.0
-    container_name: Kara_Backend_Mysql_Database
+    container_name: Chasha_Backend_Mysql_Database
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_MASTER_PASSWORD}
@@ -69,7 +69,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    container_name: Kara_Backend_RabbitMq
+    container_name: Chasha_Backend_RabbitMq
     restart: unless-stopped
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
@@ -84,7 +84,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: Kara_Backend_PhpMyAdmin
+    container_name: Chasha_Backend_PhpMyAdmin
     restart: unless-stopped
     environment:
       PMA_HOST: mysql
@@ -100,7 +100,7 @@ services:
 
   # nginx:
   #   image: nginx:latest
-  #   container_name: kara_nginx
+  #   container_name: Chasha_nginx
   #   ports:
   #     - "80:80"
   #     - "443:443"

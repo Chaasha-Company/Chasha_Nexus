@@ -21,6 +21,13 @@ export const EnvValueConfig: EnvInterface = {
   KARA_TAX_NUMBER: getNumberEnvHelper('KARA_TAX_NUMBER', 0),
   KARA_NATIONAL_ID: getNumberEnvHelper('KARA_NATIONAL_ID', 0),
 
+  // =========================Chasha Info=========================
+  CHASHA_LEGAL_NAME: getStringEnvHelper('CHASHA_LEGAL_NAME', ''),
+  CHASHA_TRADE_NAME: getStringEnvHelper('CHASHA_TRADE_NAME', ''),
+  CHASHA_REGISTRATION_NUMBER: getNumberEnvHelper('CHASHA_REGISTRATION_NUMBER', 0),
+  CHASHA_TAX_NUMBER: getNumberEnvHelper('CHASHA_TAX_NUMBER', 0),
+  CHASHA_NATIONAL_ID: getNumberEnvHelper('CHASHA_NATIONAL_ID', 0),
+
   // =========================Rate Limiting=========================
   API_RATE_LIMIT_WINDOW: getNumberEnvHelper('API_RATE_LIMIT_WINDOW', 0),
   API_RATE_LIMIT_MAX: getNumberEnvHelper('API_RATE_LIMIT_MAX', 1),
