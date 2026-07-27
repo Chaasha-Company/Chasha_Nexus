@@ -25,9 +25,7 @@ export class PlatformAdminsModel {
   })
   platformAdminStatusId!: string;
 
-  @ManyToOne(() => PlatformAdminStatusesModel, (platformAdminStatus) => platformAdminStatus.platformAdmins, {
-    eager: false,
-  })
+  @ManyToOne(() => PlatformAdminStatusesModel, (platformAdminStatus) => platformAdminStatus.platformAdmins)
   @JoinColumn({
     name: 'platform_admin_status_id',
   })
