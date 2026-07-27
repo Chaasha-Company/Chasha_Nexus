@@ -39,6 +39,14 @@ export class BusinessEmployeesModel {
   businessEmployeeCode!: string;
 
   @Column({
+    name: 'business_employee_reset_password_code',
+    type: 'varchar',
+    length: 22,
+    unique: true,
+  })
+  businessEmployeeResetPasswordCode!: string;
+
+  @Column({
     name: 'business_employee_first_name',
     type: 'varchar',
     length: 100,

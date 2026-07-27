@@ -32,6 +32,13 @@ export class PlatformAdminsModel {
   platformAdminStatus!: PlatformAdminStatusesModel;
 
   @Column({
+    name: 'platform_admin_reset_password_code',
+    type: 'varchar',
+    length: 22,
+  })
+  platformAdminResetPasswordCode!: string;
+
+  @Column({
     name: 'platform_admin_first_name',
     type: 'varchar',
     length: 100,
