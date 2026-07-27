@@ -1,6 +1,6 @@
 import 'express';
 import type { Language } from '@/infrastructure/translator-system/i18n';
-import type { AuthTokenPayload } from '@/shared/v1/types/auth';
+import type { BusinessEmployeeAuthTokenPayload, PlatformAdminAuthTokenPayload } from '@/shared/v1/types/auth';
 
 declare module 'express-serve-static-core' {
   interface Request {
@@ -8,6 +8,6 @@ declare module 'express-serve-static-core' {
     lang: Language;
   }
   interface Request {
-    user?: AuthTokenPayload;
+    user?: PlatformAdminAuthTokenPayload | BusinessEmployeeAuthTokenPayload;
   }
 }
