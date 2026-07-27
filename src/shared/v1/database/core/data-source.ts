@@ -16,9 +16,7 @@ export const AppDataSource: DataSource = new DataSource({
   poolSize: EnvValueConfig.DB_POOL_MASTER_CONNECTION_LIMIT,
 
   entities: [CasbinRule],
-  migrations: [
-    `${isProduction ? 'shared/v1/database/migrations/*.js' : 'src/shared/v1/database/migrations/*.ts'}`,
-  ],
+  migrations: [`${isProduction ? 'shared/v1/database/migrations/*.js' : 'src/shared/v1/database/migrations/*.ts'}`],
   synchronize: false,
   logging: EnvValueConfig.DATABASE_LOGGING,
   logger: 'file',

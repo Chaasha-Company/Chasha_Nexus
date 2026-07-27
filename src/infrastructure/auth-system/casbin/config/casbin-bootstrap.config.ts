@@ -15,15 +15,7 @@ export const casbinAuthInitConfig = async (): Promise<void> => {
     }
     // @ts-expect-error - Module exports structure mismatch
     const adapter = await TypeORMAdapter.default.newAdapter({ connection: AppDataSource });
-    const modulePath = path.join(
-      process.cwd(),
-      isProduction ? '' : 'src',
-      'infrastructure',
-      'auth-system',
-      'casbin',
-      'config',
-      'model.conf',
-    );
+    const modulePath = path.join(process.cwd(), isProduction ? '' : 'src', 'infrastructure', 'auth-system', 'casbin', 'config', 'model.conf');
     enforcer = await newEnforcer(modulePath, adapter);
     await enforcer.loadPolicy();
     loggerConfig.info('Casbin Auth System loaded successfully.');

@@ -5,10 +5,7 @@ import { type ErrorsResponse } from '@/shared/v1/types';
 import { ValidationMessage } from '@/shared/v1/enums';
 import { ValidationMessages, t } from '@/infrastructure/translator-system/i18n';
 
-export const zodErrorObjectCreatorHelper = (
-  req: Request,
-  issues: ZodError['issues'],
-): ErrorsResponse => {
+export const zodErrorObjectCreatorHelper = (req: Request, issues: ZodError['issues']): ErrorsResponse => {
   const result: ErrorsResponse = {};
 
   issues.forEach((issue: ZodIssue) => {

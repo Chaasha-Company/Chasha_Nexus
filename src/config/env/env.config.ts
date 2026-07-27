@@ -1,10 +1,6 @@
 import type { EnvInterface } from '@/shared/v1/interfaces/config/env';
 import { envLoaderBootstrapConfig } from './env-loader.config';
-import {
-  getBooleanEnvHelper,
-  getNumberEnvHelper,
-  getStringEnvHelper,
-} from '@/shared/v1/helpers/config/env';
+import { getBooleanEnvHelper, getNumberEnvHelper, getStringEnvHelper } from '@/shared/v1/helpers/config/env';
 
 void envLoaderBootstrapConfig();
 

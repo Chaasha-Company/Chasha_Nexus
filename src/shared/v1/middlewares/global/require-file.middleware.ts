@@ -6,11 +6,7 @@ import { throwBadRequestException } from '@/shared/v1/exceptions';
 export const requiredFileMiddleware =
   (fieldName: string) =>
   (req: Request, _res: Response, next: NextFunction): void => {
-    let hasFile = false;
-
-    if (req.file !== undefined && req.file !== null) {
-      hasFile = true;
-    }
+    let hasFile = req.file !== undefined && req.file !== null;
 
     if (!hasFile && req.files !== undefined && req.files !== null) {
       if (Array.isArray(req.files)) {
@@ -18,12 +14,12 @@ export const requiredFileMiddleware =
       } else {
         const fieldFiles = req.files[fieldName];
 
-        if (fieldFiles !== undefined && fieldFiles !== null) {
-          if (Array.isArray(fieldFiles)) {
-            hasFile = fieldFiles.length > 0;
-          } else {
-            hasFile = true;
-          }
+        if (fieldFiles === undefined || fieldFiles === null) {
+          hasFile = false;
+        } else if (Array.isArray(fieldFiles)) {
+          hasFile = fieldFiles.length > 0;
+        } else {
+          hasFile = true;
         }
       }
     }

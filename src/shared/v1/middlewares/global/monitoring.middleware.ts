@@ -22,13 +22,8 @@ export const monitoringMiddleware = (req: Request, res: Response, next: NextFunc
 
     requestCounter.inc({ method: req.method, route, status_code: statusCode });
 
-    const contentLength = res.getHeaders()['content-length']
-      ? Number(res.getHeaders()['content-length'])
-      : 0;
-    responseSizeHistogram.observe(
-      { method: req.method, route, status_code: statusCode },
-      contentLength,
-    );
+    const contentLength = res.getHeaders()['content-length'] ? Number(res.getHeaders()['content-length']) : 0;
+    responseSizeHistogram.observe({ method: req.method, route, status_code: statusCode }, contentLength);
   });
 
   next();

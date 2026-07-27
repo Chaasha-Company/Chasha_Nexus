@@ -17,11 +17,7 @@ router.use('/user', userRouter);
 router.use('/admin', adminRouter);
 
 if (EnvValueConfig.OPEN_API_ENABLED) {
-  router.use(
-    EnvValueConfig.OPEN_API_URL,
-    swaggerUi.serve,
-    swaggerUi.setup(openApiDocument('en'), swaggerUiConfig),
-  );
+  router.use(EnvValueConfig.OPEN_API_URL, swaggerUi.serve, swaggerUi.setup(openApiDocument('en'), swaggerUiConfig));
 }
 
 export { router as v1Router };

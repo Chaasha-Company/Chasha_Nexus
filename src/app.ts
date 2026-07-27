@@ -30,9 +30,7 @@ export const createChashaApplication = (): Application => {
   app.use('/favicon.ico', express.static(path.join('./public/assets/images/favicon.ico')));
 
   // application entrypoint
-  app.get('/', (_req: Request, res: Response) =>
-    res.sendFile(path.join(process.cwd(), 'index.html')),
-  );
+  app.get('/', (_req: Request, res: Response) => res.sendFile(path.join(process.cwd(), 'index.html')));
 
   // v1 router
   app.use('/api/v1/:lang', languageFilterMiddleware, v1Router);

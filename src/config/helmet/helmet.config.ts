@@ -5,23 +5,11 @@ export const helmetConfig: HelmetOptions = {
     directives: {
       defaultSrc: ["'self'"],
 
-      scriptSrc: [
-        "'self'",
-        "'unsafe-inline'",
-        "'unsafe-eval'",
-        'https://cdn.jsdelivr.net',
-        'https://*.jsdelivr.net',
-      ],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'https://cdn.jsdelivr.net', 'https://*.jsdelivr.net'],
 
       styleSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net', 'https://*.jsdelivr.net'],
 
-      fontSrc: [
-        "'self'",
-        'data:',
-        'https://cdn.jsdelivr.net',
-        'https://*.jsdelivr.net',
-        'https://fonts.scalar.com',
-      ],
+      fontSrc: ["'self'", 'data:', 'https://cdn.jsdelivr.net', 'https://*.jsdelivr.net', 'https://fonts.scalar.com'],
 
       connectSrc: ["'self'", 'https://api.scalar.com', 'https://cdn.jsdelivr.net'],
 

@@ -5,14 +5,10 @@ import { ErrorCode, HttpStatus, ResponseMessage, ValidationMessage } from '@/sha
 import { ValidationMessages, ResponseMessages, t } from '@/infrastructure/translator-system/i18n';
 import { errorResponseHandler } from '@/shared/v1/helpers/api/handlers';
 
-export const multerErrorHandlerHelper = (
-  error: multer.MulterError,
-  req: Request,
-  res: Response,
-): void => {
+export const multerErrorHandlerHelper = (error: multer.MulterError, req: Request, res: Response): void => {
   const statusCode = HttpStatus.BAD_REQUEST;
-  let errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
-  let details: ErrorsResponse = { error_message: [error.message] };
+  let errorCode;
+  let details;
 
   switch (error.code) {
     case 'LIMIT_PART_COUNT':
@@ -67,19 +63,10 @@ export const multerErrorHandlerHelper = (
     default:
       errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
       details = {
-        error_message: [
-          t(ValidationMessages, ValidationMessage.UNEXPECTED_INTERNAL_ERROR, req.lang),
-        ],
+        error_message: [t(ValidationMessages, ValidationMessage.UNEXPECTED_INTERNAL_ERROR, req.lang)],
       };
       break;
   }
 
-  errorResponseHandler<ErrorsResponse>(
-    req,
-    res,
-    statusCode,
-    details,
-    t(ResponseMessages, ResponseMessage.FILE_UPLOAD_FAILED, req.lang),
-    errorCode,
-  );
+  errorResponseHandler<ErrorsResponse>(req, res, statusCode, details, t(ResponseMessages, ResponseMessage.FILE_UPLOAD_FAILED, req.lang), errorCode);
 };
