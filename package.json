@@ -65,7 +65,7 @@
     "npm:audit:fix": "npm audit fix",
     "npm:check": "npm run npm:check:deps && npm run npm:check:types && npm run lint && npm run format:check",
     "npm:check:deps": "npm ls",
-    "npm:check:types": "tsc -p tsconfig.dev.json --noEmit",
+    "npm:check:types": "tsc -p tsconfig.json --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky"
   },

@@ -1,1 +1,1 @@
-export * from './RESPONSE-MESSAGE.enum';
+export * from './response-message.enum';

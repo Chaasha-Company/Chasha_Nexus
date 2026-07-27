@@ -1,1 +1,1 @@
-export * from './VALIDATION-MESSAGE.enum';
+export * from './validation-message.enum';
