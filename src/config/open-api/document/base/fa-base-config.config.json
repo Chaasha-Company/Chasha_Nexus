@@ -1,576 +1,416 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
-    "title": "مستندات API بک‌اند چاشا",
+    "title": "رابط برنامه‌نویسی پلتفرم چاشا",
+    "summary": "مستندات رسمی REST API پلتفرم چاشا",
+    "description": "مستندات رسمی REST API مربوط به سیستم مدیریت رستوران چاشا.\n\nاین API امکانات مدیریت پلتفرم، مدیریت رستوران، احراز هویت، ثبت سفارش، منوی QR، گردش کار آشپزخانه، اعلان‌ها و سرویس‌های آینده پلتفرم را فراهم می‌کند.\n\nتمامی Endpointها بر اساس اصول REST طراحی شده‌اند و پاسخ‌ها را در قالب استاندارد JSON بازمی‌گردانند.\n\nاحراز هویت بسته به نوع کلاینت، از طریق کوکی (Cookie-based Authentication) یا توکن Bearer انجام می‌شود.",
     "version": "1.0.0",
-    "description": "مستندات کامل API پلتفرم چاشا که توسط تیم توسعه کارا ایجاد شده است."
+    "termsOfService": "https://docs.chaasha.ir/terms",
+    "contact": {
+      "name": "فناوری کارا",
+      "url": "https://karaflow.com",
+      "email": "backend@karaflow.com"
+    },
+    "license": {
+      "name": "مجوز خصوصی",
+      "url": "https://docs.chaasha.ir/license"
+    }
   },
+
+  "externalDocs": {
+    "description": "مستندات کامل توسعه‌دهندگان",
+    "url": "https://docs.chaasha.ir"
+  },
+
   "servers": [
     {
       "url": "https://api.chaasha.ir/api/v1",
-      "description": "سرور تولید (Production)",
-      "variables": {
-        "prefix": {
-          "enum": ["fa", "en"],
-          "default": "fa",
-          "description": "پیشوند زبان"
-        }
-      }
+      "description": "سرور عملیاتی (Production)"
     },
     {
-      "url": "https://develop-api.chasha.ir/api/v1",
-      "description": "سرور توسعه (Development)",
-      "variables": {
-        "prefix": {
-          "enum": ["fa", "en"],
-          "default": "fa",
-          "description": "پیشوند زبان"
-        }
-      }
+      "url": "https://staging-api.chaasha.ir/api/v1",
+      "description": "سرور آزمایشی (Staging)"
+    },
+    {
+      "url": "https://develop-api.chaasha.ir/api/v1",
+      "description": "سرور توسعه (Development)"
     },
     {
       "url": "http://localhost:3000/api/v1",
-      "description": "سرور محلی (Local)",
-      "variables": {
-        "prefix": {
-          "enum": ["fa", "en"],
-          "default": "fa",
-          "description": "پیشوند زبان"
-        }
-      }
+      "description": "محیط توسعه محلی (Local Development)"
     }
   ],
+
   "tags": [
     {
-      "name": "Auth - Login",
-      "description": "نقاط پایانی مربوط به ورود کاربر و تولید توکن"
-    },
-    {
-      "name": "Auth - Check",
-      "description": "نقاط پایانی مربوط به بررسی وضعیت احراز هویت"
-    },
-    {
-      "name": "GLOBAL - Counsel Request",
-      "description": "نقاط پایانی مربوط به ایجاد و مدیریت درخواست‌های مشاوره"
-    },
-    {
-      "name": "GLOBAL - Company Information",
-      "description": "نقاط پایانی مربوط به دریافت اطلاعات حقوقی و تماس شرکت"
+      "name": "احراز هویت مدیران پلتفرم",
+      "description": "Endpointهای مربوط به احراز هویت مدیران پلتفرم شامل ورود، تأیید کد یکبار مصرف (OTP)، ایجاد توکن، خروج، تمدید توکن و بازیابی رمز عبور."
     }
   ],
+
   "paths": {
-    "/global/auth/login/username": {
+    "/admin/auth/login/with-phone": {
       "post": {
-        "tags": ["Auth - Login"],
-        "summary": "ورود با نام کاربری",
-        "description": "احراز هویت کاربر با استفاده از نام کاربری و رمز عبور. پس از احراز هویت موفق، توکن‌های JWT به صورت کوکی‌های HttpOnly در پاسخ تنظیم می‌شوند.",
+        "tags": ["احراز هویت مدیران پلتفرم"],
+        "summary": "ورود با شماره تلفن",
+        "description": "فرآیند احراز هویت مدیر پلتفرم را آغاز می‌کند.\n\nدر این Endpoint اطلاعات ورود مدیر (شماره تلفن و رمز عبور) اعتبارسنجی می‌شود.\n\nدر صورت معتبر بودن اطلاعات:\n- یک نشست ورود موقت ایجاد می‌شود.\n- یک کد تأیید شش رقمی (OTP) تولید می‌شود.\n- نشست در حافظه Cache ذخیره می‌شود.\n- شناسه موقت loginSession بازگردانده می‌شود.\n\nشناسه loginSession باید در مرحله تأیید OTP استفاده شود.\n\nاگر از قبل یک نشست ورود فعال برای این شماره تلفن وجود داشته باشد، به جای ایجاد نشست جدید، خطایی بازگردانده می‌شود و کاربر باید فرآیند تأیید قبلی را ادامه دهد.",
+        "operationId": "loginWithPhoneNumberPlatformAdmin",
+
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginWithUsernameInput"
+                "$ref": "#/components/schemas/LoginWithPhoneNumberPlatformAdminRequest"
               },
-              "example": {
-                "userUserName": "عرفان_ابویی",
-                "userPassword": "SecurePass123!"
+              "examples": {
+                "login": {
+                  "summary": "درخواست معتبر",
+                  "value": {
+                    "loginPhoneNumber": "09123456789",
+                    "loginPassword": "StrongPassword123"
+                  }
+                }
               }
             }
           }
         },
+
         "responses": {
           "200": {
-            "description": "ورود موفقیت‌آمیز بود. توکن‌ها در کوکی‌های HttpOnly تنظیم شدند.",
+            "description": "نشست ورود با موفقیت ایجاد شد.",
+            "headers": {
+              "x-request-id": {
+                "description": "شناسه یکتای درخواست.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiResponseSuccess"
+                  "$ref": "#/components/schemas/LoginWithPhoneNumberPlatformAdminResponse"
                 },
-                "example": {
-                  "status": 200,
-                  "success": true,
-                  "author": "Kara_Company",
-                  "message": "عملیات با موفقیت انجام شد.",
-                  "data": null,
-                  "timeStamp": "2026-06-13T10:47:54.024Z",
-                  "version": "1.0.0"
+                "examples": {
+                  "success": {
+                    "summary": "ایجاد نشست",
+                    "value": {
+                      "status": 200,
+                      "success": true,
+                      "author": "Kara_Company",
+                      "message": "عملیات با موفقیت انجام شد.",
+                      "data": {
+                        "loginSession": "2a8e43dc-be17-4d02-8820-daa3638168b1"
+                      },
+                      "timeStamp": "2026-07-28T19:01:15.281Z",
+                      "version": "0.1.0"
+                    }
+                  }
                 }
               }
             }
           },
+
           "400": {
-            "description": "درخواست نامعتبر - خطای اعتبارسنجی",
+            "description": "اعتبارسنجی ناموفق یا نقض قوانین کسب‌وکار.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
-                "example": {
-                  "status": 400,
-                  "success": false,
-                  "author": "Kara_Company",
-                  "message": "اعتبارسنجی ناموفق بود",
-                  "errorCode": "VALIDATION_ERROR",
-                  "errors": {
-                    "userUserName": ["نام کاربری الزامی است"],
-                    "userPassword": ["رمز عبور باید حداقل ۸ کاراکتر باشد"]
+                "examples": {
+                  "InvalidPhoneNumber": {
+                    "summary": "خطای اعتبارسنجی شماره تلفن",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "اعتبارسنجی با خطا مواجه شد.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "loginPhoneNumber": ["شماره تلفن باید دقیقاً ۱۱ رقم بوده و با 09 شروع شود."]
+                      },
+                      "timeStamp": "2026-07-28T19:01:46.652Z",
+                      "version": "0.1.0"
+                    }
                   },
-                  "timeStamp": "2026-06-13T10:47:54.024Z",
-                  "version": "1.0.0"
+
+                  "WrongPassword": {
+                    "summary": "رمز عبور اشتباه",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "تعارض در داده‌ها.",
+                      "errorCode": "E1090",
+                      "errors": {
+                        "loginPassword": ["رمز عبور وارد شده صحیح نیست."]
+                      },
+                      "timeStamp": "2026-07-28T19:01:22.197Z",
+                      "version": "0.1.0"
+                    }
+                  },
+
+                  "AlreadyInQueue": {
+                    "summary": "نشست ورود فعال",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "تعارض در داده‌ها.",
+                      "errorCode": "E1090",
+                      "errors": {
+                        "error_message": ["درخواست ورود شما قبلاً ثبت شده است. لطفاً به صفحه تأیید بازگردید و کد OTP خود را وارد کنید."]
+                      },
+                      "timeStamp": "2026-07-28T19:01:22.197Z",
+                      "version": "0.1.0"
+                    }
+                  }
                 }
               }
             }
           },
+
           "404": {
-            "description": "یافت نشد - اطلاعات ورود اشتباه",
+            "description": "مدیر پلتفرم یافت نشد.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
-                "example": {
-                  "status": 404,
-                  "success": false,
-                  "author": "Kara_Company",
-                  "message": "موردی با این مشخصات پیدا نشد.",
-                  "errorCode": "NOT_FOUND",
-                  "errors": {
-                    "details": ["نام کاربری یا رمز عبور اشتباه است."]
-                  },
-                  "timeStamp": "2026-06-13T10:47:54.024Z",
-                  "version": "1.0.0"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/global/user/auth/check": {
-      "get": {
-        "tags": ["Auth - Check"],
-        "summary": "بررسی وضعیت احراز هویت کاربر",
-        "description": "این نقطه پایانی بررسی می‌کند که آیا کاربر فعلی لاگین کرده است یا خیر. اگر کاربر معتبر باشد، یک پاسخ موفقیت‌آمیز با آبجکت داده خالی بازگردانده می‌شود. در غیر این صورت، خطای UNAUTHORIZED بازگردانده می‌شود.",
-        "responses": {
-          "200": {
-            "description": "کاربر احراز هویت شده است. پاسخ موفقیت با داده خالی.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponseSuccess"
-                },
-                "example": {
-                  "status": 200,
-                  "success": true,
-                  "author": "Kara_Company",
-                  "message": "عملیات با موفقیت انجام شد.",
-                  "data": {},
-                  "timeStamp": "2026-06-13T10:47:54.024Z",
-                  "version": "1.0.0"
+                "examples": {
+                  "NotFound": {
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "منبع درخواستی یافت نشد.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "loginPhoneNumber": ["مدیر پلتفرمی با این شماره تلفن وجود ندارد."]
+                      },
+                      "timeStamp": "2026-07-28T19:01:27.765Z",
+                      "version": "0.1.0"
+                    }
+                  }
                 }
               }
             }
           },
-          "401": {
-            "description": "غیرمجاز - توکن نامعتبر یا موجود نیست",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                },
-                "example": {
-                  "status": 401,
-                  "success": false,
-                  "author": "Kara_Company",
-                  "message": "شما مجوز دسترسی به این منبع را ندارید.",
-                  "errorCode": "UNAUTHORIZED",
-                  "errors": {},
-                  "timeStamp": "2026-06-13T10:47:54.024Z",
-                  "version": "1.0.0"
-                }
-              }
-            }
+
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
           }
         }
       }
+    }
+  },
+
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "توکن دسترسی JWT"
+      },
+      "CookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "accessToken",
+        "description": "احراز هویت از طریق کوکی HttpOnly"
+      }
     },
-    "/global/counsel-request/create": {
-      "post": {
-        "tags": ["GLOBAL - Counsel Request"],
-        "summary": "ایجاد درخواست مشاوره جدید",
-        "description": "این نقطه پایانی به کاربران اجازه می‌دهد تا یک درخواست جدید برای خدمات مشاوره ارسال کنند. قبل از پردازش، نام کامل، شماره تلفن و توضیحات اعتبارسنجی می‌شوند.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCounselRequestInput"
-              },
-              "example": {
-                "counselRequestFullName": "عرفان ابویی",
-                "counselRequestPhoneNumber": "09393929968",
-                "counselRequestDescription": "سلام و درود. بنده به دنبال یه اپلیکیشن فروشگاهی هستم و خواستار پیاده سازی اون توسط کارا هستم.",
-                "counselRequestInformationId": "c2f8201c-26e2-4830-8b36-1cb557ec759a"
+
+    "schemas": {
+      "LoginWithPhoneNumberPlatformAdminRequest": {
+        "type": "object",
+        "required": ["loginPhoneNumber", "loginPassword"],
+        "properties": {
+          "loginPhoneNumber": {
+            "type": "string",
+            "description": "شماره تلفن مدیر پلتفرم.",
+            "example": "09123456789",
+            "pattern": "^09\\d{9}$",
+            "minLength": 11,
+            "maxLength": 11
+          },
+          "loginPassword": {
+            "type": "string",
+            "description": "رمز عبور مدیر پلتفرم.",
+            "example": "StrongPassword123",
+            "minLength": 1,
+            "maxLength": 64
+          }
+        }
+      },
+
+      "LoginWithPhoneNumberPlatformAdminResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Kara_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "عملیات با موفقیت انجام شد."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "loginSession": {
+                "type": "string",
+                "format": "uuid",
+                "description": "شناسه موقت نشست ورود.",
+                "example": "2a8e43dc-be17-4d02-8820-daa3638168b1"
               }
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "0.1.0"
+          }
+        }
+      },
+
+      "ValidationError": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "loginPhoneNumber": ["شماره تلفن باید دقیقاً ۱۱ رقم بوده و با 09 شروع شود."]
+        }
+      },
+
+      "BusinessError": {
+        "type": "object",
+        "properties": {
+          "error_message": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
         },
-        "responses": {
-          "201": {
-            "description": "درخواست مشاوره با موفقیت ایجاد شد",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponseSuccess"
-                },
-                "example": {
-                  "status": 201,
-                  "success": true,
-                  "author": "Kara_Company",
-                  "message": "عملیات با موفقیت انجام شد",
-                  "data": {
-                    "counselRequestMessage": "درخواست شما ثبت و مشاوران ما در ساعات آینده با شما تماس خواهند گرفت",
-                    "counselRequestCode": "@Kara_12345678"
-                  },
-                  "timeStamp": "2025-05-10T12:00:00.000Z",
-                  "version": "1.0.0"
-                }
-              }
-            }
+        "example": {
+          "error_message": ["درخواست ورود شما قبلاً ثبت شده است. لطفاً به صفحه تأیید بازگردید و کد OTP خود را وارد کنید."]
+        }
+      },
+
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 400
           },
-          "400": {
-            "description": "درخواست نامعتبر - خطای اعتبارسنجی",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                },
-                "example": {
-                  "status": 400,
-                  "success": false,
-                  "author": "Kara_Company",
-                  "message": "اعتبارسنجی ناموفق بود",
-                  "errorCode": "VALIDATION_ERROR",
-                  "errors": {
-                    "counselRequestFullName": ["نام کامل الزامی است"],
-                    "counselRequestPhoneNumber": ["شماره تلفن معتبر الزامی است"]
-                  },
-                  "timeStamp": "2025-05-10T12:00:00.000Z",
-                  "version": "1.0.0"
-                }
-              }
-            }
+          "success": {
+            "type": "boolean",
+            "example": false
           },
-          "404": {
-            "description": "یافت نشد",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                },
-                "example": {
-                  "status": 404,
-                  "success": false,
-                  "author": "Kara_Company",
-                  "message": "موردی با این مشخصات پیدا نشد.",
-                  "errorCode": "NOT_FOUND",
-                  "errors": {
-                    "routePath": ["/a123"],
-                    "routeMethod": ["GET"]
-                  },
-                  "timeStamp": "2026-05-11T13:42:15.352Z",
-                  "version": "1.0.0"
-                }
-              }
-            }
+          "author": {
+            "type": "string",
+            "example": "Kara_Company"
           },
-          "500": {
-            "description": "خطای داخلی سرور",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                },
-                "example": {
-                  "status": 500,
-                  "success": false,
-                  "author": "Kara_Company",
-                  "message": "خطای داخلی سرور",
-                  "errorCode": "INTERNAL_ERROR",
-                  "errors": {},
-                  "timeStamp": "2025-05-10T12:00:00.000Z",
-                  "version": "1.0.0"
-                }
-              }
-            }
+          "message": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "string",
+            "example": "E1001"
+          },
+          "errors": {
+            "type": "object",
+            "description": "خطاهای اعتبارسنجی یا قوانین کسب‌وکار."
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "0.1.0"
           }
         }
       }
     },
-    "/global/information/kara": {
-      "get": {
-        "tags": ["GLOBAL - Company Information"],
-        "summary": "دریافت اطلاعات شرکت کارا",
-        "description": "نام حقوقی، نام تجاری، شماره ثبت، وضعیت و شماره‌های تماس شرکت را بازیابی می‌کند.",
-        "responses": {
-          "200": {
-            "description": "عملیات با موفقیت انجام شد",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponseSuccess"
-                },
-                "example": {
-                  "status": 200,
-                  "success": true,
-                  "author": "Kara_Company",
-                  "message": "عملیات با موفقیت انجام شد.",
-                  "data": {
-                    "informationLegalName": "شرکت سهامی خاص کارا نوین",
-                    "informationTradeName": "KARA   کارا",
-                    "informationRegistrationNumber": "1234567",
-                    "informationStatus": {
-                      "informationStatusTitleFa": "تایید شده",
-                      "informationStatusTitleEn": "Approved",
-                      "informationStatusSlug": "approved"
-                    },
-                    "informationPhoneNumbers": [
-                      {
-                        "informationPhoneNumberValue": "09123456789",
-                        "informationPhoneNumberDescriptionFa": "شماره همراه مدیرعامل",
-                        "informationPhoneNumberDescriptionEn": "CEO Mobile Number",
-                        "informationPhoneNumberIsDefault": true,
-                        "informationPhoneNumberType": {
-                          "informationPhoneNumberTypeTitleFa": "شماره موبایل شخصی",
-                          "informationPhoneNumberTypeTitleEn": "Personal Mobile Number",
-                          "informationPhoneNumberTypeSlug": "personalmobilenumber"
-                        }
-                      },
-                      {
-                        "informationPhoneNumberValue": "02112345678",
-                        "informationPhoneNumberDescriptionFa": "شماره ثابت دفتر مرکزی",
-                        "informationPhoneNumberDescriptionEn": "Head Office Landline",
-                        "informationPhoneNumberIsDefault": false,
-                        "informationPhoneNumberType": {
-                          "informationPhoneNumberTypeTitleFa": "شماره دفتر کار",
-                          "informationPhoneNumberTypeTitleEn": "Office Landline",
-                          "informationPhoneNumberTypeSlug": "officelandline"
-                        }
-                      },
-                      {
-                        "informationPhoneNumberValue": "02112345679",
-                        "informationPhoneNumberDescriptionFa": "شماره فکس",
-                        "informationPhoneNumberDescriptionEn": "Fax Number",
-                        "informationPhoneNumberIsDefault": false,
-                        "informationPhoneNumberType": {
-                          "informationPhoneNumberTypeTitleFa": "شماره فکس",
-                          "informationPhoneNumberTypeTitleEn": "Fax Number",
-                          "informationPhoneNumberTypeSlug": "faxnumber"
-                        }
-                      },
-                      {
-                        "informationPhoneNumberValue": "02188888888",
-                        "informationPhoneNumberDescriptionFa": "پشتیبانی مشتریان",
-                        "informationPhoneNumberDescriptionEn": "Customer Support",
-                        "informationPhoneNumberIsDefault": false,
-                        "informationPhoneNumberType": {
-                          "informationPhoneNumberTypeTitleFa": "شماره پشتیبانی",
-                          "informationPhoneNumberTypeTitleEn": "Support Line",
-                          "informationPhoneNumberTypeSlug": "supportline"
-                        }
-                      }
-                    ]
-                  },
-                  "timeStamp": "2026-05-30T17:54:28.501Z",
-                  "version": "1.0.0"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "درخواست نامعتبر",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                },
-                "example": {
-                  "status": 400,
-                  "success": false,
-                  "author": "Kara_Company",
-                  "message": "درخواست نامعتبر",
-                  "errorCode": "BAD_REQUEST",
-                  "errors": {},
-                  "timeStamp": "2026-05-30T17:54:28.501Z",
-                  "version": "1.0.0"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "خطای داخلی سرور",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                },
-                "example": {
-                  "status": 500,
-                  "success": false,
-                  "author": "Kara_Company",
-                  "message": "خطای داخلی سرور",
-                  "errorCode": "INTERNAL_ERROR",
-                  "errors": {},
-                  "timeStamp": "2026-05-30T17:54:28.501Z",
-                  "version": "1.0.0"
-                }
-              }
+
+    "responses": {
+      "ValidationFailed": {
+        "description": "اعتبارسنجی ناموفق."
+      },
+
+      "BadRequest": {
+        "description": "نقض قوانین کسب‌وکار."
+      },
+
+      "Unauthorized": {
+        "description": "دسترسی غیرمجاز."
+      },
+
+      "Forbidden": {
+        "description": "دسترسی ممنوع."
+      },
+
+      "NotFound": {
+        "description": "منبع موردنظر یافت نشد."
+      },
+
+      "Conflict": {
+        "description": "تعارض در داده‌ها."
+      },
+
+      "TooManyRequests": {
+        "description": "تعداد درخواست‌ها بیش از حد مجاز است."
+      },
+
+      "InternalServerError": {
+        "description": "خطای داخلی سرور.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "status": 500,
+              "success": false,
+              "author": "Kara_Company",
+              "message": "خطای داخلی سرور.",
+              "errorCode": "E5000",
+              "errors": {},
+              "timeStamp": "2026-07-28T19:01:46.652Z",
+              "version": "0.1.0"
             }
           }
         }
       }
     }
   },
-  "components": {
-    "schemas": {
-      "LoginWithUsernameInput": {
-        "type": "object",
-        "required": ["userUserName", "userPassword"],
-        "properties": {
-          "userUserName": {
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 54,
-            "description": "نام کاربری کاربر."
-          },
-          "userPassword": {
-            "type": "string",
-            "minLength": 8,
-            "maxLength": 64,
-            "description": "رمز عبور کاربر."
-          }
-        }
-      },
-      "CreateCounselRequestInput": {
-        "type": "object",
-        "required": ["counselRequestFullName", "counselRequestPhoneNumber", "counselRequestDescription", "counselRequestInformationId"],
-        "properties": {
-          "counselRequestFullName": {
-            "type": "string",
-            "description": "نام کامل فرد درخواست‌کننده مشاوره.",
-            "example": "علی رضایی"
-          },
-          "counselRequestPhoneNumber": {
-            "type": "string",
-            "description": "شماره تلفن درخواست‌دهنده. باید با الگوهای استاندارد تلفن مطابقت داشته باشد.",
-            "example": "09393929968"
-          },
-          "counselRequestDescription": {
-            "type": "string",
-            "maxLength": 120,
-            "description": "توضیح مختصری درباره درخواست یا مشکل. حداکثر ۱۲۰ کاراکتر.",
-            "example": "نیاز به کمک برای فرآیند تخلیه مستأجر دارم."
-          },
-          "counselRequestInformationId": {
-            "type": "string",
-            "maxLength": 36,
-            "description": "شناسه ی برند",
-            "example": "c2f8201c-26e2-4830-8b36-1cb557ec759a"
-          }
-        }
-      },
-      "CreateCounselGlobalResponseDTO": {
-        "type": "object",
-        "properties": {
-          "counselRequestMessage": {
-            "type": "string",
-            "description": "پیام موفقیتی که توسط سیستم بازگردانده می‌شود."
-          },
-          "counselRequestCode": {
-            "type": "string",
-            "description": "کد منحصر به فرد اختصاص یافته به این درخواست خاص."
-          }
-        }
-      },
-      "ApiResponseSuccess": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "description": "کد وضعیت HTTP"
-          },
-          "success": {
-            "type": "boolean",
-            "description": "نشان‌دهنده موفقیت عملیات"
-          },
-          "author": {
-            "type": "string",
-            "description": "نویسنده پاسخ API"
-          },
-          "message": {
-            "type": "string",
-            "description": "پیام توصیف‌کننده نتیجه"
-          },
-          "data": {
-            "oneOf": [{ "$ref": "#/components/schemas/CreateCounselGlobalResponseDTO" }, { "type": "null" }],
-            "nullable": true,
-            "description": "داده‌های پاسخ یا null اگر داده خاصی بازگردانده نشود."
-          },
-          "timeStamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "زمان ثبت پاسخ"
-          },
-          "version": {
-            "type": "string",
-            "description": "نسخه API"
-          }
-        }
-      },
-      "ApiErrorResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "description": "کد وضعیت HTTP"
-          },
-          "success": {
-            "type": "boolean",
-            "description": "برای خطاها همیشه false است"
-          },
-          "author": {
-            "type": "string",
-            "description": "نویسنده پاسخ API"
-          },
-          "message": {
-            "type": "string",
-            "description": "پیام خطای عمومی"
-          },
-          "errorCode": {
-            "type": "string",
-            "description": "کد خطای خاص تعریف شده در enum ErrorCode"
-          },
-          "errors": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "description": "نقشه‌ای از نام فیلدها به آرایه‌ای از پیام‌های خطا"
-          },
-          "timeStamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "زمان ثبت پاسخ"
-          },
-          "version": {
-            "type": "string",
-            "description": "نسخه API"
-          }
-        }
-      }
+
+  "security": [
+    {
+      "CookieAuth": []
+    },
+    {
+      "BearerAuth": []
     }
-  }
+  ]
 }

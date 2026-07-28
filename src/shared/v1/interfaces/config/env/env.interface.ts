@@ -88,4 +88,8 @@ export interface EnvInterface {
   JWT_ACCESS_TOKEN_SECRET_KEY: string;
   JWT_REFRESH_TOKEN_EXPIRES_AT: number;
   JWT_ACCESS_TOKEN_EXPIRES_AT: number;
+
+  // =========================Platform Admin Authentication=========================
+  PLATFORM_ADMIN_LOGIN_WITH_PHONE_OTP_EXPIRES_IN_SECONDS: number;
+  PLATFORM_ADMIN_LOGIN_SESSION_EXPIRES_IN_SECONDS: number;
 }

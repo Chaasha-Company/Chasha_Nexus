@@ -1,4 +1,4 @@
 export interface LoginWithPhoneNumberPlatformAdminCommand {
-  loginPhoneNumner: string;
+  loginPhoneNumber: string;
   loginPassword: string;
 }

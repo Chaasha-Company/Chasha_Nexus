@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BeforeInsert, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { PlatformAdminSessionsModel, PlatformAdminStatusesModel } from './childrens';
+import { generateChashaResetPasswordCodeHelper, hashPasswordProvider } from '@/modules/v1/auth';
 
 @Entity({
   name: 'platform_admins',
@@ -94,4 +95,13 @@ export class PlatformAdminsModel {
     nullable: true,
   })
   platformAdminDeletedAt!: Date | null;
+
+  @BeforeInsert()
+  async hashPasswordOnInsert(): Promise<void> {
+    if (this.platformAdminPassword) {
+      const hashPassword = hashPasswordProvider();
+      this.platformAdminPassword = await hashPassword(this.platformAdminPassword);
+      this.platformAdminResetPasswordCode = generateChashaResetPasswordCodeHelper();
+    }
+  }
 }

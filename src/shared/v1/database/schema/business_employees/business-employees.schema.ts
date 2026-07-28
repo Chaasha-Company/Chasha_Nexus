@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BeforeInsert, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { BusinessEmployeeSessionsModel, BusinessEmployeeStatusesModel } from './childrens';
+import { generateChashaResetPasswordCodeHelper, hashPasswordProvider } from '@/modules/v1/auth';
 
 @Entity({
   name: 'business_employees',
@@ -32,6 +33,14 @@ export class BusinessEmployeesModel {
     unique: true,
   })
   businessEmployeeCode!: string;
+
+  @Column({
+    name: 'business_employee_password',
+    type: 'varchar',
+    length: 64,
+    unique: true,
+  })
+  businessEmployeePassword!: string;
 
   @Column({
     name: 'business_employee_reset_password_code',
@@ -96,4 +105,13 @@ export class BusinessEmployeesModel {
     nullable: true,
   })
   businessEmployeeDeletedAt!: Date | null;
+
+  @BeforeInsert()
+  async hashPasswordOnInsert(): Promise<void> {
+    if (this.businessEmployeePassword) {
+      const hashPassword = hashPasswordProvider();
+      this.businessEmployeePassword = await hashPassword(this.businessEmployeePassword);
+      this.businessEmployeeResetPasswordCode = generateChashaResetPasswordCodeHelper();
+    }
+  }
 }

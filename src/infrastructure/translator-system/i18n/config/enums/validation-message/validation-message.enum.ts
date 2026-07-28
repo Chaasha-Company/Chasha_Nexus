@@ -74,85 +74,33 @@ export const ValidationMessages = {
     en: 'Error: Field - A required field name is missing.',
   },
 
-  // =========================Counsel Validation========================
-  [ValidationMessage.COUNSEL_REQUEST_FULL_NAME_IS_REQUIRED]: {
-    fa: 'خطا: نام و نام خانوادگی مشاوره - این فیلد الزامی است و باید رشته باشد.',
-    en: 'Error: Counsel Full Name - This field is required and must be a string.',
+  // =========================Platform Admin Login Validation=========================
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_NOT_FOUND_PHONE_NUMBER]: {
+    fa: 'خطا: شماره تماس - کاربری با این مشخصات پیدا نشد.',
+    en: 'Error: Phone number - No user was found with the provided credentials.',
   },
-
-  [ValidationMessage.COUNSEL_REQUEST_PHONE_NUMBER_IS_REQUIRED]: {
-    fa: 'خطا: شماره تماس مشاوره - این فیلد الزامی است و باید رشته باشد.',
-    en: 'Error: Counsel Phone Number - This field is required and must be a string.',
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_PASSWORD_INCORRECT]: {
+    fa: 'خطا: رمز عبور - صحیح نیست.',
+    en: 'Error Password - is incorrect.',
   },
-
-  [ValidationMessage.COUNSEL_REQUEST_DESCRIPTION_IS_REQUIRED]: {
-    fa: 'خطا: توضیحات مشاوره - این فیلد الزامی است و باید رشته باشد.',
-    en: 'Error: Counsel Description - This field is required and must be a string.',
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_PHONE_NUMBER_REQUIRED]: {
+    fa: 'خطا: شماره تماس - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: Phone number - This field is required and must be a valid string.',
   },
-
-  [ValidationMessage.COUNSEL_REQUEST_INFORMATION_ID_IS_REQUIRED]: {
-    fa: 'خطا: شناسه برند - این فیلد الزامی است و باید رشته باشد.',
-    en: 'Error: Counsel Information Id - This field is required and must be a string.',
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_PHONE_NUMBER_BAD_FORMAT]: {
+    fa: 'خطا: شماره تماس - باید 11 رقم باشد و با صفر شروع شود..',
+    en: 'Error: Phone number - It must be 11 digits long and start with 0.',
   },
-
-  [ValidationMessage.COUNSEL_REQUEST_INFORMATION_ID_IS_ONLY_36_CH]: {
-    fa: 'خطا: توضیحات مشاوره - 36 نویسه باید ارسال شود.',
-    en: 'Error: Counsel Information Id - length is 36 characters.',
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_PASSWORD_REQUIRED]: {
+    fa: 'خطا: رمز عبور - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: Password - This field is required and must be a valid string.',
   },
-
-  [ValidationMessage.COUNSEL_REQUEST_INFORMATION_IS_EXIST]: {
-    fa: 'خطا: مشاوره برند - موردی با این مشخصه یافت نشد..',
-    en: 'Error: Counsel Information Id - Not found with this ID.',
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_PASSWORD_IS_ONLY_64_CH]: {
+    fa: 'خطا: رمز عبور - حداکثر ۶۴ کاراکتر مجاز است.',
+    en: 'Error: Password - Maximum length is 64 characters.',
   },
-
-  [ValidationMessage.COUNSEL_REQUEST_PHONE_NUMBER_IS_NOT_VALID_FORMAT]: {
-    fa: 'خطا: شماره تماس مشاوره - فرمت شماره تماس ارسال شده نادرست است.',
-    en: 'Error: Counsel Phone Number - Invalid phone number format.',
-  },
-
-  [ValidationMessage.COUNSEL_REQUEST_DESCRIPTION_IS_ONLY_120_CH]: {
-    fa: 'خطا: توضیحات مشاوره - حداکثر 120 نویسه مجاز است.',
-    en: 'Error: Counsel Description - Maximum length is 120 characters.',
-  },
-
-  [ValidationMessage.COUNSEL_REQUEST_EXISTS_WITH_THIS_PHONE_NUMBER]: {
-    fa: 'خطا: شماره تماس مشاوره - قبلاً برای این شماره جلسه‌ای رزرو شده است.',
-    en: 'Error: Counsel Phone Number - A session has already been booked for this number.',
-  },
-
-  // =========================Login Validation========================
-  [ValidationMessage.LOGIN_USERNAME_REQUIRED]: {
-    fa: 'خطا: نام کاربری ورود - این فیلد الزامی است و باید رشته باشد.',
-    en: 'Error: Login Username - This field is required and must be a string.',
-  },
-
-  [ValidationMessage.LOGIN_USERNAME_MIN_LENGTH]: {
-    fa: 'خطا: نام کاربری ورود - باید حداقل 3 نویسه باشد.',
-    en: 'Error: Login Username - Must be at least 3 characters.',
-  },
-
-  [ValidationMessage.LOGIN_USERNAME_MAX_LENGTH]: {
-    fa: 'خطا: نام کاربری ورود - باید حداکثر 54 نویسه باشد.',
-    en: 'Error: Login Username - Must be at most 54 characters.',
-  },
-
-  [ValidationMessage.LOGIN_PASSWORD_REQUIRED]: {
-    fa: 'خطا: گذرواژه ورود - این فیلد الزامی است و باید رشته باشد.',
-    en: 'Error: Login Password - This field is required and must be a string.',
-  },
-
-  [ValidationMessage.LOGIN_PASSWORD_MIN_LENGTH]: {
-    fa: 'خطا: گذرواژه ورود - باید حداقل 8 نویسه باشد.',
-    en: 'Error: Login Password - Must be at least 8 characters.',
-  },
-
-  [ValidationMessage.LOGIN_PASSWORD_MAX_LENGTH]: {
-    fa: 'خطا: گذرواژه ورود - باید حداکثر 64 نویسه باشد.',
-    en: 'Error: Login Password - Must be at most 64 characters.',
-  },
-
-  [ValidationMessage.LOGIN_USERNAME_OR_PASSWORD_NOT_FOUND]: {
-    fa: 'خطا: نام کابری یا گذرواژه ورود - نام کاربری یا رمز عبور اشتباه است.',
-    en: 'Error: Login Password Or Username - Password or Username is Wrong.',
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_ALREADY_IN_QUEUE]: {
+    fa: 'خطا: درخواست ورود شما در حال انتظار است. لطفاً به صفحه تأیید کد بازگردید و کد ارسال‌شده را وارد کنید.',
+    en: 'Error: Your login request is already pending. Please return to the verification page and enter the verification code that was sent to you.',
   },
 } as const;

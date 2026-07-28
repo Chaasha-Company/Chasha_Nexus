@@ -1,6 +1,6 @@
 import { loggerConfig } from '@/config/logger';
 import { AppDataSource } from '@/shared/v1/database/core';
-import { createBusinessEmployeeStatusDataSeed, createPlatformAdminStatusDataSeed } from '@/shared/v1/database/seeds/categories';
+import { createBusinessEmployeeStatusDataSeed, createPlatformAdminSeed, createPlatformAdminStatusDataSeed } from '@/shared/v1/database/seeds/categories';
 
 export const seedLoaderHelper = async (): Promise<void> => {
   try {
@@ -10,6 +10,7 @@ export const seedLoaderHelper = async (): Promise<void> => {
     }
     await createPlatformAdminStatusDataSeed();
     await createBusinessEmployeeStatusDataSeed();
+    await createPlatformAdminSeed();
   } catch (error: unknown) {
     loggerConfig.error(`Seeding Database lost with ${error}`);
   }

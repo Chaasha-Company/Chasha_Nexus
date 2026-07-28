@@ -2,4 +2,4 @@ import { Router } from 'express';
 
 const router = Router();
 
-export { router as authRouter };
+export { router as businessAuthRouter };
