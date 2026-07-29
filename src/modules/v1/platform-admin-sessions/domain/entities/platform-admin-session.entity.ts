@@ -1,4 +1,4 @@
-import type { PlatformAdminsEntity } from './platform-admin.entity';
+import type { PlatformAdminsEntity } from '@/modules/v1/platform-admins';
 
 export interface PlatformAdminSessionsEntity {
   platformAdminSessionId: string;

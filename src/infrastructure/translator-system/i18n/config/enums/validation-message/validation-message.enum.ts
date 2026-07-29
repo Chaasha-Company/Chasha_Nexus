@@ -79,28 +79,64 @@ export const ValidationMessages = {
     fa: 'خطا: شماره تماس - کاربری با این مشخصات پیدا نشد.',
     en: 'Error: Phone number - No user was found with the provided credentials.',
   },
+
   [ValidationMessage.PLATFORM_ADMIN_LOGIN_PASSWORD_INCORRECT]: {
     fa: 'خطا: رمز عبور - صحیح نیست.',
     en: 'Error Password - is incorrect.',
   },
+
   [ValidationMessage.PLATFORM_ADMIN_LOGIN_PHONE_NUMBER_REQUIRED]: {
     fa: 'خطا: شماره تماس - این فیلد اجباری است و باید یک رشته معتبر باشد.',
     en: 'Error: Phone number - This field is required and must be a valid string.',
   },
+
   [ValidationMessage.PLATFORM_ADMIN_LOGIN_PHONE_NUMBER_BAD_FORMAT]: {
     fa: 'خطا: شماره تماس - باید 11 رقم باشد و با صفر شروع شود..',
     en: 'Error: Phone number - It must be 11 digits long and start with 0.',
   },
+
   [ValidationMessage.PLATFORM_ADMIN_LOGIN_PASSWORD_REQUIRED]: {
     fa: 'خطا: رمز عبور - این فیلد اجباری است و باید یک رشته معتبر باشد.',
     en: 'Error: Password - This field is required and must be a valid string.',
   },
+
   [ValidationMessage.PLATFORM_ADMIN_LOGIN_PASSWORD_IS_ONLY_64_CH]: {
     fa: 'خطا: رمز عبور - حداکثر ۶۴ کاراکتر مجاز است.',
     en: 'Error: Password - Maximum length is 64 characters.',
   },
+
   [ValidationMessage.PLATFORM_ADMIN_LOGIN_ALREADY_IN_QUEUE]: {
     fa: 'خطا: درخواست ورود شما در حال انتظار است. لطفاً به صفحه تأیید کد بازگردید و کد ارسال‌شده را وارد کنید.',
     en: 'Error: Your login request is already pending. Please return to the verification page and enter the verification code that was sent to you.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_VERIFY_SESSION_ID_REQUIRED]: {
+    fa: 'خطا: شناسه نشست ورود - این فیلد اجباری است و باید رشته باشد.',
+    en: 'Error: Login session ID - This field is required and must be a string.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_VERIFY_SESSION_ID_NOT_FOUND]: {
+    fa: 'خطا: نشست ورود یافت نشد یا منقضی شده است. لطفاً دوباره فرآیند ورود را آغاز کنید.',
+    en: 'Error: Login session was not found or has expired. Please start the login process again.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_VERIFY_SESSION_ID_IS_ONLY_32_CH]: {
+    fa: 'خطا: شناسه نشست ورود - باید یک شناسه معتبر (UUID) باشد.',
+    en: 'Error: Login session ID - Must be a valid UUID.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_VERIFY_OTP_REQUIRED]: {
+    fa: 'خطا: کد تأیید - این فیلد اجباری است و باید رشته باشد.',
+    en: 'Error: Verification code - This field is required and must be a string.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_VERIFY_OTP_IS_ONLY_6_CH]: {
+    fa: 'خطا: کد تأیید - باید دقیقاً ۶ رقم باشد.',
+    en: 'Error: Verification code - Must contain exactly 6 digits.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_VERIFY_OTP_INVALID]: {
+    fa: 'خطا: کد تأیید وارد شده صحیح نیست.',
+    en: 'Error: The verification code you entered is invalid.',
   },
 } as const;

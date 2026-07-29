@@ -1,5 +1,5 @@
-import type { CreatePlatformAdminSessionRepositoryContract } from '@/modules/v1/platform-admins/domain';
-import type { CreatePlatformAdminSessionRequestDTO } from '@/modules/v1/platform-admins/presentation';
+import type { CreatePlatformAdminSessionRepositoryContract } from '@/modules/v1/platform-admin-sessions/domain';
+import type { CreatePlatformAdminSessionRequestDTO } from '@/modules/v1/platform-admin-sessions/presentation';
 import { PlatformAdminSessionsModel } from '@/shared/v1/database/schema/platform_admins/childrens';
 import { AppDataSource } from '@/shared/v1/database/core';
 

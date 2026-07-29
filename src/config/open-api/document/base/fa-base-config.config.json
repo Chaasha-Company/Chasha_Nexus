@@ -1,13 +1,13 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "رابط برنامه‌نویسی پلتفرم چاشا",
+    "title": "پلتفرم چاشا - API رسمی",
     "summary": "مستندات رسمی REST API پلتفرم چاشا",
-    "description": "مستندات رسمی REST API مربوط به سیستم مدیریت رستوران چاشا.\n\nاین API امکانات مدیریت پلتفرم، مدیریت رستوران، احراز هویت، ثبت سفارش، منوی QR، گردش کار آشپزخانه، اعلان‌ها و سرویس‌های آینده پلتفرم را فراهم می‌کند.\n\nتمامی Endpointها بر اساس اصول REST طراحی شده‌اند و پاسخ‌ها را در قالب استاندارد JSON بازمی‌گردانند.\n\nاحراز هویت بسته به نوع کلاینت، از طریق کوکی (Cookie-based Authentication) یا توکن Bearer انجام می‌شود.",
+    "description": "این API موتور عملیاتی پلتفرم رستوران‌های چاشا را تغذیه می‌کند.\n\nاین API امکان مدیریت پلتفرم، مدیریت رستوران‌ها، احراز هویت، سفارش‌گیری، منوی QR، گردش کار آشپزخانه، اعلان‌ها و خدمات آینده پلتفرم را فراهم می‌کند.\n\nتمامی اندپوینت‌ها از اصول REST پیروی کرده و پاسخ‌های استاندارد JSON برمی‌گردانند.\n\nاحراز هویت بسته به پلتفرم کاربر (وب یا موبایل)، هم از طریق کوکی (Cookie-based) و هم از طریق توکن Bearer پشتیبانی می‌شود.",
     "version": "1.0.0",
     "termsOfService": "https://docs.chaasha.ir/terms",
     "contact": {
-      "name": "فناوری کارا",
+      "name": "شرکت کرا فناوری",
       "url": "https://karaflow.com",
       "email": "backend@karaflow.com"
     },
@@ -25,7 +25,7 @@
   "servers": [
     {
       "url": "https://api.chaasha.ir/api/v1",
-      "description": "سرور عملیاتی (Production)"
+      "description": "سرور تولید (Production)"
     },
     {
       "url": "https://staging-api.chaasha.ir/api/v1",
@@ -37,23 +37,23 @@
     },
     {
       "url": "http://localhost:3000/api/v1",
-      "description": "محیط توسعه محلی (Local Development)"
+      "description": "محیط محلی (Local Development)"
     }
   ],
 
   "tags": [
     {
-      "name": "احراز هویت مدیران پلتفرم",
-      "description": "Endpointهای مربوط به احراز هویت مدیران پلتفرم شامل ورود، تأیید کد یکبار مصرف (OTP)، ایجاد توکن، خروج، تمدید توکن و بازیابی رمز عبور."
+      "name": "احراز هویت مدیر پلتفرم",
+      "description": "اندپوینت‌های مربوط به احراز هویت مدیران پلتفرم شامل ورود، تایید OTP، تولید توکن، خروج و بازیابی رمز عبور."
     }
   ],
 
   "paths": {
     "/admin/auth/login/with-phone": {
       "post": {
-        "tags": ["احراز هویت مدیران پلتفرم"],
+        "tags": ["احراز هویت مدیر پلتفرم"],
         "summary": "ورود با شماره تلفن",
-        "description": "فرآیند احراز هویت مدیر پلتفرم را آغاز می‌کند.\n\nدر این Endpoint اطلاعات ورود مدیر (شماره تلفن و رمز عبور) اعتبارسنجی می‌شود.\n\nدر صورت معتبر بودن اطلاعات:\n- یک نشست ورود موقت ایجاد می‌شود.\n- یک کد تأیید شش رقمی (OTP) تولید می‌شود.\n- نشست در حافظه Cache ذخیره می‌شود.\n- شناسه موقت loginSession بازگردانده می‌شود.\n\nشناسه loginSession باید در مرحله تأیید OTP استفاده شود.\n\nاگر از قبل یک نشست ورود فعال برای این شماره تلفن وجود داشته باشد، به جای ایجاد نشست جدید، خطایی بازگردانده می‌شود و کاربر باید فرآیند تأیید قبلی را ادامه دهد.",
+        "description": "فرآیند احراز هویت مدیر پلتفرم را آغاز می‌کند.\n\nاین اندپوینت اعتبارنامه‌های مدیر (شماره تلفن و رمز عبور) را اعتبارسنجی می‌کند.\n\nدر صورت صحیح بودن اعتبارنامه‌ها:\n- یک سشن ورود موقت ایجاد می‌شود.\n- یک کد یکبار مصرف (OTP) شش رقمی تولید می‌شود.\n- سشن در حافظه کش ذخیره می‌شود.\n- یک شناسه سشن ورود موقت (loginSession) بازگردانده می‌شود.\n\nشناسه loginSession بازگردانده شده باید در مرحله تایید OTP استفاده شود.\n\nدر صورتی که قبلاً یک سشن ورود فعال برای این شماره تلفن وجود داشته باشد، API خطایی بازگردانده و از کلاینت می‌خواهد به جای ایجاد سشن جدید، فرآیند تایید موجود را ادامه دهد.",
         "operationId": "loginWithPhoneNumberPlatformAdmin",
 
         "requestBody": {
@@ -78,10 +78,10 @@
 
         "responses": {
           "200": {
-            "description": "نشست ورود با موفقیت ایجاد شد.",
+            "description": "سشن ورود با موفقیت ایجاد شد.",
             "headers": {
               "x-request-id": {
-                "description": "شناسه یکتای درخواست.",
+                "description": "شناسه منحصر به فرد درخواست.",
                 "schema": {
                   "type": "string"
                 }
@@ -94,7 +94,7 @@
                 },
                 "examples": {
                   "success": {
-                    "summary": "ایجاد نشست",
+                    "summary": "سشن ایجاد شد",
                     "value": {
                       "status": 200,
                       "success": true,
@@ -113,7 +113,7 @@
           },
 
           "400": {
-            "description": "اعتبارسنجی ناموفق یا نقض قوانین کسب‌وکار.",
+            "description": "اعتبارسنجی ناموفق بود یا قانون کسب‌وکار نقض شد.",
             "content": {
               "application/json": {
                 "schema": {
@@ -121,15 +121,15 @@
                 },
                 "examples": {
                   "InvalidPhoneNumber": {
-                    "summary": "خطای اعتبارسنجی شماره تلفن",
+                    "summary": "اعتبارسنجی شماره تلفن",
                     "value": {
                       "status": 400,
                       "success": false,
                       "author": "Kara_Company",
-                      "message": "اعتبارسنجی با خطا مواجه شد.",
+                      "message": "اعتبارسنجی ناموفق بود.",
                       "errorCode": "E1001",
                       "errors": {
-                        "loginPhoneNumber": ["شماره تلفن باید دقیقاً ۱۱ رقم بوده و با 09 شروع شود."]
+                        "loginPhoneNumber": ["شماره تلفن باید دقیقاً شامل ۱۱ رقم بوده و با ۰۹ شروع شود."]
                       },
                       "timeStamp": "2026-07-28T19:01:46.652Z",
                       "version": "0.1.0"
@@ -137,15 +137,15 @@
                   },
 
                   "WrongPassword": {
-                    "summary": "رمز عبور اشتباه",
+                    "summary": "رمز عبور نادرست",
                     "value": {
                       "status": 400,
                       "success": false,
                       "author": "Kara_Company",
-                      "message": "تعارض در داده‌ها.",
+                      "message": "تضاد داده‌ها.",
                       "errorCode": "E1090",
                       "errors": {
-                        "loginPassword": ["رمز عبور وارد شده صحیح نیست."]
+                        "loginPassword": ["رمز عبور نادرست است."]
                       },
                       "timeStamp": "2026-07-28T19:01:22.197Z",
                       "version": "0.1.0"
@@ -153,15 +153,15 @@
                   },
 
                   "AlreadyInQueue": {
-                    "summary": "نشست ورود فعال",
+                    "summary": "سشن ورود موجود",
                     "value": {
                       "status": 400,
                       "success": false,
                       "author": "Kara_Company",
-                      "message": "تعارض در داده‌ها.",
+                      "message": "تضاد داده‌ها.",
                       "errorCode": "E1090",
                       "errors": {
-                        "error_message": ["درخواست ورود شما قبلاً ثبت شده است. لطفاً به صفحه تأیید بازگردید و کد OTP خود را وارد کنید."]
+                        "error_message": ["درخواست ورود شما در حال حاضر در جریان است. لطفاً به صفحه تایید برگشته و کد OTP خود را وارد کنید."]
                       },
                       "timeStamp": "2026-07-28T19:01:22.197Z",
                       "version": "0.1.0"
@@ -173,7 +173,7 @@
           },
 
           "404": {
-            "description": "مدیر پلتفرم یافت نشد.",
+            "description": "مدیر پلتفرم پیدا نشد.",
             "content": {
               "application/json": {
                 "schema": {
@@ -185,12 +185,235 @@
                       "status": 404,
                       "success": false,
                       "author": "Kara_Company",
-                      "message": "منبع درخواستی یافت نشد.",
+                      "message": "منبع مورد نظر پیدا نشد.",
                       "errorCode": "E1020",
                       "errors": {
-                        "loginPhoneNumber": ["مدیر پلتفرمی با این شماره تلفن وجود ندارد."]
+                        "loginPhoneNumber": ["هیچ مدیر پلتفرمی با این شماره تلفن وجود ندارد."]
                       },
                       "timeStamp": "2026-07-28T19:01:27.765Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/admin/auth/login/with-phone/verify": {
+      "post": {
+        "tags": ["احراز هویت مدیر پلتفرم"],
+        "summary": "تایید OTP ورود",
+        "description": "فرآیند احراز هویت مدیر پلتفرم را تکمیل می‌کند.\n\nاین اندپوینت سشن ورود موقت را اعتبارسنجی کرده و کد یکبار مصرف (OTP) را بررسی می‌کند.\n\nمراحل فرآیند تایید:\n\n1. اعتبارسنجی بدنه درخواست.\n2. جستجوی سشن ورود موقت.\n3. بررسی تاریخ انقضای سشن.\n4. اعتبارسنجی OTP.\n5. یافتن مدیر پلتفرم.\n6. ایجاد سشن احراز هویت دائمی.\n7. تولید توکن دسترسی JWT (Access Token).\n8. تولید توکن رفرش JWT (Refresh Token).\n9. ذخیره هش شده توکن رفرش در داخل سشن مدیر پلتفرم.\n10. حذف کش ورود موقت.\n\nرفتار کلاینت (Client):\n\n• کلاینت وب (Web Client):\n- توکن دسترسی به صورت کوکی HttpOnly بازگردانده می‌شود.\n- توکن رفرش به صورت کوکی HttpOnly بازگردانده می‌شود.\n- داده‌های پاسخ (data) برابر با null است.\n\n• کلاینت موبایل (Mobile Client):\n- توکن دسترسی در داخل بدنه پاسخ بازگردانده می‌شود.\n- توکن رفرش در داخل بدنه پاسخ بازگردانده می‌شود.\n\nپلتفرم کلاینت با استفاده از هدر درخواست 'x-platform' تعیین می‌شود.\n\nمقادیر پذیرفته شده:\n- web\n- mobile",
+        "operationId": "verifyPlatformAdminLogin",
+
+        "parameters": [
+          {
+            "name": "x-platform",
+            "in": "header",
+            "required": false,
+            "description": "پلتفرم کلاینت.",
+            "schema": {
+              "type": "string",
+              "enum": ["web", "mobile"],
+              "default": "web"
+            }
+          }
+        ],
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginVerifyPlatformAdminRequest"
+              },
+              "examples": {
+                "verify": {
+                  "summary": "تایید ورود",
+                  "value": {
+                    "loginVerifySessionId": "2a8e43dc-be17-4d02-8820-daa3638168b1",
+                    "loginVerifyPhoneNumber": "09123456789",
+                    "loginVerifyOtp": "482913"
+                  }
+                }
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "احراز هویت با موفقیت تکمیل شد.",
+
+            "headers": {
+              "Set-Cookie": {
+                "description": "فقط برای پلتفرم وب بازگردانده می‌شود. حاوی توکن دسترسی و توکن رفرش به صورت کوکی‌های HttpOnly.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-request-id": {
+                "description": "شناسه منحصر به فرد درخواست.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Web": {
+                    "summary": "کلاینت وب",
+                    "value": {
+                      "status": 200,
+                      "success": true,
+                      "author": "Kara_Company",
+                      "message": "عملیات با موفقیت انجام شد.",
+                      "data": null,
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  },
+
+                  "Mobile": {
+                    "summary": "کلاینت موبایل",
+                    "value": {
+                      "status": 200,
+                      "success": true,
+                      "author": "Kara_Company",
+                      "message": "عملیات با موفقیت انجام شد.",
+                      "data": {
+                        "loginVerifyAccessToken": "eyJhbGciOiJIUzI1NiIs...",
+                        "loginVerifyRefreshToken": "eyJhbGciOiJIUzI1NiIs..."
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "اعتبارسنجی ناموفق بود یا تایید شکست خورد.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "InvalidSessionId": {
+                    "summary": "شناسه سشن نامعتبر",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "اعتبارسنجی ناموفق بود.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "loginVerifySessionId": ["شناسه سشن باید یک UUID معتبر باشد."]
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  },
+
+                  "InvalidPhoneNumber": {
+                    "summary": "اعتبارسنجی تلفن",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "اعتبارسنجی ناموفق بود.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "loginVerifyPhoneNumber": ["فرمت شماره تلفن نامعتبر است."]
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  },
+
+                  "InvalidOTPFormat": {
+                    "summary": "اعتبارسنجی OTP",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "اعتبارسنجی ناموفق بود.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "loginVerifyOtp": ["OTP باید دقیقاً شامل ۶ رقم باشد."]
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  },
+
+                  "WrongOTP": {
+                    "summary": "OTP نادرست",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "تضاد داده‌ها.",
+                      "errorCode": "E1090",
+                      "errors": {
+                        "loginVerifyOtp": ["کد تایید نادرست است."]
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "سشن یا مدیر پلتفرم پیدا نشد.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "SessionExpired": {
+                    "summary": "سشن منقضی شده",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "منبع مورد نظر پیدا نشد.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "loginVerifyPhoneNumber": ["سشن ورود منقضی شده یا وجود ندارد."]
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  },
+
+                  "PlatformAdminNotFound": {
+                    "summary": "مدیر پیدا نشد",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "منبع مورد نظر پیدا نشد.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "loginVerifyPhoneNumber": ["مدیر پلتفرم پیدا نشد."]
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
                       "version": "0.1.0"
                     }
                   }
@@ -219,7 +442,7 @@
         "type": "apiKey",
         "in": "cookie",
         "name": "accessToken",
-        "description": "احراز هویت از طریق کوکی HttpOnly"
+        "description": "احراز هویت کوکی HttpOnly"
       }
     },
 
@@ -271,7 +494,7 @@
               "loginSession": {
                 "type": "string",
                 "format": "uuid",
-                "description": "شناسه موقت نشست ورود.",
+                "description": "شناسه سشن ورود موقت.",
                 "example": "2a8e43dc-be17-4d02-8820-daa3638168b1"
               }
             }
@@ -287,6 +510,58 @@
         }
       },
 
+      "LoginVerifyPlatformAdminRequest": {
+        "type": "object",
+        "required": ["loginVerifySessionId", "loginVerifyPhoneNumber", "loginVerifyOtp"],
+        "properties": {
+          "loginVerifySessionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "شناسه سشن ورود موقت که توسط اندپوینت ورود با شماره تلفن بازگردانده شده است.",
+            "example": "2a8e43dc-be17-4d02-8820-daa3638168b1"
+          },
+          "loginVerifyPhoneNumber": {
+            "type": "string",
+            "description": "شماره تلفن مدیر پلتفرم.",
+            "example": "09123456789",
+            "pattern": "^09\\d{9}$",
+            "minLength": 11,
+            "maxLength": 11
+          },
+          "loginVerifyOtp": {
+            "type": "string",
+            "description": "کد یکبار مصرف شش رقمی ارسال شده به مدیر.",
+            "example": "482913",
+            "pattern": "^\\d{6}$",
+            "minLength": 6,
+            "maxLength": 6
+          }
+        }
+      },
+
+      "LoginVerifyPlatformAdminMobileResponse": {
+        "type": "object",
+        "properties": {
+          "loginVerifyAccessToken": {
+            "type": "string",
+            "description": "توکن دسترسی JWT.",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          },
+          "loginVerifyRefreshToken": {
+            "type": "string",
+            "description": "توکن رفرش JWT.",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          }
+        }
+      },
+
+      "LoginVerifyPlatformAdminWebResponse": {
+        "type": "object",
+        "nullable": true,
+        "example": null,
+        "description": "کلاینت‌های وب کوکی‌های احراز هویت را دریافت می‌کنند. بنابراین، داده‌های بدنه پاسخ null است."
+      },
+
       "ValidationError": {
         "type": "object",
         "additionalProperties": {
@@ -295,9 +570,17 @@
             "type": "string"
           }
         },
-        "example": {
-          "loginPhoneNumber": ["شماره تلفن باید دقیقاً ۱۱ رقم بوده و با 09 شروع شود."]
-        }
+        "examples": [
+          {
+            "loginVerifySessionId": ["شناسه سشن باید یک UUID معتبر باشد."]
+          },
+          {
+            "loginVerifyPhoneNumber": ["فرمت شماره تلفن نامعتبر است."]
+          },
+          {
+            "loginVerifyOtp": ["OTP باید دقیقاً شامل ۶ رقم باشد."]
+          }
+        ]
       },
 
       "BusinessError": {
@@ -311,7 +594,7 @@
           }
         },
         "example": {
-          "error_message": ["درخواست ورود شما قبلاً ثبت شده است. لطفاً به صفحه تأیید بازگردید و کد OTP خود را وارد کنید."]
+          "error_message": ["اعتبارسنجی قانون کسب‌وکار ناموفق بود."]
         }
       },
 
@@ -331,7 +614,8 @@
             "example": "Kara_Company"
           },
           "message": {
-            "type": "string"
+            "type": "string",
+            "example": "اعتبارسنجی ناموفق بود."
           },
           "errorCode": {
             "type": "string",
@@ -339,7 +623,7 @@
           },
           "errors": {
             "type": "object",
-            "description": "خطاهای اعتبارسنجی یا قوانین کسب‌وکار."
+            "description": "خطاهای اعتبارسنجی یا خطاهای کسب‌وکار."
           },
           "timeStamp": {
             "type": "string",
@@ -349,68 +633,133 @@
             "type": "string",
             "example": "0.1.0"
           }
-        }
-      }
-    },
+        },
 
-    "responses": {
-      "ValidationFailed": {
-        "description": "اعتبارسنجی ناموفق."
-      },
+        "ValidationError": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "loginPhoneNumber": ["شماره تلفن باید دقیقاً شامل ۱۱ رقم بوده و با ۰۹ شروع شود."]
+          }
+        },
 
-      "BadRequest": {
-        "description": "نقض قوانین کسب‌وکار."
-      },
+        "BusinessError": {
+          "type": "object",
+          "properties": {
+            "error_message": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "example": {
+            "error_message": ["درخواست ورود شما در حال حاضر در جریان است. لطفاً به صفحه تایید برگشته و کد OTP خود را وارد کنید."]
+          }
+        },
 
-      "Unauthorized": {
-        "description": "دسترسی غیرمجاز."
-      },
-
-      "Forbidden": {
-        "description": "دسترسی ممنوع."
-      },
-
-      "NotFound": {
-        "description": "منبع موردنظر یافت نشد."
-      },
-
-      "Conflict": {
-        "description": "تعارض در داده‌ها."
-      },
-
-      "TooManyRequests": {
-        "description": "تعداد درخواست‌ها بیش از حد مجاز است."
-      },
-
-      "InternalServerError": {
-        "description": "خطای داخلی سرور.",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/ErrorResponse"
+        "ErrorResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "integer",
+              "example": 400
             },
-            "example": {
-              "status": 500,
-              "success": false,
-              "author": "Kara_Company",
-              "message": "خطای داخلی سرور.",
-              "errorCode": "E5000",
-              "errors": {},
-              "timeStamp": "2026-07-28T19:01:46.652Z",
-              "version": "0.1.0"
+            "success": {
+              "type": "boolean",
+              "example": false
+            },
+            "author": {
+              "type": "string",
+              "example": "Kara_Company"
+            },
+            "message": {
+              "type": "string"
+            },
+            "errorCode": {
+              "type": "string",
+              "example": "E1001"
+            },
+            "errors": {
+              "type": "object",
+              "description": "خطاهای اعتبارسنجی یا کسب‌وکار."
+            },
+            "timeStamp": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "version": {
+              "type": "string",
+              "example": "0.1.0"
+            }
+          }
+        }
+      },
+
+      "responses": {
+        "ValidationFailed": {
+          "description": "اعتبارسنجی ناموفق بود."
+        },
+
+        "BadRequest": {
+          "description": "اعتبارسنجی قانون کسب‌وکار ناموفق بود."
+        },
+
+        "Unauthorized": {
+          "description": "غیرمجاز."
+        },
+
+        "Forbidden": {
+          "description": "ممنوع."
+        },
+
+        "NotFound": {
+          "description": "منبع پیدا نشد."
+        },
+
+        "Conflict": {
+          "description": "تضاد داده‌ها."
+        },
+
+        "TooManyRequests": {
+          "description": "درخواست‌های بیش از حد مجاز."
+        },
+
+        "InternalServerError": {
+          "description": "خطای داخلی سرور.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorResponse"
+              },
+              "example": {
+                "status": 500,
+                "success": false,
+                "author": "Kara_Company",
+                "message": "خطای داخلی سرور.",
+                "errorCode": "E5000",
+                "errors": {},
+                "timeStamp": "2026-07-29T15:41:18.928Z",
+                "version": "0.1.0"
+              }
             }
           }
         }
       }
-    }
-  },
-
-  "security": [
-    {
-      "CookieAuth": []
     },
-    {
-      "BearerAuth": []
-    }
-  ]
+
+    "security": [
+      {
+        "CookieAuth": []
+      },
+      {
+        "BearerAuth": []
+      }
+    ]
+  }
 }

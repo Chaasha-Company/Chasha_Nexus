@@ -204,6 +204,229 @@
           }
         }
       }
+    },
+    "/admin/auth/login/with-phone/verify": {
+      "post": {
+        "tags": ["Platform Admin Authentication"],
+        "summary": "Verify login OTP",
+        "description": "Completes the Platform Administrator authentication process.\n\nThis endpoint validates the temporary login session and verifies the one-time password (OTP).\n\nVerification flow:\n\n1. Validates request body.\n2. Finds temporary login session.\n3. Checks session expiration.\n4. Validates OTP.\n5. Finds Platform Administrator.\n6. Creates a permanent authenticated session.\n7. Generates JWT Access Token.\n8. Generates JWT Refresh Token.\n9. Stores hashed Refresh Token inside Platform Admin Session.\n10. Deletes temporary login cache.\n\nClient behavior:\n\n• Web Client:\n- Access Token is returned as HttpOnly Cookie.\n- Refresh Token is returned as HttpOnly Cookie.\n- Response data is null.\n\n• Mobile Client:\n- Access Token is returned inside response body.\n- Refresh Token is returned inside response body.\n\nThe client platform is determined using the 'x-platform' request header.\n\nAccepted values:\n- web\n- mobile",
+        "operationId": "verifyPlatformAdminLogin",
+
+        "parameters": [
+          {
+            "name": "x-platform",
+            "in": "header",
+            "required": false,
+            "description": "Client platform.",
+            "schema": {
+              "type": "string",
+              "enum": ["web", "mobile"],
+              "default": "web"
+            }
+          }
+        ],
+
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginVerifyPlatformAdminRequest"
+              },
+              "examples": {
+                "verify": {
+                  "summary": "Verify Login",
+                  "value": {
+                    "loginVerifySessionId": "2a8e43dc-be17-4d02-8820-daa3638168b1",
+                    "loginVerifyPhoneNumber": "09123456789",
+                    "loginVerifyOtp": "482913"
+                  }
+                }
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Authentication completed successfully.",
+
+            "headers": {
+              "Set-Cookie": {
+                "description": "Only returned for Web platform. Contains Access Token and Refresh Token as HttpOnly cookies.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Web": {
+                    "summary": "Web Client",
+                    "value": {
+                      "status": 200,
+                      "success": true,
+                      "author": "Kara_Company",
+                      "message": "Operation completed successfully.",
+                      "data": null,
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  },
+
+                  "Mobile": {
+                    "summary": "Mobile Client",
+                    "value": {
+                      "status": 200,
+                      "success": true,
+                      "author": "Kara_Company",
+                      "message": "Operation completed successfully.",
+                      "data": {
+                        "loginVerifyAccessToken": "eyJhbGciOiJIUzI1NiIs...",
+                        "loginVerifyRefreshToken": "eyJhbGciOiJIUzI1NiIs..."
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "Validation failed or verification failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "InvalidSessionId": {
+                    "summary": "Invalid Session Id",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "loginVerifySessionId": ["Session identifier must be a valid UUID."]
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  },
+
+                  "InvalidPhoneNumber": {
+                    "summary": "Phone Validation",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "loginVerifyPhoneNumber": ["Phone number format is invalid."]
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  },
+
+                  "InvalidOTPFormat": {
+                    "summary": "OTP Validation",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "loginVerifyOtp": ["OTP must contain exactly 6 digits."]
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  },
+
+                  "WrongOTP": {
+                    "summary": "Wrong OTP",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "Data conflict.",
+                      "errorCode": "E1090",
+                      "errors": {
+                        "loginVerifyOtp": ["Verification code is incorrect."]
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "Session or Platform Administrator not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "SessionExpired": {
+                    "summary": "Session Expired",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "Requested resource was not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "loginVerifyPhoneNumber": ["Login session has expired or does not exist."]
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  },
+
+                  "PlatformAdminNotFound": {
+                    "summary": "Administrator Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "Requested resource was not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "loginVerifyPhoneNumber": ["Platform administrator was not found."]
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
     }
   },
 
@@ -287,6 +510,58 @@
         }
       },
 
+      "LoginVerifyPlatformAdminRequest": {
+        "type": "object",
+        "required": ["loginVerifySessionId", "loginVerifyPhoneNumber", "loginVerifyOtp"],
+        "properties": {
+          "loginVerifySessionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Temporary login session identifier returned by the Login With Phone endpoint.",
+            "example": "2a8e43dc-be17-4d02-8820-daa3638168b1"
+          },
+          "loginVerifyPhoneNumber": {
+            "type": "string",
+            "description": "Platform Administrator phone number.",
+            "example": "09123456789",
+            "pattern": "^09\\d{9}$",
+            "minLength": 11,
+            "maxLength": 11
+          },
+          "loginVerifyOtp": {
+            "type": "string",
+            "description": "Six digit One-Time Password sent to the administrator.",
+            "example": "482913",
+            "pattern": "^\\d{6}$",
+            "minLength": 6,
+            "maxLength": 6
+          }
+        }
+      },
+
+      "LoginVerifyPlatformAdminMobileResponse": {
+        "type": "object",
+        "properties": {
+          "loginVerifyAccessToken": {
+            "type": "string",
+            "description": "JWT Access Token.",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          },
+          "loginVerifyRefreshToken": {
+            "type": "string",
+            "description": "JWT Refresh Token.",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          }
+        }
+      },
+
+      "LoginVerifyPlatformAdminWebResponse": {
+        "type": "object",
+        "nullable": true,
+        "example": null,
+        "description": "Web clients receive authentication cookies. Therefore, the response body data is null."
+      },
+
       "ValidationError": {
         "type": "object",
         "additionalProperties": {
@@ -295,9 +570,17 @@
             "type": "string"
           }
         },
-        "example": {
-          "loginPhoneNumber": ["Phone number must contain exactly 11 digits and start with 09."]
-        }
+        "examples": [
+          {
+            "loginVerifySessionId": ["Session identifier must be a valid UUID."]
+          },
+          {
+            "loginVerifyPhoneNumber": ["Phone number format is invalid."]
+          },
+          {
+            "loginVerifyOtp": ["OTP must contain exactly 6 digits."]
+          }
+        ]
       },
 
       "BusinessError": {
@@ -311,7 +594,7 @@
           }
         },
         "example": {
-          "error_message": ["Your login request is already in progress. Please return to the verification page and enter your OTP."]
+          "error_message": ["Business rule validation failed."]
         }
       },
 
@@ -331,7 +614,8 @@
             "example": "Kara_Company"
           },
           "message": {
-            "type": "string"
+            "type": "string",
+            "example": "Validation failed."
           },
           "errorCode": {
             "type": "string",
@@ -339,7 +623,7 @@
           },
           "errors": {
             "type": "object",
-            "description": "Validation or business errors."
+            "description": "Validation errors or business errors."
           },
           "timeStamp": {
             "type": "string",
@@ -349,68 +633,133 @@
             "type": "string",
             "example": "0.1.0"
           }
-        }
-      }
-    },
+        },
 
-    "responses": {
-      "ValidationFailed": {
-        "description": "Validation failed."
-      },
+        "ValidationError": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "loginPhoneNumber": ["Phone number must contain exactly 11 digits and start with 09."]
+          }
+        },
 
-      "BadRequest": {
-        "description": "Business rule violation."
-      },
+        "BusinessError": {
+          "type": "object",
+          "properties": {
+            "error_message": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "example": {
+            "error_message": ["Your login request is already in progress. Please return to the verification page and enter your OTP."]
+          }
+        },
 
-      "Unauthorized": {
-        "description": "Unauthorized."
-      },
-
-      "Forbidden": {
-        "description": "Forbidden."
-      },
-
-      "NotFound": {
-        "description": "Resource not found."
-      },
-
-      "Conflict": {
-        "description": "Data conflict."
-      },
-
-      "TooManyRequests": {
-        "description": "Too many requests."
-      },
-
-      "InternalServerError": {
-        "description": "Internal Server Error.",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/ErrorResponse"
+        "ErrorResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "integer",
+              "example": 400
             },
-            "example": {
-              "status": 500,
-              "success": false,
-              "author": "Kara_Company",
-              "message": "Internal Server Error.",
-              "errorCode": "E5000",
-              "errors": {},
-              "timeStamp": "2026-07-28T19:01:46.652Z",
-              "version": "0.1.0"
+            "success": {
+              "type": "boolean",
+              "example": false
+            },
+            "author": {
+              "type": "string",
+              "example": "Kara_Company"
+            },
+            "message": {
+              "type": "string"
+            },
+            "errorCode": {
+              "type": "string",
+              "example": "E1001"
+            },
+            "errors": {
+              "type": "object",
+              "description": "Validation or business errors."
+            },
+            "timeStamp": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "version": {
+              "type": "string",
+              "example": "0.1.0"
+            }
+          }
+        }
+      },
+
+      "responses": {
+        "ValidationFailed": {
+          "description": "Validation failed."
+        },
+
+        "BadRequest": {
+          "description": "Business rule validation failed."
+        },
+
+        "Unauthorized": {
+          "description": "Unauthorized."
+        },
+
+        "Forbidden": {
+          "description": "Forbidden."
+        },
+
+        "NotFound": {
+          "description": "Resource not found."
+        },
+
+        "Conflict": {
+          "description": "Data conflict."
+        },
+
+        "TooManyRequests": {
+          "description": "Too many requests."
+        },
+
+        "InternalServerError": {
+          "description": "Internal Server Error.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorResponse"
+              },
+              "example": {
+                "status": 500,
+                "success": false,
+                "author": "Kara_Company",
+                "message": "Internal Server Error.",
+                "errorCode": "E5000",
+                "errors": {},
+                "timeStamp": "2026-07-29T15:41:18.928Z",
+                "version": "0.1.0"
+              }
             }
           }
         }
       }
-    }
-  },
-
-  "security": [
-    {
-      "CookieAuth": []
     },
-    {
-      "BearerAuth": []
-    }
-  ]
+
+    "security": [
+      {
+        "CookieAuth": []
+      },
+      {
+        "BearerAuth": []
+      }
+    ]
+  }
 }
