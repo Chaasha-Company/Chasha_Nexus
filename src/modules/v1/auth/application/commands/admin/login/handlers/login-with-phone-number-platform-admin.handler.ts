@@ -60,17 +60,13 @@ export const loginWithPhoneNumberPlatformAdminCommandHandler = async (credential
   }
 
   const loginSession = crypto.randomUUID();
+  const otpCode = Math.floor(100000 + Math.random() * 900000);
 
   const cacheData: LoginWithPhoneNumberPlatformAdminSession = {
     platformAdminLoginWithPhoneNumberSessionId: loginSession,
-
-    platformAdminLoginWithPhoneNumberOtp: Math.floor(100000 + Math.random() * 900000),
-
+    platformAdminLoginWithPhoneNumberOtp: otpCode,
     platformAdminLoginWithPhoneNumberOtpCreatedAt: new Date(),
-
     platformAdminLoginWithPhoneNumberOtpExpiresAt: EnvValueConfig.PLATFORM_ADMIN_LOGIN_WITH_PHONE_OTP_EXPIRES_IN_SECONDS,
-
-    platformAdminLoginWithPhoneNumberAttempt: 1,
   };
 
   const setCache = setCacheHelper();
@@ -83,5 +79,6 @@ export const loginWithPhoneNumberPlatformAdminCommandHandler = async (credential
 
   return {
     loginSession,
+    loginOtpExpiresTimer: EnvValueConfig.PLATFORM_ADMIN_LOGIN_WITH_PHONE_OTP_EXPIRES_IN_SECONDS,
   };
 };

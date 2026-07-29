@@ -3,5 +3,4 @@ export interface LoginWithPhoneNumberPlatformAdminSession {
   platformAdminLoginWithPhoneNumberOtpExpiresAt: number;
   platformAdminLoginWithPhoneNumberOtpCreatedAt: Date;
   platformAdminLoginWithPhoneNumberSessionId: string;
-  platformAdminLoginWithPhoneNumberAttempt: number;
 }

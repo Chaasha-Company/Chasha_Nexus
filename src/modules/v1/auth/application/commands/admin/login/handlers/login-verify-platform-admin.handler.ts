@@ -32,16 +32,22 @@ export const loginVerifyPlatformAdminCommandHandler = async (
       },
     });
   }
-  const sessionExpired = Date.now() > (session as LoginWithPhoneNumberPlatformAdminSession).platformAdminLoginWithPhoneNumberOtpCreatedAt.getTime() + (session as LoginWithPhoneNumberPlatformAdminSession).platformAdminLoginWithPhoneNumberOtpExpiresAt * 1000;
 
-  if (sessionExpired) {
-    cacheDel({
-      cacheName: `${CacheKey.PLATFORM_ADMIN_LOGIN_WITH_PHONE}:${loginVerifyData.loginVerifyPhoneNumber}`,
-    });
+  if ((session as LoginWithPhoneNumberPlatformAdminSession).platformAdminLoginWithPhoneNumberSessionId !== loginVerifyData.loginVerifySessionId) {
     throwNotFoundException({
       message: t(ResponseMessages, ResponseMessage.NOT_FOUND, lang),
       details: {
-        loginVerifyPhoneNumber: [t(ValidationMessages, ValidationMessage.PLATFORM_ADMIN_LOGIN_VERIFY_SESSION_ID_NOT_FOUND, lang)],
+        loginVerifySessionId: [t(ValidationMessages, ValidationMessage.PLATFORM_ADMIN_LOGIN_VERIFY_SESSION_ID_NOT_FOUND, lang)],
+      },
+    });
+  }
+  const otpExpired = Date.now() > (session as LoginWithPhoneNumberPlatformAdminSession).platformAdminLoginWithPhoneNumberOtpCreatedAt.getTime() + (session as LoginWithPhoneNumberPlatformAdminSession).platformAdminLoginWithPhoneNumberOtpExpiresAt * 1000;
+
+  if (otpExpired) {
+    throwBadRequestException({
+      message: t(ResponseMessages, ResponseMessage.DATA_CONFLICT, lang),
+      details: {
+        loginVerifyOtp: [t(ValidationMessages, ValidationMessage.PLATFORM_ADMIN_LOGIN_VERIFY_OTP_EXPIRED, lang)],
       },
     });
   }

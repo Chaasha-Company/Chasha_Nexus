@@ -1,11 +1,8 @@
-import { type NextFunction, type Request, type Response, Router } from 'express';
-import { loginVeirfyPlatformAdminController, loginWithPhoneNumberPlatformAdminController } from '@/modules/v1/auth/presentation/controllers';
-import { LoginVerifyPlatformAdminValidation, LoginWithPhoneNumberPlatformAdminValidation } from '@/modules/v1/auth/presentation/validations';
-import { validateBodyMiddleware } from '@/shared/v1/middlewares/validation';
+import { adminLoginRouter } from './login';
+import { Router } from 'express';
 
 const router = Router();
 
-router.post('/login/with-phone', (req: Request, res: Response, next: NextFunction) => validateBodyMiddleware(LoginWithPhoneNumberPlatformAdminValidation(req.lang))(req, res, next), loginWithPhoneNumberPlatformAdminController);
-router.post('/login/with-phone/verify', (req: Request, res: Response, next: NextFunction) => validateBodyMiddleware(LoginVerifyPlatformAdminValidation(req.lang))(req, res, next), loginVeirfyPlatformAdminController);
+router.use('/login', adminLoginRouter);
 
 export { router as adminAuthRouter };

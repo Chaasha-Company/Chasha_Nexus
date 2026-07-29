@@ -139,4 +139,14 @@ export const ValidationMessages = {
     fa: 'خطا: کد تأیید وارد شده صحیح نیست.',
     en: 'Error: The verification code you entered is invalid.',
   },
+
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_VERIFY_OTP_NOT_EXPIRED]: {
+    fa: 'کد تأیید معتبر است. لطفاً برای ادامه فرآیند ورود به صفحه تأیید مراجعه کنید.',
+    en: 'The verification code is valid. Please continue the login process on the verification page.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_LOGIN_VERIFY_OTP_EXPIRED]: {
+    fa: 'خطا: کد تأیید منقضی شده است. لطفاً درخواست ارسال مجدد کد تأیید را ثبت کنید.',
+    en: 'Error: The verification code has expired. Please request a new verification code.',
+  },
 } as const;
