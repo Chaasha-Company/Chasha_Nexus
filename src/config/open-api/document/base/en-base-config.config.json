@@ -1,5 +1,5 @@
 {
-  "openapi": "3.2.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "Chasha Platform API",
     "summary": "Official REST API Documentation for Chasha Platform",
@@ -16,12 +16,10 @@
       "url": "https://docs.chaasha.ir/license"
     }
   },
-
   "externalDocs": {
     "description": "Complete Developer Documentation",
     "url": "https://docs.chaasha.ir"
   },
-
   "servers": [
     {
       "url": "https://api.chaasha.ir/api/v1",
@@ -40,14 +38,16 @@
       "description": "Local Development"
     }
   ],
-
   "tags": [
     {
       "name": "Platform Admin Authentication",
       "description": "Authentication endpoints for Platform Administrators including login, OTP verification, token generation, logout, refresh token and password recovery."
+    },
+    {
+      "name": "Business Authentication",
+      "description": "Authentication endpoints for business employees including login, token generation, refresh and logout."
     }
   ],
-
   "paths": {
     "/admin/auth/login/with-phone": {
       "post": {
@@ -55,7 +55,6 @@
         "summary": "Login with phone number",
         "description": "Starts the Platform Administrator authentication process.\n\nThis endpoint validates the administrator credentials (phone number and password).\n\nIf the credentials are valid:\n- Creates a temporary login session.\n- Generates a six-digit OTP.\n- Stores the session in cache.\n- Returns a temporary loginSession identifier.\n\nThe returned loginSession must be used during OTP verification.\n\nIf there is already an active login session for this phone number, the API returns an error asking the client to continue the existing verification process instead of creating a new one.",
         "operationId": "loginWithPhoneNumberPlatformAdmin",
-
         "requestBody": {
           "required": true,
           "content": {
@@ -75,7 +74,6 @@
             }
           }
         },
-
         "responses": {
           "200": {
             "description": "Login session created successfully.",
@@ -112,7 +110,6 @@
               }
             }
           },
-
           "400": {
             "description": "Validation failed or business rule violation.",
             "content": {
@@ -136,7 +133,6 @@
                       "version": "0.1.0"
                     }
                   },
-
                   "WrongPassword": {
                     "summary": "Incorrect Password",
                     "value": {
@@ -152,7 +148,6 @@
                       "version": "0.1.0"
                     }
                   },
-
                   "AlreadyInQueue": {
                     "summary": "Existing Login Session",
                     "value": {
@@ -172,7 +167,6 @@
               }
             }
           },
-
           "404": {
             "description": "Platform administrator not found.",
             "content": {
@@ -199,7 +193,6 @@
               }
             }
           },
-
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
@@ -212,7 +205,6 @@
         "summary": "Verify login OTP",
         "description": "Completes the Platform Administrator authentication process.\n\nThis endpoint validates the temporary login session and verifies the one-time password (OTP).\n\nVerification flow:\n\n1. Validates request body.\n2. Finds temporary login session.\n3. Checks session expiration.\n4. Validates OTP.\n5. Finds Platform Administrator.\n6. Creates a permanent authenticated session.\n7. Generates JWT Access Token.\n8. Generates JWT Refresh Token.\n9. Stores hashed Refresh Token inside Platform Admin Session.\n10. Deletes temporary login cache.\n\nClient behavior:\n\n• Web Client:\n- Access Token is returned as HttpOnly Cookie.\n- Refresh Token is returned as HttpOnly Cookie.\n- Response data is null.\n\n• Mobile Client:\n- Access Token is returned inside response body.\n- Refresh Token is returned inside response body.\n\nThe client platform is determined using the 'x-platform' request header.\n\nAccepted values:\n- web\n- mobile",
         "operationId": "verifyPlatformAdminLogin",
-
         "parameters": [
           {
             "name": "x-platform",
@@ -220,18 +212,12 @@
             "required": false,
             "description": "Client platform.",
             "schema": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/LoginVerifyPlatformAdminMobileResponse"
-                },
-                {
-                  "$ref": "#/components/schemas/LoginVerifyPlatformAdminWebResponse"
-                }
-              ]
+              "type": "string",
+              "enum": ["web", "mobile"],
+              "default": "web"
             }
           }
         ],
-
         "requestBody": {
           "required": true,
           "content": {
@@ -252,11 +238,9 @@
             }
           }
         },
-
         "responses": {
           "200": {
             "description": "Authentication completed successfully.",
-
             "headers": {
               "Set-Cookie": {
                 "description": "Only returned for Web platform. Contains Access Token and Refresh Token as HttpOnly cookies.",
@@ -271,7 +255,6 @@
                 }
               }
             },
-
             "content": {
               "application/json": {
                 "examples": {
@@ -287,7 +270,6 @@
                       "version": "0.1.0"
                     }
                   },
-
                   "Mobile": {
                     "summary": "Mobile Client",
                     "value": {
@@ -307,7 +289,6 @@
               }
             }
           },
-
           "400": {
             "description": "Validation failed or verification failed.",
             "content": {
@@ -331,7 +312,6 @@
                       "version": "0.1.0"
                     }
                   },
-
                   "InvalidPhoneNumber": {
                     "summary": "Phone Validation",
                     "value": {
@@ -347,7 +327,6 @@
                       "version": "0.1.0"
                     }
                   },
-
                   "InvalidOTPFormat": {
                     "summary": "OTP Validation",
                     "value": {
@@ -363,7 +342,6 @@
                       "version": "0.1.0"
                     }
                   },
-
                   "WrongOTP": {
                     "summary": "Wrong OTP",
                     "value": {
@@ -383,7 +361,6 @@
               }
             }
           },
-
           "404": {
             "description": "Session or Platform Administrator not found.",
             "content": {
@@ -407,7 +384,6 @@
                       "version": "0.1.0"
                     }
                   },
-
                   "PlatformAdminNotFound": {
                     "summary": "Administrator Not Found",
                     "value": {
@@ -427,7 +403,6 @@
               }
             }
           },
-
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
@@ -439,9 +414,7 @@
         "tags": ["Platform Admin Authentication"],
         "summary": "Resend login OTP",
         "description": "Generates a new OTP for an existing Platform Administrator login session.\n\nThis endpoint is used when the previous OTP has expired.\n\nFlow:\n\n1. Validates phone number and session identifier.\n2. Finds existing temporary login session.\n3. Checks session ownership.\n4. Validates previous OTP expiration.\n5. Generates a new six-digit OTP.\n6. Updates login session cache.\n7. Returns new OTP expiration timer.\n\nThe existing loginSession identifier remains unchanged and must continue to be used for OTP verification.",
-
         "operationId": "loginResendOtpPlatformAdmin",
-
         "requestBody": {
           "required": true,
           "content": {
@@ -461,7 +434,6 @@
             }
           }
         },
-
         "responses": {
           "200": {
             "description": "OTP regenerated successfully.",
@@ -489,25 +461,165 @@
               }
             }
           },
-
           "400": {
             "description": "Validation failed or OTP is still valid.",
             "content": {
               "application/json": {
-                "$ref": "#/components/schemas/ErrorResponse"
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
               }
             }
           },
-
           "404": {
             "description": "Login session was not found.",
             "content": {
               "application/json": {
-                "$ref": "#/components/schemas/ErrorResponse"
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
               }
             }
           },
-
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/business/auth/login/with-phone": {
+      "post": {
+        "tags": ["Business Authentication"],
+        "summary": "Login business employee with phone number",
+        "description": "Starts authentication process for business employees.\n\nThis endpoint validates business employee credentials using phone number and password.\n\nIf credentials are valid:\n- Generates access token.\n- Generates refresh token.\n- Creates authenticated session.\n- Returns tokens based on client platform.\n\nFor web clients, tokens are stored in HttpOnly cookies.\nFor mobile clients, tokens are returned in response body.",
+        "operationId": "loginWithPhoneNumberBusiness",
+        "parameters": [
+          {
+            "name": "x-platform",
+            "in": "header",
+            "required": false,
+            "description": "Client platform type.",
+            "schema": {
+              "type": "string",
+              "enum": ["web", "mobile"],
+              "default": "web"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginWithPhoneNumberBusinessRequest"
+              },
+              "examples": {
+                "login": {
+                  "summary": "Valid login request",
+                  "value": {
+                    "loginPhoneNumber": "09123456789",
+                    "loginPassword": "StrongPassword123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Authentication completed successfully.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Web": {
+                    "summary": "Web Client",
+                    "value": {
+                      "status": 200,
+                      "success": true,
+                      "author": "Kara_Company",
+                      "message": "Operation completed successfully.",
+                      "data": null,
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  },
+                  "Mobile": {
+                    "summary": "Mobile Client",
+                    "value": {
+                      "status": 200,
+                      "success": true,
+                      "author": "Kara_Company",
+                      "message": "Operation completed successfully.",
+                      "data": {
+                        "loginAccessToken": "eyJhbGciOiJIUzI1NiIs...",
+                        "loginRefreshToken": "eyJhbGciOiJIUzI1NiIs..."
+                      },
+                      "timeStamp": "2026-07-29T15:41:18.928Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed or credential conflict.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "InvalidPhoneNumber": {
+                    "summary": "Phone number validation error",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "loginPhoneNumber": ["Phone number format is invalid."]
+                      }
+                    }
+                  },
+                  "WrongPassword": {
+                    "summary": "Incorrect password",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "Data conflict.",
+                      "errorCode": "E1090",
+                      "errors": {
+                        "loginPassword": ["Password is incorrect."]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Business employee not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Kara_Company",
+                  "message": "Requested resource was not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "loginPhoneNumber": ["Business employee with this phone number does not exist."]
+                  }
+                }
+              }
+            }
+          },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
@@ -515,7 +627,6 @@
       }
     }
   },
-
   "components": {
     "securitySchemes": {
       "BearerAuth": {
@@ -531,7 +642,6 @@
         "description": "HttpOnly Cookie Authentication"
       }
     },
-
     "schemas": {
       "LoginWithPhoneNumberPlatformAdminRequest": {
         "type": "object",
@@ -554,7 +664,6 @@
           }
         }
       },
-
       "LoginWithPhoneNumberPlatformAdminResponse": {
         "type": "object",
         "properties": {
@@ -600,7 +709,6 @@
           }
         }
       },
-
       "LoginVerifyPlatformAdminRequest": {
         "type": "object",
         "required": ["loginVerifySessionId", "loginVerifyPhoneNumber", "loginVerifyOtp"],
@@ -629,7 +737,6 @@
           }
         }
       },
-
       "LoginVerifyPlatformAdminMobileResponse": {
         "type": "object",
         "properties": {
@@ -645,14 +752,12 @@
           }
         }
       },
-
       "LoginVerifyPlatformAdminWebResponse": {
         "type": "object",
         "nullable": true,
         "example": null,
         "description": "Web clients receive authentication cookies. Therefore, the response body data is null."
       },
-
       "LoginResendOtpPlatformAdminRequest": {
         "type": "object",
         "required": ["loginResendOtpPhoneNumber", "loginResendOtpSessionId"],
@@ -665,7 +770,6 @@
             "minLength": 11,
             "maxLength": 11
           },
-
           "loginResendOtpSessionId": {
             "type": "string",
             "format": "uuid",
@@ -674,7 +778,6 @@
           }
         }
       },
-
       "LoginResendOtpPlatformAdminResponse": {
         "type": "object",
         "properties": {
@@ -682,22 +785,18 @@
             "type": "integer",
             "example": 200
           },
-
           "success": {
             "type": "boolean",
             "example": true
           },
-
           "author": {
             "type": "string",
             "example": "Kara_Company"
           },
-
           "message": {
             "type": "string",
             "example": "Operation completed successfully."
           },
-
           "data": {
             "type": "object",
             "properties": {
@@ -708,19 +807,49 @@
               }
             }
           },
-
           "timeStamp": {
             "type": "string",
             "format": "date-time"
           },
-
           "version": {
             "type": "string",
             "example": "0.1.0"
           }
         }
       },
-
+      "LoginWithPhoneNumberBusinessRequest": {
+        "type": "object",
+        "required": ["loginPhoneNumber", "loginPassword"],
+        "properties": {
+          "loginPhoneNumber": {
+            "type": "string",
+            "description": "Business employee phone number.",
+            "example": "09123456789",
+            "pattern": "^09\\d{9}$",
+            "minLength": 11,
+            "maxLength": 11
+          },
+          "loginPassword": {
+            "type": "string",
+            "description": "Business employee password.",
+            "example": "StrongPassword123",
+            "maxLength": 64
+          }
+        }
+      },
+      "LoginWithPhoneNumberBusinessMobileResponse": {
+        "type": "object",
+        "properties": {
+          "loginAccessToken": {
+            "type": "string",
+            "description": "JWT access token."
+          },
+          "loginRefreshToken": {
+            "type": "string",
+            "description": "JWT refresh token."
+          }
+        }
+      },
       "ValidationError": {
         "type": "object",
         "additionalProperties": {
@@ -741,7 +870,6 @@
           }
         ]
       },
-
       "BusinessError": {
         "type": "object",
         "properties": {
@@ -756,7 +884,6 @@
           "error_message": ["Business rule validation failed."]
         }
       },
-
       "ErrorResponse": {
         "type": "object",
         "properties": {
@@ -792,126 +919,52 @@
             "type": "string",
             "example": "0.1.0"
           }
-        },
-
-        "ValidationError": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "example": {
-            "loginPhoneNumber": ["Phone number must contain exactly 11 digits and start with 09."]
-          }
-        },
-
-        "BusinessError": {
-          "type": "object",
-          "properties": {
-            "error_message": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "example": {
-            "error_message": ["Your login request is already in progress. Please return to the verification page and enter your OTP."]
-          }
-        },
-
-        "ErrorResponse": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "integer",
-              "example": 400
+        }
+      }
+    },
+    "responses": {
+      "InternalServerError": {
+        "description": "Internal Server Error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
             },
-            "success": {
-              "type": "boolean",
-              "example": false
-            },
-            "author": {
-              "type": "string",
-              "example": "Kara_Company"
-            },
-            "message": {
-              "type": "string"
-            },
-            "errorCode": {
-              "type": "string",
-              "example": "E1001"
-            },
-            "errors": {
-              "type": "object",
-              "description": "Validation or business errors."
-            },
-            "timeStamp": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "version": {
-              "type": "string",
-              "example": "0.1.0"
+            "example": {
+              "status": 500,
+              "success": false,
+              "author": "Kara_Company",
+              "message": "Internal Server Error.",
+              "errorCode": "E5000",
+              "errors": {},
+              "timeStamp": "2026-07-29T15:41:18.928Z",
+              "version": "0.1.0"
             }
           }
         }
       },
-
-      "responses": {
-        "ValidationFailed": {
-          "description": "Validation failed."
-        },
-
-        "BadRequest": {
-          "description": "Business rule validation failed."
-        },
-
-        "Unauthorized": {
-          "description": "Unauthorized."
-        },
-
-        "Forbidden": {
-          "description": "Forbidden."
-        },
-
-        "NotFound": {
-          "description": "Resource not found."
-        },
-
-        "Conflict": {
-          "description": "Data conflict."
-        },
-
-        "TooManyRequests": {
-          "description": "Too many requests."
-        },
-
-        "InternalServerError": {
-          "description": "Internal Server Error.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ErrorResponse"
-              },
-              "example": {
-                "status": 500,
-                "success": false,
-                "author": "Kara_Company",
-                "message": "Internal Server Error.",
-                "errorCode": "E5000",
-                "errors": {},
-                "timeStamp": "2026-07-29T15:41:18.928Z",
-                "version": "0.1.0"
-              }
-            }
-          }
-        }
+      "ValidationFailed": {
+        "description": "Validation failed."
+      },
+      "BadRequest": {
+        "description": "Business rule validation failed."
+      },
+      "Unauthorized": {
+        "description": "Unauthorized."
+      },
+      "Forbidden": {
+        "description": "Forbidden."
+      },
+      "NotFound": {
+        "description": "Resource not found."
+      },
+      "Conflict": {
+        "description": "Data conflict."
+      },
+      "TooManyRequests": {
+        "description": "Too many requests."
       }
     },
-
     "security": [
       {
         "CookieAuth": []

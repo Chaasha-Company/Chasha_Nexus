@@ -10,7 +10,7 @@ export const findPlatformAdminByPhoneNumberRepository =
 
     return await platformAdminRepository.findOne({
       where: {
-        platformAdminPhoneNumber: platformAdminData.platform_admin_phone_number,
+        platformAdminPhoneNumber: platformAdminData.platformAdminPhoneNumber,
       },
     });
   };

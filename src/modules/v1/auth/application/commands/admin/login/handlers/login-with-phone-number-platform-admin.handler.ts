@@ -34,7 +34,7 @@ export const loginWithPhoneNumberPlatformAdminCommandHandler = async (credential
   const findPlatformAdmin = findPlatformAdminByPhoneNumberRepository();
 
   const platformAdmin = await findPlatformAdmin({
-    platform_admin_phone_number: credential.loginPhoneNumber,
+    platformAdminPhoneNumber: credential.loginPhoneNumber,
   });
 
   if (!platformAdmin) {

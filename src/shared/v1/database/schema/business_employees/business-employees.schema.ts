@@ -1,5 +1,6 @@
 import { BeforeInsert, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { BusinessEmployeeSessionsModel, BusinessEmployeeStatusesModel } from './childrens';
+import { BusinessesModel } from '@/shared/v1/database/schema/businesses';
 import { generateChashaResetPasswordCodeHelper, hashPasswordProvider } from '@/modules/v1/auth';
 
 @Entity({
@@ -22,6 +23,18 @@ export class BusinessEmployeesModel {
     name: 'business_employee_status_id',
   })
   businessEmployeeStatus!: BusinessEmployeeStatusesModel;
+
+  @Column({
+    name: 'business_employee_business_id',
+    type: 'uuid',
+  })
+  businessEmployeeBusinessId!: string;
+
+  @ManyToOne(() => BusinessesModel, (business) => business.businessEmployees, { eager: false })
+  @JoinColumn({
+    name: 'business_employee_business_id',
+  })
+  businessEmployeeBusiness!: BusinessesModel;
 
   @OneToMany(() => BusinessEmployeeSessionsModel, (session) => session.businessEmployeeSessionUser, { eager: false })
   businessEmployeeSessions!: BusinessEmployeeSessionsModel[];

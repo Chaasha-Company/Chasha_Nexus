@@ -62,7 +62,7 @@ export const loginVerifyPlatformAdminCommandHandler = async (
   }
 
   const platformAdmin = await findPlatformAdminByPhoneNumberRepository()({
-    platform_admin_phone_number: loginVerifyData.loginVerifyPhoneNumber as string,
+    platformAdminPhoneNumber: loginVerifyData.loginVerifyPhoneNumber as string,
   });
 
   if (platformAdmin === null) {

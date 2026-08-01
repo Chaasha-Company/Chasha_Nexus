@@ -149,4 +149,35 @@ export const ValidationMessages = {
     fa: 'خطا: کد تأیید منقضی شده است. لطفاً درخواست ارسال مجدد کد تأیید را ثبت کنید.',
     en: 'Error: The verification code has expired. Please request a new verification code.',
   },
+
+  // =========================Business Login Validation=========================
+  [ValidationMessage.BUSINESS_LOGIN_NOT_FOUND_PHONE_NUMBER]: {
+    fa: 'خطا: شماره تماس - کاربری با این مشخصات پیدا نشد.',
+    en: 'Error: Phone number - No user was found with the provided credentials.',
+  },
+
+  [ValidationMessage.BUSINESS_LOGIN_PASSWORD_INCORRECT]: {
+    fa: 'خطا: رمز عبور - صحیح نیست.',
+    en: 'Error: Password - is incorrect.',
+  },
+
+  [ValidationMessage.BUSINESS_LOGIN_PHONE_NUMBER_REQUIRED]: {
+    fa: 'خطا: شماره تماس - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: Phone number - This field is required and must be a valid string.',
+  },
+
+  [ValidationMessage.BUSINESS_LOGIN_PHONE_NUMBER_BAD_FORMAT]: {
+    fa: 'خطا: شماره تماس - باید 11 رقم باشد و با صفر شروع شود.',
+    en: 'Error: Phone number - It must be 11 digits long and start with 0.',
+  },
+
+  [ValidationMessage.BUSINESS_LOGIN_PASSWORD_REQUIRED]: {
+    fa: 'خطا: رمز عبور - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: Password - This field is required and must be a valid string.',
+  },
+
+  [ValidationMessage.BUSINESS_LOGIN_PASSWORD_IS_ONLY_64_CH]: {
+    fa: 'خطا: رمز عبور - حداکثر ۶۴ کاراکتر مجاز است.',
+    en: 'Error: Password - Maximum length is 64 characters.',
+  },
 } as const;
