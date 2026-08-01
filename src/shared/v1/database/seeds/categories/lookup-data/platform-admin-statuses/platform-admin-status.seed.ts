@@ -5,25 +5,31 @@ import { PlatformAdminStatusesModel } from '@/shared/v1/database/schema/platform
 export const createPlatformAdminStatusDataSeed = async (): Promise<void> => {
   const repository = AppDataSource.getRepository(PlatformAdminStatusesModel);
 
-  const platformAdminStatusesData = [
+  const platformAdminStatusesData: Partial<PlatformAdminStatusesModel>[] = [
     {
-      platformAdminStatusName: 'فعال',
+      platformAdminStatusNameEn: 'Active',
+      platformAdminStatusNameFa: 'فعال',
       platformAdminStatusSlug: 'active',
-      platformAdminStatusDescription: 'ادمین پلتفرم فعال است',
+      platformAdminStatusDescriptionEn: 'Platform administrator account is active and has full access.',
+      platformAdminStatusDescriptionFa: 'ادمین پلتفرم فعال است و دسترسی کامل دارد.',
       platformAdminStatusSortOrder: 1,
       platformAdminStatusIsSystem: true,
     },
     {
-      platformAdminStatusName: 'غیرفعال',
+      platformAdminStatusNameEn: 'Inactive',
+      platformAdminStatusNameFa: 'غیرفعال',
       platformAdminStatusSlug: 'inactive',
-      platformAdminStatusDescription: 'ادمین پلتفرم غیرفعال است',
+      platformAdminStatusDescriptionEn: 'Platform administrator account is inactive and cannot access the platform.',
+      platformAdminStatusDescriptionFa: 'ادمین پلتفرم غیرفعال است و دسترسی به سیستم ندارد.',
       platformAdminStatusSortOrder: 2,
       platformAdminStatusIsSystem: true,
     },
     {
-      platformAdminStatusName: 'تعلیق شده',
+      platformAdminStatusNameEn: 'Suspended',
+      platformAdminStatusNameFa: 'تعلیق شده',
       platformAdminStatusSlug: 'suspended',
-      platformAdminStatusDescription: 'دسترسی ادمین پلتفرم متوقف شده است',
+      platformAdminStatusDescriptionEn: 'Platform administrator access has been temporarily suspended.',
+      platformAdminStatusDescriptionFa: 'دسترسی ادمین پلتفرم به صورت موقت متوقف شده است.',
       platformAdminStatusSortOrder: 3,
       platformAdminStatusIsSystem: true,
     },
@@ -32,12 +38,12 @@ export const createPlatformAdminStatusDataSeed = async (): Promise<void> => {
   const tableHasData = await repository.count();
 
   if (tableHasData > 0) {
-    loggerConfig.info('Platform Admin Statuses Table has Data - Seed Runned !');
+    loggerConfig.info('Platform Admin Statuses Table has Data - Seed Skipped!');
 
     return;
   }
 
   await repository.insert(platformAdminStatusesData);
 
-  loggerConfig.info('Platform Admin Statuses Table has no Data - Seed Runned and Data insert !');
+  loggerConfig.info('Platform Admin Statuses Table Seed Completed Successfully!');
 };

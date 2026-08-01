@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, OneToMany, DeleteDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, OneToMany, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 import { BusinessEmployeesModel } from '@/shared/v1/database/schema/business_employees';
+import { BusinessTypesModel } from './childrens';
 
 @Entity({
   name: 'businesses',
@@ -28,6 +29,18 @@ export class BusinessesModel {
 
   @OneToMany(() => BusinessEmployeesModel, (businessEmployee) => businessEmployee.businessEmployeeBusiness, { eager: false })
   businessEmployees!: BusinessEmployeesModel[];
+
+  @Column({
+    name: 'business_type_id',
+    type: 'uuid',
+  })
+  businessTypeId!: number;
+
+  @ManyToOne(() => BusinessTypesModel, (businessType) => businessType.businessTypebusinesses, { eager: false })
+  @JoinColumn({
+    name: 'business_type_id',
+  })
+  businessType!: BusinessTypesModel;
 
   @CreateDateColumn({
     name: 'business_created_at',

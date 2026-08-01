@@ -1,10 +1,12 @@
 import type { BusinessEmployeesEntity } from './business-employee.entity';
 
 export interface BusinessEmployeeStatusesEntity {
-  businessEmployeeStatusId: string;
-  businessEmployeeStatusName: string;
+  businessEmployeeStatusId: number;
+  businessEmployeeStatusNameEn: string;
+  businessEmployeeStatusNameFa: string;
   businessEmployeeStatusSlug: string;
-  businessEmployeeStatusDescription: string | null;
+  businessEmployeeStatusDescriptionEn: string | null;
+  businessEmployeeStatusDescriptionFa: string | null;
   businessEmployeeStatusSortOrder: number;
   businessEmployeeStatusIsSystem: boolean;
   businessEmployees: BusinessEmployeesEntity[];

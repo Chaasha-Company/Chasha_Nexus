@@ -14,9 +14,9 @@ export class BusinessEmployeesModel {
 
   @Column({
     name: 'business_employee_status_id',
-    type: 'uuid',
+    type: 'integer',
   })
-  businessEmployeeStatusId!: string;
+  businessEmployeeStatusId!: number;
 
   @ManyToOne(() => BusinessEmployeeStatusesModel, (status) => status.businessEmployees)
   @JoinColumn({

@@ -13,7 +13,7 @@ export const createPlatformAdminSeed = async (): Promise<void> => {
   });
 
   const platformAdmin = {
-    platformAdminStatusId: status?.platformAdminStatusId as string,
+    platformAdminStatusId: status?.platformAdminStatusId as number,
     platformAdminFirstName: 'عرفان',
     platformAdminLastName: 'ابویی مهریزی',
     platformAdminPhoneNumber: '09393929968',

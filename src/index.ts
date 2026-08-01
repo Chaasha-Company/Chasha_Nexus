@@ -12,3 +12,5 @@ export * from '@/shared/v1/database/migrations/1785167640943-Add_ResetPasswordCo
 export * from '@/shared/v1/database/migrations/1785179949938-Create_Sessions_For_Business_Employees_And_Platform_Admins';
 export * from '@/shared/v1/database/migrations/1785180629830-Add_Authentication_Fields_To_Business_Employee_Sessions';
 export * from '@/shared/v1/database/migrations/1785258989854-Add_Password_Field_For_Business_Employee';
+export * from '@/shared/v1/database/migrations/1785599803000-Create_Businesses';
+export * from '@/shared/v1/database/migrations/1785613559506-Add_Multi_Language_Remove_UUID_For_Statuess_Create_Business_Types';

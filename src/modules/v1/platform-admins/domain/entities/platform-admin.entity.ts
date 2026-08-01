@@ -3,7 +3,7 @@ import type { PlatformAdminStatusesEntity } from './platform-admin-status.entity
 
 export interface PlatformAdminsEntity {
   platformAdminId: string;
-  platformAdminStatusId: string;
+  platformAdminStatusId: number;
   platformAdminStatus: PlatformAdminStatusesEntity;
   platformAdminSessions: PlatformAdminSessionsEntity[];
   platformAdminResetPasswordCode: string;

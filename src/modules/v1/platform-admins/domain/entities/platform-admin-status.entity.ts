@@ -1,10 +1,12 @@
 import type { PlatformAdminsEntity } from './platform-admin.entity';
 
 export interface PlatformAdminStatusesEntity {
-  platformAdminStatusId: string;
-  platformAdminStatusName: string;
+  platformAdminStatusId: number;
+  platformAdminStatusNameEn: string;
+  platformAdminStatusNameFa: string;
   platformAdminStatusSlug: string;
-  platformAdminStatusDescription: string | null;
+  platformAdminStatusDescriptionEn: string | null;
+  platformAdminStatusDescriptionFa: string | null;
   platformAdminStatusSortOrder: number;
   platformAdminStatusIsSystem: boolean;
   platformAdmins: PlatformAdminsEntity[];

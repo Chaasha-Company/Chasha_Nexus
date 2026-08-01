@@ -5,26 +5,41 @@ import { BusinessEmployeeStatusesModel } from '@/shared/v1/database/schema/busin
 export const createBusinessEmployeeStatusDataSeed = async (): Promise<void> => {
   const repository = AppDataSource.getRepository(BusinessEmployeeStatusesModel);
 
-  const businessEmployeeStatusesData = [
+  const businessEmployeeStatusesData: Partial<BusinessEmployeeStatusesModel>[] = [
     {
-      businessEmployeeStatusName: 'فعال',
+      businessEmployeeStatusNameEn: 'Active',
+      businessEmployeeStatusNameFa: 'فعال',
       businessEmployeeStatusSlug: 'active',
-      businessEmployeeStatusDescription: 'کارمند فعال است',
+      businessEmployeeStatusDescriptionEn: 'Employee account is active and can access the business platform.',
+      businessEmployeeStatusDescriptionFa: 'کارمند فعال است و امکان استفاده از پنل کسب‌وکار را دارد.',
       businessEmployeeStatusSortOrder: 1,
       businessEmployeeStatusIsSystem: true,
     },
     {
-      businessEmployeeStatusName: 'غیرفعال',
+      businessEmployeeStatusNameEn: 'Inactive',
+      businessEmployeeStatusNameFa: 'غیرفعال',
       businessEmployeeStatusSlug: 'inactive',
-      businessEmployeeStatusDescription: 'کارمند غیرفعال است',
+      businessEmployeeStatusDescriptionEn: 'Employee account is inactive and cannot access the business platform.',
+      businessEmployeeStatusDescriptionFa: 'کارمند غیرفعال است و دسترسی به پنل کسب‌وکار ندارد.',
       businessEmployeeStatusSortOrder: 2,
       businessEmployeeStatusIsSystem: true,
     },
     {
-      businessEmployeeStatusName: 'تعلیق شده',
+      businessEmployeeStatusNameEn: 'Suspended',
+      businessEmployeeStatusNameFa: 'تعلیق شده',
       businessEmployeeStatusSlug: 'suspended',
-      businessEmployeeStatusDescription: 'دسترسی و فعالیت کارمند به صورت موقت متوقف شده است',
+      businessEmployeeStatusDescriptionEn: 'Employee access has been temporarily suspended.',
+      businessEmployeeStatusDescriptionFa: 'دسترسی و فعالیت کارمند به صورت موقت متوقف شده است.',
       businessEmployeeStatusSortOrder: 3,
+      businessEmployeeStatusIsSystem: true,
+    },
+    {
+      businessEmployeeStatusNameEn: 'Pending',
+      businessEmployeeStatusNameFa: 'در انتظار تایید',
+      businessEmployeeStatusSlug: 'pending',
+      businessEmployeeStatusDescriptionEn: 'Employee account is waiting for approval.',
+      businessEmployeeStatusDescriptionFa: 'حساب کارمند منتظر تایید مدیر کسب‌وکار است.',
+      businessEmployeeStatusSortOrder: 4,
       businessEmployeeStatusIsSystem: true,
     },
   ];
@@ -32,12 +47,12 @@ export const createBusinessEmployeeStatusDataSeed = async (): Promise<void> => {
   const tableHasData = await repository.count();
 
   if (tableHasData > 0) {
-    loggerConfig.info('Business Employee Statuses Table has Data - Seed Runned !');
+    loggerConfig.info('Business Employee Statuses Table has Data - Seed Skipped!');
 
     return;
   }
 
   await repository.insert(businessEmployeeStatusesData);
 
-  loggerConfig.info('Business Employee Statuses Table has no Data - Seed Runned and Data insert !');
+  loggerConfig.info('Business Employee Statuses Table Seed Completed Successfully!');
 };

@@ -6,17 +6,24 @@ import { PlatformAdminsModel } from '../platform-admins.schema';
   name: 'platform_admin_statuses',
 })
 export class PlatformAdminStatusesModel {
-  @PrimaryGeneratedColumn('uuid', {
+  @PrimaryGeneratedColumn('increment', {
     name: 'platform_admin_status_id',
   })
-  platformAdminStatusId!: string;
+  platformAdminStatusId!: number;
 
   @Column({
-    name: 'platform_admin_status_name',
+    name: 'platform_admin_status_name_fa',
     type: 'varchar',
     length: 100,
   })
-  platformAdminStatusName!: string;
+  platformAdminStatusNameFa!: string;
+
+  @Column({
+    name: 'platform_admin_status_name_en',
+    type: 'varchar',
+    length: 100,
+  })
+  platformAdminStatusNameEn!: string;
 
   @Column({
     name: 'platform_admin_status_slug',
@@ -27,11 +34,18 @@ export class PlatformAdminStatusesModel {
   platformAdminStatusSlug!: string;
 
   @Column({
-    name: 'platform_admin_status_description',
+    name: 'platform_admin_status_description_en',
     type: 'text',
     nullable: true,
   })
-  platformAdminStatusDescription!: string | null;
+  platformAdminStatusDescriptionEn!: string | null;
+
+  @Column({
+    name: 'platform_admin_status_description_fa',
+    type: 'text',
+    nullable: true,
+  })
+  platformAdminStatusDescriptionFa!: string | null;
 
   @Column({
     name: 'platform_admin_status_sort_order',

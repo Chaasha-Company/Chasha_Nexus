@@ -4,7 +4,7 @@ import type { BusinessesEntity } from '@/modules/v1/business/domain';
 
 export interface BusinessEmployeesEntity {
   businessEmployeeId: string;
-  businessEmployeeStatusId: string;
+  businessEmployeeStatusId: number;
   businessEmployeeStatus: BusinessEmployeeStatusesEntity;
   businessEmployeeSessions: BusinessEmployeeSessionsEntity[];
   businessEmployeeBusinessId: string;

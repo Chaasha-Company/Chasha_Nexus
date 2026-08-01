@@ -14,9 +14,9 @@ export class PlatformAdminsModel {
 
   @Column({
     name: 'platform_admin_status_id',
-    type: 'uuid',
+    type: 'integer',
   })
-  platformAdminStatusId!: string;
+  platformAdminStatusId!: number;
 
   @ManyToOne(() => PlatformAdminStatusesModel, (platformAdminStatus) => platformAdminStatus.platformAdmins)
   @JoinColumn({

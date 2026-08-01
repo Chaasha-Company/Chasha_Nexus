@@ -6,17 +6,24 @@ import { BusinessEmployeesModel } from '../business-employees.schema';
   name: 'business_employee_statuses',
 })
 export class BusinessEmployeeStatusesModel {
-  @PrimaryGeneratedColumn('uuid', {
+  @PrimaryGeneratedColumn('increment', {
     name: 'business_employee_status_id',
   })
-  businessEmployeeStatusId!: string;
+  businessEmployeeStatusId!: number;
 
   @Column({
-    name: 'business_employee_status_name',
+    name: 'business_employee_status_name_fa',
     type: 'varchar',
     length: 100,
   })
-  businessEmployeeStatusName!: string;
+  businessEmployeeStatusNameFa!: string;
+
+  @Column({
+    name: 'business_employee_status_name_en',
+    type: 'varchar',
+    length: 100,
+  })
+  businessEmployeeStatusNameEn!: string;
 
   @Column({
     name: 'business_employee_status_slug',
@@ -27,11 +34,18 @@ export class BusinessEmployeeStatusesModel {
   businessEmployeeStatusSlug!: string;
 
   @Column({
-    name: 'business_employee_status_description',
+    name: 'business_employee_status_description_en',
     type: 'text',
     nullable: true,
   })
-  businessEmployeeStatusDescription!: string | null;
+  businessEmployeeStatusDescriptionEn!: string | null;
+
+  @Column({
+    name: 'business_employee_status_description_fa',
+    type: 'text',
+    nullable: true,
+  })
+  businessEmployeeStatusDescriptionFa!: string | null;
 
   @Column({
     name: 'business_employee_status_sort_order',
