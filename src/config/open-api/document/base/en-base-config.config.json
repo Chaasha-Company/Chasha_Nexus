@@ -625,6 +625,94 @@
           }
         }
       }
+    },
+    "/global/lockup/business-type": {
+      "get": {
+        "tags": ["Global Lockup"],
+        "summary": "Get all business types",
+        "description": "Retrieves a list of all available business types with their localized names, slugs, and sort orders.",
+        "operationId": "getBusinessTypes",
+        "responses": {
+          "200": {
+            "description": "List of business types retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessTypeListResponse"
+                },
+                "examples": {
+                  "success": {
+                    "summary": "Successful retrieval of business types",
+                    "value": {
+                      "status": 200,
+                      "success": true,
+                      "author": "Kara_Company",
+                      "message": "عملیات با موفقیت انجام شد.",
+                      "data": [
+                        {
+                          "businessTypeNameFa": "نانوایی و شیرینی فروشی",
+                          "businessTypeNameEn": "Bakery",
+                          "businessTypeSlug": "bakery",
+                          "businessTypeSortOrder": 5
+                        },
+                        {
+                          "businessTypeNameFa": "فروشگاه دسر",
+                          "businessTypeNameEn": "Dessert Shop",
+                          "businessTypeSlug": "dessert-shop",
+                          "businessTypeSortOrder": 6
+                        },
+                        {
+                          "businessTypeNameFa": "رستوران",
+                          "businessTypeNameEn": "Restaurant",
+                          "businessTypeSlug": "restaurant",
+                          "businessTypeSortOrder": 1
+                        },
+                        {
+                          "businessTypeNameFa": "کافی شاپ",
+                          "businessTypeNameEn": "Coffee Shop",
+                          "businessTypeSlug": "coffee-shop",
+                          "businessTypeSortOrder": 4
+                        },
+                        {
+                          "businessTypeNameFa": "کافه",
+                          "businessTypeNameEn": "Cafe",
+                          "businessTypeSlug": "cafe",
+                          "businessTypeSortOrder": 2
+                        },
+                        {
+                          "businessTypeNameFa": "سایر",
+                          "businessTypeNameEn": "Other",
+                          "businessTypeSlug": "other",
+                          "businessTypeSortOrder": 99
+                        },
+                        {
+                          "businessTypeNameFa": "فست فود",
+                          "businessTypeNameEn": "Fast Food",
+                          "businessTypeSlug": "fast-food",
+                          "businessTypeSortOrder": 3
+                        }
+                      ],
+                      "timeStamp": "2026-08-01T20:33:00.638Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -869,6 +957,63 @@
             "loginVerifyOtp": ["OTP must contain exactly 6 digits."]
           }
         ]
+      },
+      "BusinessTypeItem": {
+        "type": "object",
+        "properties": {
+          "businessTypeNameFa": {
+            "type": "string",
+            "description": "نام نوع کسب‌وکار به زبان فارسی."
+          },
+          "businessTypeNameEn": {
+            "type": "string",
+            "description": "Name of the business type in English."
+          },
+          "businessTypeSlug": {
+            "type": "string",
+            "description": "Slug unique identifier for the business type."
+          },
+          "businessTypeSortOrder": {
+            "type": "integer",
+            "description": "Sorting order of the business type."
+          }
+        }
+      },
+      "BusinessTypeListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Kara_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BusinessTypeItem"
+            },
+            "description": "List of business types."
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "0.1.0"
+          }
+        }
       },
       "BusinessError": {
         "type": "object",

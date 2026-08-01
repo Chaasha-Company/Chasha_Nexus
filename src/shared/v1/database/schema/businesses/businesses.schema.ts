@@ -36,7 +36,7 @@ export class BusinessesModel {
   })
   businessTypeId!: number;
 
-  @ManyToOne(() => BusinessTypesModel, (businessType) => businessType.businessTypebusinesses, { eager: false })
+  @ManyToOne(() => BusinessTypesModel, (businessType) => businessType.businessTypeBusinesses, { eager: false })
   @JoinColumn({
     name: 'business_type_id',
   })

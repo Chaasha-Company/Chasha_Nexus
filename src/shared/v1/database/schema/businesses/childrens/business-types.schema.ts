@@ -52,7 +52,7 @@ export class BusinessTypesModel {
   @OneToMany(() => BusinessesModel, (business) => business.businessType, {
     eager: false,
   })
-  businessTypebusinesses!: BusinessesModel[];
+  businessTypeBusinesses!: BusinessesModel[];
 
   @CreateDateColumn({
     name: 'business_type_created_at',

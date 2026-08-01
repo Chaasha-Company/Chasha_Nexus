@@ -1,6 +1,7 @@
 import { ResponseMessages, t, ValidationMessages, type Language } from '@/infrastructure/translator-system/i18n';
 import type { LoginWithPhoneNumberBusinessCommand } from '../login-with-phone-number-business.command';
 import type { BusinessEmployeeAuthTokenPayload } from '@/shared/v1/types/auth/token';
+import type { LoginWithPhoneNumberBusinessMobileResponseDTO } from '@/modules/v1/auth/presentation';
 import ms from 'ms';
 import { findBusinessEmployeeByPhoneNumberRepository } from '@/modules/v1/business-employees';
 import { throwBadRequestException, throwNotFoundException } from '@/shared/v1/exceptions';
@@ -9,13 +10,7 @@ import { createAccessTokenProvider, createRefreshTokenProvider, hashPasswordProv
 import { createBusinessEmployeeSessionRepository } from '@/modules/v1/business-employee-sessions';
 import { EnvValueConfig } from '@/config/env';
 
-export const loginWithPhoneNumberBusinessCommandHandler = async (
-  loginData: LoginWithPhoneNumberBusinessCommand,
-  lang: Language,
-): Promise<{
-  loginAccessToken: string;
-  loginRefreshToken: string;
-}> => {
+export const loginWithPhoneNumberBusinessCommandHandler = async (loginData: LoginWithPhoneNumberBusinessCommand, lang: Language): Promise<LoginWithPhoneNumberBusinessMobileResponseDTO> => {
   const findBusinessEmployee = findBusinessEmployeeByPhoneNumberRepository();
 
   const businessEmployee = await findBusinessEmployee({

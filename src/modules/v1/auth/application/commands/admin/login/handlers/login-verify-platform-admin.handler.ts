@@ -1,6 +1,7 @@
 import { deleteCacheHelper, getCacheHelper, type LoginWithPhoneNumberPlatformAdminSession } from '@/infrastructure/cache-system/node-cache';
 import type { LoginVerifyPlatformAdminCommand } from '../login-verify-platform-admin.command';
 import type { PlatformAdminAuthTokenPayload } from '@/shared/v1/types/auth/token';
+import type { LoginVerifyPlatformAdminMobileResponseDTO } from '@/modules/v1/auth/presentation';
 import ms from 'ms';
 import { CacheKey, ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
 import { throwBadRequestException, throwNotFoundException } from '@/shared/v1/exceptions';
@@ -10,13 +11,7 @@ import { createPlatformAdminSessionRepository } from '@/modules/v1/platform-admi
 import { createAccessTokenProvider, createRefreshTokenProvider, hashPasswordProvider } from '@/modules/v1/auth/infrastructure';
 import { EnvValueConfig } from '@/config/env';
 
-export const loginVerifyPlatformAdminCommandHandler = async (
-  loginVerifyData: LoginVerifyPlatformAdminCommand,
-  lang: Language,
-): Promise<{
-  loginVerifyAccessToken: string;
-  loginVerifyRefreshToken: string;
-}> => {
+export const loginVerifyPlatformAdminCommandHandler = async (loginVerifyData: LoginVerifyPlatformAdminCommand, lang: Language): Promise<LoginVerifyPlatformAdminMobileResponseDTO> => {
   const cacheGet = getCacheHelper();
   const cacheDel = deleteCacheHelper();
 
