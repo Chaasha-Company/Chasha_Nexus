@@ -5,7 +5,7 @@ import { BusinessEmployeeStatusesModel } from '@/shared/v1/database/schema/busin
 export const createBusinessEmployeeStatusDataSeed = async (): Promise<void> => {
   const repository = AppDataSource.getRepository(BusinessEmployeeStatusesModel);
 
-  const businessEmployeeStatusesData: Partial<BusinessEmployeeStatusesModel>[] = [
+  const businessEmployeeStatusesData = [
     {
       businessEmployeeStatusNameEn: 'Active',
       businessEmployeeStatusNameFa: 'فعال',

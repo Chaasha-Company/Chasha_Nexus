@@ -5,7 +5,7 @@ import { PlatformAdminStatusesModel } from '@/shared/v1/database/schema/platform
 export const createPlatformAdminStatusDataSeed = async (): Promise<void> => {
   const repository = AppDataSource.getRepository(PlatformAdminStatusesModel);
 
-  const platformAdminStatusesData: Partial<PlatformAdminStatusesModel>[] = [
+  const platformAdminStatusesData = [
     {
       platformAdminStatusNameEn: 'Active',
       platformAdminStatusNameFa: 'فعال',

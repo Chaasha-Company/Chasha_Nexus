@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { BusinessesModel } from '@/shared/v1/database/schema/businesses';
+import { EarlyAccessRequestsModel } from '@/shared/v1/database/schema/early_access_requests';
 
 @Entity({
   name: 'business_types',
@@ -53,6 +54,11 @@ export class BusinessTypesModel {
     eager: false,
   })
   businessTypeBusinesses!: BusinessesModel[];
+
+  @OneToMany(() => EarlyAccessRequestsModel, (request) => request.earlyAccessRequestBusinessType, {
+    eager: false,
+  })
+  businessTypeEarlyAccess!: EarlyAccessRequestsModel[];
 
   @CreateDateColumn({
     name: 'business_type_created_at',

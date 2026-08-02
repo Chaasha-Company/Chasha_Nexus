@@ -5,7 +5,7 @@ import { BusinessTypesModel } from '@/shared/v1/database/schema/businesses/child
 export const createBusinessTypeDataSeed = async (): Promise<void> => {
   const repository = AppDataSource.getRepository(BusinessTypesModel);
 
-  const businessTypesData: Partial<BusinessTypesModel>[] = [
+  const businessTypesData = [
     {
       businessTypeNameEn: 'Restaurant',
       businessTypeNameFa: 'رستوران',
