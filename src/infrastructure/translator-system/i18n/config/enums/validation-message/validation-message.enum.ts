@@ -180,4 +180,55 @@ export const ValidationMessages = {
     fa: 'خطا: رمز عبور - حداکثر ۶۴ کاراکتر مجاز است.',
     en: 'Error: Password - Maximum length is 64 characters.',
   },
+
+  // =========================Early Access Request Validation=========================
+  [ValidationMessage.EARLY_ACCESS_REQUEST_FULL_NAME_REQUIRED]: {
+    fa: 'خطا: نام و نام خانوادگی - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: Full name - This field is required and must be a valid string.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_FULL_NAME_TOO_SHORT]: {
+    fa: 'خطا: نام و نام خانوادگی - حداقل ۲ کاراکتر الزامی است.',
+    en: 'Error: Full name - Minimum length is 2 characters.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_FULL_NAME_TOO_LONG]: {
+    fa: 'خطا: نام و نام خانوادگی - حداکثر ۱۵۰ کاراکتر مجاز است.',
+    en: 'Error: Full name - Maximum length is 150 characters.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_PHONE_NUMBER_REQUIRED]: {
+    fa: 'خطا: شماره تماس - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: Phone number - This field is required and must be a valid string.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_PHONE_NUMBER_BAD_FORMAT]: {
+    fa: 'خطا: شماره تماس - باید ۱۱ رقم باشد و با صفر شروع شود.',
+    en: 'Error: Phone number - It must be 11 digits long and start with 0.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_TYPE_REQUIRED]: {
+    fa: 'خطا: نوع کسب‌وکار - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: Business type - This field is required and must be a valid string.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_TYPE_NOT_FOUND]: {
+    fa: 'خطا: نوع کسب‌وکار - نوع کسب و کاری با این اسلاگ پیدا نشد..',
+    en: 'Error: Business type - No business type was found with the provided slug.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_CITY_REQUIRED]: {
+    fa: 'خطا: شهر - این فیلد اجباری است و باید یک مقدار معتبر باشد.',
+    en: 'Error: City - This field is required and must be a valid value.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_STATE_REQUIRED]: {
+    fa: 'خطا: استان - این فیلد اجباری است و باید یک مقدار معتبر باشد.',
+    en: 'Error: State - This field is required and must be a valid value.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_ALREADY_EXISTS]: {
+    fa: 'خطا: درخواست دسترسی زودهنگام - برای این شماره تماس قبلاً درخواست ثبت شده است.',
+    en: 'Error: Early access request - An early access request already exists for this phone number.',
+  },
 } as const;

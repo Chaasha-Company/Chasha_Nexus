@@ -1,1 +1,1 @@
-export * from './early-access-request.route';
+export * from './global';

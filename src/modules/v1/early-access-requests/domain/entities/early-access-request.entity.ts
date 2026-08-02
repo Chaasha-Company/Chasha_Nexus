@@ -9,7 +9,6 @@ export interface EarlyAccessRequestsEntity {
   earlyAccessRequestBusinessType: BusinessTypesEntity;
   earlyAccessRequestFullName: string;
   earlyAccessRequestPhoneNumber: string;
-  earlyAccessRequestCity: string;
   earlyAccessRequestCode: string;
   earlyAccessRequestMetadata: Record<string, unknown> | null;
   earlyAccessRequestCreatedAt: Date;

@@ -10,7 +10,7 @@ export class BusinessTypesModel {
   @PrimaryGeneratedColumn('uuid', {
     name: 'business_type_id',
   })
-  businessTypeId!: string;
+  businessTypeId!: number;
 
   @Column({
     name: 'business_type_name_fa',

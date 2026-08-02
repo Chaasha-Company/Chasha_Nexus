@@ -16,3 +16,4 @@ export * from '@/shared/v1/database/migrations/1785599803000-Create_Businesses';
 export * from '@/shared/v1/database/migrations/1785613559506-Add_Multi_Language_Remove_UUID_For_Statuess_Create_Business_Types';
 export * from '@/shared/v1/database/migrations/1785618311976-Create_Early_Access_Request_With_status';
 export * from '@/shared/v1/database/migrations/1785687640629-Add_Early_Access_Request_Code_Field';
+export * from '@/shared/v1/database/migrations/1785700723494-Remove_Country_Data_Field';

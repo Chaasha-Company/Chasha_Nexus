@@ -55,20 +55,6 @@ export class EarlyAccessRequestsModel {
   earlyAccessRequestPhoneNumber!: string;
 
   @Column({
-    name: 'early_access_request_state',
-    type: 'varchar',
-    length: 100,
-  })
-  earlyAccessRequestState!: string;
-
-  @Column({
-    name: 'early_access_request_city',
-    type: 'varchar',
-    length: 100,
-  })
-  earlyAccessRequestCity!: string;
-
-  @Column({
     name: 'early_access_request_code',
     type: 'varchar',
     length: 14,

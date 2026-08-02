@@ -46,6 +46,10 @@
     {
       "name": "Business Authentication",
       "description": "Authentication endpoints for business employees including login, token generation, refresh and logout."
+    },
+    {
+      "name": "Global Early Access Requests",
+      "description": "Public endpoints for creating and managing Chasha Early Access requests."
     }
   ],
   "paths": {
@@ -626,6 +630,127 @@
         }
       }
     },
+    "/global/early-access-request/create": {
+      "post": {
+        "tags": ["Global Early Access Requests"],
+        "summary": "Create early access request",
+        "description": "Creates a new Early Access request for businesses interested in joining the Chasha platform.\n\nThis endpoint is publicly accessible and does not require authentication.\n\nIf the phone number has already been registered, the API returns a conflict error.",
+        "operationId": "createGlobalEarlyAccessRequest",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGlobalEarlyAccessRequest"
+              },
+              "examples": {
+                "create": {
+                  "summary": "Create Early Access Request",
+                  "value": {
+                    "earlyAccessRequestFullName": "John Doe",
+                    "earlyAccessRequestPhoneNumber": "09123456789",
+                    "earlyAccessRequestBusinessTypeSlug": "restaurant"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Early access request created successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateGlobalEarlyAccessRequestResponse"
+                },
+                "examples": {
+                  "success": {
+                    "summary": "Request Created",
+                    "value": {
+                      "status": 200,
+                      "success": true,
+                      "author": "Kara_Company",
+                      "message": "Operation completed successfully.",
+                      "data": {
+                        "earlyAccessRequestCode": "@CHASHA_873310"
+                      },
+                      "timeStamp": "2026-08-02T20:03:40.086Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "InvalidPhoneNumber": {
+                    "summary": "Phone Number Validation",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "earlyAccessRequestPhoneNumber": ["Phone number must contain exactly 11 digits and start with 09."]
+                      },
+                      "timeStamp": "2026-08-02T20:03:35.286Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "An early access request already exists for this phone number.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "AlreadyRegistered": {
+                    "summary": "Phone Number Already Registered",
+                    "value": {
+                      "status": 409,
+                      "success": false,
+                      "author": "Kara_Company",
+                      "message": "Data conflict.",
+                      "errorCode": "E1021",
+                      "errors": {
+                        "earlyAccessRequestPhoneNumber": ["An Early Access request has already been submitted for this phone number."]
+                      },
+                      "timeStamp": "2026-08-02T20:03:30.508Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/global/lockup/business-type": {
       "get": {
         "tags": ["Global Lockup"],
@@ -935,6 +1060,72 @@
           "loginRefreshToken": {
             "type": "string",
             "description": "JWT refresh token."
+          }
+        }
+      },
+      "CreateGlobalEarlyAccessRequest": {
+        "type": "object",
+        "required": ["earlyAccessRequestFullName", "earlyAccessRequestPhoneNumber", "earlyAccessRequestBusinessTypeSlug"],
+        "properties": {
+          "earlyAccessRequestFullName": {
+            "type": "string",
+            "description": "Full name of the applicant.",
+            "example": "John Doe",
+            "minLength": 2,
+            "maxLength": 150
+          },
+          "earlyAccessRequestPhoneNumber": {
+            "type": "string",
+            "description": "Applicant phone number.",
+            "example": "09123456789",
+            "pattern": "^09\\d{9}$",
+            "minLength": 11,
+            "maxLength": 11
+          },
+          "earlyAccessRequestBusinessTypeSlug": {
+            "type": "string",
+            "description": "Business type slug.",
+            "example": "restaurant",
+            "minLength": 1
+          }
+        }
+      },
+      "CreateGlobalEarlyAccessRequestResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Kara_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "earlyAccessRequestCode": {
+                "type": "string",
+                "description": "Unique Early Access request identifier.",
+                "example": "@CHASHA_873310"
+              }
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "0.1.0"
           }
         }
       },
