@@ -1,1 +1,1 @@
-export * from './create-platform-admin-session.contract';
+export * from './create-platform-admin-session-repository.contract';

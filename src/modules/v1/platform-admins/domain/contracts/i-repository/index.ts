@@ -1,1 +1,1 @@
-export * from './find-platform-admin-by-phone-number.contract';
+export * from './find-platform-admin-by-phone-number-repository.contract';

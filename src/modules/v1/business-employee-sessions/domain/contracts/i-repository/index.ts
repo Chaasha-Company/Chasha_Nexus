@@ -1,1 +1,1 @@
-export * from './create-business-employee-session.contract';
+export * from './create-business-employee-session-repository.contract';
