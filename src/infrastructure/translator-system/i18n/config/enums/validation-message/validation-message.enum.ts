@@ -192,6 +192,27 @@ export const ValidationMessages = {
     en: 'Error: Refresh token - is invalid or has expired.',
   },
 
+  // =========================Platform Admin Refresh Token Validation=========================
+  [ValidationMessage.PLATFORM_ADMIN_REFRESH_TOKEN_REQUIRED]: {
+    fa: 'خطا: توکن بروزرسانی ادمین - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: Platform admin refresh token - This field is required and must be a valid string.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_REFRESH_TOKEN_INVALID]: {
+    fa: 'خطا: توکن بروزرسانی ادمین - نامعتبر است یا منقضی شده است.',
+    en: 'Error: Platform admin refresh token - is invalid or has expired.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_REFRESH_TOKEN_SESSION_NOT_FOUND]: {
+    fa: 'خطا: نشست ادمین - نشست احراز هویت برای این توکن یافت نشد.',
+    en: 'Error: Platform admin session - Authentication session was not found for this token.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_REFRESH_TOKEN_EXPIRED]: {
+    fa: 'خطا: نشست ادمین - نشست احراز هویت منقضی شده است.',
+    en: 'Error: Platform admin session - Authentication session has expired.',
+  },
+
   // =========================Authentication Middleware Validation=========================
   [ValidationMessage.ACCESS_TOKEN_REQUIRED]: {
     fa: 'خطا: توکن دسترسی - ارسال این فیلد الزامی است.',

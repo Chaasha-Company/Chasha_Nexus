@@ -491,6 +491,84 @@
         }
       }
     },
+    "/admin/auth/refresh-token": {
+      "post": {
+        "tags": ["Platform Admin Authentication"],
+        "summary": "Refresh platform administrator authentication tokens",
+        "description": "Generates new authentication tokens for a Platform Administrator using the refresh token stored in HttpOnly Cookie.\n\nRefresh token lifecycle:\n\n1. Reads refresh token from HttpOnly Cookie.\n2. Validates refresh token signature.\n3. Checks token ownership.\n4. Finds Platform Administrator session.\n5. Validates session expiration.\n6. Compares stored hashed refresh token.\n7. Rotates refresh token.\n8. Updates session activity and expiration time.\n9. Sets new Access Token and Refresh Token as HttpOnly Cookies.\n\nThe response body does not contain authentication tokens.",
+        "operationId": "refreshPlatformAdminToken",
+        "parameters": [
+          {
+            "name": "x-platform",
+            "in": "header",
+            "required": false,
+            "description": "Client platform type.",
+            "schema": {
+              "type": "string",
+              "enum": ["web"],
+              "default": "web"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tokens refreshed successfully.",
+            "headers": {
+              "Set-Cookie": {
+                "description": "New Access Token and Refresh Token are returned as HttpOnly cookies.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Kara_Company",
+                  "message": "Operation completed successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-04T00:00:00.000Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Refresh token is invalid, expired, or session is not valid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 401,
+                  "success": false,
+                  "author": "Kara_Company",
+                  "message": "Unauthorized.",
+                  "errorCode": "E4010",
+                  "errors": {
+                    "error_message": ["Refresh token is invalid or has expired."]
+                  },
+                  "timeStamp": "2026-08-04T00:00:00.000Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/business/auth/login/with-phone": {
       "post": {
         "tags": ["Business Authentication"],
