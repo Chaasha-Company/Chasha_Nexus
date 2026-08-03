@@ -192,6 +192,22 @@ export const ValidationMessages = {
     en: 'Error: Refresh token - is invalid or has expired.',
   },
 
+  // =========================Authentication Middleware Validation=========================
+  [ValidationMessage.ACCESS_TOKEN_REQUIRED]: {
+    fa: 'خطا: توکن دسترسی - ارسال این فیلد الزامی است.',
+    en: 'Error: Access token - This field is required.',
+  },
+
+  [ValidationMessage.ACCESS_TOKEN_INVALID]: {
+    fa: 'خطا: توکن دسترسی - نامعتبر یا منقضی شده است.',
+    en: 'Error: Access token - The token is invalid or expired.',
+  },
+
+  [ValidationMessage.ACCESS_TOKEN_SESSION_INVALID]: {
+    fa: 'خطا: نشست کاربر - نشست فعال برای این توکن یافت نشد.',
+    en: 'Error: User session - No active session was found for this token.',
+  },
+
   // =========================Early Access Request Validation=========================
   [ValidationMessage.EARLY_ACCESS_REQUEST_FULL_NAME_REQUIRED]: {
     fa: 'خطا: نام و نام خانوادگی - این فیلد اجباری است و باید یک رشته معتبر باشد.',
