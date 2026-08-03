@@ -181,6 +181,17 @@ export const ValidationMessages = {
     en: 'Error: Password - Maximum length is 64 characters.',
   },
 
+  // =========================Business Refresh Token Validation=========================
+  [ValidationMessage.BUSINESS_REFRESH_TOKEN_REQUIRED]: {
+    fa: 'خطا: توکن بروزرسانی - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: Refresh token - This field is required and must be a valid string.',
+  },
+
+  [ValidationMessage.BUSINESS_REFRESH_TOKEN_INVALID]: {
+    fa: 'خطا: توکن بروزرسانی - نامعتبر است یا منقضی شده است.',
+    en: 'Error: Refresh token - is invalid or has expired.',
+  },
+
   // =========================Early Access Request Validation=========================
   [ValidationMessage.EARLY_ACCESS_REQUEST_FULL_NAME_REQUIRED]: {
     fa: 'خطا: نام و نام خانوادگی - این فیلد اجباری است و باید یک رشته معتبر باشد.',

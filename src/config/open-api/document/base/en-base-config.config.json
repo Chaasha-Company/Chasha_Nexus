@@ -630,6 +630,86 @@
         }
       }
     },
+    "/business/auth/refresh-token": {
+      "post": {
+        "tags": ["Business Authentication"],
+        "summary": "Refresh business employee authentication tokens",
+        "description": "Generates new access and refresh tokens for an authenticated business employee without requiring login again.\n\nRefresh token lifecycle:\n\n1. Validates refresh token signature.\n2. Checks token type ownership.\n3. Finds existing business employee session.\n4. Validates stored hashed refresh token.\n5. Rotates refresh token.\n6. Updates session activity and expiration time.\n7. Returns new authentication tokens.\n\nThe previous refresh token becomes invalid after rotation.",
+        "operationId": "refreshBusinessEmployeeToken",
+        "parameters": [
+          {
+            "name": "x-platform",
+            "in": "header",
+            "required": false,
+            "description": "Client platform type.",
+            "schema": {
+              "type": "string",
+              "enum": ["web", "mobile"],
+              "default": "web"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenBusinessRequest"
+              },
+              "example": {
+                "refreshTokenBusiness": "eyJhbGciOiJIUzI1NiIs..."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tokens refreshed successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Kara_Company",
+                  "message": "Operation completed successfully.",
+                  "data": {
+                    "newBusinessAccessToken": "eyJhbGciOiJIUzI1NiIs...",
+                    "newBusinessRefreshToken": "eyJhbGciOiJIUzI1NiIs..."
+                  },
+                  "timeStamp": "2026-08-04T00:00:00.000Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Refresh token is invalid or expired.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 401,
+                  "success": false,
+                  "author": "Kara_Company",
+                  "message": "Unauthorized.",
+                  "errorCode": "E4010",
+                  "errors": {
+                    "refreshTokenBusiness": ["Refresh token is invalid."]
+                  },
+                  "timeStamp": "2026-08-04T00:00:00.000Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/global/early-access-request/create": {
       "post": {
         "tags": ["Global Early Access Requests"],
@@ -1126,6 +1206,17 @@
           "version": {
             "type": "string",
             "example": "0.1.0"
+          }
+        }
+      },
+      "RefreshTokenBusinessRequest": {
+        "type": "object",
+        "required": ["refreshTokenBusiness"],
+        "properties": {
+          "refreshTokenBusiness": {
+            "type": "string",
+            "description": "Business employee JWT refresh token.",
+            "example": "eyJhbGciOiJIUzI1NiIs..."
           }
         }
       },
