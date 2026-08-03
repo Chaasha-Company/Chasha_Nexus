@@ -46,7 +46,7 @@
   "scripts": {
     "start": "node index.js",
     "build:production": "vite build && npm run copy-asset",
-    "copy-asset": "node src/__scripts__/copy-command/copy-assets.script.mjs",
+    "copy-asset": "node ./__scripts__/copy-command/copy-assets.script.mjs",
     "start:dev": "cross-env NODE_ENV=development tsx watch src/index.ts",
     "start:production": "cross-env NODE_ENV=production node dist/index.js",
     "ORM-typeorm": "tsx ./node_modules/typeorm/cli.js",

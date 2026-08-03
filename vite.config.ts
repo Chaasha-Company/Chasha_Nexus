@@ -1,7 +1,7 @@
 import path from 'path';
 import { defineConfig } from 'vite';
 import { VitePluginNode } from 'vite-plugin-node';
-import { copyJsonFilePlugin } from './plugin';
+import { copyJsonFilePlugin } from './__plugin__';
 
 export default defineConfig({
   plugins: [

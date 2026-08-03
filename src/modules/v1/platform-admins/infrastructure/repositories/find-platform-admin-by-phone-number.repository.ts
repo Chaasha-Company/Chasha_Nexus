@@ -1,11 +1,11 @@
 import type { FindPlatformAdminByPhoneNumberRepositoryContract } from '@/modules/v1/platform-admins/domain';
-import type { FindPlatformAdminByPhoneNumberRequestDTO } from '@/modules/v1/platform-admins/presentation';
+import type { FindPlatformAdminByPhoneNumberQuery } from '@/modules/v1/platform-admins/application';
 import { PlatformAdminsModel } from '@/shared/v1/database/schema/platform_admins';
 import { AppDataSource } from '@/shared/v1/database/core';
 
 export const findPlatformAdminByPhoneNumberRepository =
   (): FindPlatformAdminByPhoneNumberRepositoryContract =>
-  async (platformAdminData: FindPlatformAdminByPhoneNumberRequestDTO): Promise<null | PlatformAdminsModel> => {
+  async (platformAdminData: FindPlatformAdminByPhoneNumberQuery): Promise<null | PlatformAdminsModel> => {
     const platformAdminRepository = AppDataSource.getRepository(PlatformAdminsModel);
 
     return await platformAdminRepository.findOne({
