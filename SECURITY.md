@@ -298,9 +298,9 @@ We encourage researchers and contributors to report vulnerabilities responsibly.
 
 ---
 
-# About Kara
+# About Mehkam
 
-Chasha is developed and maintained by **Kara**, a technology company focused on building secure, scalable, and enterprise-grade software platforms.
+Chasha is developed and maintained by **Mehkam**, a technology company focused on building secure, scalable, and enterprise-grade software platforms.
 
 ---
 

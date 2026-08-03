@@ -13,7 +13,7 @@ export const errorResponseHandler = <T>(
   errors?: T,
   message: string = t(ResponseMessages, ResponseMessage.SUCCESS, req.lang),
   error_code: ErrorCode = ErrorCode.UNKNOWN_ERROR,
-  author = 'Kara_Company',
+  author = 'Mehkam_Company',
 ): Response<ApiErrorResponse<T>> =>
   res.status(status).json({
     status,

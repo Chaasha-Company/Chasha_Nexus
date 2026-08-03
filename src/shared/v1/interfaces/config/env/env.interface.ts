@@ -8,12 +8,12 @@ export interface EnvInterface {
   APP_DESCRIPTION: string;
   APP_VERSION: string;
 
-  // =========================Kara Info=========================
-  KARA_LEGAL_NAME: string;
-  KARA_TRADE_NAME: string;
-  KARA_REGISTRATION_NUMBER: number;
-  KARA_TAX_NUMBER: number;
-  KARA_NATIONAL_ID: number;
+  // =========================Mehkam Info=========================
+  MEHKAM_LEGAL_NAME: string;
+  MEHKAM_TRADE_NAME: string;
+  MEHKAM_REGISTRATION_NUMBER: number;
+  MEHKAM_TAX_NUMBER: number;
+  MEHKAM_NATIONAL_ID: number;
 
   // =========================Chasha Info =========================
   CHASHA_LEGAL_NAME: string;

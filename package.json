@@ -1,7 +1,7 @@
 {
   "name": "chasha-platform",
   "version": "1.0.0",
-  "description": "Chasha is a modern Restaurant Operating System founded by Erfan Abouei under Kara Holding. Chasha helps restaurants and cafes optimize their operations by providing digital menus, QR-based ordering, real-time order management, and a seamless experience for customers, waiters, and restaurant teams.",
+  "description": "Chasha is a modern Restaurant Operating System founded by Erfan Abouei under Mehkam Holding. Chasha helps restaurants and cafes optimize their operations by providing digital menus, QR-based ordering, real-time order management, and a seamless experience for customers, waiters, and restaurant teams.",
   "keywords": [
     "Restaurant",
     "RestaurantOS",
@@ -16,7 +16,7 @@
     "RealtimeOrdering",
     "ModernRestaurant",
     "CustomerExperience",
-    "KaraHolding"
+    "MehkamHolding"
   ],
   "homepage": "https://github.com/Erfan-Abouei/Chasha_Platform#readme",
   "bugs": {

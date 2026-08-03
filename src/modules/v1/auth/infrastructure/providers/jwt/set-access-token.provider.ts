@@ -12,6 +12,6 @@ export const setAccessTokenProvider =
       secure: isProduction && !isLocal,
       sameSite: isLocal ? 'lax' : 'none',
       maxAge: EnvValueConfig.JWT_ACCESS_TOKEN_EXPIRES_AT,
-      domain: isLocal ? undefined : '.karaflow.com',
+      domain: isLocal ? undefined : '.mehkam.ir',
     });
   };

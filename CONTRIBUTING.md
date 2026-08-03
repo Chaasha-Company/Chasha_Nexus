@@ -18,7 +18,7 @@
 
 Thank you for your interest in contributing to **Chasha**.
 
-Chasha is a modern **Restaurant Operating System (Restaurant OS)** developed by **Kara** to simplify restaurant operations through QR ordering, real-time order management, and an intuitive management platform.
+Chasha is a modern **Restaurant Operating System (Restaurant OS)** developed by **Mehkam** to simplify restaurant operations through QR ordering, real-time order management, and an intuitive management platform.
 
 To maintain long-term scalability, maintainability, security, and code quality, every contribution must follow the engineering standards described in this document.
 
@@ -491,5 +491,5 @@ For architecture discussions, implementation guidance, or engineering decisions,
 
 <p align="center">
   <strong>Chasha — Smart Restaurant Operating System</strong><br>
-  A Product by <strong>Kara</strong>
+  A Product by <strong>Mehkam</strong>
 </p>

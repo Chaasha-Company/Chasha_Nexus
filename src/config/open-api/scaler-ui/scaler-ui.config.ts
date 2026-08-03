@@ -6,13 +6,13 @@
 // export const apiRefrenceConfig: ApiReferenceConfiguration = {
 //   content: openApiDocument,
 //   metaData: {
-//     title: 'Kara Api V1 | Documention',
-//     description: 'Complete API documentation for the Kara platform developed by Kara Team.',
+//     title: 'Mehkam Api V1 | Documention',
+//     description: 'Complete API documentation for the Mehkam platform developed by Mehkam Team.',
 //   },
 //   defaultHttpClient: {
 //     targetKey: 'dart',
 //     clientKey: 'fetch',
 //   },
-//   pageTitle: 'Kara Api V1 | Documention',
+//   pageTitle: 'Mehkam Api V1 | Documention',
 //   //   cdn: ''
 // };

@@ -14,12 +14,12 @@ export const EnvValueConfig: EnvInterface = {
   APP_DESCRIPTION: getStringEnvHelper('APP_DESCRIPTION', ''),
   APP_VERSION: getStringEnvHelper('APP_VERSION', ''),
 
-  // =========================Kara Info=========================
-  KARA_LEGAL_NAME: getStringEnvHelper('KARA_LEGAL_NAME', ''),
-  KARA_TRADE_NAME: getStringEnvHelper('KARA_TRADE_NAME', ''),
-  KARA_REGISTRATION_NUMBER: getNumberEnvHelper('KARA_REGISTRATION_NUMBER', 0),
-  KARA_TAX_NUMBER: getNumberEnvHelper('KARA_TAX_NUMBER', 0),
-  KARA_NATIONAL_ID: getNumberEnvHelper('KARA_NATIONAL_ID', 0),
+  // =========================Mehkam Info=========================
+  MEHKAM_LEGAL_NAME: getStringEnvHelper('MEHKAM_LEGAL_NAME', ''),
+  MEHKAM_TRADE_NAME: getStringEnvHelper('MEHKAM_TRADE_NAME', ''),
+  MEHKAM_REGISTRATION_NUMBER: getNumberEnvHelper('MEHKAM_REGISTRATION_NUMBER', 0),
+  MEHKAM_TAX_NUMBER: getNumberEnvHelper('MEHKAM_TAX_NUMBER', 0),
+  MEHKAM_NATIONAL_ID: getNumberEnvHelper('MEHKAM_NATIONAL_ID', 0),
 
   // =========================Chasha Info=========================
   CHASHA_LEGAL_NAME: getStringEnvHelper('CHASHA_LEGAL_NAME', ''),

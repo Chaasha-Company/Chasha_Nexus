@@ -7,9 +7,9 @@
     "version": "1.0.0",
     "termsOfService": "https://docs.chaasha.ir/terms",
     "contact": {
-      "name": "Kara Technology",
-      "url": "https://karaflow.com",
-      "email": "backend@karaflow.com"
+      "name": "Mehkam Technology",
+      "url": "https://mehkam.ir",
+      "email": "backend@mehkam.ir"
     },
     "license": {
       "name": "Private License",
@@ -53,7 +53,7 @@
     }
   ],
   "paths": {
-    "/admin/auth/login/with-phone": {
+    "{language_prefix}/admin/auth/login/with-phone": {
       "post": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Login with phone number",
@@ -100,7 +100,7 @@
                     "value": {
                       "status": 200,
                       "success": true,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Operation completed successfully.",
                       "data": {
                         "loginSession": "2a8e43dc-be17-4d02-8820-daa3638168b1",
@@ -127,7 +127,7 @@
                     "value": {
                       "status": 400,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Validation failed.",
                       "errorCode": "E1001",
                       "errors": {
@@ -142,7 +142,7 @@
                     "value": {
                       "status": 400,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Data conflict.",
                       "errorCode": "E1090",
                       "errors": {
@@ -157,7 +157,7 @@
                     "value": {
                       "status": 400,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Data conflict.",
                       "errorCode": "E1090",
                       "errors": {
@@ -183,7 +183,7 @@
                     "value": {
                       "status": 404,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Requested resource was not found.",
                       "errorCode": "E1020",
                       "errors": {
@@ -203,7 +203,7 @@
         }
       }
     },
-    "/admin/auth/login/with-phone/verify": {
+    "{language_prefix}/admin/auth/login/with-phone/verify": {
       "post": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Verify login OTP",
@@ -267,7 +267,7 @@
                     "value": {
                       "status": 200,
                       "success": true,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Operation completed successfully.",
                       "data": null,
                       "timeStamp": "2026-07-29T15:41:18.928Z",
@@ -279,7 +279,7 @@
                     "value": {
                       "status": 200,
                       "success": true,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Operation completed successfully.",
                       "data": {
                         "loginVerifyAccessToken": "eyJhbGciOiJIUzI1NiIs...",
@@ -306,7 +306,7 @@
                     "value": {
                       "status": 400,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Validation failed.",
                       "errorCode": "E1001",
                       "errors": {
@@ -321,7 +321,7 @@
                     "value": {
                       "status": 400,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Validation failed.",
                       "errorCode": "E1001",
                       "errors": {
@@ -336,7 +336,7 @@
                     "value": {
                       "status": 400,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Validation failed.",
                       "errorCode": "E1001",
                       "errors": {
@@ -351,7 +351,7 @@
                     "value": {
                       "status": 400,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Data conflict.",
                       "errorCode": "E1090",
                       "errors": {
@@ -378,7 +378,7 @@
                     "value": {
                       "status": 404,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Requested resource was not found.",
                       "errorCode": "E1020",
                       "errors": {
@@ -393,7 +393,7 @@
                     "value": {
                       "status": 404,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Requested resource was not found.",
                       "errorCode": "E1020",
                       "errors": {
@@ -413,7 +413,7 @@
         }
       }
     },
-    "/admin/auth/login/with-phone/resend-otp": {
+    "{language_prefix}/admin/auth/login/with-phone/resend-otp": {
       "post": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Resend login OTP",
@@ -452,7 +452,7 @@
                     "value": {
                       "status": 200,
                       "success": true,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Operation completed successfully.",
                       "data": {
                         "loginResendOtpExpiresTimer": 120
@@ -491,7 +491,7 @@
         }
       }
     },
-    "/admin/auth/refresh-token": {
+    "{language_prefix}/admin/auth/refresh-token": {
       "post": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Refresh platform administrator authentication tokens",
@@ -532,7 +532,7 @@
                 "example": {
                   "status": 200,
                   "success": true,
-                  "author": "Kara_Company",
+                  "author": "Mehkam_Company",
                   "message": "Operation completed successfully.",
                   "data": null,
                   "timeStamp": "2026-08-04T00:00:00.000Z",
@@ -551,7 +551,7 @@
                 "example": {
                   "status": 401,
                   "success": false,
-                  "author": "Kara_Company",
+                  "author": "Mehkam_Company",
                   "message": "Unauthorized.",
                   "errorCode": "E4010",
                   "errors": {
@@ -569,7 +569,66 @@
         }
       }
     },
-    "/business/auth/login/with-phone": {
+    "{language_prefix}/admin/auth/me": {
+      "get": {
+        "tags": ["Platform Admin Authentication"],
+        "summary": "Check current platform administrator authentication status",
+        "description": "Checks whether the current request belongs to an authenticated Platform Administrator.\n\nThis endpoint is used by frontend applications during initialization to restore authentication state.\n\nThe endpoint does not return administrator information. It only validates:\n\n- Access Token validity.\n- Platform Administrator session existence.\n- Session active status.\n- Session expiration time.\n\nAuthentication is performed using HttpOnly Cookie or Bearer Token.",
+        "operationId": "getCurrentPlatformAdminAuthenticationStatus",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Platform Administrator is authenticated successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Chasha_Company",
+                  "message": "Operation completed successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-04T00:00:00.000Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed because access token or session is invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 401,
+                  "success": false,
+                  "author": "Chasha_Company",
+                  "message": "Unauthorized.",
+                  "errorCode": "E4010",
+                  "errors": {
+                    "error_message": ["Access token is invalid or session has expired."]
+                  },
+                  "timeStamp": "2026-08-04T00:00:00.000Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/auth/login/with-phone": {
       "post": {
         "tags": ["Business Authentication"],
         "summary": "Login business employee with phone number",
@@ -618,7 +677,7 @@
                     "value": {
                       "status": 200,
                       "success": true,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Operation completed successfully.",
                       "data": null,
                       "timeStamp": "2026-07-29T15:41:18.928Z",
@@ -630,7 +689,7 @@
                     "value": {
                       "status": 200,
                       "success": true,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Operation completed successfully.",
                       "data": {
                         "loginAccessToken": "eyJhbGciOiJIUzI1NiIs...",
@@ -657,7 +716,7 @@
                     "value": {
                       "status": 400,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Validation failed.",
                       "errorCode": "E1001",
                       "errors": {
@@ -670,7 +729,7 @@
                     "value": {
                       "status": 400,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Data conflict.",
                       "errorCode": "E1090",
                       "errors": {
@@ -692,7 +751,7 @@
                 "example": {
                   "status": 404,
                   "success": false,
-                  "author": "Kara_Company",
+                  "author": "Mehkam_Company",
                   "message": "Requested resource was not found.",
                   "errorCode": "E1020",
                   "errors": {
@@ -708,7 +767,7 @@
         }
       }
     },
-    "/business/auth/refresh-token": {
+    "/{language_prefix}/business/auth/refresh-token": {
       "post": {
         "tags": ["Business Authentication"],
         "summary": "Refresh business employee authentication tokens",
@@ -748,7 +807,7 @@
                 "example": {
                   "status": 200,
                   "success": true,
-                  "author": "Kara_Company",
+                  "author": "Mehkam_Company",
                   "message": "Operation completed successfully.",
                   "data": {
                     "newBusinessAccessToken": "eyJhbGciOiJIUzI1NiIs...",
@@ -770,7 +829,7 @@
                 "example": {
                   "status": 401,
                   "success": false,
-                  "author": "Kara_Company",
+                  "author": "Mehkam_Company",
                   "message": "Unauthorized.",
                   "errorCode": "E4010",
                   "errors": {
@@ -788,7 +847,66 @@
         }
       }
     },
-    "/global/early-access-request/create": {
+    "/{language_prefix}/business/auth/me": {
+      "get": {
+        "tags": ["Business Authentication"],
+        "summary": "Check current business employee authentication status",
+        "description": "Checks whether the current request belongs to an authenticated Business Employee.\n\nThis endpoint is used by frontend applications during initialization to restore authentication state.\n\nThe endpoint does not return employee information. It only validates:\n\n- Access Token validity.\n- Business Employee session existence.\n- Session active status.\n- Session expiration time.\n\nAuthentication is performed using HttpOnly Cookie or Bearer Token.",
+        "operationId": "getCurrentBusinessEmployeeAuthenticationStatus",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Business Employee is authenticated successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Chasha_Company",
+                  "message": "Operation completed successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-04T00:00:00.000Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed because access token or session is invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 401,
+                  "success": false,
+                  "author": "Chasha_Company",
+                  "message": "Unauthorized.",
+                  "errorCode": "E4010",
+                  "errors": {
+                    "error_message": ["Access token is invalid or session has expired."]
+                  },
+                  "timeStamp": "2026-08-04T00:00:00.000Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/global/early-access-request/create": {
       "post": {
         "tags": ["Global Early Access Requests"],
         "summary": "Create early access request",
@@ -836,7 +954,7 @@
                     "value": {
                       "status": 200,
                       "success": true,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Operation completed successfully.",
                       "data": {
                         "earlyAccessRequestCode": "@CHASHA_873310"
@@ -862,7 +980,7 @@
                     "value": {
                       "status": 400,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Validation failed.",
                       "errorCode": "E1001",
                       "errors": {
@@ -889,7 +1007,7 @@
                     "value": {
                       "status": 409,
                       "success": false,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "Data conflict.",
                       "errorCode": "E1021",
                       "errors": {
@@ -909,7 +1027,7 @@
         }
       }
     },
-    "/global/lockup/business-type": {
+    "/{language_prefix}/global/lockup/business-type": {
       "get": {
         "tags": ["Global Lockup"],
         "summary": "Get all business types",
@@ -937,7 +1055,7 @@
                     "value": {
                       "status": 200,
                       "success": true,
-                      "author": "Kara_Company",
+                      "author": "Mehkam_Company",
                       "message": "عملیات با موفقیت انجام شد.",
                       "data": [
                         {
@@ -1048,7 +1166,7 @@
           },
           "author": {
             "type": "string",
-            "example": "Kara_Company"
+            "example": "Mehkam_Company"
           },
           "message": {
             "type": "string",
@@ -1162,7 +1280,7 @@
           },
           "author": {
             "type": "string",
-            "example": "Kara_Company"
+            "example": "Mehkam_Company"
           },
           "message": {
             "type": "string",
@@ -1261,7 +1379,7 @@
           },
           "author": {
             "type": "string",
-            "example": "Kara_Company"
+            "example": "Mehkam_Company"
           },
           "message": {
             "type": "string",
@@ -1352,7 +1470,7 @@
           },
           "author": {
             "type": "string",
-            "example": "Kara_Company"
+            "example": "Mehkam_Company"
           },
           "message": {
             "type": "string",
@@ -1402,7 +1520,7 @@
           },
           "author": {
             "type": "string",
-            "example": "Kara_Company"
+            "example": "Mehkam_Company"
           },
           "message": {
             "type": "string",
@@ -1438,7 +1556,7 @@
             "example": {
               "status": 500,
               "success": false,
-              "author": "Kara_Company",
+              "author": "Mehkam_Company",
               "message": "Internal Server Error.",
               "errorCode": "E5000",
               "errors": {},

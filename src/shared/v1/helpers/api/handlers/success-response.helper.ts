@@ -12,7 +12,7 @@ export const successResponseHandler = <T>(
   status: HttpStatus,
   data?: T,
   message: string = t(ResponseMessages, ResponseMessage.SUCCESS, req.lang),
-  author = 'Kara_Company',
+  author = 'Mehkam_Company',
 ): Response<ApiSuccessResponse<T>> =>
   res.status(status).json({
     status,

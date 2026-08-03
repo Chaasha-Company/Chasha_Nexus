@@ -20,7 +20,7 @@
 
 # Overview
 
-Chasha is a modern **Restaurant Operating System (Restaurant OS)** developed by **Kara** to simplify, automate, and optimize restaurant operations.
+Chasha is a modern **Restaurant Operating System (Restaurant OS)** developed by **Mehkam** to simplify, automate, and optimize restaurant operations.
 
 Instead of offering only a digital menu or QR ordering solution, Chasha provides a complete operational platform that connects customers, waiters, kitchens, managers, and administrators into a single unified system.
 
@@ -354,11 +354,11 @@ Restaurant Operating System
 
 ---
 
-# About Kara
+# About Mehkam
 
-Chasha is proudly built by **Kara**.
+Chasha is proudly built by **Mehkam**.
 
-Kara is a technology company focused on designing, engineering, and operating scalable software products. Every product developed by Kara follows the same engineering principles, architecture standards, and long-term product vision.
+Mehkam is a technology company focused on designing, engineering, and operating scalable software products. Every product developed by Mehkam follows the same engineering principles, architecture standards, and long-term product vision.
 
 ---
 
@@ -366,12 +366,12 @@ Kara is a technology company focused on designing, engineering, and operating sc
 
 **Erfan Abouei**
 
-Founder of Kara
+Founder of Mehkam
 
 ---
 
 # License
 
-Copyright © 2026 Kara.
+Copyright © 2026 Mehkam.
 
 All rights reserved.

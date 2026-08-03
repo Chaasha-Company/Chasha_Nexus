@@ -655,7 +655,7 @@ Chasha architecture prioritizes:
 
 Built by:
 
-**Kara Holding**
+**Mehkam Holding**
 
 Technology company focused on building scalable digital products.
 

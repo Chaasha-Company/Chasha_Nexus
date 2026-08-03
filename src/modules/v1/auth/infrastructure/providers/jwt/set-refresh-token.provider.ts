@@ -12,6 +12,6 @@ export const setRefreshTokenProvider =
       secure: isProduction && !isLocal,
       sameSite: isLocal ? 'lax' : 'none',
       maxAge: EnvValueConfig.JWT_REFRESH_TOKEN_EXPIRES_AT,
-      domain: isLocal ? undefined : '.karaflow.com',
+      domain: isLocal ? undefined : '.mehkam.ir',
     });
   };

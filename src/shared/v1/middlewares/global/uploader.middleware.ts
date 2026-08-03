@@ -12,7 +12,7 @@ export const uploaderMiddleware = (folder: string, allowedTypes: string[], limit
     s3: s3Config,
     acl: isPublicFile ? 'public-read' : 'private',
     key(_req: Express.Request, _file: Express.Multer.File, cb: (_error: MulterError | null, _key?: string) => void) {
-      const fullPath = `${folder}/${Date.now()}-${randomUUID()}-@KARA`;
+      const fullPath = `${folder}/${Date.now()}-${randomUUID()}-@Mehkam`;
       cb(null, fullPath);
     },
   });

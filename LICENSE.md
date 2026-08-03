@@ -24,7 +24,7 @@ All rights reserved.
 
 # Ownership
 
-Chasha, including all source code, documentation, designs, specifications, software architecture, APIs, database schemas, business logic, UI/UX assets, workflows, trademarks, and all associated intellectual property, is the exclusive property of **Kara** and its founder, **Erfan Abouei**.
+Chasha, including all source code, documentation, designs, specifications, software architecture, APIs, database schemas, business logic, UI/UX assets, workflows, trademarks, and all associated intellectual property, is the exclusive property of **Mehkam** and its founder, **Erfan Abouei**.
 
 No ownership rights are transferred by accessing, downloading, or using any part of this repository.
 
@@ -96,7 +96,7 @@ All intellectual property rights, including but not limited to:
 - User Interface Designs
 - Product Branding
 
-remain the sole and exclusive property of **Kara**.
+remain the sole and exclusive property of **Mehkam**.
 
 ---
 
@@ -127,12 +127,12 @@ IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY CLAIM, 
 For licensing inquiries, commercial agreements, partnership requests, or legal permissions, contact:
 
 ```text
-legal@karaflow.com
+legal@mehkam.ir
 ```
 
 ---
 
 <p align="center">
   <strong>Chasha — Smart Restaurant Operating System</strong><br>
-  A Product by <strong>Kara</strong>
+  A Product by <strong>Mehkam</strong>
 </p>
