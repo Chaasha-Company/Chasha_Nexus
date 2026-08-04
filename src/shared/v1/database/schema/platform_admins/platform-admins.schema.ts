@@ -2,6 +2,7 @@ import { BeforeInsert, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinC
 
 import { PlatformAdminSessionsModel, PlatformAdminStatusesModel } from './childrens';
 import { generateChashaResetPasswordCodeHelper, hashPasswordProvider } from '@/modules/v1/authentications';
+import { PlatformAdminRolesModel } from './childrens/platform-admin-roles/platform-admin-roles.schema';
 
 @Entity({
   name: 'platform_admins',
@@ -26,6 +27,20 @@ export class PlatformAdminsModel {
 
   @OneToMany(() => PlatformAdminSessionsModel, (session) => session.platformAdminSessionUser, { eager: false })
   platformAdminSessions!: PlatformAdminSessionsModel[];
+
+  @Column({
+    name: 'platform_admin_role_id',
+    type: 'uuid',
+  })
+  platformAdminRoleId!: string;
+
+  @ManyToOne(() => PlatformAdminRolesModel, (platformAdminRole) => platformAdminRole.platformAdminRoleAdmins, {
+    eager: false,
+  })
+  @JoinColumn({
+    name: 'platform_admin_role_id',
+  })
+  platformAdminRole!: PlatformAdminRolesModel;
 
   @Column({
     name: 'platform_admin_reset_password_code',

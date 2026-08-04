@@ -21,3 +21,4 @@ export * from '@/shared/v1/database/migrations/1785854628043-Create_Permissions'
 export * from '@/shared/v1/database/migrations/1785855578648-Create_Business_Roles';
 export * from '@/shared/v1/database/migrations/1785856050761-Add_Business_Employee_Role_Id_To_Business_Employees';
 export * from '@/shared/v1/database/migrations/1785879259366-Create_Business_Role_Permissions';
+export * from '@/shared/v1/database/migrations/1785881611178-Create_Platform_Admin_Roles_Permission_Roles';
