@@ -2,7 +2,7 @@ import { loggerConfig } from '@/config/logger';
 import { AppDataSource } from '@/shared/v1/database/core';
 import { PlatformAdminsModel, PlatformAdminStatusesModel } from '@/shared/v1/database/schema/platform_admins';
 
-export const createPlatformAdminSeed = async (): Promise<void> => {
+export const createPlatformAdminDataSeed = async (): Promise<void> => {
   const repository = AppDataSource.getRepository(PlatformAdminsModel);
   const platformAdminStatusRepository = AppDataSource.getRepository(PlatformAdminStatusesModel);
 

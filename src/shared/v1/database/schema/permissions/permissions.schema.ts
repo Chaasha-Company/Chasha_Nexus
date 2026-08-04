@@ -1,4 +1,4 @@
-import { PermissionActionEnum, PermissionTypeEnum } from '@/modules/v1/authorizations/domain';
+import { PermissionActionEnum, PermissionSubjectEnum, PermissionTypeEnum } from '@/modules/v1/authorizations/domain';
 import { BusinessRolePermissionsModel } from '@/shared/v1/database/schema/businesses/childrens';
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
@@ -23,6 +23,13 @@ export class PermissionsModel {
     unique: true,
   })
   permissionKey!: string;
+
+  @Column({
+    name: 'permission_subject',
+    type: 'enum',
+    enum: PermissionSubjectEnum,
+  })
+  permissionSubject!: PermissionSubjectEnum;
 
   @Column({
     name: 'permission_version',
