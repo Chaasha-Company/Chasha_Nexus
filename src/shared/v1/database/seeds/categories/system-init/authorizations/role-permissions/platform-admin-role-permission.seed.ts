@@ -8,17 +8,8 @@ import { PermissionsModel } from '@/shared/v1/database/schema/permissions';
 
 export const createPlatformAdminRolePermissionDataSeed = async (): Promise<void> => {
   const rolePermissionRepository = AppDataSource.getRepository(PlatformAdminRolePermissionsModel);
-
   const roleRepository = AppDataSource.getRepository(PlatformAdminRolesModel);
-
   const permissionRepository = AppDataSource.getRepository(PermissionsModel);
-
-  const tableHasData = await rolePermissionRepository.count();
-
-  if (tableHasData > 0) {
-    loggerConfig.info('Platform Admin Role Permissions Table has Data - Seed Skipped!');
-    return;
-  }
 
   const superAdminRole = await roleRepository.findOne({
     where: {
@@ -28,15 +19,34 @@ export const createPlatformAdminRolePermissionDataSeed = async (): Promise<void>
 
   const permissions = await permissionRepository.find();
 
-  const rolePermissions = permissions.map((permission) =>
-    rolePermissionRepository.create({
+  if (permissions.length === 0) {
+    loggerConfig.warn('No permissions found - Platform Admin Role Permission Seed Skipped!');
+    return;
+  }
+
+  const existingRolePermissions = await rolePermissionRepository.find({
+    where: {
       platformAdminRolePermissionRoleId: superAdminRole?.platformAdminRoleId,
+    },
+  });
 
-      platformAdminRolePermissionPermissionId: permission.permissionId,
-    }),
-  );
+  const existingPermissionIds = new Set(existingRolePermissions.map((item) => item.platformAdminRolePermissionPermissionId));
 
-  await rolePermissionRepository.save(rolePermissions);
+  const newRolePermissions = permissions
+    .filter((permission) => !existingPermissionIds.has(permission.permissionId))
+    .map((permission) =>
+      rolePermissionRepository.create({
+        platformAdminRolePermissionRoleId: superAdminRole?.platformAdminRoleId,
+        platformAdminRolePermissionPermissionId: permission.permissionId,
+      }),
+    );
 
-  loggerConfig.info('Platform Admin Role Permissions Seed Completed Successfully!');
+  if (newRolePermissions.length === 0) {
+    loggerConfig.info('Platform Admin Role Permissions are already synchronized!');
+    return;
+  }
+
+  await rolePermissionRepository.save(newRolePermissions);
+
+  loggerConfig.info('Platform Admin Role Permissions Table has no Data - Seed Runned and Data insert !');
 };

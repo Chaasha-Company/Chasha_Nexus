@@ -1,5 +1,5 @@
-// TODO: This seed contains temporary test data.
-// Replace final authorization strategy.
+// TODO: This seed contains temporary authorization data.
+// Replace with final authorization strategy.
 
 import { loggerConfig } from '@/config/logger';
 import { AppDataSource } from '@/shared/v1/database/core';
@@ -59,16 +59,28 @@ export const createPermissionDataSeed = async (): Promise<void> => {
     },
   ];
 
-  const tableHasData = await repository.count();
+  for (const permission of permissions) {
+    const existsPermission = await repository.findOne({
+      where: {
+        permissionKey: permission.permissionKey,
+      },
+    });
 
-  if (tableHasData > 0) {
-    loggerConfig.info('Permission Table has Data - Seed Runned !');
-    return;
+    if (existsPermission) {
+      await repository.update(
+        {
+          permissionKey: permission.permissionKey,
+        },
+        {
+          ...permission,
+        },
+      );
+
+      continue;
+    }
+
+    await repository.save(repository.create(permission));
   }
 
-  const permissionData = repository.create(permissions);
-
-  await repository.save(permissionData);
-
-  loggerConfig.info('Permission Table Seed Runned and Data Inserted !');
+  loggerConfig.info('Permission Table has no Data - Seed Runned and Data insert !');
 };
