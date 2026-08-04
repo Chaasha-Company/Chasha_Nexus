@@ -1,14 +1,11 @@
+// TODO: This seed contains temporary test data.
+// Replace final authorization strategy.
+
 import { loggerConfig } from '@/config/logger';
 import { AppDataSource } from '@/shared/v1/database/core';
 import { PermissionsModel } from '@/shared/v1/database/schema/permissions';
 import { PermissionActionEnum, PermissionTypeEnum } from '@/modules/v1/authorizations/domain';
 
-/**
- * ⚠️ TEST DATA ONLY
- *
- * This seed contains temporary permission data for development/testing purposes.
- * The structure may change in future versions.
- */
 export const createPermissionDataSeed = async (): Promise<void> => {
   const repository = AppDataSource.getRepository(PermissionsModel);
 
