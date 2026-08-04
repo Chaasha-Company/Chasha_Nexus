@@ -2,6 +2,7 @@ import { BeforeInsert, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinC
 import { BusinessEmployeeSessionsModel, BusinessEmployeeStatusesModel } from './childrens';
 import { BusinessesModel } from '@/shared/v1/database/schema/businesses';
 import { generateChashaResetPasswordCodeHelper, hashPasswordProvider } from '@/modules/v1/authentications';
+import { BusinessRolesModel } from '@/shared/v1/database/schema/businesses/childrens/business-roles/business-roles.schema';
 
 @Entity({
   name: 'business_employees',
@@ -38,6 +39,20 @@ export class BusinessEmployeesModel {
 
   @OneToMany(() => BusinessEmployeeSessionsModel, (session) => session.businessEmployeeSessionUser, { eager: false })
   businessEmployeeSessions!: BusinessEmployeeSessionsModel[];
+
+  @Column({
+    name: 'business_employee_role_id',
+    type: 'uuid',
+  })
+  businessEmployeeRoleId!: string;
+
+  @ManyToOne(() => BusinessRolesModel, (businessRole) => businessRole.businessRoleEmployees, {
+    eager: false,
+  })
+  @JoinColumn({
+    name: 'business_employee_role_id',
+  })
+  businessEmployeeRole!: BusinessRolesModel;
 
   @Column({
     name: 'business_employee_code',

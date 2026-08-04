@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 
 import { BusinessEmployeesModel } from '@/shared/v1/database/schema/business_employees';
 import { BusinessTypesModel } from './childrens';
+import { BusinessRolesModel } from './childrens/business-roles';
 
 @Entity({
   name: 'businesses',
@@ -29,6 +30,9 @@ export class BusinessesModel {
 
   @OneToMany(() => BusinessEmployeesModel, (businessEmployee) => businessEmployee.businessEmployeeBusiness, { eager: false })
   businessEmployees!: BusinessEmployeesModel[];
+
+  @OneToMany(() => BusinessRolesModel, (businessRole) => businessRole.businessRoleBusiness, { eager: false })
+  businessRoles!: BusinessRolesModel[];
 
   @Column({
     name: 'business_type_id',

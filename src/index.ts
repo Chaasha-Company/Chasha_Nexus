@@ -17,3 +17,7 @@ export * from '@/shared/v1/database/migrations/1785613559506-Add_Multi_Language_
 export * from '@/shared/v1/database/migrations/1785618311976-Create_Early_Access_Request_With_status';
 export * from '@/shared/v1/database/migrations/1785687640629-Add_Early_Access_Request_Code_Field';
 export * from '@/shared/v1/database/migrations/1785700723494-Remove_Country_Data_Field';
+export * from '@/shared/v1/database/migrations/1785854628043-Create_Permissions';
+export * from '@/shared/v1/database/migrations/1785855578648-Create_Business_Roles';
+export * from '@/shared/v1/database/migrations/1785856050761-Add_Business_Employee_Role_Id_To_Business_Employees';
+export * from '@/shared/v1/database/migrations/1785879259366-Create_Business_Role_Permissions';

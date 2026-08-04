@@ -8,11 +8,13 @@ import {
   BusinessEmployeeStatusesModel,
   BusinessesModel,
   EarlyAccessRequestsModel,
+  PermissionsModel,
   PlatformAdminSessionsModel,
   PlatformAdminsModel,
   PlatformAdminStatusesModel,
 } from '@/shared/v1/database/schema';
-import { BusinessTypesModel } from '@/shared/v1/database/schema/businesses/childrens';
+import { BusinessRolePermissionsModel, BusinessTypesModel } from '@/shared/v1/database/schema/businesses/childrens';
+import { BusinessRolesModel } from '@/shared/v1/database/schema/businesses/childrens/business-roles/business-roles.schema';
 import { EarlyAccessRequestStatusesModel } from '@/shared/v1/database/schema/early_access_requests/childrens';
 import { DataSource } from 'typeorm';
 import { CasbinRule } from 'typeorm-adapter';
@@ -41,6 +43,9 @@ export const AppDataSource: DataSource = new DataSource({
     BusinessTypesModel,
     EarlyAccessRequestsModel,
     EarlyAccessRequestStatusesModel,
+    PermissionsModel,
+    BusinessRolesModel,
+    BusinessRolePermissionsModel,
   ],
   migrations: [`${isProduction ? 'shared/v1/database/migrations/*.js' : 'src/shared/v1/database/migrations/*.ts'}`],
   synchronize: false,
