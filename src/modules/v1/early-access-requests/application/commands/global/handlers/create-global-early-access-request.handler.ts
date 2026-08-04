@@ -1,6 +1,6 @@
 import type { CreateGlobalEarlyAccessRequestRequestDTO, CreateGlobalEarlyAccessRequestResponseDTO } from '@/modules/v1/early-access-requests/presentation';
 import { ResponseMessages, t, ValidationMessages, type Language } from '@/infrastructure/translator-system/i18n';
-import { findBusinessTypeBySlugRepository } from '@/modules/v1/business';
+import { findBusinessTypeBySlugRepository } from '@/modules/v1/businesses';
 import { throwNotFoundException, throwRequestConflictException } from '@/shared/v1/exceptions';
 import { ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
 import { createEarlyAccessRequestRepository, findEarlyAccessRequestByPhoneNumberRepository, findEarlyAccessRequestBySlugRepository, generateChashaEarlyAccessRequestCodeHelper } from '@/modules/v1/early-access-requests/infrastructure';

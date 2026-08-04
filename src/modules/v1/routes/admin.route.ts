@@ -1,4 +1,4 @@
-import { adminAuthRouter } from '@/modules/v1/auth';
+import { adminAuthRouter } from '@/modules/v1/authentications';
 import { Router } from 'express';
 
 const router = Router();

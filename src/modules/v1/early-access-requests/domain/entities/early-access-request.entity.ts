@@ -1,4 +1,4 @@
-import type { BusinessTypesEntity } from '@/modules/v1/business';
+import type { BusinessTypesEntity } from '@/modules/v1/businesses';
 import type { EarlyAccessRequestStatusesEntity } from './early-access-status.entity';
 
 export interface EarlyAccessRequestsEntity {

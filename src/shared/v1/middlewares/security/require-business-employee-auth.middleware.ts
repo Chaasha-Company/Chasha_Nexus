@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import type { AuthTokenPayload } from '@/shared/v1/types';
-import { verifyAccessTokenProvider } from '@/modules/v1/auth/infrastructure';
+import { verifyAccessTokenProvider } from '@/modules/v1/authentications/infrastructure';
 import { throwUnAuthenticatedException } from '@/shared/v1/exceptions';
 import { ResponseMessages, ValidationMessages, t } from '@/infrastructure/translator-system/i18n';
 import { ResponseMessage, ValidationMessage } from '@/shared/v1/enums';

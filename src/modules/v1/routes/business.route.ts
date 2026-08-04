@@ -1,4 +1,4 @@
-import { businessAuthRouter } from '@/modules/v1/auth';
+import { businessAuthRouter } from '@/modules/v1/authentications';
 import { Router } from 'express';
 
 const router = Router();

@@ -1,6 +1,6 @@
 import type { BusinessEmployeeSessionsEntity } from '@/modules/v1/business-employee-sessions';
 import type { BusinessEmployeeStatusesEntity } from './business-employee-status.entity';
-import type { BusinessesEntity } from '@/modules/v1/business/domain';
+import type { BusinessesEntity } from '@/modules/v1/businesses/domain';
 
 export interface BusinessEmployeesEntity {
   businessEmployeeId: string;

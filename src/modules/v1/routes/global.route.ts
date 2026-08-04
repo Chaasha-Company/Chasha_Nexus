@@ -1,5 +1,5 @@
 import { globalEarlyAccessRequestRouter } from '@/modules/v1/early-access-requests';
-import { lockUpRouter } from '@/modules/v1/lockup';
+import { lockUpRouter } from '@/modules/v1/lockups';
 import { Router } from 'express';
 
 const router = Router();
