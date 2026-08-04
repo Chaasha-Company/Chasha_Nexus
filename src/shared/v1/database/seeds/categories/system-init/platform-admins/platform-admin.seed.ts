@@ -1,10 +1,11 @@
 import { loggerConfig } from '@/config/logger';
 import { AppDataSource } from '@/shared/v1/database/core';
-import { PlatformAdminsModel, PlatformAdminStatusesModel } from '@/shared/v1/database/schema/platform_admins';
+import { PlatformAdminRolesModel, PlatformAdminsModel, PlatformAdminStatusesModel } from '@/shared/v1/database/schema/platform_admins';
 
 export const createPlatformAdminDataSeed = async (): Promise<void> => {
   const repository = AppDataSource.getRepository(PlatformAdminsModel);
   const platformAdminStatusRepository = AppDataSource.getRepository(PlatformAdminStatusesModel);
+  const platformAdminRoleRepository = AppDataSource.getRepository(PlatformAdminRolesModel);
 
   const status = await platformAdminStatusRepository.findOne({
     where: {
@@ -12,10 +13,17 @@ export const createPlatformAdminDataSeed = async (): Promise<void> => {
     },
   });
 
+  const role = await platformAdminRoleRepository.findOne({
+    where: {
+      platformAdminRoleKey: 'super_admin',
+    },
+  });
+
   const platformAdmin = {
     platformAdminStatusId: status?.platformAdminStatusId as number,
     platformAdminFirstName: 'عرفان',
     platformAdminLastName: 'ابویی مهریزی',
+    platformAdminRoleId: role?.platformAdminRoleId as string,
     platformAdminPhoneNumber: '09393929968',
     platformAdminPassword: 'erfan123456',
     platformAdminIsPhoneVerified: true,
