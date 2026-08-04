@@ -66,6 +66,7 @@ export const refreshTokenPlatformAdminCommandHandler = async (tokenData: Refresh
   const authTokenPayload: PlatformAdminAuthTokenPayload = {
     auth_token_id: verifiedToken.auth_token_id,
     auth_token_session_id: platformAdminSessionIsExist?.platformAdminSessionId as string,
+    auth_token_role_id: verifiedToken.auth_token_role_id,
     auth_token_type: 'platform_admin',
   };
 

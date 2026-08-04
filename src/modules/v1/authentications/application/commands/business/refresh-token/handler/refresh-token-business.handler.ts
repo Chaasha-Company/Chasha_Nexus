@@ -66,6 +66,7 @@ export const refreshTokenBusinessCommandHandler = async (tokenData: RefreshToken
     auth_token_id: verifiedToken.auth_token_id,
     auth_token_business_id: verifiedToken.auth_token_business_id,
     auth_token_session_id: businessEmployeeSessionIsExist?.businessEmployeeSessionId as string,
+    auth_token_role_id: verifiedToken.auth_token_role_id,
     auth_token_type: 'business_employee',
   };
 

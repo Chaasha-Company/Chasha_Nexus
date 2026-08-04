@@ -73,6 +73,7 @@ export const loginVerifyPlatformAdminCommandHandler = async (loginVerifyData: Lo
   const authTokenPayload: PlatformAdminAuthTokenPayload = {
     auth_token_id: platformAdmin?.platformAdminId as string,
     auth_token_session_id: sessionId,
+    auth_token_role_id: platformAdmin?.platformAdminRoleId as string,
     auth_token_type: 'platform_admin',
   };
 

@@ -44,6 +44,7 @@ export const loginWithPhoneNumberBusinessCommandHandler = async (loginData: Logi
     auth_token_id: businessEmployee?.businessEmployeeId as string,
     auth_token_business_id: businessEmployee?.businessEmployeeBusinessId as string,
     auth_token_session_id: sessionId,
+    auth_token_role_id: businessEmployee?.businessEmployeeRoleId as string,
     auth_token_type: 'business_employee',
   };
 
