@@ -5,6 +5,7 @@ export type UpdateBusinessEmployeeSessionCommand = AtLeastOne<{
   businessEmployeeSessionRefreshToken?: string;
   businessEmployeeSessionIpAddress?: string | null;
   businessEmployeeSessionUserAgent?: string | null;
+  businessEmployeeSessionRevokedAt?: Date | null;
   businessEmployeeSessionLastActivityAt?: Date | null;
   businessEmployeeSessionExpiresAt?: Date;
   businessEmployeeSessionIsActive?: boolean;

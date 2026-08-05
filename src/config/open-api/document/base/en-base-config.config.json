@@ -629,7 +629,7 @@
       }
     },
     "/{language_prefix}/admin/auth/logout": {
-      "get": {
+      "post": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Logout platform administrator",
         "description": "Terminates the current authenticated Platform Administrator session.\n\nThe endpoint requires an active authentication session validated by authentication middleware.\n\nLogout flow:\n\n1. Validates current Access Token.\n2. Identifies authenticated Platform Administrator session from authentication middleware.\n3. Retrieves session identifier from authentication context.\n4. Revokes the active authentication session.\n5. Invalidates the refresh token to prevent future token usage.\n6. Clears authentication cookies for Web clients.\n\nFor mobile clients, the backend revokes the session. The client application is responsible for removing locally stored tokens from Secure Storage.",
@@ -990,6 +990,101 @@
                     "error_message": ["Access token is invalid or session has expired."]
                   },
                   "timeStamp": "2026-08-04T00:00:00.000Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/auth/logout": {
+      "post": {
+        "tags": ["Business Authentication"],
+        "summary": "Logout business employee",
+        "description": "Terminates the current authenticated business employee session.\n\nThe endpoint requires an active authentication session validated by authentication middleware.\n\nLogout flow:\n\n1. Validates current Access Token.\n2. Identifies authenticated Business Employee session from authentication context.\n3. Retrieves session identifier.\n4. Revokes the active authentication session.\n5. Invalidates the refresh token to prevent future token usage.\n6. Clears authentication cookies for Web clients.\n\nFor mobile clients, the backend revokes the session. The client application is responsible for removing locally stored tokens from Secure Storage.",
+        "operationId": "logoutBusinessEmployee",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logout completed successfully.",
+            "headers": {
+              "Set-Cookie": {
+                "description": "Authentication cookies are cleared for Web clients.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-05T20:00:00.000Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed because access token or session is invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 401,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Unauthorized.",
+                  "errorCode": "E4010",
+                  "errors": {
+                    "error_message": ["Access token is invalid or authentication session has expired."]
+                  },
+                  "timeStamp": "2026-08-05T20:00:00.000Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Authentication session was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Requested resource was not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "error_message": ["Authentication session does not exist."]
+                  },
+                  "timeStamp": "2026-08-05T20:00:00.000Z",
                   "version": "0.1.0"
                 }
               }

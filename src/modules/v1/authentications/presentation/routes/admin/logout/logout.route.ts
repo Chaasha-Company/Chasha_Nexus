@@ -3,6 +3,6 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get('/', logoutPlatformAdminController);
+router.post('/', logoutPlatformAdminController);
 
 export { router as platformAdminLogoutRouter };

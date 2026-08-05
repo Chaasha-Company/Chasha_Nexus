@@ -61,6 +61,13 @@ export class BusinessEmployeeSessionsModel {
   businessEmployeeSessionLastActivityAt!: Date | null;
 
   @Column({
+    name: 'business_employee_session_revoked_at',
+    type: 'timestamp',
+    nullable: true,
+  })
+  businessEmployeeSessionRevokedAt!: Date | null;
+
+  @Column({
     name: 'business_employee_session_is_active',
     type: 'boolean',
     default: true,

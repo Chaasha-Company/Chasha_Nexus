@@ -6,7 +6,7 @@ import { createAccessTokenProvider, createRefreshTokenProvider, hashPasswordProv
 import { throwUnAuthenticatedException } from '@/shared/v1/exceptions';
 import { ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
 import { findBusinessEmployeeSessionByIdRepository } from '@/modules/v1/business-employee-sessions';
-import { updateBusinessEmployeeSessionRepository } from '@/modules/v1/business-employee-sessions/infrastructure/repositories/update-business-employee-session.repository';
+import { updateBusinessEmployeeSessionRepository } from '@/modules/v1/business-employee-sessions/infrastructure';
 import { EnvValueConfig } from '@/config/env';
 
 export const refreshTokenBusinessCommandHandler = async (tokenData: RefreshTokenBusinessRequestDTO, lang: Language): Promise<RefreshTokenBusinessResponseDTO> => {
