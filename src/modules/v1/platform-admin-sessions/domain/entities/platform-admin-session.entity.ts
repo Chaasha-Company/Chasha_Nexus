@@ -8,6 +8,7 @@ export interface PlatformAdminSessionsEntity {
   platformAdminSessionIpAddress: string | null;
   platformAdminSessionUserAgent: string | null;
   platformAdminSessionLastActivityAt: Date | null;
+  platformAdminSessionRevokedAt: Date | null;
   platformAdminSessionExpiresAt: Date;
   platformAdminSessionIsActive: boolean;
   platformAdminSessionCreatedAt: Date;

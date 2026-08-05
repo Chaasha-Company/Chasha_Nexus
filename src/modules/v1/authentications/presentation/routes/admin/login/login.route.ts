@@ -10,4 +10,4 @@ router.post('/with-phone/verify', (req: Request, res: Response, next: NextFuncti
 
 router.post('/with-phone/resend-otp', (req: Request, res: Response, next: NextFunction) => validateBodyMiddleware(LoginResendOtpPlatformAdminValidation(req.lang))(req, res, next), loginResendOtpPlatformAdminController);
 
-export { router as adminLoginRouter };
+export { router as platformAdminLoginRouter };

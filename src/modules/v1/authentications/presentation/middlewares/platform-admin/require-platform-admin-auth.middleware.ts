@@ -46,7 +46,7 @@ export const requirePlatformAdminAuthMiddleware = async (req: Request, _res: Res
       platformAdminSessionId: verifiedToken?.auth_token_session_id as string,
     });
 
-    if (session === null || session.platformAdminSessionIsActive === false || session.platformAdminSessionExpiresAt < new Date()) {
+    if (session === null || session.platformAdminSessionIsActive === false || session.platformAdminSessionExpiresAt < new Date() || session.platformAdminSessionRevokedAt !== null) {
       throwUnAuthenticatedException({
         message: t(ResponseMessages, ResponseMessage.UNAUTHORIZED, req.lang),
         details: {

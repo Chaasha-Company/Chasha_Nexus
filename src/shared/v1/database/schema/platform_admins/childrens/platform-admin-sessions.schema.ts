@@ -64,6 +64,13 @@ export class PlatformAdminSessionsModel {
   })
   platformAdminSessionIsActive!: boolean;
 
+  @Column({
+    name: 'platform_admin_session_revoked_at',
+    type: 'timestamp',
+    nullable: true,
+  })
+  platformAdminSessionRevokedAt!: Date | null;
+
   @CreateDateColumn({
     name: 'platform_admin_session_created_at',
     type: 'timestamp',
