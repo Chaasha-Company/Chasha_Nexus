@@ -229,6 +229,22 @@ export const ValidationMessages = {
     en: 'Error: User session - No active session was found for this token.',
   },
 
+  // =========================Authorization Validation=========================
+  [ValidationMessage.AUTHORIZATION_PLATFORM_ADMIN_ROLE_NOT_FOUND]: {
+    fa: 'خطا: نقش ادمین - نقش دسترسی برای این کاربر یافت نشد.',
+    en: 'Error: Platform admin role - The assigned role was not found.',
+  },
+
+  [ValidationMessage.AUTHORIZATION_BUSINESS_ROLE_NOT_FOUND]: {
+    fa: 'خطا: نقش کسب‌وکار - نقش دسترسی برای این کارمند یافت نشد.',
+    en: 'Error: Business role - The assigned role was not found.',
+  },
+
+  [ValidationMessage.AUTHORIZATION_PERMISSION_DENIED]: {
+    fa: 'خطا: دسترسی - شما اجازه انجام این عملیات را ندارید.',
+    en: 'Error: Permission - You do not have permission to perform this action.',
+  },
+
   // =========================Early Access Request Validation=========================
   [ValidationMessage.EARLY_ACCESS_REQUEST_FULL_NAME_REQUIRED]: {
     fa: 'خطا: نام و نام خانوادگی - این فیلد اجباری است و باید یک رشته معتبر باشد.',
