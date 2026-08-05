@@ -1,5 +1,6 @@
 import { PermissionActionEnum, PermissionSubjectEnum, PermissionTypeEnum } from '@/modules/v1/authorizations/domain';
 import { BusinessRolePermissionsModel } from '@/shared/v1/database/schema/businesses/childrens';
+import { PlatformAdminRolePermissionsModel } from '@/shared/v1/database/schema/platform_admins';
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity({
@@ -15,6 +16,9 @@ export class PermissionsModel {
     eager: false,
   })
   permissionBusinessRolePermissions!: BusinessRolePermissionsModel[];
+
+  @OneToMany(() => PlatformAdminRolePermissionsModel, (platformAdminRolePermission) => platformAdminRolePermission.platformAdminRolePermissionPermission)
+  permissionPlatformAdminRolePermissions!: PlatformAdminRolePermissionsModel[];
 
   @Column({
     name: 'permission_key',
