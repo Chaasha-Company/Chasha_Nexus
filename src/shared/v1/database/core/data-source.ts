@@ -32,6 +32,12 @@ export const AppDataSource: DataSource = new DataSource({
 
   poolSize: EnvValueConfig.DB_POOL_MASTER_CONNECTION_LIMIT,
 
+  cache: {
+    type: 'database',
+    tableName: 'chasha_caches',
+    duration: 300_000,
+  },
+
   entities: [
     CasbinRule,
     PlatformAdminsModel,

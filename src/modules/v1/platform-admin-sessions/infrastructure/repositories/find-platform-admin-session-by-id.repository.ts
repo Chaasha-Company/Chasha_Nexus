@@ -8,5 +8,8 @@ export const findPlatformAdminSessionByIdRepository =
   async (platformAdminSessionData: FindPlatformAdminSessionByIdQuery): Promise<PlatformAdminSessionsModel | null> => {
     const platformAdminSessionRepository = AppDataSource.getRepository(PlatformAdminSessionsModel);
 
-    return await platformAdminSessionRepository.findOneBy({ platformAdminSessionId: platformAdminSessionData.platformAdminSessionId });
+    return await platformAdminSessionRepository.findOne({
+      where: { platformAdminSessionId: platformAdminSessionData.platformAdminSessionId },
+      cache: true,
+    });
   };

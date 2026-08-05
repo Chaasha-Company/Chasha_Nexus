@@ -17,5 +17,6 @@ export const findBusinessRoleByIdRepository =
           businessRolePermissionPermission: true,
         },
       },
+      cache: true,
     });
   };

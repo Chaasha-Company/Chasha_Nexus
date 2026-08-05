@@ -5,5 +5,5 @@ import { BusinessTypesModel } from '@/shared/v1/database/schema/businesses/child
 export const getAllBusinessTypeRepository = (): GetAllBusinessTypeRepositoryContract => async (): Promise<BusinessTypesModel[]> => {
   const businessTypeRepository = AppDataSource.getRepository(BusinessTypesModel);
 
-  return await businessTypeRepository.find();
+  return await businessTypeRepository.find({ cache: true });
 };

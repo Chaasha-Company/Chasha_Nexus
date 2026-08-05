@@ -8,5 +8,10 @@ export const findBusinessEmployeeSessionByIdRepository =
   async (businessEmployeeSessionData: FindBusinessEmployeeSessionByIdQuery): Promise<BusinessEmployeeSessionsModel | null> => {
     const businessEmployeeSessionRepository = AppDataSource.getRepository(BusinessEmployeeSessionsModel);
 
-    return await businessEmployeeSessionRepository.findOneBy({ businessEmployeeSessionId: businessEmployeeSessionData.businessEmployeeSessionId });
+    return await businessEmployeeSessionRepository.findOne({
+      where: {
+        businessEmployeeSessionId: businessEmployeeSessionData.businessEmployeeSessionId,
+      },
+      cache: true,
+    });
   };
