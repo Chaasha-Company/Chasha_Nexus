@@ -2,7 +2,7 @@ import { platformAdminRefreshTokenRouter } from './refresh-token';
 import { platformAdminMeRouter } from './me';
 import { adminLoginRouter } from './login';
 import { Router } from 'express';
-import { requirePlatformAdminAuthMiddleware } from '@/shared/v1/middlewares/security';
+import { requirePlatformAdminAuthMiddleware } from '@/modules/v1/authentications/presentation/middlewares';
 
 const router = Router();
 

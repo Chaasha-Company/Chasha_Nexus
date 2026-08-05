@@ -2,7 +2,7 @@ import { businessRefreshTokenRouter } from './refresh-token';
 import { businessLoginRouter } from './login';
 import { businessMeRouter } from './me';
 import { Router } from 'express';
-import { requireBusinessEmployeeAuthMiddleware } from '@/shared/v1/middlewares/security';
+import { requireBusinessEmployeeAuthMiddleware } from '@/modules/v1/authentications/presentation/middlewares';
 
 const router = Router();
 
