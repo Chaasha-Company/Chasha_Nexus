@@ -43,7 +43,7 @@ export const refreshTokenBusinessCommandHandler = async (tokenData: RefreshToken
     });
   }
 
-  if ((businessEmployeeSessionIsExist?.businessEmployeeSessionExpiresAt as Date) < new Date()) {
+  if ((businessEmployeeSessionIsExist?.businessEmployeeSessionExpiresAt as Date) < new Date() || businessEmployeeSessionIsExist?.businessEmployeeSessionRevokedAt !== null) {
     throwUnAuthenticatedException({
       message: t(ResponseMessages, ResponseMessage.UNAUTHORIZED, lang),
       details: {

@@ -46,7 +46,7 @@ export const requireBusinessEmployeeAuthMiddleware = async (req: Request, _res: 
       businessEmployeeSessionId: verifiedToken?.auth_token_session_id as string,
     });
 
-    if (session === null || session.businessEmployeeSessionIsActive === false || session.businessEmployeeSessionExpiresAt < new Date()) {
+    if (session === null || session.businessEmployeeSessionIsActive === false || session.businessEmployeeSessionExpiresAt < new Date() || session.businessEmployeeSessionRevokedAt !== null) {
       throwUnAuthenticatedException({
         message: t(ResponseMessages, ResponseMessage.UNAUTHORIZED, req.lang),
         details: {

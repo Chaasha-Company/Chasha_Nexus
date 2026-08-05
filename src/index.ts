@@ -19,3 +19,4 @@ export * from '@/shared/v1/database/migrations/1785687640629-Add_Early_Access_Re
 export * from '@/shared/v1/database/migrations/1785700723494-Remove_Country_Data_Field';
 export * from '@/shared/v1/database/migrations/1785884061495-Create_Authorization_System';
 export * from '@/shared/v1/database/migrations/1785955307773-Create_Chasha_Caches';
+export * from '@/shared/v1/database/migrations/1785963476815-Add_RevokedAt_Field';

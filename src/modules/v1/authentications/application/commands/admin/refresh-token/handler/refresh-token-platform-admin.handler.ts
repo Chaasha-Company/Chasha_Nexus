@@ -44,7 +44,7 @@ export const refreshTokenPlatformAdminCommandHandler = async (tokenData: Refresh
     });
   }
 
-  if ((platformAdminSessionIsExist?.platformAdminSessionExpiresAt as Date) < new Date()) {
+  if ((platformAdminSessionIsExist?.platformAdminSessionExpiresAt as Date) < new Date() || platformAdminSessionIsExist?.platformAdminSessionRevokedAt !== null) {
     throwUnAuthenticatedException({
       message: t(ResponseMessages, ResponseMessage.UNAUTHORIZED, lang),
       details: {
