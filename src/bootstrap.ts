@@ -1,4 +1,3 @@
-// TODO: Revert to RabbitMQ implementation once server capacity is increased.
 import { createChashaApplication } from './app';
 
 import { EnvValueConfig } from '@/config/env';
