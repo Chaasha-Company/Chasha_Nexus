@@ -1120,9 +1120,6 @@
             "description": "Password reset request processed successfully. The response is intentionally identical whether or not the phone number belongs to a business employee.",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
-                },
                 "example": {
                   "status": 200,
                   "success": true,
@@ -1155,6 +1152,119 @@
                         "forgotPasswordPhoneNumber": ["Phone number must contain exactly 11 digits and start with 09."]
                       },
                       "timeStamp": "2026-08-08T21:53:31.771Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/auth/forgot-password/verify": {
+      "post": {
+        "tags": ["Business Authentication"],
+        "summary": "Verify business employee password reset",
+        "description": "Completes the password reset process for a business employee.\n\nThis endpoint validates the password reset token, verifies the associated password reset session, updates the employee password, revokes all active authentication sessions for the employee, and invalidates the password reset session.\n\nPassword reset flow:\n\n1. Validates the reset token and new password.\n2. Hashes the reset token and locates the temporary password reset session.\n3. Validates that the password reset session is still active.\n4. Verifies that the business employee exists.\n5. Updates the business employee password.\n6. Revokes all active authentication sessions belonging to the employee.\n7. Deletes the password reset session from cache.\n\nAfter successful completion, the business employee must authenticate again using the new password.",
+        "operationId": "forgotPasswordVerifyBusiness",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordVerifyBusinessRequest"
+              },
+              "examples": {
+                "default": {
+                  "summary": "Verify password reset",
+                  "value": {
+                    "forgotPasswordVerifyResetToken": "9f8c7d6e5b4a32100112233445566778899aabbccddeeff001122334455667788",
+                    "forgotPasswordVerifyNewPassword": "NewSecurePassword123!"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password reset completed successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-09T00:00:00.000Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed or password reset session is invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "InvalidResetToken": {
+                    "summary": "Invalid Reset Token",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Data conflict.",
+                      "errorCode": "E1090",
+                      "errors": {
+                        "forgotPasswordVerifyResetToken": ["Password reset session is invalid or has expired."]
+                      },
+                      "timeStamp": "2026-08-09T00:00:00.000Z",
+                      "version": "0.1.0"
+                    }
+                  },
+                  "EmployeeNotFound": {
+                    "summary": "Business Employee Not Found",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Data conflict.",
+                      "errorCode": "E1090",
+                      "errors": {
+                        "forgotPasswordVerifyResetToken": ["Password reset session is invalid or has expired."]
+                      },
+                      "timeStamp": "2026-08-09T00:00:00.000Z",
+                      "version": "0.1.0"
+                    }
+                  },
+                  "InvalidPassword": {
+                    "summary": "Invalid New Password",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "forgotPasswordVerifyNewPassword": ["Password is invalid."]
+                      },
+                      "timeStamp": "2026-08-09T00:00:00.000Z",
                       "version": "0.1.0"
                     }
                   }
@@ -1318,7 +1428,7 @@
                       "status": 200,
                       "success": true,
                       "author": "Mehkam_Company",
-                      "message": "Operation completed successfully.",
+                      "message": "عملیات با موفقیت انجام شد.",
                       "data": [
                         {
                           "businessTypeNameFa": "نانوایی و شیرینی فروشی",
@@ -1690,6 +1800,28 @@
             "minLength": 11,
             "maxLength": 11,
             "example": "09393929968"
+          }
+        }
+      },
+      "ForgotPasswordVerifyBusinessRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["forgotPasswordVerifyResetToken", "forgotPasswordVerifyNewPassword"],
+        "properties": {
+          "forgotPasswordVerifyResetToken": {
+            "type": "string",
+            "description": "Password reset token generated during the business employee password recovery process.",
+            "pattern": "^[a-fA-F0-9]{64}$",
+            "minLength": 64,
+            "maxLength": 64,
+            "example": "9f8c7d6e5b4a32100112233445566778899aabbccddeeff001122334455667788"
+          },
+          "forgotPasswordVerifyNewPassword": {
+            "type": "string",
+            "description": "New password for the business employee.",
+            "minLength": 1,
+            "maxLength": 64,
+            "example": "NewSecurePassword123!"
           }
         }
       },

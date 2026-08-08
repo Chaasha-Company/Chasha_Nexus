@@ -219,6 +219,36 @@ export const ValidationMessages = {
     en: 'Error: Phone number - It must be 11 digits long and start with 0.',
   },
 
+  [ValidationMessage.BUSINESS_FORGOT_PASSWORD_VERIFY_RESET_TOKEN_REQUIRED]: {
+    fa: 'خطا: توکن بازنشانی رمز عبور - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: Password reset token - This field is required and must be a valid string.',
+  },
+
+  [ValidationMessage.BUSINESS_FORGOT_PASSWORD_VERIFY_RESET_TOKEN_INVALID]: {
+    fa: 'خطا: توکن بازنشانی رمز عبور - نامعتبر یا منقضی شده است.',
+    en: 'Error: Password reset token - The token is invalid or expired.',
+  },
+
+  [ValidationMessage.BUSINESS_FORGOT_PASSWORD_VERIFY_RESET_TOKEN_IS_ONLY_32_CH]: {
+    fa: 'خطا: توکن بازنشانی رمز عبور - باید دقیقاً ۳۲ کاراکتر باشد.',
+    en: 'Error: Password reset token - Must contain exactly 32 characters.',
+  },
+
+  [ValidationMessage.BUSINESS_FORGOT_PASSWORD_VERIFY_NEW_PASSWORD_REQUIRED]: {
+    fa: 'خطا: رمز عبور جدید - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: New password - This field is required and must be a valid string.',
+  },
+
+  [ValidationMessage.BUSINESS_FORGOT_PASSWORD_VERIFY_NEW_PASSWORD_IS_ONLY_64_CH]: {
+    fa: 'خطا: رمز عبور جدید - حداکثر ۶۴ کاراکتر مجاز است.',
+    en: 'Error: New password - Maximum length is 64 characters.',
+  },
+
+  [ValidationMessage.BUSINESS_FORGOT_PASSWORD_RESET_SESSION_INVALID]: {
+    fa: 'خطا: نشست بازیابی رمز عبور - نشست بازیابی رمز عبور نامعتبر یا منقضی شده است.',
+    en: 'Error: Password reset session - The password reset session is invalid or has expired.',
+  },
+
   [ValidationMessage.PLATFORM_ADMIN_REFRESH_TOKEN_EXPIRED]: {
     fa: 'خطا: نشست ادمین - نشست احراز هویت منقضی شده است.',
     en: 'Error: Platform admin session - Authentication session has expired.',

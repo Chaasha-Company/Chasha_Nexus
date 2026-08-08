@@ -66,7 +66,6 @@ export class BusinessEmployeesModel {
     name: 'business_employee_password',
     type: 'varchar',
     length: 64,
-    unique: true,
   })
   businessEmployeePassword!: string;
 

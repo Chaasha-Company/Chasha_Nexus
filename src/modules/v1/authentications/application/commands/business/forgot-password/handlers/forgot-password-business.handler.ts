@@ -22,6 +22,7 @@ export const forgotPasswordBusinessCommandHandler = async (forgotPasswordData: F
     cacheTTL: EnvValueConfig.BUSINESS_EMPLOYEE_FORGOT_PASSWORD_EXPIRES_IN_SECONDS,
     cacheData: {
       forgotPasswordBusinessEmployeeId: businessEmployeeExist.businessEmployeeId as string,
+      forgetPasswordBusinessEmployeePhoneNumber: businessEmployeeExist.businessEmployeePhoneNumber as string,
       forgotPasswordBusinessCreatedAt: new Date(),
     },
   });
