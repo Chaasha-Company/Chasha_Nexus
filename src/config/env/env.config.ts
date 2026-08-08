@@ -98,4 +98,7 @@ export const EnvValueConfig: EnvInterface = {
   // =========================Platform Admin Authentication=========================
   PLATFORM_ADMIN_LOGIN_WITH_PHONE_OTP_EXPIRES_IN_SECONDS: getNumberEnvHelper('PLATFORM_ADMIN_LOGIN_WITH_PHONE_OTP_EXPIRES_IN_SECONDS', 0),
   PLATFORM_ADMIN_LOGIN_SESSION_EXPIRES_IN_SECONDS: getNumberEnvHelper('PLATFORM_ADMIN_LOGIN_SESSION_EXPIRES_IN_SECONDS', 0),
+
+  // =========================Business Employee Authentication=========================
+  BUSINESS_EMPLOYEE_FORGOT_PASSWORD_EXPIRES_IN_SECONDS: getNumberEnvHelper('BUSINESS_EMPLOYEE_FORGOT_PASSWORD_EXPIRES_IN_SECONDS', 0),
 };

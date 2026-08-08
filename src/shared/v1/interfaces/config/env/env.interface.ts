@@ -92,4 +92,7 @@ export interface EnvInterface {
   // =========================Platform Admin Authentication=========================
   PLATFORM_ADMIN_LOGIN_WITH_PHONE_OTP_EXPIRES_IN_SECONDS: number;
   PLATFORM_ADMIN_LOGIN_SESSION_EXPIRES_IN_SECONDS: number;
+
+  // =========================Platform Admin Authentication=========================
+  BUSINESS_EMPLOYEE_FORGOT_PASSWORD_EXPIRES_IN_SECONDS: number;
 }

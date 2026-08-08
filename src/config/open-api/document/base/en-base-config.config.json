@@ -1096,6 +1096,78 @@
         }
       }
     },
+    "/{language_prefix}/business/auth/forgot-password": {
+      "post": {
+        "tags": ["Business Authentication"],
+        "summary": "Request business employee password reset",
+        "description": "Initiates the password reset process for a business employee using their phone number.\n\nFor security reasons, this endpoint does not reveal whether the provided phone number belongs to an existing business employee.\n\nIf a business employee exists with the provided phone number:\n- A temporary password reset session is created in cache.\n- A password reset verification code is generated.\n- The verification code is sent to the employee via SMS.\n\nIf no business employee exists with the provided phone number, no password reset session or SMS is created.\n\nIn both cases, the API returns the same successful response to prevent user enumeration.",
+        "operationId": "forgotPasswordBusiness",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordBusinessRequest"
+              },
+              "example": {
+                "forgotPasswordPhoneNumber": "09393929968"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password reset request processed successfully. The response is intentionally identical whether or not the phone number belongs to a business employee.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-08T21:53:31.771Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "InvalidPhoneNumber": {
+                    "summary": "Invalid Phone Number",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "forgotPasswordPhoneNumber": ["Phone number must contain exactly 11 digits and start with 09."]
+                      },
+                      "timeStamp": "2026-08-08T21:53:31.771Z",
+                      "version": "0.1.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/global/early-access-request/create": {
       "post": {
         "tags": ["Global Early Access Requests"],
@@ -1246,7 +1318,7 @@
                       "status": 200,
                       "success": true,
                       "author": "Mehkam_Company",
-                      "message": "عملیات با موفقیت انجام شد.",
+                      "message": "Operation completed successfully.",
                       "data": [
                         {
                           "businessTypeNameFa": "نانوایی و شیرینی فروشی",
@@ -1603,6 +1675,21 @@
             "type": "string",
             "description": "Business employee JWT refresh token.",
             "example": "eyJhbGciOiJIUzI1NiIs..."
+          }
+        }
+      },
+      "ForgotPasswordBusinessRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["forgotPasswordPhoneNumber"],
+        "properties": {
+          "forgotPasswordPhoneNumber": {
+            "type": "string",
+            "description": "Business employee phone number used to initiate the password reset process.",
+            "pattern": "^09\\d{9}$",
+            "minLength": 11,
+            "maxLength": 11,
+            "example": "09393929968"
           }
         }
       },

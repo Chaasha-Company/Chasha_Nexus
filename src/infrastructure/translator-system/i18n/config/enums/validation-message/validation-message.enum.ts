@@ -208,6 +208,17 @@ export const ValidationMessages = {
     en: 'Error: Platform admin session - Authentication session was not found for this token.',
   },
 
+  // =========================Business Forgot Password Validation=========================
+  [ValidationMessage.BUSINESS_FORGOT_PASSWORD_PHONE_NUMBER_REQUIRED]: {
+    fa: 'خطا: شماره تماس - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: Phone number - This field is required and must be a valid string.',
+  },
+
+  [ValidationMessage.BUSINESS_FORGOT_PASSWORD_PHONE_NUMBER_BAD_FORMAT]: {
+    fa: 'خطا: شماره تماس - باید ۱۱ رقم باشد و با صفر شروع شود.',
+    en: 'Error: Phone number - It must be 11 digits long and start with 0.',
+  },
+
   [ValidationMessage.PLATFORM_ADMIN_REFRESH_TOKEN_EXPIRED]: {
     fa: 'خطا: نشست ادمین - نشست احراز هویت منقضی شده است.',
     en: 'Error: Platform admin session - Authentication session has expired.',
