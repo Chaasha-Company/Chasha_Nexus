@@ -1,12 +1,12 @@
 import type { Request, Response, NextFunction } from 'express';
-import type { LoginWithPhoneNumberBusinessMobileResponseDTO, LoginWithPhoneNumberPlatformAdminRequestDTO } from '@/modules/v1/authentications/presentation/dtos';
+import type { LoginWithPhoneNumberBusinessMobileResponseDTO } from '@/modules/v1/authentications/presentation/dtos';
 import { loginWithPhoneNumberBusinessCommandHandler } from '@/modules/v1/authentications/application';
 import { setAccessTokenProvider, setRefreshTokenProvider } from '@/modules/v1/authentications/infrastructure';
 import { successResponseHandler } from '@/shared/v1/helpers/api/handlers';
 import { HttpStatus, ResponseMessage } from '@/shared/v1/enums';
 import { ResponseMessages, t } from '@/infrastructure/translator-system/i18n';
 
-export const loginWithPhoneNumberBusinessController = async (req: Request<unknown, unknown, LoginWithPhoneNumberPlatformAdminRequestDTO>, res: Response, next: NextFunction): Promise<void> => {
+export const loginWithPhoneNumberBusinessController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const platform = req.headers['x-platform'] === 'mobile' ? 'mobile' : 'web';
     const userAgent = req.headers['user-agent'] as string;

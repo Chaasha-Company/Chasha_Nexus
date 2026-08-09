@@ -1,7 +1,7 @@
+import { Router, type NextFunction, type Request, type Response } from 'express';
 import { loginWithPhoneNumberBusinessController } from '@/modules/v1/authentications/presentation/controllers';
 import { LoginWithPhoneNumberBusinessValidation } from '@/modules/v1/authentications/presentation/validations';
 import { validateBodyMiddleware } from '@/shared/v1/middlewares/validation';
-import { Router, type NextFunction, type Request, type Response } from 'express';
 
 const router = Router();
 

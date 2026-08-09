@@ -1,12 +1,12 @@
 import type { Request, Response, NextFunction } from 'express';
-import type { LoginVerifyPlatformAdminMobileResponseDTO, LoginVerifyPlatformAdminRequestDTO } from '@/modules/v1/authentications/presentation/dtos';
+import type { LoginVerifyPlatformAdminMobileResponseDTO } from '@/modules/v1/authentications/presentation/dtos';
 import { successResponseHandler } from '@/shared/v1/helpers/api/handlers';
 import { loginVerifyPlatformAdminCommandHandler } from '@/modules/v1/authentications/application';
 import { setAccessTokenProvider, setRefreshTokenProvider } from '@/modules/v1/authentications/infrastructure';
 import { HttpStatus, ResponseMessage } from '@/shared/v1/enums';
 import { ResponseMessages, t } from '@/infrastructure/translator-system/i18n';
 
-export const loginVeirfyPlatformAdminController = async (req: Request<unknown, unknown, LoginVerifyPlatformAdminRequestDTO>, res: Response, next: NextFunction): Promise<void> => {
+export const loginVeirfyPlatformAdminController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const platform = req.headers['x-platform'] === 'mobile' ? 'mobile' : 'web';
     const userAgent = req.headers['user-agent'] as string;

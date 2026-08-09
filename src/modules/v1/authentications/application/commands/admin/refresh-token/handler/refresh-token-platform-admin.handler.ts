@@ -1,7 +1,7 @@
 import { ResponseMessages, t, ValidationMessages, type Language } from '@/infrastructure/translator-system/i18n';
 import type { PlatformAdminAuthTokenPayload } from '@/shared/v1/types/auth';
 import type { RefreshTokenPlatformAdminResponseDTO } from '@/modules/v1/authentications/presentation/dtos/response/admin/refresh-token';
-import type { RefreshTokenPlatformAdminRequestDTO } from '@/modules/v1/authentications/presentation';
+import type { RefreshTokenPlatformAdminCommand } from '../refresh-token-platform-admin.command';
 import ms from 'ms';
 import { createAccessTokenProvider, createRefreshTokenProvider, hashPasswordProvider, passwordCheckerProvider, verifyRefreshTokenProvider } from '@/modules/v1/authentications/infrastructure';
 import { throwUnAuthenticatedException } from '@/shared/v1/exceptions';
@@ -10,7 +10,7 @@ import { EnvValueConfig } from '@/config/env';
 import { findPlatformAdminSessionByIdRepository } from '@/modules/v1/platform-admin-sessions';
 import { updatePlatformAdminSessionRepository } from '@/modules/v1/platform-admin-sessions/infrastructure';
 
-export const refreshTokenPlatformAdminCommandHandler = async (tokenData: RefreshTokenPlatformAdminRequestDTO, lang: Language): Promise<RefreshTokenPlatformAdminResponseDTO> => {
+export const refreshTokenPlatformAdminCommandHandler = async (tokenData: RefreshTokenPlatformAdminCommand, lang: Language): Promise<RefreshTokenPlatformAdminResponseDTO> => {
   const { refreshTokenPlatformAdmin } = tokenData;
 
   const verifiedToken = verifyRefreshTokenProvider()(refreshTokenPlatformAdmin as string) as PlatformAdminAuthTokenPayload;
