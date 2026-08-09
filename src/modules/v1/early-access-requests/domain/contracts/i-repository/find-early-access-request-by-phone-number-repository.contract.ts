@@ -1,4 +1,5 @@
 import type { FindEarlyAccessRequestByPhoneNumberQuery } from '@/modules/v1/early-access-requests/application';
 import type { EarlyAccessRequestsModel } from '@/shared/v1/database/schema/early_access_requests';
+import type { EntityManager } from 'typeorm';
 
-export type FindEarlyAccessRequestByPhoneNumberRepositoryContract = (earlyAccessRequestData: FindEarlyAccessRequestByPhoneNumberQuery) => Promise<EarlyAccessRequestsModel | null>;
+export type FindEarlyAccessRequestByPhoneNumberRepositoryContract = (earlyAccessRequestData: FindEarlyAccessRequestByPhoneNumberQuery, manager?: EntityManager) => Promise<EarlyAccessRequestsModel | null>;
