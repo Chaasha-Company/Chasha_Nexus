@@ -7,6 +7,7 @@ import { throwBadRequestException } from '@/shared/v1/exceptions';
 import { findBusinessEmployeeByPhoneNumberRepository, updateBusinessEmployeeRepository } from '@/modules/v1/business-employees';
 import { hashPasswordProvider } from '@/modules/v1/authentications/infrastructure';
 import { revokedAllBusinessEmployeeSessionByIdRepository } from '@/modules/v1/business-employee-sessions';
+import { transactionManager } from '@/shared/v1/database/transaction';
 
 export const forgotPasswordVerifyBusinessCommandHandler = async (forgotPasswordVerifyData: ForgotPasswordVerifyBusinessCommand, lang: Language): Promise<void> => {
   const resetPasswordTokenHash = createHash('sha256').update(forgotPasswordVerifyData.forgotPasswordVerifyResetToken).digest('hex');
@@ -39,13 +40,21 @@ export const forgotPasswordVerifyBusinessCommandHandler = async (forgotPasswordV
 
   const hashedNewPassword = await hashPasswordProvider()(forgotPasswordVerifyData.forgotPasswordVerifyNewPassword);
 
-  await updateBusinessEmployeeRepository()({
-    businessEmployeeId: resetPasswordSessionData?.forgotPasswordBusinessEmployeeId as string,
-    businessEmployeePassword: hashedNewPassword,
-  });
+  await transactionManager(async (manager) => {
+    await updateBusinessEmployeeRepository()(
+      {
+        businessEmployeeId: resetPasswordSessionData?.forgotPasswordBusinessEmployeeId as string,
+        businessEmployeePassword: hashedNewPassword,
+      },
+      manager,
+    );
 
-  await revokedAllBusinessEmployeeSessionByIdRepository()({
-    businessEmployeeSessionUserId: resetPasswordSessionData?.forgotPasswordBusinessEmployeeId as string,
+    await revokedAllBusinessEmployeeSessionByIdRepository()(
+      {
+        businessEmployeeSessionUserId: resetPasswordSessionData?.forgotPasswordBusinessEmployeeId as string,
+      },
+      manager,
+    );
   });
 
   deleteCacheHelper()({
