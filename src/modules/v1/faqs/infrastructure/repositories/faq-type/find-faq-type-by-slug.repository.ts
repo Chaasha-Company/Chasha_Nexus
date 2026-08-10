@@ -13,5 +13,6 @@ export const findFaqTypeBySlugRepository =
       where: {
         faqTypeSlug: faqTypeData.faqTypeSlug,
       },
+      cache: true,
     });
   };

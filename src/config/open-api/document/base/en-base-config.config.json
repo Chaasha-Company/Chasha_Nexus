@@ -50,6 +50,10 @@
     {
       "name": "Global Early Access Requests",
       "description": "Public endpoints for creating and managing Chasha Early Access requests."
+    },
+    {
+      "name": "Global FAQ",
+      "description": "Public endpoints for retrieving Chasha frequently asked questions."
     }
   ],
   "paths": {
@@ -1399,6 +1403,117 @@
         }
       }
     },
+    "/{language_prefix}/global/faq/get-all": {
+      "get": {
+        "tags": ["Global FAQ"],
+        "summary": "Get all global FAQs by type",
+        "description": "Retrieves all active frequently asked questions based on the requested FAQ type.\n\nSupported FAQ types:\n- landing\n- business\n\nThis endpoint is publicly accessible and does not require authentication.",
+        "operationId": "getAllGlobalFaq",
+        "parameters": [
+          {
+            "name": "faqType",
+            "in": "query",
+            "required": true,
+            "description": "FAQ category type.",
+            "schema": {
+              "type": "string",
+              "enum": ["landing", "business"],
+              "example": "landing"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "FAQs retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GlobalFaqListResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": [
+                    {
+                      "faqQuestionFa": "چاشا چیست؟",
+                      "faqQuestionEn": "What is Chasha?",
+                      "faqAnswerFa": "چاشا یک سیستم عامل مدیریت کسب‌وکارهای خدماتی است که فرآیندهای روزمره را ساده‌تر و هوشمندتر می‌کند.",
+                      "faqAnswerEn": "Chasha is an operating system designed to simplify and optimize daily business operations.",
+                      "faqSlug": "what-is-chasha",
+                      "faqSortOrder": 1,
+                      "faqIsActive": true
+                    }
+                  ],
+                  "timeStamp": "2026-08-11T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 400,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Validation failed.",
+                  "errorCode": "E1001",
+                  "errors": {
+                    "faq_type": ["FAQ type must be either landing or business."]
+                  },
+                  "timeStamp": "2026-08-11T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "FAQ type not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Requested resource was not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "faq_type": ["FAQ type does not exist."]
+                  },
+                  "timeStamp": "2026-08-11T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/global/lockup/business-type": {
       "get": {
         "tags": ["Global Lockup"],
@@ -1822,6 +1937,75 @@
             "minLength": 1,
             "maxLength": 64,
             "example": "NewSecurePassword123!"
+          }
+        }
+      },
+      "GlobalFaqItem": {
+        "type": "object",
+        "properties": {
+          "faqQuestionFa": {
+            "type": "string",
+            "description": "FAQ question in Persian."
+          },
+          "faqQuestionEn": {
+            "type": "string",
+            "description": "FAQ question in English."
+          },
+          "faqAnswerFa": {
+            "type": "string",
+            "description": "FAQ answer in Persian."
+          },
+          "faqAnswerEn": {
+            "type": "string",
+            "description": "FAQ answer in English."
+          },
+          "faqSlug": {
+            "type": "string",
+            "description": "Unique FAQ identifier."
+          },
+          "faqSortOrder": {
+            "type": "integer",
+            "description": "Display sorting order."
+          },
+          "faqIsActive": {
+            "type": "boolean",
+            "description": "Indicates whether FAQ is active."
+          }
+        }
+      },
+
+      "GlobalFaqListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GlobalFaqItem"
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
           }
         }
       },

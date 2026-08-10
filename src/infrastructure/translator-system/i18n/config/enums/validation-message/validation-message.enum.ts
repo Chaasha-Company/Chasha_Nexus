@@ -336,4 +336,10 @@ export const ValidationMessages = {
     fa: 'خطا: درخواست دسترسی زودهنگام - برای این شماره تماس قبلاً درخواست ثبت شده است.',
     en: 'Error: Early access request - An early access request already exists for this phone number.',
   },
+
+  // =========================Faq Validation=========================
+  [ValidationMessage.FAQ_TYPE_INVALID]: {
+    fa: 'خطا: نوع سوالات متداول - مقدار ارسال شده فقط می‌تواند landing یا business باشد.',
+    en: 'Error: FAQ type - The value must be either landing or business.',
+  },
 } as const;

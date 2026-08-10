@@ -1,3 +1,3 @@
 export interface FindFaqTypeBySlugQuery {
-  faqTypeSlug: string;
+  faqTypeSlug: 'landing' | 'business';
 }
