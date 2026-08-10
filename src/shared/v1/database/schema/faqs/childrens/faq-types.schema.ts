@@ -62,7 +62,7 @@ export class FaqTypesModel {
   @OneToMany(() => FaqsModel, (faq) => faq.faqType, {
     eager: false,
   })
-  faqs!: FaqsModel[];
+  faqTypeFaqs!: FaqsModel[];
 
   @CreateDateColumn({
     name: 'faq_type_created_at',

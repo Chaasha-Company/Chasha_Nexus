@@ -65,7 +65,7 @@ export class FaqsModel {
   })
   faqIsActive!: boolean;
 
-  @ManyToOne(() => FaqTypesModel, (faqType) => faqType.faqs, {
+  @ManyToOne(() => FaqTypesModel, (faqType) => faqType.faqTypeFaqs, {
     eager: false,
     nullable: false,
   })
