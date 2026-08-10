@@ -52,7 +52,10 @@ export const createBusinessEmployeeStatusDataSeed = async (): Promise<void> => {
     return;
   }
 
-  await repository.insert(businessEmployeeStatusesData);
+  await repository.upsert(businessEmployeeStatusesData, {
+    conflictPaths: ['businessEmployeeStatusSlug'],
+    skipUpdateIfNoValuesChanged: true,
+  });
 
   loggerConfig.info('Business Employee Statuses Table Seed Completed Successfully!');
 };

@@ -65,7 +65,10 @@ export const createBusinessTypeDataSeed = async (): Promise<void> => {
     return;
   }
 
-  await repository.insert(businessTypesData);
+  await repository.upsert(businessTypesData, {
+    conflictPaths: ['businessTypeSlug'],
+    skipUpdateIfNoValuesChanged: true,
+  });
 
   loggerConfig.info('Business Types Table Seed Completed Successfully!');
 };

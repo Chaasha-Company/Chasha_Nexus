@@ -21,3 +21,4 @@ export * from '@/shared/v1/database/migrations/1785884061495-Create_Authorizatio
 export * from '@/shared/v1/database/migrations/1785955307773-Create_Chasha_Caches';
 export * from '@/shared/v1/database/migrations/1785963476815-Add_RevokedAt_Field';
 export * from '@/shared/v1/database/migrations/1786227371073-Remove_Unique_Password_Field';
+export * from '@/shared/v1/database/migrations/1786394906093-Create_Faqs_And_Types';

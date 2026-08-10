@@ -52,7 +52,10 @@ export const createEarlyAccessStatusDataSeed = async (): Promise<void> => {
     return;
   }
 
-  await repository.insert(earlyAccessRequestStatusesData);
+  await repository.upsert(earlyAccessRequestStatusesData, {
+    conflictPaths: ['earlyAccessRequestStatusSlug'],
+    skipUpdateIfNoValuesChanged: true,
+  });
 
   loggerConfig.info('Early Access Request Statuses Table Seed Completed Successfully!');
 };

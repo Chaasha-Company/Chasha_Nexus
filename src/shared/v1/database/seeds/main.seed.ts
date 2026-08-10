@@ -10,6 +10,7 @@ import {
   createPlatformAdminRolePermissionDataSeed,
   createPlatformAdminStatusDataSeed,
 } from '@/shared/v1/database/seeds/categories';
+import { createFaqDataSeed, createFaqTypeDataSeed } from '@/shared/v1/database/seeds/categories/lookup-data/faqs';
 
 export const seedLoaderHelper = async (): Promise<void> => {
   try {
@@ -25,6 +26,8 @@ export const seedLoaderHelper = async (): Promise<void> => {
     await createPermissionDataSeed();
     await createPlatformAdminRoleDataSeed();
     await createPlatformAdminRolePermissionDataSeed();
+    await createFaqTypeDataSeed();
+    await createFaqDataSeed();
   } catch (error: unknown) {
     loggerConfig.error(`Seeding Database lost with ${error}`);
   }

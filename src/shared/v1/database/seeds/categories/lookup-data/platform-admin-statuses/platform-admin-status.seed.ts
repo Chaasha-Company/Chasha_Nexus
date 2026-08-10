@@ -43,7 +43,10 @@ export const createPlatformAdminStatusDataSeed = async (): Promise<void> => {
     return;
   }
 
-  await repository.insert(platformAdminStatusesData);
+  await repository.upsert(platformAdminStatusesData, {
+    conflictPaths: ['platformAdminStatusSlug'],
+    skipUpdateIfNoValuesChanged: true,
+  });
 
   loggerConfig.info('Platform Admin Statuses Table Seed Completed Successfully!');
 };
