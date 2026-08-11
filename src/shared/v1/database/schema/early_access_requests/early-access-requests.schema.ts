@@ -55,6 +55,13 @@ export class EarlyAccessRequestsModel {
   earlyAccessRequestPhoneNumber!: string;
 
   @Column({
+    name: 'early_access_request_business_name',
+    type: 'varchar',
+    length: 150,
+  })
+  earlyAccessRequestBusinessName!: string;
+
+  @Column({
     name: 'early_access_request_code',
     type: 'varchar',
     length: 14,

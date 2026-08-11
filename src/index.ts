@@ -22,3 +22,4 @@ export * from '@/shared/v1/database/migrations/1785955307773-Create_Chasha_Cache
 export * from '@/shared/v1/database/migrations/1785963476815-Add_RevokedAt_Field';
 export * from '@/shared/v1/database/migrations/1786227371073-Remove_Unique_Password_Field';
 export * from '@/shared/v1/database/migrations/1786394906093-Create_Faqs_And_Types';
+export * from '@/shared/v1/database/migrations/1786470843389-Add_BusinessName_To_Early_Access_Requests';
