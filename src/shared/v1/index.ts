@@ -6,3 +6,4 @@ export * from './middlewares';
 export * from './interfaces';
 export * from './database';
 export * from './domain';
+export * from './validations';

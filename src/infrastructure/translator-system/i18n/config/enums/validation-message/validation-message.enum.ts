@@ -18,6 +18,27 @@ export const ValidationMessages = {
     en: 'Error: Body - This field must not be included in the request.',
   },
 
+  // =========================Pagination Validation=========================
+  [ValidationMessage.PAGINATION_PAGE_REQUIRED]: {
+    fa: 'خطا: صفحه‌بندی - شماره صفحه الزامی است.',
+    en: 'Error: Pagination - Page number is required.',
+  },
+
+  [ValidationMessage.PAGINATION_PAGE_INVALID]: {
+    fa: 'خطا: صفحه‌بندی - شماره صفحه باید یک عدد صحیح بزرگ‌تر از صفر باشد.',
+    en: 'Error: Pagination - Page number must be a positive integer.',
+  },
+
+  [ValidationMessage.PAGINATION_LIMIT_REQUIRED]: {
+    fa: 'خطا: صفحه‌بندی - تعداد آیتم‌ها در هر صفحه الزامی است.',
+    en: 'Error: Pagination - Items per page is required.',
+  },
+
+  [ValidationMessage.PAGINATION_LIMIT_INVALID]: {
+    fa: 'خطا: صفحه‌بندی - تعداد آیتم‌ها در هر صفحه باید یک عدد صحیح بزرگ‌تر از صفر باشد.',
+    en: 'Error: Pagination - Items per page must be a positive integer.',
+  },
+
   // =========================Multer Validation=========================
   [ValidationMessage.FILE_TYPE_NOT_ALLOWED]: {
     fa: 'خطا: نوع فایل - ارسال این نوع فایل مجاز نیست.',

@@ -6,6 +6,12 @@ export enum ValidationMessage {
   // =========================Zod Validation========================
   BODY_IS_NOT_VALID = 'BODY_IS_NOT_VALID',
 
+  // =========================Pagination Validation=========================
+  PAGINATION_PAGE_REQUIRED = 'PAGINATION_PAGE_REQUIRED',
+  PAGINATION_PAGE_INVALID = 'PAGINATION_PAGE_INVALID',
+  PAGINATION_LIMIT_REQUIRED = 'PAGINATION_LIMIT_REQUIRED',
+  PAGINATION_LIMIT_INVALID = 'PAGINATION_LIMIT_INVALID',
+
   // =========================Multer Validation=========================
   FILE_TYPE_NOT_ALLOWED = 'FILE_TYPE_NOT_ALLOWED',
   FILE_FIELD_NOT_VALID = 'FILE_FIELD_NOT_VALID',
