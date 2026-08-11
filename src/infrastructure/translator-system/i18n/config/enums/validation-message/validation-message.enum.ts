@@ -312,24 +312,29 @@ export const ValidationMessages = {
     en: 'Error: Phone number - It must be 11 digits long and start with 0.',
   },
 
+  [ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_NAME_REQUIRED]: {
+    fa: 'خطا: نام مجموعه - این فیلد اجباری است و باید یک رشته معتبر باشد.',
+    en: 'Error: Business name - This field is required and must be a valid string.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_NAME_TOO_SHORT]: {
+    fa: 'خطا: نام مجموعه - حداقل ۲ کاراکتر الزامی است.',
+    en: 'Error: Business name - Minimum length is 2 characters.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_NAME_TOO_LONG]: {
+    fa: 'خطا: نام مجموعه - حداکثر ۱۵۰ کاراکتر مجاز است.',
+    en: 'Error: Business name - Maximum length is 150 characters.',
+  },
+
   [ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_TYPE_REQUIRED]: {
     fa: 'خطا: نوع کسب‌وکار - این فیلد اجباری است و باید یک رشته معتبر باشد.',
     en: 'Error: Business type - This field is required and must be a valid string.',
   },
 
   [ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_TYPE_NOT_FOUND]: {
-    fa: 'خطا: نوع کسب‌وکار - نوع کسب و کاری با این اسلاگ پیدا نشد..',
+    fa: 'خطا: نوع کسب‌وکار - نوع کسب‌وکاری با این اسلاگ پیدا نشد.',
     en: 'Error: Business type - No business type was found with the provided slug.',
-  },
-
-  [ValidationMessage.EARLY_ACCESS_REQUEST_CITY_REQUIRED]: {
-    fa: 'خطا: شهر - این فیلد اجباری است و باید یک مقدار معتبر باشد.',
-    en: 'Error: City - This field is required and must be a valid value.',
-  },
-
-  [ValidationMessage.EARLY_ACCESS_REQUEST_STATE_REQUIRED]: {
-    fa: 'خطا: استان - این فیلد اجباری است و باید یک مقدار معتبر باشد.',
-    en: 'Error: State - This field is required and must be a valid value.',
   },
 
   [ValidationMessage.EARLY_ACCESS_REQUEST_ALREADY_EXISTS]: {

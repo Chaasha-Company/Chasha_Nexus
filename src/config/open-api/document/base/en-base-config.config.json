@@ -1301,6 +1301,7 @@
                   "value": {
                     "earlyAccessRequestFullName": "John Doe",
                     "earlyAccessRequestPhoneNumber": "09123456789",
+                    "earlyAccessRequestBusinessName": "Chasha Coffeshop | چاشا کافی شاپ",
                     "earlyAccessRequestBusinessTypeSlug": "restaurant"
                   }
                 }
@@ -1844,6 +1845,13 @@
             "pattern": "^09\\d{9}$",
             "minLength": 11,
             "maxLength": 11
+          },
+          "earlyAccessRequestBusinessName": {
+            "type": "string",
+            "description": "Applicant Busienss name.",
+            "example": "Chasha Coffeshop | چاشا کافی شاپ",
+            "minLength": 2,
+            "maxLength": 150
           },
           "earlyAccessRequestBusinessTypeSlug": {
             "type": "string",

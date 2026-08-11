@@ -2,8 +2,9 @@ import type { CreateGlobalEarlyAccessRequestRequestDTO, CreateGlobalEarlyAccessR
 import { ResponseMessages, t, ValidationMessages, type Language } from '@/infrastructure/translator-system/i18n';
 import { findBusinessTypeBySlugRepository } from '@/modules/v1/businesses';
 import { throwNotFoundException, throwRequestConflictException } from '@/shared/v1/exceptions';
-import { ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
+import { EventName, ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
 import { createEarlyAccessRequestRepository, findEarlyAccessRequestByPhoneNumberRepository, findEarlyAccessRequestBySlugRepository, generateChashaEarlyAccessRequestCodeHelper } from '@/modules/v1/early-access-requests/infrastructure';
+import { eventEmitterConfig } from '@/config/emitter';
 
 export const createGlobalEarlyAccessRequestCommandHandler = async (createEarlyAccessRequestData: CreateGlobalEarlyAccessRequestRequestDTO, lang: Language): Promise<CreateGlobalEarlyAccessRequestResponseDTO> => {
   const businessTypeIsExist = await findBusinessTypeBySlugRepository()({ businessTypeSlug: createEarlyAccessRequestData.earlyAccessRequestBusinessTypeSlug as string });
@@ -35,8 +36,15 @@ export const createGlobalEarlyAccessRequestCommandHandler = async (createEarlyAc
     earlyAccessRequestBusinessTypeId: businessTypeIsExist?.businessTypeId as number,
     earlyAccessRequestFullName: createEarlyAccessRequestData.earlyAccessRequestFullName as string,
     earlyAccessRequestPhoneNumber: createEarlyAccessRequestData.earlyAccessRequestPhoneNumber as string,
+    earlyAccessRequestBusinessName: createEarlyAccessRequestData.earlyAccessRequestBusinessName as string,
     earlyAccessRequestStatusId: ealryAccessRequestPendingStatus?.earlyAccessRequestStatusId as number,
     earlyAccessRequestCode,
+  });
+
+  eventEmitterConfig.emit(EventName.EARLY_ACCESS_REQUEST_CREATED, {
+    earlyAccessRequestPatternCode: 1234 /* --> Development <-- */,
+    earlyAccessRequestPhoneNumber: createEarlyAccessRequestData.earlyAccessRequestPhoneNumber,
+    earlyAccessRequestSmsParameters: [createEarlyAccessRequestData.earlyAccessRequestFullName, createEarlyAccessRequestData.earlyAccessRequestBusinessName],
   });
 
   return {

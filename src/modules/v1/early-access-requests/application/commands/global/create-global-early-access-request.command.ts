@@ -3,5 +3,6 @@ export interface CreateGlobalEarlyAccessRequestCommand {
   earlyAccessRequestBusinessTypeId: number;
   earlyAccessRequestFullName: string;
   earlyAccessRequestPhoneNumber: string;
+  earlyAccessRequestBusinessName: string;
   earlyAccessRequestCode: string;
 }

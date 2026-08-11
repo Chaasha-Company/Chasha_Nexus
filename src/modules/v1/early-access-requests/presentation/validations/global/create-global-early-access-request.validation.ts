@@ -25,6 +25,17 @@ export const CreateGlobalEarlyAccessRequestValidation = (lang: Language): Schema
         error: t(ValidationMessages, ValidationMessage.EARLY_ACCESS_REQUEST_PHONE_NUMBER_BAD_FORMAT, lang),
       }),
 
+    earlyAccessRequestBusinessName: z
+      .string({
+        error: t(ValidationMessages, ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_NAME_REQUIRED, lang),
+      })
+      .min(2, {
+        error: t(ValidationMessages, ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_NAME_TOO_SHORT, lang),
+      })
+      .max(150, {
+        error: t(ValidationMessages, ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_NAME_TOO_LONG, lang),
+      }),
+
     earlyAccessRequestBusinessTypeSlug: z
       .string({
         error: t(ValidationMessages, ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_TYPE_REQUIRED, lang),
