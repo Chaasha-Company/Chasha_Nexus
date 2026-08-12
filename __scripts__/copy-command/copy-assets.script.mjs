@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '../../');
 const DIST_DIR = path.join(ROOT_DIR, 'dist');
 
-const FILES_TO_COPY = ['.env', '.env.production', '.env.development', '.htaccess', '.dockerignore', '.gitignore', 'index.html', 'package.json', 'package-lock.json', 'public', 'data'];
+const FILES_TO_COPY = ['.env', '.env.production', '.env.development', '.htaccess', '.gitignore', 'index.html', 'package.json', 'package-lock.json', 'public', '__data__'];
 
 async function copyAssets() {
   console.log(chalk.blue.bold('\n🚀 Starting Asset Copy Process...\n'));
