@@ -62,6 +62,21 @@ export const createPermissionDataSeed = async (): Promise<void> => {
       permissionDescriptionEn: 'Access to the early access request list options API',
       permissionNavigation: null,
     },
+
+    {
+      permissionKey: 'early-access-requests.detail.read',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.EARLY_ACCESS_REQUEST_DETAIL,
+      permissionVersion: 1,
+      permissionModule: 'early-access-requests',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.ACTION,
+      permissionLabelFa: 'دریافت مشخصات یک درخواست دسترسی زودهنگام',
+      permissionLabelEn: 'Get Early Access Request Detail List Options',
+      permissionDescriptionFa: 'دسترسی به API دریافت مشخصات یک درخواست‌ دسترسی زودهنگام',
+      permissionDescriptionEn: 'Access to the early access request detail options API',
+      permissionNavigation: null,
+    },
   ];
 
   for (const permission of permissions) {

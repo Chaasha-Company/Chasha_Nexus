@@ -368,6 +368,21 @@ export const ValidationMessages = {
     en: 'Error: Early access request - An early access request already exists for this phone number.',
   },
 
+  [ValidationMessage.EARLY_ACCESS_REQUEST_ID_REQUIRED]: {
+    fa: 'خطا: شناسه درخواست دسترسی زودهنگام - این فیلد اجباری است و باید یک رشته باشد.',
+    en: 'Error: Early access request ID - This field is required and must be a string.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_ID_INVALID]: {
+    fa: 'خطا: شناسه درخواست دسترسی زودهنگام - باید یک عدد صحیح بزرگ‌تر از صفر باشد.',
+    en: 'Error: Early access request ID - Must be a positive integer.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_ID_NOT_FOUND]: {
+    fa: 'خطا: شناسه درخواست دسترسی زودهنگام - درخواست موردنظر یافت نشد.',
+    en: 'Error: Early access request ID - The requested early access request was not found.',
+  },
+
   // =========================Faq Validation=========================
   [ValidationMessage.FAQ_TYPE_INVALID]: {
     fa: 'خطا: نوع سوالات متداول - مقدار ارسال شده فقط می‌تواند landing یا business باشد.',

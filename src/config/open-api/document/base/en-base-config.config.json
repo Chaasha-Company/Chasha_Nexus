@@ -1670,6 +1670,140 @@
         }
       }
     },
+    "/{language_prefix}/admin/early-access-request/detail": {
+      "post": {
+        "tags": ["Admin Early Access Requests"],
+        "summary": "Get Early Access Request detail",
+        "description": "Retrieves detailed information about a specific Early Access Request using its unique identifier. This endpoint is protected by Platform Administrator authentication and requires the EARLY_ACCESS_REQUEST_DETAIL permission.",
+        "operationId": "getEarlyAccessRequestDetail",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetEarlyAccessRequestDetailRequest"
+              },
+              "example": {
+                "earlyAccessRequestId": "19352f07-6d0d-47cb-9a35-6873dac786d2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Early Access Request detail retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetEarlyAccessRequestDetailResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": {
+                    "earlyAccessRequestId": "19352f07-6d0d-47cb-9a35-6873dac786d2",
+                    "earlyAccessRequestFullName": "عرفان ابویی",
+                    "earlyAccessRequestPhoneNumber": "09431356465",
+                    "earlyAccessRequestBusinessName": "Chasha Coffeshop | چاشا کافی شاپ",
+                    "earlyAccessRequestCode": "@CHASHA_288302",
+                    "earlyAccessRequestMetadata": null,
+                    "earlyAccessRequestCreatedAt": "2026-08-13T12:04:47.070Z",
+                    "earlyAccessRequestUpdatedAt": "2026-08-13T12:04:47.070Z",
+                    "earlyAccessRequestStatus": {
+                      "earlyAccessRequestStatusNameFa": "در انتظار بررسی",
+                      "earlyAccessRequestStatusNameEn": "Pending",
+                      "earlyAccessRequestStatusSlug": "pending",
+                      "earlyAccessRequestStatusDescriptionFa": "درخواست اولیه ثبت شده و منتظر بررسی است",
+                      "earlyAccessRequestStatusDescriptionEn": "Request submitted and waiting for review",
+                      "earlyAccessRequestStatusSortOrder": 1
+                    },
+                    "earlyAccessRequestBusinessType": {
+                      "businessTypeNameFa": "رستوران",
+                      "businessTypeNameEn": "Restaurant",
+                      "businessTypeSlug": "restaurant",
+                      "businessTypeSortOrder": 1
+                    }
+                  },
+                  "timeStamp": "2026-08-16T23:01:03.286Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 400,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Validation failed.",
+                  "errorCode": "E1001",
+                  "errors": {
+                    "earlyAccessRequestId": ["Early Access Request identifier is invalid."]
+                  },
+                  "timeStamp": "2026-08-16T23:01:26.870Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Early Access Request was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Requested resource was not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "earlyAccessRequestId": ["Early Access Request with the provided identifier was not found."]
+                  },
+                  "timeStamp": "2026-08-16T23:01:26.870Z",
+                  "version": "0.1.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/global/faq/get-all": {
       "get": {
         "tags": ["Global FAQ"],
@@ -1810,7 +1944,7 @@
                       "status": 200,
                       "success": true,
                       "author": "Mehkam_Company",
-                      "message": "عملیات با موفقیت انجام شد.",
+                      "message": "Operation completed successfully.",
                       "data": [
                         {
                           "businessTypeNameFa": "نانوایی و شیرینی فروشی",
@@ -2534,6 +2668,107 @@
             "type": "integer",
             "description": "Business type display sort order.",
             "example": 1
+          }
+        }
+      },
+      "GetEarlyAccessRequestDetailResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "$ref": "#/components/schemas/EarlyAccessRequestDetail"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "0.1.0"
+          }
+        }
+      },
+      "GetEarlyAccessRequestDetailRequest": {
+        "type": "object",
+        "required": ["earlyAccessRequestId"],
+        "properties": {
+          "earlyAccessRequestId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique Early Access Request identifier.",
+            "example": "19352f07-6d0d-47cb-9a35-6873dac786d2"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetEarlyAccessRequestByIdItem": {
+        "type": "object",
+        "properties": {
+          "earlyAccessRequestId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique Early Access Request identifier.",
+            "example": "19352f07-6d0d-47cb-9a35-6873dac786d2"
+          },
+          "earlyAccessRequestFullName": {
+            "type": "string",
+            "description": "Applicant full name.",
+            "example": "عرفان ابویی"
+          },
+          "earlyAccessRequestPhoneNumber": {
+            "type": "string",
+            "description": "Applicant phone number.",
+            "example": "09431356465"
+          },
+          "earlyAccessRequestBusinessName": {
+            "type": "string",
+            "description": "Applicant business name.",
+            "example": "Chasha Coffeshop | چاشا کافی شاپ"
+          },
+          "earlyAccessRequestCode": {
+            "type": "string",
+            "description": "Unique Early Access Request code.",
+            "example": "@CHASHA_288302"
+          },
+          "earlyAccessRequestMetadata": {
+            "type": "object",
+            "nullable": true,
+            "description": "Additional metadata associated with the Early Access Request.",
+            "additionalProperties": true,
+            "example": null
+          },
+          "earlyAccessRequestCreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Request creation timestamp.",
+            "example": "2026-08-13T12:04:47.070Z"
+          },
+          "earlyAccessRequestUpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Request last update timestamp.",
+            "example": "2026-08-13T12:04:47.070Z"
+          },
+          "earlyAccessRequestStatus": {
+            "$ref": "#/components/schemas/EarlyAccessRequestStatus"
+          },
+          "earlyAccessRequestBusinessType": {
+            "$ref": "#/components/schemas/EarlyAccessRequestBusinessType"
           }
         }
       },

@@ -18,13 +18,13 @@ export const seedLoaderHelper = async (): Promise<void> => {
       loggerConfig.error('Data Source is not initialized. Run initialize() first.');
       return;
     }
+    await createPlatformAdminRoleDataSeed();
     await createPlatformAdminStatusDataSeed();
     await createBusinessEmployeeStatusDataSeed();
     await createPlatformAdminDataSeed();
     await createBusinessTypeDataSeed();
     await createEarlyAccessStatusDataSeed();
     await createPermissionDataSeed();
-    await createPlatformAdminRoleDataSeed();
     await createPlatformAdminRolePermissionDataSeed();
     await createFaqTypeDataSeed();
     await createFaqDataSeed();
