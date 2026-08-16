@@ -1,8 +1,9 @@
-import type { GetAllGlobalFaqQueryRequestDTO, GetAllGlobalFaqResponseDTO } from '@/modules/v1/faqs/presentation';
+import type { GetAllGlobalFaqQueryRequestDTO } from '@/modules/v1/faqs/presentation';
 import type { FaqsModel } from '@/shared/v1/database/schema/faqs';
+import type { FindAllFaqByTypeQueryResult } from '../results';
 import { findAllFaqByTypeRepository, findFaqTypeBySlugRepository } from '@/modules/v1/faqs/infrastructure';
 
-export const findAllFaqByTypeQueryHandler = async (faqData: GetAllGlobalFaqQueryRequestDTO): Promise<GetAllGlobalFaqResponseDTO[]> => {
+export const findAllFaqByTypeQueryHandler = async (faqData: GetAllGlobalFaqQueryRequestDTO): FindAllFaqByTypeQueryResult => {
   const faqType = await findFaqTypeBySlugRepository()({
     faqTypeSlug: faqData.faqType as 'landing' | 'business',
   });

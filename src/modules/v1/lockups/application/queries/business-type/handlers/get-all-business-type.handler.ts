@@ -1,7 +1,7 @@
-import type { GetAllBusinessTypeResponseDTO } from '@/modules/v1/lockups/presentation';
+import type { GetAllBusinessTypeQueryResult } from '../results';
 import { getAllBusinessTypeRepository } from '@/modules/v1/businesses';
 
-export const getAllBusinessTypeQueryHandler = async (): Promise<GetAllBusinessTypeResponseDTO[]> => {
+export const getAllBusinessTypeQueryHandler = async (): GetAllBusinessTypeQueryResult => {
   const businessTypes = await getAllBusinessTypeRepository()();
 
   return businessTypes.map((item) => ({

@@ -1,12 +1,12 @@
 import type { Request, Response, NextFunction } from 'express';
-import type { PermissionActionEnum } from '@/modules/v1/authorizations/domain';
+import type { PermissionActionEnum, PermissionResourceEnum } from '@/modules/v1/authorizations/domain';
 import { findPlatformAdminRoleByIdRepository } from '@/modules/v1/platform-admins';
 import { throwNotFoundException, throwUnAuthorizedException } from '@/shared/v1/exceptions';
 import { ResponseMessages, t, ValidationMessages } from '@/infrastructure/translator-system/i18n';
 import { ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
 
 export const permissionGuardPlatformAdminMiddleware =
-  ({ platformAdminPermissionModule, platformAdminPermissionAction }: { platformAdminPermissionModule: string; platformAdminPermissionAction: PermissionActionEnum }) =>
+  ({ platformAdminPermissionModule, platformAdminPermissionResource, platformAdminPermissionAction }: { platformAdminPermissionModule: string; platformAdminPermissionResource: PermissionResourceEnum; platformAdminPermissionAction: PermissionActionEnum }) =>
   async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
     const adminAuthData = req.user;
 
@@ -25,9 +25,11 @@ export const permissionGuardPlatformAdminMiddleware =
       return;
     }
 
-    const hasPermission = platformAdminRole.platformAdminRolePermissions.some(
-      (rolePermission) => rolePermission.platformAdminRolePermissionPermission.permissionModule === platformAdminPermissionModule && rolePermission.platformAdminRolePermissionPermission.permissionAction === platformAdminPermissionAction,
-    );
+    const hasPermission = platformAdminRole.platformAdminRolePermissions.some((rolePermission) => {
+      const permission = rolePermission.platformAdminRolePermissionPermission;
+
+      return permission.permissionModule === platformAdminPermissionModule && permission.permissionResource === platformAdminPermissionResource && permission.permissionAction === platformAdminPermissionAction && permission.permissionIsActive === true;
+    });
 
     if (hasPermission === false) {
       throwUnAuthorizedException({

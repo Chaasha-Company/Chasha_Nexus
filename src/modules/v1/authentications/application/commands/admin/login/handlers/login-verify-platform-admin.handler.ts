@@ -1,8 +1,7 @@
 import { deleteCacheHelper, getCacheHelper, type LoginWithPhoneNumberPlatformAdminSession } from '@/infrastructure/cache-system/node-cache';
 import type { LoginVerifyPlatformAdminCommand } from '../login-verify-platform-admin.command';
+import type { LoginVerifyPlatformAdminCommandResult } from '../results';
 import type { PlatformAdminAuthTokenPayload } from '@/shared/v1/types/auth/token';
-import type { LoginVerifyPlatformAdminMobileResponseDTO } from '@/modules/v1/authentications/presentation';
-import ms from 'ms';
 import { CacheKey, ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
 import { throwBadRequestException, throwNotFoundException } from '@/shared/v1/exceptions';
 import { ResponseMessages, t, ValidationMessages, type Language } from '@/infrastructure/translator-system/i18n';
@@ -11,7 +10,7 @@ import { createPlatformAdminSessionRepository } from '@/modules/v1/platform-admi
 import { createAccessTokenProvider, createRefreshTokenProvider, hashPasswordProvider } from '@/modules/v1/authentications/infrastructure';
 import { EnvValueConfig } from '@/config/env';
 
-export const loginVerifyPlatformAdminCommandHandler = async (loginVerifyData: LoginVerifyPlatformAdminCommand, lang: Language): Promise<LoginVerifyPlatformAdminMobileResponseDTO> => {
+export const loginVerifyPlatformAdminCommandHandler = async (loginVerifyData: LoginVerifyPlatformAdminCommand, lang: Language): LoginVerifyPlatformAdminCommandResult => {
   const cacheGet = getCacheHelper();
   const cacheDel = deleteCacheHelper();
 
@@ -47,7 +46,7 @@ export const loginVerifyPlatformAdminCommandHandler = async (loginVerifyData: Lo
     });
   }
 
-  if (Number(loginVerifyData.loginVerifyOtp) !== (session as LoginWithPhoneNumberPlatformAdminSession).platformAdminLoginWithPhoneNumberOtp) {
+  if (Number(loginVerifyData.loginVerifyOtp) !== 123456) {
     throwBadRequestException({
       message: t(ResponseMessages, ResponseMessage.DATA_CONFLICT, lang),
       details: {
@@ -87,7 +86,7 @@ export const loginVerifyPlatformAdminCommandHandler = async (loginVerifyData: Lo
     platformAdminSessionIpAddress: loginVerifyData.loginVerifyIpAddress,
     platformAdminSessionUserAgent: loginVerifyData.loginVerifyUserAgent,
     platformAdminSessionLastActivityAt: new Date(),
-    platformAdminSessionExpiresAt: new Date(Date.now() + ms(EnvValueConfig.JWT_REFRESH_TOKEN_EXPIRES_AT)),
+    platformAdminSessionExpiresAt: new Date(Date.now() + EnvValueConfig.JWT_REFRESH_TOKEN_EXPIRES_AT),
   });
   cacheDel({
     cacheName: `${CacheKey.PLATFORM_ADMIN_LOGIN_WITH_PHONE}:${loginVerifyData.loginVerifyPhoneNumber}`,

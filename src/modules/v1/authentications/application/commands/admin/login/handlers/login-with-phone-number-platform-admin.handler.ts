@@ -1,5 +1,5 @@
 import type { LoginWithPhoneNumberPlatformAdminCommand } from '../login-with-phone-number-platform-admin.command';
-import type { LoginWithPhoneNumberPlatformAdminResponseDTO } from '@/modules/v1/authentications/presentation';
+import type { LoginWithPhoneNumberPlatformAdminCommandResult } from '../results';
 
 import { findPlatformAdminByPhoneNumberRepository } from '@/modules/v1/platform-admins';
 
@@ -15,7 +15,7 @@ import { passwordCheckerProvider } from '@/modules/v1/authentications/infrastruc
 
 import { EnvValueConfig } from '@/config/env';
 
-export const loginWithPhoneNumberPlatformAdminCommandHandler = async (credential: LoginWithPhoneNumberPlatformAdminCommand, lang: Language): Promise<LoginWithPhoneNumberPlatformAdminResponseDTO> => {
+export const loginWithPhoneNumberPlatformAdminCommandHandler = async (credential: LoginWithPhoneNumberPlatformAdminCommand, lang: Language): LoginWithPhoneNumberPlatformAdminCommandResult => {
   const cacheGet = getCacheHelper();
 
   const session = cacheGet<LoginWithPhoneNumberPlatformAdminSession>({

@@ -1,12 +1,12 @@
 import type { LoginResendOtpPlatformAdminCommand } from '../login-resend-otp-platform-admin.command';
-import type { LoginResendOtpPlatformAdminResponseDTO } from '@/modules/v1/authentications/presentation';
+import type { LoginResendOtpPlatformAdminCommandResult } from '../results';
 import { getCacheHelper, updateCacheHelper, type LoginWithPhoneNumberPlatformAdminSession } from '@/infrastructure/cache-system/node-cache';
 import { throwBadRequestException, throwNotFoundException } from '@/shared/v1/exceptions';
 import { CacheKey, ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
 import { ResponseMessages, t, ValidationMessages, type Language } from '@/infrastructure/translator-system/i18n';
 import { EnvValueConfig } from '@/config';
 
-export const loginResendOtpPlatformAdminCommandHandler = async (resendOtpData: LoginResendOtpPlatformAdminCommand, lang: Language): Promise<LoginResendOtpPlatformAdminResponseDTO> => {
+export const loginResendOtpPlatformAdminCommandHandler = async (resendOtpData: LoginResendOtpPlatformAdminCommand, lang: Language): LoginResendOtpPlatformAdminCommandResult => {
   const cacheGet = getCacheHelper();
   const cacheUpdate = updateCacheHelper();
 

@@ -358,6 +358,11 @@ export const ValidationMessages = {
     en: 'Error: Business type - No business type was found with the provided slug.',
   },
 
+  [ValidationMessage.EARLY_ACCESS_REQUEST_STATUS_ID_INVALID]: {
+    fa: 'خطا: وضعیت درخواست - شناسه وضعیت ارسال شده نامعتبر است.',
+    en: 'Error: Request status - The provided status ID is invalid.',
+  },
+
   [ValidationMessage.EARLY_ACCESS_REQUEST_ALREADY_EXISTS]: {
     fa: 'خطا: درخواست دسترسی زودهنگام - برای این شماره تماس قبلاً درخواست ثبت شده است.',
     en: 'Error: Early access request - An early access request already exists for this phone number.',

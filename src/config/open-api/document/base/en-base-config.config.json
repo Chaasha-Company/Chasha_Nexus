@@ -52,6 +52,10 @@
       "description": "Public endpoints for creating and managing Chasha Early Access requests."
     },
     {
+      "name": "Admin Early Access Requests",
+      "description": "Authenticated and permission-controlled endpoints for Platform Administrators to search, filter, and retrieve Early Access Requests."
+    },
+    {
       "name": "Global FAQ",
       "description": "Public endpoints for retrieving Chasha frequently asked questions."
     }
@@ -1404,6 +1408,268 @@
         }
       }
     },
+
+    "/{language_prefix}/admin/early-access-request/list-option": {
+      "get": {
+        "tags": ["Admin Early Access Requests"],
+        "summary": "Get Early Access Request list options",
+        "description": "Retrieves the available search fields and status filter options for the Platform Administrator Early Access Request management interface. This endpoint is protected by Platform Administrator authentication and requires the EARLY_ACCESS_REQUEST_LIST_OPTIONS permission.",
+        "operationId": "getListOptionEarlyAccessRequest",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Early Access Request list options retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetListOptionEarlyAccessRequestResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": {
+                    "earlyAccessRequestSearch": [
+                      {
+                        "earlyAccessRequestSearchField": "fullName",
+                        "earlyAccessRequestSearchLabels": ["Full Name"]
+                      },
+                      {
+                        "earlyAccessRequestSearchField": "phoneNumber",
+                        "earlyAccessRequestSearchLabels": ["Phone Number"]
+                      },
+                      {
+                        "earlyAccessRequestSearchField": "businessName",
+                        "earlyAccessRequestSearchLabels": ["Business Name"]
+                      },
+                      {
+                        "earlyAccessRequestSearchField": "code",
+                        "earlyAccessRequestSearchLabels": ["Request Code"]
+                      }
+                    ],
+                    "earlyAccessRequestFilters": {
+                      "earlyAccessRequestStatus": [
+                        {
+                          "earlyAccessRequestStatusId": 1,
+                          "earlyAccessRequestStatusLabels": {
+                            "fa": "در انتظار بررسی",
+                            "en": "Pending"
+                          }
+                        },
+                        {
+                          "earlyAccessRequestStatusId": 2,
+                          "earlyAccessRequestStatusLabels": {
+                            "fa": "تماس گرفته شد",
+                            "en": "Contacted"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "timeStamp": "2026-08-17T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/admin/early-access-request/get-all": {
+      "get": {
+        "tags": ["Admin Early Access Requests"],
+        "summary": "Get all Early Access Requests",
+        "description": "Retrieves a paginated list of Early Access Requests for Platform Administrators. The endpoint supports pagination, global search, and status filtering. Search is performed across the Early Access Request full name, phone number, business name, and request code. The query schema is strict and unsupported query parameters are rejected. This endpoint is protected by Platform Administrator authentication and requires the EARLY_ACCESS_REQUEST_GET_ALL permission.",
+        "operationId": "getAllEarlyAccessRequest",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "paginationPage",
+            "in": "query",
+            "required": true,
+            "description": "Pagination page number.",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d+$",
+              "example": "1"
+            }
+          },
+          {
+            "name": "paginationLimit",
+            "in": "query",
+            "required": true,
+            "description": "Number of Early Access Requests to return per page.",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d+$",
+              "example": "20"
+            }
+          },
+          {
+            "name": "earlyAccessRequestSearch",
+            "in": "query",
+            "required": false,
+            "description": "Searches Early Access Requests by full name, phone number, business name, or request code.",
+            "schema": {
+              "type": "string",
+              "example": "Chasha"
+            }
+          },
+          {
+            "name": "earlyAccessRequestStatusId",
+            "in": "query",
+            "required": false,
+            "description": "Filters Early Access Requests by status identifier. The value must contain only numeric characters.",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d+$",
+              "example": "1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Early Access Requests retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllEarlyAccessRequestPaginationResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": [
+                    {
+                      "earlyAccessRequestId": "9f8c7d6e-5b4a-3210-0112-233445566778",
+                      "earlyAccessRequestStatus": {
+                        "earlyAccessRequestStatusNameFa": "در انتظار بررسی",
+                        "earlyAccessRequestStatusNameEn": "Pending",
+                        "earlyAccessRequestStatusSlug": "pending",
+                        "earlyAccessRequestStatusDescriptionFa": "درخواست در انتظار بررسی است.",
+                        "earlyAccessRequestStatusDescriptionEn": "The request is waiting for review.",
+                        "earlyAccessRequestStatusSortOrder": 1
+                      },
+                      "earlyAccessRequestBusinessType": {
+                        "businessTypeNameFa": "رستوران",
+                        "businessTypeNameEn": "Restaurant",
+                        "businessTypeSlug": "restaurant",
+                        "businessTypeSortOrder": 1
+                      },
+                      "earlyAccessRequestFullName": "John Doe",
+                      "earlyAccessRequestPhoneNumber": "09123456789",
+                      "earlyAccessRequestBusinessName": "Chasha Coffee Shop",
+                      "earlyAccessRequestCode": "@CHASHA_873310",
+                      "earlyAccessRequestMetadata": null,
+                      "earlyAccessRequestCreatedAt": "2026-08-16T18:30:00.000Z",
+                      "earlyAccessRequestUpdatedAt": "2026-08-16T18:30:00.000Z"
+                    }
+                  ],
+                  "pagination": {
+                    "page": 1,
+                    "limit": 20,
+                    "totalItems": 1,
+                    "totalPages": 1
+                  },
+                  "timeStamp": "2026-08-17T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoQueryData": {
+                    "summary": "No Query Parameters",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-17T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "InvalidStatusId": {
+                    "summary": "Invalid Status ID",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "earlyAccessRequestStatusId": ["Early Access Request status id is invalid."]
+                      },
+                      "timeStamp": "2026-08-17T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/global/faq/get-all": {
       "get": {
         "tags": ["Global FAQ"],
@@ -2014,6 +2280,281 @@
           "version": {
             "type": "string",
             "example": "1.0.0"
+          }
+        }
+      },
+
+      "GetListOptionEarlyAccessRequestResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "$ref": "#/components/schemas/EarlyAccessRequestListOptionData"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "EarlyAccessRequestListOptionData": {
+        "type": "object",
+        "properties": {
+          "earlyAccessRequestSearch": {
+            "type": "array",
+            "description": "Available search fields for Early Access Requests.",
+            "items": {
+              "$ref": "#/components/schemas/EarlyAccessRequestSearchOption"
+            }
+          },
+          "earlyAccessRequestFilters": {
+            "$ref": "#/components/schemas/EarlyAccessRequestFilterOptions"
+          }
+        }
+      },
+      "EarlyAccessRequestSearchOption": {
+        "type": "object",
+        "properties": {
+          "earlyAccessRequestSearchField": {
+            "type": "string",
+            "description": "Logical search field identifier.",
+            "enum": ["fullName", "phoneNumber", "businessName", "code"],
+            "example": "fullName"
+          },
+          "earlyAccessRequestSearchLabels": {
+            "type": "array",
+            "description": "Localized labels for the search field.",
+            "items": {
+              "type": "string"
+            },
+            "example": ["Full Name"]
+          }
+        }
+      },
+      "EarlyAccessRequestFilterOptions": {
+        "type": "object",
+        "properties": {
+          "earlyAccessRequestStatus": {
+            "type": "array",
+            "description": "Available Early Access Request statuses.",
+            "items": {
+              "$ref": "#/components/schemas/EarlyAccessRequestStatusFilterOption"
+            }
+          }
+        }
+      },
+      "EarlyAccessRequestStatusFilterOption": {
+        "type": "object",
+        "properties": {
+          "earlyAccessRequestStatusId": {
+            "type": "integer",
+            "description": "Unique Early Access Request status identifier.",
+            "example": 1
+          },
+          "earlyAccessRequestStatusLabels": {
+            "type": "object",
+            "description": "Localized status labels.",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "fa": "در انتظار بررسی",
+              "en": "Pending"
+            }
+          }
+        }
+      },
+      "GetAllEarlyAccessRequestPaginationResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAllEarlyAccessRequestItem"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationMetadata"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "GetAllEarlyAccessRequestItem": {
+        "type": "object",
+        "properties": {
+          "earlyAccessRequestId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique Early Access Request identifier.",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566778"
+          },
+          "earlyAccessRequestStatus": {
+            "$ref": "#/components/schemas/EarlyAccessRequestStatus"
+          },
+          "earlyAccessRequestBusinessType": {
+            "$ref": "#/components/schemas/EarlyAccessRequestBusinessType"
+          },
+          "earlyAccessRequestFullName": {
+            "type": "string",
+            "description": "Applicant full name.",
+            "example": "John Doe"
+          },
+          "earlyAccessRequestPhoneNumber": {
+            "type": "string",
+            "description": "Applicant phone number.",
+            "example": "09123456789"
+          },
+          "earlyAccessRequestBusinessName": {
+            "type": "string",
+            "description": "Applicant business name.",
+            "example": "Chasha Coffee Shop"
+          },
+          "earlyAccessRequestCode": {
+            "type": "string",
+            "description": "Unique Early Access Request code.",
+            "example": "@CHASHA_873310"
+          },
+          "earlyAccessRequestMetadata": {
+            "type": "object",
+            "nullable": true,
+            "description": "Additional metadata associated with the Early Access Request.",
+            "additionalProperties": true,
+            "example": null
+          },
+          "earlyAccessRequestCreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Request creation timestamp."
+          },
+          "earlyAccessRequestUpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Request last update timestamp."
+          }
+        }
+      },
+      "EarlyAccessRequestStatus": {
+        "type": "object",
+        "properties": {
+          "earlyAccessRequestStatusNameFa": {
+            "type": "string",
+            "description": "Status name in Persian.",
+            "example": "در انتظار بررسی"
+          },
+          "earlyAccessRequestStatusNameEn": {
+            "type": "string",
+            "description": "Status name in English.",
+            "example": "Pending"
+          },
+          "earlyAccessRequestStatusSlug": {
+            "type": "string",
+            "description": "Unique status slug.",
+            "example": "pending"
+          },
+          "earlyAccessRequestStatusDescriptionFa": {
+            "type": "string",
+            "nullable": true,
+            "description": "Status description in Persian.",
+            "example": "درخواست در انتظار بررسی است."
+          },
+          "earlyAccessRequestStatusDescriptionEn": {
+            "type": "string",
+            "nullable": true,
+            "description": "Status description in English.",
+            "example": "The request is waiting for review."
+          },
+          "earlyAccessRequestStatusSortOrder": {
+            "type": "integer",
+            "description": "Status display sort order.",
+            "example": 1
+          }
+        }
+      },
+      "EarlyAccessRequestBusinessType": {
+        "type": "object",
+        "properties": {
+          "businessTypeNameFa": {
+            "type": "string",
+            "description": "Business type name in Persian.",
+            "example": "رستوران"
+          },
+          "businessTypeNameEn": {
+            "type": "string",
+            "description": "Business type name in English.",
+            "example": "Restaurant"
+          },
+          "businessTypeSlug": {
+            "type": "string",
+            "description": "Unique business type slug.",
+            "example": "restaurant"
+          },
+          "businessTypeSortOrder": {
+            "type": "integer",
+            "description": "Business type display sort order.",
+            "example": 1
+          }
+        }
+      },
+      "PaginationMetadata": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "example": 1
+          },
+          "limit": {
+            "type": "integer",
+            "example": 20
+          },
+          "totalItems": {
+            "type": "integer",
+            "example": 100
+          },
+          "totalPages": {
+            "type": "integer",
+            "example": 5
           }
         }
       },

@@ -1,8 +1,8 @@
-import type { GetListOptionEarlyAccessRequestResponseDTO } from '@/modules/v1/early-access-requests/presentation';
+import type { GetListEarlyAccessRequestQueryResult } from '../results';
 import { getAllEarlyAccessRequestStatusRepository } from '@/modules/v1/early-access-requests/infrastructure';
 import { EarlyAccessRequestListDefinition } from '@/modules/v1/early-access-requests/list';
 
-export const getListOptionEarlyAccessRequestQueryHandler = async (): Promise<GetListOptionEarlyAccessRequestResponseDTO> => {
+export const getListOptionEarlyAccessRequestQueryHandler = async (): GetListEarlyAccessRequestQueryResult => {
   const earlyAccessStatuses = await getAllEarlyAccessRequestStatusRepository()();
 
   return {

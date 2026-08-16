@@ -1,4 +1,5 @@
 export enum PermissionResourceEnum {
-  ADMIN = 'admin',
-  BUSINESS = 'business',
+  EARLY_ACCESS_REQUEST_PAGE = 'early_access_request_page',
+  EARLY_ACCESS_REQUEST_GET_ALL = 'early_access_request_get_all',
+  EARLY_ACCESS_REQUEST_LIST_OPTIONS = 'early_access_request_list_options',
 }

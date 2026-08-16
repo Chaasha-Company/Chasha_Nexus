@@ -1,8 +1,7 @@
 import { ResponseMessages, t, ValidationMessages, type Language } from '@/infrastructure/translator-system/i18n';
 import type { LoginWithPhoneNumberBusinessCommand } from '../login-with-phone-number-business.command';
 import type { BusinessEmployeeAuthTokenPayload } from '@/shared/v1/types/auth/token';
-import type { LoginWithPhoneNumberBusinessMobileResponseDTO } from '@/modules/v1/authentications/presentation';
-import ms from 'ms';
+import type { LoginWithPhoneNumberBusinessCommandResult } from '../results';
 import { findBusinessEmployeeByPhoneNumberRepository } from '@/modules/v1/business-employees';
 import { throwBadRequestException, throwNotFoundException } from '@/shared/v1/exceptions';
 import { ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
@@ -10,7 +9,7 @@ import { createAccessTokenProvider, createRefreshTokenProvider, hashPasswordProv
 import { createBusinessEmployeeSessionRepository } from '@/modules/v1/business-employee-sessions';
 import { EnvValueConfig } from '@/config/env';
 
-export const loginWithPhoneNumberBusinessCommandHandler = async (loginData: LoginWithPhoneNumberBusinessCommand, lang: Language): Promise<LoginWithPhoneNumberBusinessMobileResponseDTO> => {
+export const loginWithPhoneNumberBusinessCommandHandler = async (loginData: LoginWithPhoneNumberBusinessCommand, lang: Language): LoginWithPhoneNumberBusinessCommandResult => {
   const findBusinessEmployee = findBusinessEmployeeByPhoneNumberRepository();
 
   const businessEmployee = await findBusinessEmployee({
@@ -58,7 +57,7 @@ export const loginWithPhoneNumberBusinessCommandHandler = async (loginData: Logi
     businessEmployeeSessionIpAddress: loginData.loginIpAddress,
     businessEmployeeSessionUserAgent: loginData.loginUserAgent,
     businessEmployeeSessionLastActivityAt: new Date(),
-    businessEmployeeSessionExpiresAt: new Date(Date.now() + ms(EnvValueConfig.JWT_REFRESH_TOKEN_EXPIRES_AT)),
+    businessEmployeeSessionExpiresAt: new Date(Date.now() + EnvValueConfig.JWT_REFRESH_TOKEN_EXPIRES_AT),
   });
 
   return {

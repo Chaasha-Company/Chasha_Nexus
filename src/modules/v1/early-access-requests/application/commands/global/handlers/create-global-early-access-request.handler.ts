@@ -1,4 +1,5 @@
-import type { CreateGlobalEarlyAccessRequestRequestDTO, CreateGlobalEarlyAccessRequestResponseDTO } from '@/modules/v1/early-access-requests/presentation';
+import type { CreateGlobalEarlyAccessRequestRequestDTO } from '@/modules/v1/early-access-requests/presentation';
+import type { CreateGlobalEarlyAccessRequestQueryResult } from '../results';
 import { ResponseMessages, t, ValidationMessages, type Language } from '@/infrastructure/translator-system/i18n';
 import { findBusinessTypeBySlugRepository } from '@/modules/v1/businesses';
 import { throwNotFoundException, throwRequestConflictException } from '@/shared/v1/exceptions';
@@ -6,7 +7,7 @@ import { EventName, ResponseMessage, ValidationMessage } from '@/shared/v1/enums
 import { createEarlyAccessRequestRepository, findEarlyAccessRequestByPhoneNumberRepository, findEarlyAccessRequestBySlugRepository, generateChashaEarlyAccessRequestCodeHelper } from '@/modules/v1/early-access-requests/infrastructure';
 import { eventEmitterConfig } from '@/config/emitter';
 
-export const createGlobalEarlyAccessRequestCommandHandler = async (createEarlyAccessRequestData: CreateGlobalEarlyAccessRequestRequestDTO, lang: Language): Promise<CreateGlobalEarlyAccessRequestResponseDTO> => {
+export const createGlobalEarlyAccessRequestCommandHandler = async (createEarlyAccessRequestData: CreateGlobalEarlyAccessRequestRequestDTO, lang: Language): CreateGlobalEarlyAccessRequestQueryResult => {
   const businessTypeIsExist = await findBusinessTypeBySlugRepository()({ businessTypeSlug: createEarlyAccessRequestData.earlyAccessRequestBusinessTypeSlug as string });
 
   if (businessTypeIsExist === null) {

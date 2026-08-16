@@ -12,4 +12,6 @@ export const createEarlyAccessRequestRepository =
     const earlyAccessData = earlyAccessRequestRepository.create(createEarlyAccessRequestData);
 
     await earlyAccessRequestRepository.save(earlyAccessData);
+
+    await AppDataSource.queryResultCache?.remove(['early-access-requests', 'early-access-requests-count']);
   };

@@ -17,7 +17,9 @@ export class PermissionsModel {
   })
   permissionBusinessRolePermissions!: BusinessRolePermissionsModel[];
 
-  @OneToMany(() => PlatformAdminRolePermissionsModel, (platformAdminRolePermission) => platformAdminRolePermission.platformAdminRolePermissionPermission)
+  @OneToMany(() => PlatformAdminRolePermissionsModel, (platformAdminRolePermission) => platformAdminRolePermission.platformAdminRolePermissionPermission, {
+    eager: false,
+  })
   permissionPlatformAdminRolePermissions!: PlatformAdminRolePermissionsModel[];
 
   @Column({

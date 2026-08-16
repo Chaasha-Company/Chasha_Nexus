@@ -1,5 +1,5 @@
 import { ResponseMessages, t, ValidationMessages, type Language } from '@/infrastructure/translator-system/i18n';
-import type { RefreshTokenBusinessResponseDTO } from '@/modules/v1/authentications/presentation';
+import type { RefreshTokenBusinessCommandResult } from '../results';
 import type { RefreshTokenBusinessCommand } from '../refresh-token-business.command';
 import type { BusinessEmployeeAuthTokenPayload } from '@/shared';
 import ms from 'ms';
@@ -10,7 +10,7 @@ import { findBusinessEmployeeSessionByIdRepository } from '@/modules/v1/business
 import { updateBusinessEmployeeSessionRepository } from '@/modules/v1/business-employee-sessions/infrastructure';
 import { EnvValueConfig } from '@/config/env';
 
-export const refreshTokenBusinessCommandHandler = async (tokenData: RefreshTokenBusinessCommand, lang: Language): Promise<RefreshTokenBusinessResponseDTO> => {
+export const refreshTokenBusinessCommandHandler = async (tokenData: RefreshTokenBusinessCommand, lang: Language): RefreshTokenBusinessCommandResult => {
   const { refreshTokenBusiness } = tokenData;
 
   const verifiedToken = verifyRefreshTokenProvider()(refreshTokenBusiness as string) as BusinessEmployeeAuthTokenPayload;
