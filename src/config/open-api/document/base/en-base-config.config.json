@@ -2671,6 +2671,62 @@
           }
         }
       },
+      "EarlyAccessRequestDetail": {
+        "type": "object",
+        "properties": {
+          "earlyAccessRequestId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique Early Access Request identifier.",
+            "example": "19352f07-6d0d-47cb-9a35-6873dac786d2"
+          },
+          "earlyAccessRequestFullName": {
+            "type": "string",
+            "description": "Applicant full name.",
+            "example": "عرفان ابویی"
+          },
+          "earlyAccessRequestPhoneNumber": {
+            "type": "string",
+            "description": "Applicant phone number.",
+            "example": "09431356465"
+          },
+          "earlyAccessRequestBusinessName": {
+            "type": "string",
+            "description": "Applicant business name.",
+            "example": "Chasha Coffeshop | چاشا کافی شاپ"
+          },
+          "earlyAccessRequestCode": {
+            "type": "string",
+            "description": "Unique Early Access Request code.",
+            "example": "@CHASHA_288302"
+          },
+          "earlyAccessRequestMetadata": {
+            "type": "object",
+            "nullable": true,
+            "description": "Additional metadata associated with the Early Access Request.",
+            "additionalProperties": true,
+            "example": null
+          },
+          "earlyAccessRequestCreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Request creation timestamp.",
+            "example": "2026-08-13T12:04:47.070Z"
+          },
+          "earlyAccessRequestUpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Request last update timestamp.",
+            "example": "2026-08-13T12:04:47.070Z"
+          },
+          "earlyAccessRequestStatus": {
+            "$ref": "#/components/schemas/EarlyAccessRequestStatus"
+          },
+          "earlyAccessRequestBusinessType": {
+            "$ref": "#/components/schemas/EarlyAccessRequestBusinessType"
+          }
+        }
+      },
       "GetEarlyAccessRequestDetailResponse": {
         "type": "object",
         "properties": {
