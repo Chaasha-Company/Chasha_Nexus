@@ -25,3 +25,4 @@ export * from '@/shared/v1/database/migrations/1786394906093-Create_Faqs_And_Typ
 export * from '@/shared/v1/database/migrations/1786470843389-Add_BusinessName_To_Early_Access_Requests';
 export * from '@/shared/v1/database/migrations/1786837047594-Change_Permission_Resource_Field_Enum';
 export * from '@/shared/v1/database/migrations/1786921497583-Add_Permission_Resource_Get_Detail_Early_Access_Request';
+export * from '@/shared/v1/database/migrations/1786922755782-Add_Permission_Resource_Update_Early_Access_Request';

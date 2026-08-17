@@ -4,7 +4,7 @@ import { ResponseMessages, t, ValidationMessages, type Language } from '@/infras
 import { findBusinessTypeBySlugRepository } from '@/modules/v1/businesses';
 import { throwNotFoundException, throwRequestConflictException } from '@/shared/v1/exceptions';
 import { EventName, ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
-import { createEarlyAccessRequestRepository, findEarlyAccessRequestByPhoneNumberRepository, findEarlyAccessRequestBySlugRepository, generateChashaEarlyAccessRequestCodeHelper } from '@/modules/v1/early-access-requests/infrastructure';
+import { createEarlyAccessRequestRepository, findEarlyAccessRequestByPhoneNumberRepository, findEarlyAccessRequestStatusBySlugRepository, generateChashaEarlyAccessRequestCodeHelper } from '@/modules/v1/early-access-requests/infrastructure';
 import { eventEmitterConfig } from '@/config/emitter';
 
 export const createGlobalEarlyAccessRequestCommandHandler = async (createEarlyAccessRequestData: CreateGlobalEarlyAccessRequestRequestDTO, lang: Language): CreateGlobalEarlyAccessRequestQueryResult => {
@@ -30,7 +30,7 @@ export const createGlobalEarlyAccessRequestCommandHandler = async (createEarlyAc
     });
   }
 
-  const ealryAccessRequestPendingStatus = await findEarlyAccessRequestBySlugRepository()({ earlyAccessRequestStatusSlug: 'pending' });
+  const ealryAccessRequestPendingStatus = await findEarlyAccessRequestStatusBySlugRepository()({ earlyAccessRequestStatusSlug: 'pending' });
   const earlyAccessRequestCode = generateChashaEarlyAccessRequestCodeHelper();
 
   await createEarlyAccessRequestRepository()({

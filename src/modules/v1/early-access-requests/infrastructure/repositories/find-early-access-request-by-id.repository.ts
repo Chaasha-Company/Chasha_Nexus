@@ -17,6 +17,5 @@ export const findEarlyAccessRequestByIdRepository =
         earlyAccessRequestBusinessType: true,
         earlyAccessRequestStatus: true,
       },
-      cache: true,
     });
   };

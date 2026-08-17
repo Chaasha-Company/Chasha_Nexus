@@ -4,7 +4,7 @@ import type { EntityManager } from 'typeorm';
 import { AppDataSource } from '@/shared/v1/database/core';
 import { EarlyAccessRequestStatusesModel } from '@/shared/v1/database/schema/early_access_requests/childrens';
 
-export const findEarlyAccessRequestBySlugRepository =
+export const findEarlyAccessRequestStatusBySlugRepository =
   (): FindEarlyAccessRequestStatusBySlug =>
   async (ealryAccessRequestStatusData: FindEarlyAccessRequestStatusBySlugQuery, manager?: EntityManager): Promise<EarlyAccessRequestStatusesModel | null> => {
     const ealryAccessRequestStatusRepository = manager ? manager.getRepository(EarlyAccessRequestStatusesModel) : AppDataSource.getRepository(EarlyAccessRequestStatusesModel);
