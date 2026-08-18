@@ -1804,6 +1804,119 @@
         }
       }
     },
+    "/{language_prefix}/admin/early-access-request/update": {
+      "patch": {
+        "tags": ["Admin Early Access Requests"],
+        "summary": "Update Early Access Request",
+        "description": "Updates an existing Early Access Request by Platform Administrators.\n\nThis endpoint allows updating Early Access Request information including status, business type, contact information, request code, business name, and metadata.\n\nThis endpoint is protected by Platform Administrator authentication and requires the EARLY_ACCESS_REQUEST_UPDATE permission.",
+        "operationId": "updateEarlyAccessRequest",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEarlyAccessRequestRequest"
+              },
+              "example": {
+                "earlyAccessRequestId": "9f8c7d6e-5b4a-3210-0112-233445566778",
+                "earlyAccessRequestStatusId": 2,
+                "earlyAccessRequestBusinessName": "Chasha Coffee Shop",
+                "earlyAccessRequestMetadata": {
+                  "note": "Customer contacted successfully"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Early Access Request updated successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Updated successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-18T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 400,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Validation failed.",
+                  "errorCode": "E1001",
+                  "errors": {
+                    "earlyAccessRequestId": ["Early access request id is required."]
+                  },
+                  "timeStamp": "2026-08-18T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Early Access Request, status, or business type was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Requested resource was not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "earlyAccessRequestId": ["Early Access Request was not found."]
+                  },
+                  "timeStamp": "2026-08-18T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/global/faq/get-all": {
       "get": {
         "tags": ["Global FAQ"],
@@ -2938,6 +3051,48 @@
         },
         "example": {
           "error_message": ["Business rule validation failed."]
+        }
+      },
+      "UpdateEarlyAccessRequestRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["earlyAccessRequestId"],
+        "properties": {
+          "earlyAccessRequestId": {
+            "type": "string",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566778"
+          },
+          "earlyAccessRequestStatusId": {
+            "type": "integer",
+            "example": 2
+          },
+          "earlyAccessRequestBusinessTypeId": {
+            "type": "string",
+            "example": "1"
+          },
+          "earlyAccessRequestFullName": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "earlyAccessRequestPhoneNumber": {
+            "type": "string",
+            "example": "09123456789"
+          },
+          "earlyAccessRequestCode": {
+            "type": "string",
+            "example": "@CHASHA_873310"
+          },
+          "earlyAccessRequestBusinessName": {
+            "type": "string",
+            "example": "Chasha Coffee Shop"
+          },
+          "earlyAccessRequestMetadata": {
+            "type": "object",
+            "additionalProperties": true,
+            "example": {
+              "note": "Customer contacted successfully"
+            }
+          }
         }
       },
       "ErrorResponse": {

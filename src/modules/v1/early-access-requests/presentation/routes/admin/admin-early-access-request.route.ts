@@ -1,6 +1,6 @@
 import { PermissionActionEnum, permissionGuardPlatformAdminMiddleware, PermissionResourceEnum } from '@/modules/v1/authorizations';
-import { detailEarlyAccessRequestController, getAllEarlyAccessRequestContoller, getListOptionEarlyAccessController } from '@/modules/v1/early-access-requests/presentation/controllers';
-import { DetailEarlyAccessRequestValidation, GetAllEarlyAccessRequestQueryValidation } from '@/modules/v1/early-access-requests/presentation/validations';
+import { detailEarlyAccessRequestController, getAllEarlyAccessRequestContoller, getListOptionEarlyAccessController, updateEarlyAccessRequestController } from '@/modules/v1/early-access-requests/presentation/controllers';
+import { DetailEarlyAccessRequestValidation, GetAllEarlyAccessRequestQueryValidation, UpdateEarlyAccessRequestValidation } from '@/modules/v1/early-access-requests/presentation/validations';
 import { validateBodyMiddleware, validateQueryMiddleware } from '@/shared/v1/middlewares/validation';
 import { Router } from 'express';
 
@@ -21,9 +21,16 @@ router.get(
 
 router.post(
   '/detail',
-  /* permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'early-access-requests', platformAdminPermissionAction: PermissionActionEnum.READ, platformAdminPermissionResource: PermissionResourceEnum.EARLY_ACCESS_REQUEST_DETAIL }), */
+  permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'early-access-requests', platformAdminPermissionAction: PermissionActionEnum.READ, platformAdminPermissionResource: PermissionResourceEnum.EARLY_ACCESS_REQUEST_DETAIL }),
   validateBodyMiddleware(DetailEarlyAccessRequestValidation),
   detailEarlyAccessRequestController,
+);
+
+router.patch(
+  '/update',
+  permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'early-access-requests', platformAdminPermissionAction: PermissionActionEnum.UPDATE, platformAdminPermissionResource: PermissionResourceEnum.EARLY_ACCESS_REQUEST_UPDATE }),
+  validateBodyMiddleware(UpdateEarlyAccessRequestValidation),
+  updateEarlyAccessRequestController,
 );
 
 export { router as adminEarlyAccessRequestRouter };

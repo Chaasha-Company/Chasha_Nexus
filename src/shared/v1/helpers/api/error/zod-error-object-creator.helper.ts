@@ -12,7 +12,7 @@ export const zodErrorObjectCreatorHelper = (req: Request, issues: ZodError['issu
     let path: string;
 
     if (issue.path.length === 0) {
-      path = 'root';
+      path = 'error_message';
     } else {
       path = issue.path.join('.');
     }

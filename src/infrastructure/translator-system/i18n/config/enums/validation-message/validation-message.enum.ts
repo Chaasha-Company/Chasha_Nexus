@@ -18,6 +18,12 @@ export const ValidationMessages = {
     en: 'Error: Body - This field must not be included in the request.',
   },
 
+  // =========================Common Validation=========================
+  [ValidationMessage.UPDATE_AT_LEAST_ONE_FIELD_REQUIRED]: {
+    fa: 'خطا: بروزرسانی - حداقل یک فیلد برای بروزرسانی باید ارسال شود.',
+    en: 'Error: Update - At least one field must be provided for update.',
+  },
+
   // =========================Pagination Validation=========================
   [ValidationMessage.PAGINATION_PAGE_REQUIRED]: {
     fa: 'خطا: صفحه‌بندی - شماره صفحه الزامی است.',
@@ -381,6 +387,46 @@ export const ValidationMessages = {
   [ValidationMessage.EARLY_ACCESS_REQUEST_ID_NOT_FOUND]: {
     fa: 'خطا: شناسه درخواست دسترسی زودهنگام - درخواست موردنظر یافت نشد.',
     en: 'Error: Early access request ID - The requested early access request was not found.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_TYPE_ID_INVALID]: {
+    fa: 'خطا: نوع کسب‌وکار - شناسه نوع کسب‌وکار ارسال شده نامعتبر است.',
+    en: 'Error: Business type - The provided business type ID is invalid.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_FULL_NAME_INVALID]: {
+    fa: 'خطا: نام و نام خانوادگی - مقدار ارسال شده نامعتبر است.',
+    en: 'Error: Full name - The provided value is invalid.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_PHONE_NUMBER_INVALID]: {
+    fa: 'خطا: شماره تماس - مقدار ارسال شده نامعتبر است.',
+    en: 'Error: Phone number - The provided value is invalid.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_CODE_INVALID]: {
+    fa: 'خطا: کد درخواست - مقدار ارسال شده نامعتبر است.',
+    en: 'Error: Request code - The provided value is invalid.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_NAME_INVALID]: {
+    fa: 'خطا: نام مجموعه - مقدار ارسال شده نامعتبر است.',
+    en: 'Error: Business name - The provided value is invalid.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_METADATA_INVALID]: {
+    fa: 'خطا: اطلاعات اضافی - مقدار ارسال شده باید یک شیء معتبر باشد.',
+    en: 'Error: Metadata - The provided value must be a valid object.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_STATUS_ID_NOT_FOUND]: {
+    fa: 'خطا: وضعیت درخواست - وضعیت موردنظر یافت نشد.',
+    en: 'Error: Request status - The requested status was not found.',
+  },
+
+  [ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_TYPE_ID_NOT_FOUND]: {
+    fa: 'خطا: نوع کسب‌وکار - نوع کسب‌وکار موردنظر یافت نشد.',
+    en: 'Error: Business type - The requested business type was not found.',
   },
 
   // =========================Faq Validation=========================

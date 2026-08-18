@@ -8,7 +8,7 @@ import { ResponseMessages, t } from '@/infrastructure/translator-system/i18n';
 export const createGlobalEarlyAccessRequestController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const result = await createGlobalEarlyAccessRequestCommandHandler(req.body, req.lang);
-    successResponseHandler<CreateGlobalEarlyAccessRequestResponseDTO>(req, res, HttpStatus.OK, result, t(ResponseMessages, ResponseMessage.SUCCESS, req.lang));
+    successResponseHandler<CreateGlobalEarlyAccessRequestResponseDTO>(req, res, HttpStatus.CREATED, result, t(ResponseMessages, ResponseMessage.CREATED_SUCCESS, req.lang));
   } catch (error: unknown) {
     next(error);
   }
