@@ -1,1 +1,1 @@
-export * from './platform-admin';
+export * from './admin';
