@@ -22,5 +22,5 @@ export const bootstrap = async (): Promise<void> => {
   // await rabbitMqServerConfig();
   // await consumerLoaderBorker();
 
-  app.listen(EnvValueConfig.PORT);
+  app.listen(EnvValueConfig.PORT, '0.0.0.0');
 };

@@ -1,1 +1,1 @@
-export * from './authorization.route';
+export * from './admin';
