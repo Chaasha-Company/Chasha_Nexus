@@ -129,6 +129,23 @@ export const createPermissionDataSeed = async (): Promise<void> => {
 
       permissionNavigation: null,
     },
+    {
+      permissionKey: 'authz.permission.get-all.read',
+      permissionSubject: PermissionSubjectEnum.BUSINESS_EMPLOYEE,
+      permissionResource: PermissionResourceEnum.BUSINESS_EMPLOYEE_AUTHZ_PERMISSION_GET_ALL,
+      permissionVersion: 1,
+      permissionModule: 'business-employee-permission',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'دریافت لیست پرمیشن‌های کارمند بیزنس',
+      permissionLabelEn: 'Get All Business Employee Permissions',
+
+      permissionDescriptionFa: 'دسترسی به API دریافت لیست پرمیشن‌های کارمند بیزنس بر اساس رول',
+      permissionDescriptionEn: 'Access to the API for retrieving business employee permissions by role id',
+
+      permissionNavigation: null,
+    },
   ];
 
   for (const permission of permissions) {

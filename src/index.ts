@@ -26,3 +26,5 @@ export * from '@/shared/v1/database/migrations/1786470843389-Add_BusinessName_To
 export * from '@/shared/v1/database/migrations/1786837047594-Change_Permission_Resource_Field_Enum';
 export * from '@/shared/v1/database/migrations/1786921497583-Add_Permission_Resource_Get_Detail_Early_Access_Request';
 export * from '@/shared/v1/database/migrations/1786922755782-Add_Permission_Resource_Update_Early_Access_Request';
+export * from '@/shared/v1/database/migrations/1787090633627-Add_Platform_Admin_Authz_Permission_Get_All_Permission';
+export * from '@/shared/v1/database/migrations/1787094133874-Add_Business_Employee_Authz_Permission_Get_All_Permission';
