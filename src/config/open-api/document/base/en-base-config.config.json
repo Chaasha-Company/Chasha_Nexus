@@ -731,6 +731,92 @@
         }
       }
     },
+    "/{language_prefix}/admin/authz/permission/get-all": {
+      "get": {
+        "tags": ["Platform Admin Authentication"],
+        "summary": "Get all platform administrator permissions",
+        "description": "Retrieves a comprehensive list of all available permissions for Platform Administrators.\n\nThis endpoint is protected by Platform Administrator authentication and requires the 'business-employee-permission' module with READ action on 'BUSINESS_EMPLOYEE_AUTHZ_PERMISSION_GET_ALL' resource.\n\nThe response includes detailed permission metadata, localization labels (FA/EN), and navigation structure.",
+        "operationId": "getAllPlatformAdminPermission",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Permissions retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllPlatformAdminPermissionResponseDTO"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": [
+                    {
+                      "platformAdminRolePermissionId": "uuid-string-here",
+                      "platformAdminRolePermissionPermissionId": "uuid-string-here",
+                      "platformAdminRolePermissionPermission": {
+                        "permissionId": "perm_123",
+                        "permissionKey": "early_access_request.manage",
+                        "permissionSubject": "Early Access Request",
+                        "permissionResource": "EARLY_ACCESS_REQUEST",
+                        "permissionVersion": 1,
+                        "permissionModule": "early-access-request",
+                        "permissionAction": "MANAGE",
+                        "permissionType": "CRUD",
+                        "permissionLabelFa": "مدیریت درخواست دسترسی زودهنگام",
+                        "permissionLabelEn": "Manage Early Access Request",
+                        "permissionDescriptionFa": "دسترسی به مدیریت کامل درخواست‌های اولیه",
+                        "permissionDescriptionEn": "Full management access to early access requests",
+                        "permissionNavigation": {
+                          "permissionNavigationIcon": "settings",
+                          "permissionNavigationPath": "/admin/settings",
+                          "permissionNavigationOrder": 5,
+                          "permissionNavigationLabelEn": "Settings",
+                          "permissionNavigationLabelFa": "تنظیمات",
+                          "permissionNavigationVisible": true,
+                          "permissionNavigationGroupKey": "system",
+                          "permissionNavigationParentKey": null,
+                          "permissionNavigationGroupLabelEn": "System",
+                          "permissionNavigationGroupLabelFa": "سیستم"
+                        },
+                        "permissionIsActive": true
+                      }
+                    }
+                  ],
+                  "timeStamp": "2026-08-20T10:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/business/auth/login/with-phone": {
       "post": {
         "tags": ["Business Authentication"],
@@ -1097,6 +1183,92 @@
                 }
               }
             }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/authz/permission/get-all": {
+      "get": {
+        "tags": ["Business Authentication"],
+        "summary": "Get all business employee permissions",
+        "description": "Retrieves a comprehensive list of all available permissions for Business Employees.\n\nThis endpoint is protected by Business Employee authentication and requires the 'platform-admin-permission' module with READ action on 'PLATFORM_ADMIN_AUTHZ_PERMISSION_GET_ALL' resource.\n\nThe response includes detailed permission metadata, localization labels (FA/EN), and navigation structure.",
+        "operationId": "getAllBusinessPermission",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Permissions retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllBusinessPermissionResponseDTO"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": [
+                    {
+                      "businessRolePermissionId": "uuid-string-here",
+                      "businessRolePermissionPermissionId": "uuid-string-here",
+                      "businessRolePermissionPermission": {
+                        "permissionId": "perm_456",
+                        "permissionKey": "order.create",
+                        "permissionSubject": "Order",
+                        "permissionResource": "ORDER",
+                        "permissionVersion": 1,
+                        "permissionModule": "orders",
+                        "permissionAction": "CREATE",
+                        "permissionType": "CRUD",
+                        "permissionLabelFa": "ایجاد سفارش",
+                        "permissionLabelEn": "Create Order",
+                        "permissionDescriptionFa": "دسترسی به ایجاد سفارش جدید",
+                        "permissionDescriptionEn": "Access to create new orders",
+                        "permissionNavigation": {
+                          "permissionNavigationIcon": "shopping-cart",
+                          "permissionNavigationPath": "/business/orders/new",
+                          "permissionNavigationOrder": 1,
+                          "permissionNavigationLabelEn": "New Order",
+                          "permissionNavigationLabelFa": "سفارش جدید",
+                          "permissionNavigationVisible": true,
+                          "permissionNavigationGroupKey": "operations",
+                          "permissionNavigationParentKey": null,
+                          "permissionNavigationGroupLabelEn": "Operations",
+                          "permissionNavigationGroupLabelFa": "عملیات"
+                        },
+                        "permissionIsActive": true
+                      }
+                    }
+                  ],
+                  "timeStamp": "2026-08-20T10:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -2938,6 +3110,143 @@
           },
           "earlyAccessRequestBusinessType": {
             "$ref": "#/components/schemas/EarlyAccessRequestBusinessType"
+          }
+        }
+      },
+      "GetAllPlatformAdminPermissionResponseDTO": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "platformAdminRolePermissionId": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Unique identifier for the role-permission mapping."
+            },
+            "platformAdminRolePermissionPermissionId": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Unique identifier for the permission definition."
+            },
+            "platformAdminRolePermissionPermission": {
+              "$ref": "#/components/schemas/PermissionDetail"
+            }
+          }
+        }
+      },
+      "GetAllBusinessPermissionResponseDTO": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "businessRolePermissionId": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Unique identifier for the role-permission mapping."
+            },
+            "businessRolePermissionPermissionId": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Unique identifier for the permission definition."
+            },
+            "businessRolePermissionPermission": {
+              "$ref": "#/components/schemas/PermissionDetail"
+            }
+          }
+        }
+      },
+      "PermissionDetail": {
+        "type": "object",
+        "properties": {
+          "permissionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "permissionKey": {
+            "type": "string",
+            "description": "Unique technical key for the permission."
+          },
+          "permissionSubject": {
+            "type": "string",
+            "description": "Human-readable subject name."
+          },
+          "permissionResource": {
+            "type": "string",
+            "description": "Resource identifier."
+          },
+          "permissionVersion": {
+            "type": "integer"
+          },
+          "permissionModule": {
+            "type": "string",
+            "description": "Module identifier."
+          },
+          "permissionAction": {
+            "type": "string",
+            "description": "Action type (e.g., CREATE, READ, UPDATE, DELETE)."
+          },
+          "permissionType": {
+            "type": "string",
+            "description": "Permission type classification."
+          },
+          "permissionLabelFa": {
+            "type": "string",
+            "description": "Persian label."
+          },
+          "permissionLabelEn": {
+            "type": "string",
+            "description": "English label."
+          },
+          "permissionDescriptionFa": {
+            "type": "string",
+            "nullable": true,
+            "description": "Persian description."
+          },
+          "permissionDescriptionEn": {
+            "type": "string",
+            "nullable": true,
+            "description": "English description."
+          },
+          "permissionNavigation": {
+            "type": "object",
+            "nullable": true,
+            "properties": {
+              "permissionNavigationIcon": {
+                "type": "string"
+              },
+              "permissionNavigationPath": {
+                "type": "string"
+              },
+              "permissionNavigationOrder": {
+                "type": "integer"
+              },
+              "permissionNavigationLabelEn": {
+                "type": "string"
+              },
+              "permissionNavigationLabelFa": {
+                "type": "string"
+              },
+              "permissionNavigationVisible": {
+                "type": "boolean"
+              },
+              "permissionNavigationGroupKey": {
+                "type": "string"
+              },
+              "permissionNavigationParentKey": {
+                "type": "string",
+                "nullable": true
+              },
+              "permissionNavigationGroupLabelEn": {
+                "type": "string"
+              },
+              "permissionNavigationGroupLabelFa": {
+                "type": "string"
+              }
+            }
+          },
+          "permissionIsActive": {
+            "type": "boolean",
+            "description": "Indicates if the permission is active."
           }
         }
       },

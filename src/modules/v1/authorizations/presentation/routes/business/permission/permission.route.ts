@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { getAllBusinessPermissionController, permissionGuardBusinessMiddleware } from '@/modules/v1/authorizations/presentation';
 import { PermissionActionEnum, PermissionResourceEnum } from '@/modules/v1/authorizations/domain';
+import { permissionGuardBusinessMiddleware } from '../../../middlewares/business/permission-guard-business.middleware';
+import { getAllBusinessPermissionController } from '../../../controllers/business/permission/get-all-business-permission.controller';
 
 const router = Router();
 
