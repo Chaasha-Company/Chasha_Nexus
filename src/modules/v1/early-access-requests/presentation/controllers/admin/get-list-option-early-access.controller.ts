@@ -5,7 +5,7 @@ import { HttpStatus, ResponseMessage } from '@/shared/v1/enums';
 import { ResponseMessages, t } from '@/infrastructure/translator-system/i18n';
 import { successResponseHandler } from '@/shared/v1/helpers/api';
 
-export const getListOptionEarlyAccessController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const getListOptionEarlyAccessRequestController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const result = await getListOptionEarlyAccessRequestQueryHandler();
     successResponseHandler<GetListOptionEarlyAccessRequestResponseDTO>(req, res, HttpStatus.OK, result, t(ResponseMessages, ResponseMessage.SUCCESS, req.lang));

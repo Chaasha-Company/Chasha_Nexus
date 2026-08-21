@@ -146,6 +146,47 @@ export const createPermissionDataSeed = async (): Promise<void> => {
 
       permissionNavigation: null,
     },
+
+    // =========================Authorization System - Platform Admin Role Management=========================
+    {
+      permissionKey: 'authz.platform-admin-role.page.read',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_PAGE,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-role',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.PAGE,
+      permissionLabelFa: 'صفحه مدیریت نقش های ادمین',
+      permissionLabelEn: 'Platform Admin Roles Page',
+      permissionDescriptionFa: 'دسترسی به صفحه مدیریت نقش های ادمین',
+      permissionDescriptionEn: 'Access to the platform admin roles management page',
+      permissionNavigation: {
+        permissionNavigationVisible: true,
+        permissionNavigationGroupKey: 'authorization',
+        permissionNavigationGroupLabelFa: 'مجوزها و دسترسی‌ها',
+        permissionNavigationGroupLabelEn: 'Authorization',
+        permissionNavigationParentKey: null,
+        permissionNavigationLabelFa: 'نقش های ادمین',
+        permissionNavigationLabelEn: 'Admin Roles',
+        permissionNavigationPath: '/authz/role/list',
+        permissionNavigationIcon: 'shield',
+        permissionNavigationOrder: 1,
+      },
+    },
+    {
+      permissionKey: 'authz.platform-admin-role.list-options.read',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_LIST_OPTIONS,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-role',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.ACTION,
+      permissionLabelFa: 'دریافت گزینه‌های لیست نقش های ادمین',
+      permissionLabelEn: 'Get Platform Admin Role List Options',
+      permissionDescriptionFa: 'دسترسی به API دریافت گزینه‌های موردنیاز لیست نقش های ادمین',
+      permissionDescriptionEn: 'Access to the platform admin role list options API',
+      permissionNavigation: null,
+    },
   ];
 
   for (const permission of permissions) {

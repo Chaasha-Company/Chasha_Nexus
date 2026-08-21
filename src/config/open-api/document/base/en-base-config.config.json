@@ -817,6 +817,89 @@
         }
       }
     },
+    "/{language_prefix}/admin/authz/role/list-option": {
+      "get": {
+        "tags": ["Platform Admin Authentication"],
+        "summary": "Get Platform Administrator role list options",
+        "description": "Retrieves the available search fields and active status filter options for the Platform Administrator Role management interface. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_ROLE_LIST_OPTIONS permission.",
+        "operationId": "getListOptionPlatformAdminRole",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Platform Administrator role list options retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetListOptionPlatformAdminRoleResponseDTO"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": {
+                    "platformAdminRoleSearch": [
+                      {
+                        "platformAdminRoleSearchField": "name",
+                        "platformAdminRoleSearchLabels": ["Role Name"]
+                      },
+                      {
+                        "platformAdminRoleSearchField": "key",
+                        "platformAdminRoleSearchLabels": ["Role Key"]
+                      }
+                    ],
+                    "platformAdminRoleFilters": {
+                      "platformAdminRoleIsActive": [
+                        {
+                          "platformAdminRoleIsActiveValue": true,
+                          "platformAdminRoleIsActiveLabels": {
+                            "fa": "فعال",
+                            "en": "Active"
+                          }
+                        },
+                        {
+                          "platformAdminRoleIsActiveValue": false,
+                          "platformAdminRoleIsActiveLabels": {
+                            "fa": "غیرفعال",
+                            "en": "Inactive"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "timeStamp": "2026-08-22T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/business/auth/login/with-phone": {
       "post": {
         "tags": ["Business Authentication"],
@@ -3151,6 +3234,104 @@
             },
             "businessRolePermissionPermission": {
               "$ref": "#/components/schemas/PermissionDetail"
+            }
+          }
+        }
+      },
+      "GetListOptionPlatformAdminRoleResponseDTO": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "$ref": "#/components/schemas/PlatformAdminRoleListOptionData"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "PlatformAdminRoleListOptionData": {
+        "type": "object",
+        "properties": {
+          "platformAdminRoleSearch": {
+            "type": "array",
+            "description": "Available search fields for Platform Administrator Roles.",
+            "items": {
+              "$ref": "#/components/schemas/PlatformAdminRoleSearchOption"
+            }
+          },
+          "platformAdminRoleFilters": {
+            "$ref": "#/components/schemas/PlatformAdminRoleFilterOptions"
+          }
+        }
+      },
+      "PlatformAdminRoleSearchOption": {
+        "type": "object",
+        "properties": {
+          "platformAdminRoleSearchField": {
+            "type": "string",
+            "description": "Logical search field identifier.",
+            "example": "name"
+          },
+          "platformAdminRoleSearchLabels": {
+            "type": "array",
+            "description": "Localized labels for the search field.",
+            "items": {
+              "type": "string"
+            },
+            "example": ["Role Name"]
+          }
+        }
+      },
+      "PlatformAdminRoleFilterOptions": {
+        "type": "object",
+        "properties": {
+          "platformAdminRoleIsActive": {
+            "type": "array",
+            "description": "Available active status filter options for Platform Administrator Roles.",
+            "items": {
+              "$ref": "#/components/schemas/PlatformAdminRoleIsActiveFilterOption"
+            }
+          }
+        }
+      },
+      "PlatformAdminRoleIsActiveFilterOption": {
+        "type": "object",
+        "properties": {
+          "platformAdminRoleIsActiveValue": {
+            "type": "boolean",
+            "description": "Active status value.",
+            "example": true
+          },
+          "platformAdminRoleIsActiveLabels": {
+            "type": "object",
+            "description": "Localized active status labels.",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "fa": "فعال",
+              "en": "Active"
             }
           }
         }

@@ -9,4 +9,8 @@ export enum PermissionResourceEnum {
   // =========================Authorization System - Permission Management=========================
   PLATFORM_ADMIN_AUTHZ_PERMISSION_GET_ALL = 'platform_admin_authz_permission_get_all',
   BUSINESS_EMPLOYEE_AUTHZ_PERMISSION_GET_ALL = 'business_employee_authz_permission_get_all',
+
+  // =========================Authorization System - Role Management=========================
+  PLATFORM_ADMIN_AUTHZ_ROLE_LIST_OPTIONS = 'platform_admin_authz_role_list_option',
+  PLATFORM_ADMIN_AUTHZ_ROLE_PAGE = 'platform_admin_authz_role_page',
 }
