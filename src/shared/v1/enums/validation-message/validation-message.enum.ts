@@ -113,4 +113,6 @@ export enum ValidationMessage {
 
   // =========================Platform Admin Role Validation=========================
   PLATFORM_ADMIN_ROLE_IS_ACTIVE_INVALID = 'PLATFORM_ADMIN_ROLE_IS_ACTIVE_INVALID',
+  PLATFORM_ADMIN_ROLE_ID_REQUIRED = 'PLATFORM_ADMIN_ROLE_ID_REQUIRED',
+  PLATFORM_ADMIN_ROLE_ID_NOT_FOUND = 'PLATFORM_ADMIN_ROLE_ID_NOT_FOUND',
 }

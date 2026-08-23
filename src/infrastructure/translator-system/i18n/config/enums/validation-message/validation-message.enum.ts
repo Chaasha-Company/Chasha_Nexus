@@ -440,4 +440,14 @@ export const ValidationMessages = {
     fa: 'خطا: نقش‌های ادمین - مقدار فیلتر وضعیت فعال باید true یا false باشد.',
     en: 'Error: Platform admin role - The active status filter must be either true or false.',
   },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_ID_REQUIRED]: {
+    fa: 'خطا: نقش‌های ادمین - شناسه نقش الزامی است.',
+    en: 'Error: Platform admin role - The role id is required.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_ID_NOT_FOUND]: {
+    fa: 'خطا: نقش‌های ادمین - نقش موردنظر یافت نشد.',
+    en: 'Error: Platform admin role - The requested role was not found.',
+  },
 } as const;

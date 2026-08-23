@@ -5,7 +5,7 @@
 - **Task ID:** CHASHA-BE-TASK-002
 - **Type:** Feature
 - **Priority:** High
-- **Status:** Backlog
+- **Status:** Completed
 - **Domain:** Authorization
 - **Module:** Authorizations
 - **Dependencies:** CHASHA-BE-TASK-001
@@ -190,3 +190,57 @@ Implement the platform-admin role detail API that allows an authenticated and au
 - Do not invent additional role fields. Derive the response from the existing platform-admin role domain model and established API conventions.
 - Do not create a duplicate `find-by-id` query or repository if the existing implementation is sufficient.
 - If the existing role-by-ID query does not expose information required by the established role-detail behavior, inspect related entities and repository patterns before deciding whether an extension is required.
+
+---
+
+## Agent Record (2026-08-23)
+
+### Required Skills
+
+- Backend Engineering
+- Architecture
+- API Engineering
+- Authentication & Authorization
+- Database Engineering
+- Persistence
+- Security
+- Testing
+- Git
+- Engineering Judgment
+
+### Analysis notes
+
+- existing-behavior: reused as-is - `findPlatformAdminRoleByIdQuery` interface, `FindPlatformAdminRoleByIdRepositoryContract`, repository implementation (already loads permissions relation), shared exceptions, EA detail flow conventions (POST body id, strict single-field validation, 404 details shape).
+- created: application handler + result type (platform-admins), request/response DTOs + validation + controller + route (authorizations), permission enum value PLATFORM_ADMIN_AUTHZ_ROLE_DETAIL, seed row authz.platform-admin-role.detail.read, enum migration 1787523144517, two spec files under **test**/unit/.
+- derived-decision: response includes full permission rows nested as platformAdminRolePermissionPermission (matches existing GetAllPlatformAdminPermissionResponseDTO vocabulary); Swagger reuses orphaned PermissionDetail schema via new RolePermissionItem wrapper.
+- derived-decision: migration up() sets 11-value superset; down() removes only this task's value.
+
+### Validation results
+
+npm:check PASS - lint PASS - jest 11/11 PASS (3 suites) - Swagger parses, zero unresolved schema refs.
+
+### Review record
+
+Ten questions all YES. Findings resolved: handler/result naming mismatch caught by tsc and fixed pre-commit; transient false alarm on swagger path lookup traced to validation script checking p.get instead of p.post.
+
+### Remaining issues
+
+- Operator edits observed mid-task (left UNSTAGED, not committed by agent): eslint.config.mjs adds '**test**/\*\*' to ignores; tsconfig.json excludes '**test**'. Confirm intent as follow-up.
+- Pre-existing list-option guard module typo still open (from TASK-001).
+
+---
+
+## Final Report
+
+- Task ID: CHASHA-BE-TASK-002
+- Status: Completed
+- Implementation summary: POST /api/v1/{lang}/admin/authz/role/detail returns complete platform-admin role incl. assigned permissions; reuses existing find-by-id query/repository without duplication.
+- Files created: handler, result type, request/response DTOs, validation factory, controller, migration 1787523144517, 2 spec files (handler + validation factory).
+- Files modified: role.route.ts, permission-resource.enum.ts (+PLATFORM_ADMIN_AUTHZ_ROLE_DETAIL), permission.seed.ts (+authz.platform-admin-role.detail.read), shared+i18n validation enums (+ID_REQUIRED/ID_NOT_FOUND fa-en), barrels (6), src/index.ts (migration re-export).
+- Database changes: permission_resource MySQL enum aligned to 11 values (adds platform_admin_authz_role_detail only).
+- API changes: new endpoint POST /{lang}/admin/authz/role/detail.
+- Permission changes: seed row auto-assigned to super_admin via existing role-permission seed.
+- Swagger changes: detail path + DetailPlatformAdminRoleRequest + DetailPlatformAdminRoleResponse + RolePermissionItem reusing PermissionDetail.
+- Tests: find-platform-admin-role-by-id.handler.spec.ts (3) + detail-platform-admin-role.validation.spec.ts (4); suite total 11 passed.
+- Commit message: feat(authz): add platform admin role detail
+- Commit hash: this commit

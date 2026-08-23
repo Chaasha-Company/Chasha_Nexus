@@ -1061,6 +1061,163 @@
         }
       }
     },
+    "/{language_prefix}/admin/authz/role/detail": {
+      "post": {
+        "tags": ["Platform Admin Authentication"],
+        "summary": "Get Platform Administrator role detail",
+        "description": "Retrieves the complete information of a specific Platform Administrator role by its identifier, including the permissions assigned to the role. The role identifier is provided in the JSON request body. Returns a not-found response when the role does not exist. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_DETAIL permission.",
+        "operationId": "getDetailPlatformAdminRole",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetailPlatformAdminRoleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Platform Administrator role detail retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailPlatformAdminRoleResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": {
+                    "platformAdminRoleId": "9f8c7d6e-5b4a-3210-0112-233445566779",
+                    "platformAdminRoleKey": "super_admin",
+                    "platformAdminRoleNameFa": "مدیر ارشد سیستم",
+                    "platformAdminRoleNameEn": "Super Admin",
+                    "platformAdminRoleDescriptionFa": null,
+                    "platformAdminRoleDescriptionEn": null,
+                    "platformAdminRoleIsActive": true,
+                    "platformAdminRoleCreatedAt": "2026-08-16T18:30:00.000Z",
+                    "platformAdminRoleUpdatedAt": "2026-08-16T18:30:00.000Z",
+                    "platformAdminRolePermissions": [
+                      {
+                        "platformAdminRolePermissionId": "7c2d1e9a-1111-2222-3333-444455556666",
+                        "platformAdminRolePermissionPermission": {
+                          "permissionId": "8d3e2f0b-7777-8888-9999-000011112222",
+                          "permissionKey": "authz.platform-admin-role.list.read",
+                          "permissionSubject": "PLATFORM_ADMIN",
+                          "permissionResource": "platform_admin_authz_role_list",
+                          "permissionVersion": 1,
+                          "permissionModule": "platform-admin-role",
+                          "permissionAction": "read",
+                          "permissionType": "action",
+                          "permissionLabelFa": "دریافت لیست نقش های ادمین",
+                          "permissionLabelEn": "Get Platform Admin Role List",
+                          "permissionDescriptionFa": null,
+                          "permissionDescriptionEn": null,
+                          "permissionNavigation": null,
+                          "permissionIsActive": true
+                        }
+                      }
+                    ]
+                  },
+                  "timeStamp": "2026-08-23T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoBodyData": {
+                    "summary": "No Request Body",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "MissingRoleId": {
+                    "summary": "Missing Role Id",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "platformAdminRoleId": ["Error: Platform admin role - The role id is required."]
+                      },
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Platform Administrator role not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "The requested resource was not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "platformAdminRoleId": ["Error: Platform admin role - The requested role was not found."]
+                  },
+                  "timeStamp": "2026-08-23T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/business/auth/login/with-phone": {
       "post": {
         "tags": ["Business Authentication"],
@@ -3043,6 +3200,104 @@
               "fa": "در انتظار بررسی",
               "en": "Pending"
             }
+          }
+        }
+      },
+      "DetailPlatformAdminRoleRequest": {
+        "type": "object",
+        "required": ["platformAdminRoleId"],
+        "properties": {
+          "platformAdminRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          }
+        }
+      },
+      "RolePermissionItem": {
+        "type": "object",
+        "properties": {
+          "platformAdminRolePermissionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "platformAdminRolePermissionPermission": {
+            "$ref": "#/components/schemas/PermissionDetail"
+          }
+        }
+      },
+      "DetailPlatformAdminRoleResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "platformAdminRoleId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "platformAdminRoleKey": {
+                "type": "string",
+                "example": "super_admin"
+              },
+              "platformAdminRoleNameFa": {
+                "type": "string"
+              },
+              "platformAdminRoleNameEn": {
+                "type": "string",
+                "example": "Super Admin"
+              },
+              "platformAdminRoleDescriptionFa": {
+                "type": "string",
+                "nullable": true
+              },
+              "platformAdminRoleDescriptionEn": {
+                "type": "string",
+                "nullable": true
+              },
+              "platformAdminRoleIsActive": {
+                "type": "boolean",
+                "example": true
+              },
+              "platformAdminRoleCreatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "platformAdminRoleUpdatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "platformAdminRolePermissions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RolePermissionItem"
+                }
+              }
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
           }
         }
       },

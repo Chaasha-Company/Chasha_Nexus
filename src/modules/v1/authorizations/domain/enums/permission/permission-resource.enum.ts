@@ -14,4 +14,5 @@ export enum PermissionResourceEnum {
   PLATFORM_ADMIN_AUTHZ_ROLE_LIST_OPTIONS = 'platform_admin_authz_role_list_option',
   PLATFORM_ADMIN_AUTHZ_ROLE_PAGE = 'platform_admin_authz_role_page',
   PLATFORM_ADMIN_AUTHZ_ROLE_LIST = 'platform_admin_authz_role_list',
+  PLATFORM_ADMIN_AUTHZ_ROLE_DETAIL = 'platform_admin_authz_role_detail',
 }

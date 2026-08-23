@@ -201,6 +201,20 @@ export const createPermissionDataSeed = async (): Promise<void> => {
       permissionDescriptionEn: 'Access to the platform admin role list API',
       permissionNavigation: null,
     },
+    {
+      permissionKey: 'authz.platform-admin-role.detail.read',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_DETAIL,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-role',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.ACTION,
+      permissionLabelFa: 'دریافت جزئیات نقش ادمین',
+      permissionLabelEn: 'Get Platform Admin Role Detail',
+      permissionDescriptionFa: 'دسترسی به API دریافت جزئیات یک نقش ادمین',
+      permissionDescriptionEn: 'Access to the platform admin role detail API',
+      permissionNavigation: null,
+    },
   ];
 
   for (const permission of permissions) {

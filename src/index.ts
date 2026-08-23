@@ -29,3 +29,4 @@ export * from '@/shared/v1/database/migrations/1786922755782-Add_Permission_Reso
 export * from '@/shared/v1/database/migrations/1787090633627-Add_Platform_Admin_Authz_Permission_Get_All_Permission';
 export * from '@/shared/v1/database/migrations/1787094133874-Add_Business_Employee_Authz_Permission_Get_All_Permission';
 export * from '@/shared/v1/database/migrations/1787520116688-Add_Permission_Resource_Platform_Admin_Role_List';
+export * from '@/shared/v1/database/migrations/1787523144517-Add_Permission_Resource_Platform_Admin_Role_Detail';
