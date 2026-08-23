@@ -110,4 +110,7 @@ export enum ValidationMessage {
 
   // =========================Faq Validation=========================
   FAQ_TYPE_INVALID = 'FAQ_TYPE_INVALID',
+
+  // =========================Platform Admin Role Validation=========================
+  PLATFORM_ADMIN_ROLE_IS_ACTIVE_INVALID = 'PLATFORM_ADMIN_ROLE_IS_ACTIVE_INVALID',
 }

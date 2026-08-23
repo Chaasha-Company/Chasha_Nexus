@@ -1,0 +1,17 @@
+import type { MigrationInterface, QueryRunner } from 'typeorm';
+
+export class AddPermissionResourcePlatformAdminRoleList1787520116688 implements MigrationInterface {
+  name = 'AddPermissionResourcePlatformAdminRoleList1787520116688';
+
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(
+      "ALTER TABLE `permissions` CHANGE `permission_resource` `permission_resource` enum ('early_access_request_page', 'early_access_request_get_all', 'early_access_request_list_options', 'early_access_request_detail', 'early_access_request_update', 'platform_admin_authz_permission_get_all', 'business_employee_authz_permission_get_all', 'platform_admin_authz_role_list_option', 'platform_admin_authz_role_page', 'platform_admin_authz_role_list') NOT NULL",
+    );
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(
+      "ALTER TABLE `permissions` CHANGE `permission_resource` `permission_resource` enum ('early_access_request_page', 'early_access_request_get_all', 'early_access_request_list_options', 'early_access_request_detail', 'early_access_request_update', 'platform_admin_authz_permission_get_all', 'business_employee_authz_permission_get_all', 'platform_admin_authz_role_list_option', 'platform_admin_authz_role_page') NOT NULL",
+    );
+  }
+}

@@ -900,6 +900,166 @@
         }
       }
     },
+    "/{language_prefix}/admin/authz/role/list": {
+      "get": {
+        "tags": ["Platform Admin Authentication"],
+        "summary": "Get Platform Administrator role list",
+        "description": "Retrieves a paginated list of Platform Administrator roles for management purposes. The endpoint supports pagination, global search across the role key and bilingual names, and filtering by active status. The query schema is strict and unsupported query parameters are rejected. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_LIST permission.",
+        "operationId": "getAllPlatformAdminRole",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "paginationPage",
+            "in": "query",
+            "required": true,
+            "description": "Pagination page number.",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d+$",
+              "example": "1"
+            }
+          },
+          {
+            "name": "paginationLimit",
+            "in": "query",
+            "required": true,
+            "description": "Number of Platform Administrator roles to return per page.",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d+$",
+              "example": "20"
+            }
+          },
+          {
+            "name": "platformAdminRoleSearch",
+            "in": "query",
+            "required": false,
+            "description": "Searches Platform Administrator roles by role key or bilingual role name.",
+            "schema": {
+              "type": "string",
+              "example": "super_admin"
+            }
+          },
+          {
+            "name": "platformAdminRoleIsActive",
+            "in": "query",
+            "required": false,
+            "description": "Filters Platform Administrator roles by active status.",
+            "schema": {
+              "type": "string",
+              "enum": ["true", "false"],
+              "example": "true"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Platform Administrator roles retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllPlatformAdminRolePaginationResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": {
+                    "paginationItems": [
+                      {
+                        "platformAdminRoleId": "9f8c7d6e-5b4a-3210-0112-233445566779",
+                        "platformAdminRoleKey": "super_admin",
+                        "platformAdminRoleNameFa": "مدیر ارشد سیستم",
+                        "platformAdminRoleNameEn": "Super Admin",
+                        "platformAdminRoleDescriptionFa": null,
+                        "platformAdminRoleDescriptionEn": null,
+                        "platformAdminRoleIsActive": true,
+                        "platformAdminRoleCreatedAt": "2026-08-16T18:30:00.000Z"
+                      }
+                    ],
+                    "paginationMeta": {
+                      "paginationMetaPage": 1,
+                      "paginationMetaLimit": 20,
+                      "paginationMetaTotalItems": 1,
+                      "paginationMetaTotalPages": 1,
+                      "paginationMetaHasNextPage": false,
+                      "paginationMetaHasPreviousPage": false
+                    }
+                  },
+                  "timeStamp": "2026-08-23T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoQueryData": {
+                    "summary": "No Query Parameters",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "InvalidIsActiveFilter": {
+                    "summary": "Invalid Active Status Filter",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "platformAdminRoleIsActive": ["Error: Platform admin role - The active status filter must be either true or false."]
+                      },
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/business/auth/login/with-phone": {
       "post": {
         "tags": ["Business Authentication"],
@@ -2882,6 +3042,112 @@
               "fa": "در انتظار بررسی",
               "en": "Pending"
             }
+          }
+        }
+      },
+      "GetAllPlatformAdminRoleItem": {
+        "type": "object",
+        "properties": {
+          "platformAdminRoleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "platformAdminRoleKey": {
+            "type": "string",
+            "example": "super_admin"
+          },
+          "platformAdminRoleNameFa": {
+            "type": "string",
+            "example": "مدیر ارشد سیستم"
+          },
+          "platformAdminRoleNameEn": {
+            "type": "string",
+            "example": "Super Admin"
+          },
+          "platformAdminRoleDescriptionFa": {
+            "type": "string",
+            "nullable": true
+          },
+          "platformAdminRoleDescriptionEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "platformAdminRoleIsActive": {
+            "type": "boolean",
+            "example": true
+          },
+          "platformAdminRoleCreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "GetAllPlatformAdminRolePaginationResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "paginationItems": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/GetAllPlatformAdminRoleItem"
+                }
+              },
+              "paginationMeta": {
+                "type": "object",
+                "properties": {
+                  "paginationMetaPage": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "paginationMetaLimit": {
+                    "type": "integer",
+                    "example": 20
+                  },
+                  "paginationMetaTotalItems": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "paginationMetaTotalPages": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "paginationMetaHasNextPage": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "paginationMetaHasPreviousPage": {
+                    "type": "boolean",
+                    "example": false
+                  }
+                }
+              }
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
           }
         }
       },

@@ -434,4 +434,10 @@ export const ValidationMessages = {
     fa: 'خطا: نوع سوالات متداول - مقدار ارسال شده فقط می‌تواند landing یا business باشد.',
     en: 'Error: FAQ type - The value must be either landing or business.',
   },
+
+  // =========================Platform Admin Role Validation=========================
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_IS_ACTIVE_INVALID]: {
+    fa: 'خطا: نقش‌های ادمین - مقدار فیلتر وضعیت فعال باید true یا false باشد.',
+    en: 'Error: Platform admin role - The active status filter must be either true or false.',
+  },
 } as const;

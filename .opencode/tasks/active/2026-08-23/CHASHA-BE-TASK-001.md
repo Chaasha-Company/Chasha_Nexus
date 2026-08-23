@@ -5,10 +5,44 @@
 - **Task ID:** CHASHA-BE-TASK-001
 - **Type:** Feature
 - **Priority:** High
-- **Status:** Backlog
+- **Status:** Completed
 - **Domain:** Authorization
 - **Module:** Authorizations
 - **Dependencies:** None
+
+## Dependencies
+
+- None
+
+---
+
+## Required Skills
+
+- Backend Engineering
+- Architecture
+- API Engineering
+- Authentication & Authorization
+- Database Engineering
+- Persistence
+- Performance
+- Security
+- Testing
+- Git
+- Engineering Judgment
+
+---
+
+## Analysis Notes (agent, 2026-08-23)
+
+existing-behavior / existing-rule findings verified by inspection:
+
+1. REUSED AS-IS: `find-all-platform-admin-role.query.ts` (search/isActive/skip/take), `find-all-platform-admin-role.result.ts`, `applyPlatformAdminRoleSearch` helper, list definition/fields under `platform-admins/list/platform-admin-role/`. No duplicates will be created.
+2. TO CREATE: handler (`handlers/find-all-platform-admin-role.handler.ts`), repository contract + implementation (mirroring early-access-requests get-all pattern incl. composite cache key + 30s cache + createdAt DESC).
+3. HTTP surface belongs to `authorizations` module (precedent: list-option controller consumes platform-admins application via cross-module import).
+4. Permission model derived-decision: NEW resource enum value `PLATFORM_ADMIN_AUTHZ_ROLE_LIST = 'platform_admin_authz_role_list'`; seed row `authz.platform-admin-role.list.read` (ACTION/READ, module 'platform-admin-role'); route guard uses module 'platform-admin-role' (byte-equal to seed; NOT copying the 'platoform-admin-role' typo present in the list-option route — flagged as pre-existing issue, out of scope).
+5. Database derived-decision: `permissions.permission_resource` is a MySQL enum column. No migration ever added the two existing role values ('platform_admin_authz_role_list_option', 'platform_admin_authz_role_page') that seeds already reference — pre-existing drift. New migration must set up() to a superset of all 10 TS enum values (prevents truncation failure on real DBs); down() restores prior chain state (6 values), mirroring precedent 1787094133874. Role-permission assignment needs no edit: seed auto-grants every permission row to super_admin.
+6. Tests: jest is configured but unwired (`npm test` fails intentionally). Task explicitly requires tests; wiring minimally (test script + co-located spec under src/) per testing-rules §R4 with this task as operator-approved first wiring.
+7. Swagger derived-decision: document THIS endpoint's real envelope (data.paginationMeta\* field names) rather than reusing the inaccurate `PaginationMetadata` schema (page/limit/...) referenced by older entries.
 
 ---
 
@@ -191,3 +225,30 @@ Implement the platform-admin role list API that allows an authenticated and auth
 - Do not invent role fields, search fields, or filter fields. Derive them from the existing platform-admin role model and list definitions.
 - Do not modify the database schema unless repository inspection proves that the requested list behavior cannot be implemented with the existing schema.
 - The existing `list-option` functionality is separate from this task and must not be replaced or duplicated.
+
+---
+
+## Review Record (agent, 2026-08-23)
+
+Ten questions: 1 satisfies task YES · 2 architecture preserved YES · 3 no unnecessary coupling (type-only cross-module DTO import mirrors list-option precedent) · 4 no security risks added · 5 no authorization gaps (guard triple byte-equal to seed) · 6 API consistency kept · 7 DB consistency via superset enum migration · 8 handler covered by 4 unit tests; validation/guard layers need HTTP harness - deferral noted · 9 Swagger synchronized with real paginationMeta envelope · 10 production-ready YES.
+
+Findings resolved: BOM artifacts introduced by PowerShell writes were detected in diff review and stripped before commit (12 files). Pre-existing issues flagged, NOT touched: list-option route module typo ('platoform-admin-role' vs seed 'platform-admin-role'); missing migrations for previously seeded role resources (partially reconciled for forward-compat by this migration's up()).
+
+---
+
+## Final Report
+
+- Task ID: CHASHA-BE-TASK-001
+- Status: Completed
+- Implementation summary: GET /api/v1/{lang}/admin/authz/role/list returning paginated platform-admin roles with search (key/nameFa/nameEn) and isActive filter, guarded by dedicated permission.
+- Files created: repository contract + implementation (find-all-platform-admin-role), query handler, request/response DTOs, Zod validation factory, controller, migration 1787520116688, handler spec (4 tests).
+- Files modified: role.route.ts, permission-resource.enum.ts (+PLATFORM_ADMIN_AUTHZ_ROLE_LIST), permission.seed.ts (+authz.platform-admin-role.list.read), validation-message shared enum + i18n catalog (+PLATFORM_ADMIN_ROLE_IS_ACTIVE_INVALID fa/en), barrels (7), src/index.ts (migration re-export), jest.config.ts (ts-jest commonjs override), package.json (test: jest).
+- Database changes: migration aligning permissions.permission_resource MySQL enum to full 10-value set (adds platform_admin_authz_role_list; reconciles previously unmigrated role resources).
+- API changes: new endpoint GET /{lang}/admin/authz/role/list.
+- Permission changes: seed row authz.platform-admin-role.list.read (PLATFORM_ADMIN / platform-admin-role / read / ACTION v1); auto-assigned to super_admin by existing role-permission seed.
+- Swagger changes: path /{language_prefix}/admin/authz/role/list + GetAllPlatformAdminRoleItem + GetAllPlatformAdminRolePaginationResponse schemas documenting real paginationMeta envelope.
+- Tests: find-all-platform-admin-role.handler.spec.ts - 4 passed (pagination math, search passthrough, isActive true/false conversion, mapping shape). Testing foundation wired (npm test -> jest).
+- Validation results: npm:check PASS, lint PASS, prettier PASS, jest 4/4 PASS, spec JSON parses, all $refs resolve.
+- Commit message: feat(authz): add platform admin role list
+- Commit hash: this commit
+- Remaining issues: (a) pre-existing list-option guard module typo breaks its permission match - needs operator decision; (b) integration-level coverage for validation/auth layers deferred until HTTP test harness approved; (c) older Swagger entries still document outdated pagination shape (out of scope).
