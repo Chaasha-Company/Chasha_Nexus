@@ -90,5 +90,6 @@ them unless a task explicitly covers them:
 ## Repo-root extras
 
 `opencode.json` holds opencode provider configuration only — do not modify it as part of
-engineering tasks. `plopfile.ts` is empty. `.opencode/agent|command|instructions|plugin|skills`
-are pre-existing empty opencode scaffolding directories.
+engineering tasks. `plopfile.ts` is empty. `.opencode/agent|command|instructions|plugin`
+are pre-existing empty opencode scaffolding directories; `.opencode/skills/` hosts the
+Engineering Skill System (16 `<skill>/SKILL.md` capability definitions, see AGENTS.md §6.1).

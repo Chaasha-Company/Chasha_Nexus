@@ -45,6 +45,17 @@ existing-behavior / existing-rule / assumption, plus file paths.>
 
 - <Tasks, migrations, operator decisions, or external systems this depends on.>
 
+## Required Skills
+
+<Select the minimal set, using exact skill names from `.opencode/skills/`:
+Backend Engineering; Architecture; API Engineering; Authentication & Authorization;
+Database Engineering; Persistence; Distributed Systems; Performance; Security; Testing;
+Observability; Reliability; Infrastructure; Cloud; Git; Engineering Judgment.
+Consult each selected `.opencode/skills/<skill>/SKILL.md` during implementation and review.>
+
+- <Skill 1>
+- <Skill 2>
+
 ## Expected behavior
 
 <Observable behavior after completion: endpoints, envelopes, status codes,

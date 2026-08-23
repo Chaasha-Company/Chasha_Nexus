@@ -15,16 +15,17 @@ rules it must follow, how work flows from task to commit, and what "done" means.
 
 ## Directory map
 
-| Path                                                        | Purpose                                                                                                                      |
-| ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `context/`                                                  | Stable project knowledge: product, repository, architecture, engineering process.                                            |
-| `rules/`                                                    | Enforceable engineering rules: architecture, coding, naming, API, database, validation, security, testing, quality, commits. |
-| `workflow/`                                                 | Step-by-step workflows: development loop, task lifecycle, feature, bugfix, review, release.                                  |
-| `tasks/`                                                    | Task files, organized by lifecycle state: `backlog/`, `active/`, `review/`, `completed/`, `archived/`.                       |
-| `daily/`                                                    | Daily plans and logs for the 4–6 tasks per day cadence. Active plans live here; finished ones move to `archive/`.            |
-| `templates/`                                                | Fill-in templates for tasks (generic, feature, bugfix), reviews, and daily plans.                                            |
-| `scripts/`                                                  | Reserved for future automation helpers. Nothing executable yet.                                                              |
-| `agent/`, `command/`, `instructions/`, `plugin/`, `skills/` | Pre-existing opencode-native scaffolding. Empty on purpose; do not use for project documentation.                            |
+| Path                                             | Purpose                                                                                                                                             |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context/`                                       | Stable project knowledge: product, repository, architecture, engineering process.                                                                   |
+| `rules/`                                         | Enforceable engineering rules: architecture, coding, naming, API, database, validation, security, testing, quality, commits.                        |
+| `workflow/`                                      | Step-by-step workflows: development loop, task lifecycle, feature, bugfix, review, release.                                                         |
+| `tasks/`                                         | Task files, organized by lifecycle state: `backlog/`, `active/`, `review/`, `completed/`, `archived/`.                                              |
+| `daily/`                                         | Daily plans and logs for the 4–6 tasks per day cadence. Active plans live here; finished ones move to `archive/`.                                   |
+| `templates/`                                     | Fill-in templates for tasks (generic, feature, bugfix), reviews, and daily plans.                                                                   |
+| `scripts/`                                       | Reserved for future automation helpers. Nothing executable yet.                                                                                     |
+| `agent/`, `command/`, `instructions/`, `plugin/` | Pre-existing opencode-native scaffolding. Empty on purpose; do not use for project documentation.                                                   |
+| `skills/`                                        | Engineering Skill System: 16 composable capability definitions (`<skill>/SKILL.md`) consulted per task's `## Required Skills` (see AGENTS.md §6.1). |
 
 ## How a session starts (agent)
 

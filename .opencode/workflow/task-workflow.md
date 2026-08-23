@@ -50,7 +50,10 @@ always match the directory.
 2. Fill every section; unknowns stay explicit as `assumption` labels.
 3. The agent may draft task files from operator descriptions, but business requirements come
    only from the operator; the agent marks anything it derived.
-4. A task becomes Planned only when objective, scope, acceptance criteria, and testing/doc
+4. Declare the minimal `## Required Skills` set using exact skill names from
+   `.opencode/skills/` (see AGENTS.md §6.1); the agent consults each selected
+   `SKILL.md` during implementation and review.
+5. A task becomes Planned only when objective, scope, acceptance criteria, and testing/doc
    requirements are complete.
 
 ## Moving & completing

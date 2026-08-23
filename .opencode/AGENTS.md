@@ -81,6 +81,19 @@ Directory mapping: `backlog/` (Backlog, Planned) · `active/` (Active, Implement
 The agent must never silently treat an undocumented idea as completed work. Details:
 [`workflow/task-workflow.md`](./workflow/task-workflow.md).
 
+### 6.1 Required Skills protocol
+
+Tasks declare the capabilities they demand via a `## Required Skills` section, using the
+exact skill names defined in `.opencode/skills/` (e.g. `API Engineering`,
+`Authentication & Authorization`, `Persistence`).
+
+- Before implementing a task, identify its Required Skills and consult each corresponding
+  `.opencode/skills/[skill]/SKILL.md`; apply them actively during implementation and review.
+- Skills are composable but not universal: the agent must not blindly apply unrelated
+  skills to a task.
+- If a task lacks the section, derive the minimal sensible skill set and record it in the
+  task file before starting.
+
 ## 7. Daily execution
 
 The operator assigns 4–6 tasks per day. For each day the agent creates a daily plan from
@@ -147,22 +160,23 @@ Include `proposed-improvement` / `assumption` labels where applicable.
 
 ## 11. Knowledge map
 
-| Topic                             | Read                                                                                                   |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Product & domain                  | [`context/chasha-context.md`](./context/chasha-context.md)                                             |
-| Repository facts, tooling, quirks | [`context/repository-context.md`](./context/repository-context.md)                                     |
-| Architecture & module anatomy     | [`context/architecture-context.md`](./context/architecture-context.md)                                 |
-| Engineering process state         | [`context/engineering-context.md`](./context/engineering-context.md)                                   |
-| Boundaries & layering             | [`rules/architecture-rules.md`](./rules/architecture-rules.md)                                         |
-| Code style                        | [`rules/coding-rules.md`](./rules/coding-rules.md), [`rules/naming-rules.md`](./rules/naming-rules.md) |
-| Endpoints                         | [`rules/api-rules.md`](./rules/api-rules.md)                                                           |
-| Persistence                       | [`rules/database-rules.md`](./rules/database-rules.md)                                                 |
-| Input validation                  | [`rules/validation-rules.md`](./rules/validation-rules.md)                                             |
-| Security & authorization          | [`rules/security-rules.md`](./rules/security-rules.md)                                                 |
-| Testing                           | [`rules/testing-rules.md`](./rules/testing-rules.md)                                                   |
-| Quality bar & completion          | [`rules/quality-rules.md`](./rules/quality-rules.md)                                                   |
-| Commits                           | [`rules/commit-rules.md`](./rules/commit-rules.md)                                                     |
-| Workflows                         | [`workflow/development-workflow.md`](./workflow/development-workflow.md) and siblings                  |
+| Topic                             | Read                                                                                                     |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Product & domain                  | [`context/chasha-context.md`](./context/chasha-context.md)                                               |
+| Repository facts, tooling, quirks | [`context/repository-context.md`](./context/repository-context.md)                                       |
+| Architecture & module anatomy     | [`context/architecture-context.md`](./context/architecture-context.md)                                   |
+| Engineering process state         | [`context/engineering-context.md`](./context/engineering-context.md)                                     |
+| Boundaries & layering             | [`rules/architecture-rules.md`](./rules/architecture-rules.md)                                           |
+| Code style                        | [`rules/coding-rules.md`](./rules/coding-rules.md), [`rules/naming-rules.md`](./rules/naming-rules.md)   |
+| Endpoints                         | [`rules/api-rules.md`](./rules/api-rules.md)                                                             |
+| Persistence                       | [`rules/database-rules.md`](./rules/database-rules.md)                                                   |
+| Input validation                  | [`rules/validation-rules.md`](./rules/validation-rules.md)                                               |
+| Security & authorization          | [`rules/security-rules.md`](./rules/security-rules.md)                                                   |
+| Testing                           | [`rules/testing-rules.md`](./rules/testing-rules.md)                                                     |
+| Quality bar & completion          | [`rules/quality-rules.md`](./rules/quality-rules.md)                                                     |
+| Commits                           | [`rules/commit-rules.md`](./rules/commit-rules.md)                                                       |
+| Workflows                         | [`workflow/development-workflow.md`](./workflow/development-workflow.md) and siblings                    |
+| Capability skills (16 domains)    | [`skills/<skill>/SKILL.md`](./skills/backend-engineering/SKILL.md), consulted per task's Required Skills |
 
 ## 12. Ambiguity protocol
 
