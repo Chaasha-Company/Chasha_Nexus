@@ -13,7 +13,7 @@ export default [
   {
     files: ['src/**/*.{ts,tsx,js,jsx}'],
 
-    ignores: ['dist/**', 'coverage/**', 'node_modules/**', 'src/__scripts__/**', 'src/shared/v1/enums/**'],
+    ignores: ['dist/**', 'coverage/**', 'node_modules/**', 'src/__scripts__/**', 'src/shared/v1/enums/**', '__test__/**'],
 
     languageOptions: {
       parser: tseslint.parser,
