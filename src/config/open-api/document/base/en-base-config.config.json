@@ -1346,6 +1346,132 @@
         }
       }
     },
+    "/{language_prefix}/admin/authz/role/update": {
+      "patch": {
+        "tags": ["Platform Admin Authentication"],
+        "summary": "Update a Platform Administrator role",
+        "description": "Updates the editable data of an existing Platform Administrator role identified by its identifier in the JSON request body. Editable fields are the bilingual role names and the optional bilingual descriptions; at least one editable field must be provided. The role key and active status are not editable. Role permissions are not affected by this endpoint. Returns a not-found response when the role does not exist. The request schema is strict and unsupported fields are rejected. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_UPDATE permission.",
+        "operationId": "updatePlatformAdminRole",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePlatformAdminRoleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Platform Administrator role updated successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePlatformAdminRoleResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Updated successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-23T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoEditableFields": {
+                    "summary": "Only The Role Id Provided",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {},
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "NameTooLong": {
+                    "summary": "Role Name Too Long",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "platformAdminRoleNameEn": ["Error: Platform admin role - The English role name must not exceed 255 characters."]
+                      },
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Platform Administrator role not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "The requested resource was not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "platformAdminRoleId": ["Error: Platform admin role - The requested role was not found."]
+                  },
+                  "timeStamp": "2026-08-23T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/business/auth/login/with-phone": {
       "post": {
         "tags": ["Business Authentication"],
@@ -3387,6 +3513,68 @@
                 "format": "uuid"
               }
             }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "UpdatePlatformAdminRoleRequest": {
+        "type": "object",
+        "required": ["platformAdminRoleId"],
+        "properties": {
+          "platformAdminRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          },
+          "platformAdminRoleNameFa": {
+            "type": "string",
+            "maxLength": 255,
+            "example": "مدیر رستوران"
+          },
+          "platformAdminRoleNameEn": {
+            "type": "string",
+            "maxLength": 255,
+            "example": "Restaurant Manager"
+          },
+          "platformAdminRoleDescriptionFa": {
+            "type": "string",
+            "nullable": true
+          },
+          "platformAdminRoleDescriptionEn": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdatePlatformAdminRoleResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Updated successfully."
+          },
+          "data": {
+            "nullable": true,
+            "example": null
           },
           "timeStamp": {
             "type": "string",

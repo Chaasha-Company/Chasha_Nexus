@@ -5,7 +5,7 @@
 - **Task ID:** CHASHA-BE-TASK-004
 - **Type:** Feature
 - **Priority:** High
-- **Status:** Backlog
+- **Status:** Completed
 - **Domain:** Authorization
 - **Module:** Platform Admin Roles
 - **Dependencies:** CHASHA-BE-TASK-003
@@ -230,3 +230,47 @@ Implement an authenticated and authorized platform-admin API that updates the ed
 - Do not modify role permissions as part of this task. Permission assignment/removal must remain a separate operation.
 - Do not introduce a new architectural pattern when an existing update pattern can be reused.
 - If the existing role model does not provide enough information to determine the editable fields without making a business decision, request clarification rather than inventing a business rule.
+
+---
+
+## Agent Record (2026-08-23)
+
+### Required Skills
+
+- Backend Engineering
+- Architecture
+- API Engineering
+- Authentication & Authorization
+- Database Engineering
+- Persistence
+- Security
+- Testing
+- Git
+- Engineering Judgment
+
+### Analysis notes
+
+- Update convention verified: EA update uses PATCH /update with body-id + AtLeastOne partial command + strictObject refine (UPDATE_AT_LEAST_ONE_FIELD_REQUIRED) + null-data UPDATED_SUCCESS response. Mirrored exactly.
+- derived-decision - editable fields: bilingual names + descriptions only. platformAdminRoleKey excluded because seeds resolve roles BY KEY (mutation would break idempotent seeding); isActive excluded because no existing flow mutates it (adding it would invent a deactivation feature).
+- Conflict criterion N/A by construction: no editable field carries a uniqueness constraint (key is immutable), so 409 path cannot occur; documented instead of forced.
+- Role permissions untouched: update payload contains only role columns.
+
+### Validation results
+
+npm:check PASS - lint PASS - jest 26/26 PASS (7 suites) - Swagger parses; update path opId updatePlatformAdminRole with responses 200/400/401/403/404/500; zero unresolved refs.
+
+---
+
+## Final Report
+
+- Task ID: CHASHA-BE-TASK-004
+- Status: Completed
+- Implementation summary: PATCH /api/v1/{lang}/admin/authz/role/update updates editable fields (bilingual names/descriptions) of an existing role; id required, at-least-one-field enforced, 404 on missing role.
+- Files created: update command, handler, repository contract + implementation, request DTO, validation factory, controller, migration 1787527674995, handler spec (2 tests), validation spec (5 tests).
+- Files modified: permission-resource.enum.ts (+PLATFORM_ADMIN_AUTHZ_ROLE_UPDATE), permission.seed.ts (+authz.platform-admin-role.update.update), shared+i18n validation enums (+3 INVALID keys fa/en), barrels (6), src/index.ts (migration re-export), role.route.ts, Swagger spec.
+- Database changes: permission_resource MySQL enum aligned to 13 values (additive only).
+- Permission changes: seed row UPDATE action auto-assigned to super_admin via existing role-permission seed.
+- Swagger changes: update path + UpdatePlatformAdminRoleRequest/Response schemas documenting real null-data envelope.
+- Commit message: feat(authz): add platform admin role update
+- Commit hash: this commit
+- Remaining issues: unauthenticated/no-permission HTTP-level cases still pending approved integration harness; pre-existing list-option guard typo open.

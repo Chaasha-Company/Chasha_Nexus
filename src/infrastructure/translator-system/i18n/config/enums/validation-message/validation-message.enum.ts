@@ -485,4 +485,19 @@ export const ValidationMessages = {
     fa: 'خطا: نقش‌های ادمین - نقشی با این کلید از قبل وجود دارد.',
     en: 'Error: Platform admin role - A role with this key already exists.',
   },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_NAME_FA_INVALID]: {
+    fa: 'خطا: نقش‌های ادمین - نام فارسی نقش نامعتبر است.',
+    en: 'Error: Platform admin role - The Persian role name is invalid.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_NAME_EN_INVALID]: {
+    fa: 'خطا: نقش‌های ادمین - نام انگلیسی نقش نامعتبر است.',
+    en: 'Error: Platform admin role - The English role name is invalid.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_DESCRIPTION_INVALID]: {
+    fa: 'خطا: نقش‌های ادمین - توضیحات نقش نامعتبر است.',
+    en: 'Error: Platform admin role - The role description is invalid.',
+  },
 } as const;

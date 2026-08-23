@@ -31,3 +31,4 @@ export * from '@/shared/v1/database/migrations/1787094133874-Add_Business_Employ
 export * from '@/shared/v1/database/migrations/1787520116688-Add_Permission_Resource_Platform_Admin_Role_List';
 export * from '@/shared/v1/database/migrations/1787523144517-Add_Permission_Resource_Platform_Admin_Role_Detail';
 export * from '@/shared/v1/database/migrations/1787525326063-Add_Permission_Resource_Platform_Admin_Role_Create';
+export * from '@/shared/v1/database/migrations/1787527674995-Add_Permission_Resource_Platform_Admin_Role_Update';

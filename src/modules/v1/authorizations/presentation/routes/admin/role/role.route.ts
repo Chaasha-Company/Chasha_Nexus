@@ -1,7 +1,7 @@
 import { PermissionActionEnum, PermissionResourceEnum } from '@/modules/v1/authorizations/domain';
-import { createPlatformAdminRoleController, detailPlatformAdminRoleController, getAllPlatformAdminRoleController, getListOptionPlatformAdminRoleController } from '@/modules/v1/authorizations/presentation/controllers';
+import { createPlatformAdminRoleController, detailPlatformAdminRoleController, getAllPlatformAdminRoleController, getListOptionPlatformAdminRoleController, updatePlatformAdminRoleController } from '@/modules/v1/authorizations/presentation/controllers';
 import { permissionGuardPlatformAdminMiddleware } from '@/modules/v1/authorizations/presentation/middlewares';
-import { CreatePlatformAdminRoleValidation, DetailPlatformAdminRoleValidation, GetAllPlatformAdminRoleQueryValidation } from '@/modules/v1/authorizations/presentation/validations';
+import { CreatePlatformAdminRoleValidation, DetailPlatformAdminRoleValidation, GetAllPlatformAdminRoleQueryValidation, UpdatePlatformAdminRoleValidation } from '@/modules/v1/authorizations/presentation/validations';
 import { validateBodyMiddleware, validateQueryMiddleware } from '@/shared/v1/middlewares/validation';
 import { Router } from 'express';
 
@@ -12,6 +12,13 @@ router.post(
   permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'platform-admin-role', platformAdminPermissionAction: PermissionActionEnum.CREATE, platformAdminPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_CREATE }),
   validateBodyMiddleware(CreatePlatformAdminRoleValidation),
   createPlatformAdminRoleController,
+);
+
+router.patch(
+  '/update',
+  permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'platform-admin-role', platformAdminPermissionAction: PermissionActionEnum.UPDATE, platformAdminPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_UPDATE }),
+  validateBodyMiddleware(UpdatePlatformAdminRoleValidation),
+  updatePlatformAdminRoleController,
 );
 
 router.get(
