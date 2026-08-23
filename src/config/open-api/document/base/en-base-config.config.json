@@ -151,7 +151,7 @@
                       "status": 400,
                       "success": false,
                       "author": "Mehkam_Company",
-                      "message": "Data conflict.",
+                      "message": "Data conflict detected.",
                       "errorCode": "E1090",
                       "errors": {
                         "loginPassword": ["Password is incorrect."]
@@ -166,7 +166,7 @@
                       "status": 400,
                       "success": false,
                       "author": "Mehkam_Company",
-                      "message": "Data conflict.",
+                      "message": "Data conflict detected.",
                       "errorCode": "E1090",
                       "errors": {
                         "error_message": ["Your login request is already in progress. Please return to the verification page and enter your OTP."]
@@ -360,7 +360,7 @@
                       "status": 400,
                       "success": false,
                       "author": "Mehkam_Company",
-                      "message": "Data conflict.",
+                      "message": "Data conflict detected.",
                       "errorCode": "E1090",
                       "errors": {
                         "loginVerifyOtp": ["Verification code is incorrect."]
@@ -1184,6 +1184,12 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
           "404": {
             "description": "Platform Administrator role not found.",
             "content": {
@@ -1195,7 +1201,7 @@
                   "status": 404,
                   "success": false,
                   "author": "Mehkam_Company",
-                  "message": "The requested resource was not found.",
+                  "message": "Resource not found.",
                   "errorCode": "E1020",
                   "errors": {
                     "platformAdminRoleId": ["Error: Platform admin role - The requested role was not found."]
@@ -1205,12 +1211,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -1262,7 +1262,7 @@
                   "status": 201,
                   "success": true,
                   "author": "Mehkam_Company",
-                  "message": "Created successfully.",
+                  "message": "Item created successfully.",
                   "data": {
                     "platformAdminRoleId": "9f8c7d6e-5b4a-3210-0112-233445566779"
                   },
@@ -1312,6 +1312,12 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
           "409": {
             "description": "A platform administrator role with the same key already exists.",
             "content": {
@@ -1323,7 +1329,7 @@
                   "status": 409,
                   "success": false,
                   "author": "Mehkam_Company",
-                  "message": "Data conflict.",
+                  "message": "Data conflict detected.",
                   "errorCode": "E1021",
                   "errors": {
                     "platformAdminRoleKey": ["Error: Platform admin role - A role with this key already exists."]
@@ -1333,12 +1339,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -1438,6 +1438,12 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
           "404": {
             "description": "Platform Administrator role not found.",
             "content": {
@@ -1449,7 +1455,7 @@
                   "status": 404,
                   "success": false,
                   "author": "Mehkam_Company",
-                  "message": "The requested resource was not found.",
+                  "message": "Resource not found.",
                   "errorCode": "E1020",
                   "errors": {
                     "platformAdminRoleId": ["Error: Platform admin role - The requested role was not found."]
@@ -1459,12 +1465,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -1574,7 +1574,7 @@
                       "status": 400,
                       "success": false,
                       "author": "Mehkam_Company",
-                      "message": "Data conflict.",
+                      "message": "Data conflict detected.",
                       "errorCode": "E1090",
                       "errors": {
                         "loginPassword": ["Password is incorrect."]
@@ -2064,7 +2064,7 @@
                       "status": 400,
                       "success": false,
                       "author": "Mehkam_Company",
-                      "message": "Data conflict.",
+                      "message": "Data conflict detected.",
                       "errorCode": "E1090",
                       "errors": {
                         "forgotPasswordVerifyResetToken": ["Password reset session is invalid or has expired."]
@@ -2079,7 +2079,7 @@
                       "status": 400,
                       "success": false,
                       "author": "Mehkam_Company",
-                      "message": "Data conflict.",
+                      "message": "Data conflict detected.",
                       "errorCode": "E1090",
                       "errors": {
                         "forgotPasswordVerifyResetToken": ["Password reset session is invalid or has expired."]
@@ -2141,7 +2141,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Early access request created successfully.",
             "headers": {
               "x-request-id": {
@@ -2216,7 +2216,7 @@
                       "status": 409,
                       "success": false,
                       "author": "Mehkam_Company",
-                      "message": "Data conflict.",
+                      "message": "Data conflict detected.",
                       "errorCode": "E1021",
                       "errors": {
                         "earlyAccessRequestPhoneNumber": ["An Early Access request has already been submitted for this phone number."]
@@ -2235,7 +2235,6 @@
         }
       }
     },
-
     "/{language_prefix}/admin/early-access-request/list-option": {
       "get": {
         "tags": ["Admin Early Access Requests"],
@@ -2407,32 +2406,42 @@
                   "success": true,
                   "author": "Mehkam_Company",
                   "message": "Operation completed successfully.",
-                  "data": [
-                    {
-                      "earlyAccessRequestId": "9f8c7d6e-5b4a-3210-0112-233445566778",
-                      "earlyAccessRequestStatus": {
-                        "earlyAccessRequestStatusNameFa": "در انتظار بررسی",
-                        "earlyAccessRequestStatusNameEn": "Pending",
-                        "earlyAccessRequestStatusSlug": "pending",
-                        "earlyAccessRequestStatusDescriptionFa": "درخواست در انتظار بررسی است.",
-                        "earlyAccessRequestStatusDescriptionEn": "The request is waiting for review.",
-                        "earlyAccessRequestStatusSortOrder": 1
-                      },
-                      "earlyAccessRequestBusinessType": {
-                        "businessTypeNameFa": "رستوران",
-                        "businessTypeNameEn": "Restaurant",
-                        "businessTypeSlug": "restaurant",
-                        "businessTypeSortOrder": 1
-                      },
-                      "earlyAccessRequestFullName": "John Doe",
-                      "earlyAccessRequestPhoneNumber": "09123456789",
-                      "earlyAccessRequestBusinessName": "Chasha Coffee Shop",
-                      "earlyAccessRequestCode": "@CHASHA_873310",
-                      "earlyAccessRequestMetadata": null,
-                      "earlyAccessRequestCreatedAt": "2026-08-16T18:30:00.000Z",
-                      "earlyAccessRequestUpdatedAt": "2026-08-16T18:30:00.000Z"
+                  "data": {
+                    "paginationItems": [
+                      {
+                        "earlyAccessRequestId": "9f8c7d6e-5b4a-3210-0112-233445566778",
+                        "earlyAccessRequestStatus": {
+                          "earlyAccessRequestStatusNameFa": "در انتظار بررسی",
+                          "earlyAccessRequestStatusNameEn": "Pending",
+                          "earlyAccessRequestStatusSlug": "pending",
+                          "earlyAccessRequestStatusDescriptionFa": "درخواست در انتظار بررسی است.",
+                          "earlyAccessRequestStatusDescriptionEn": "The request is waiting for review.",
+                          "earlyAccessRequestStatusSortOrder": 1
+                        },
+                        "earlyAccessRequestBusinessType": {
+                          "businessTypeNameFa": "رستوران",
+                          "businessTypeNameEn": "Restaurant",
+                          "businessTypeSlug": "restaurant",
+                          "businessTypeSortOrder": 1
+                        },
+                        "earlyAccessRequestFullName": "John Doe",
+                        "earlyAccessRequestPhoneNumber": "09123456789",
+                        "earlyAccessRequestBusinessName": "Chasha Coffee Shop",
+                        "earlyAccessRequestCode": "@CHASHA_873310",
+                        "earlyAccessRequestMetadata": null,
+                        "earlyAccessRequestCreatedAt": "2026-08-16T18:30:00.000Z",
+                        "earlyAccessRequestUpdatedAt": "2026-08-16T18:30:00.000Z"
+                      }
+                    ],
+                    "paginationMeta": {
+                      "paginationMetaPage": 1,
+                      "paginationMetaLimit": 20,
+                      "paginationMetaTotalItems": 1,
+                      "paginationMetaTotalPages": 1,
+                      "paginationMetaHasNextPage": false,
+                      "paginationMetaHasPreviousPage": false
                     }
-                  ],
+                  },
                   "pagination": {
                     "page": 1,
                     "limit": 20,
@@ -2710,6 +2719,12 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
           "404": {
             "description": "Early Access Request, status, or business type was not found.",
             "content": {
@@ -2731,12 +2746,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -2763,7 +2772,6 @@
             }
           }
         ],
-
         "responses": {
           "200": {
             "description": "FAQs retrieved successfully.",
@@ -2802,7 +2810,6 @@
               }
             }
           },
-
           "400": {
             "description": "Validation failed.",
             "content": {
@@ -2825,7 +2832,6 @@
               }
             }
           },
-
           "404": {
             "description": "FAQ type not found.",
             "content": {
@@ -2848,7 +2854,6 @@
               }
             }
           },
-
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
@@ -3321,7 +3326,6 @@
           }
         }
       },
-
       "GlobalFaqListResponse": {
         "type": "object",
         "properties": {
@@ -3357,7 +3361,6 @@
           }
         }
       },
-
       "GetListOptionEarlyAccessRequestResponse": {
         "type": "object",
         "properties": {
@@ -3503,7 +3506,7 @@
           },
           "message": {
             "type": "string",
-            "example": "Created successfully."
+            "example": "Item created successfully."
           },
           "data": {
             "type": "object",
@@ -3814,13 +3817,44 @@
             "example": "Operation completed successfully."
           },
           "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GetAllEarlyAccessRequestItem"
+            "type": "object",
+            "properties": {
+              "paginationItems": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/GetAllEarlyAccessRequestItem"
+                }
+              },
+              "paginationMeta": {
+                "type": "object",
+                "properties": {
+                  "paginationMetaPage": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "paginationMetaLimit": {
+                    "type": "integer",
+                    "example": 20
+                  },
+                  "paginationMetaTotalItems": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "paginationMetaTotalPages": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "paginationMetaHasNextPage": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "paginationMetaHasPreviousPage": {
+                    "type": "boolean",
+                    "example": false
+                  }
+                }
+              }
             }
-          },
-          "pagination": {
-            "$ref": "#/components/schemas/PaginationMetadata"
           },
           "timeStamp": {
             "type": "string",
@@ -4340,27 +4374,6 @@
           }
         }
       },
-      "PaginationMetadata": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "integer",
-            "example": 1
-          },
-          "limit": {
-            "type": "integer",
-            "example": 20
-          },
-          "totalItems": {
-            "type": "integer",
-            "example": 100
-          },
-          "totalPages": {
-            "type": "integer",
-            "example": 5
-          }
-        }
-      },
       "ValidationError": {
         "type": "object",
         "additionalProperties": {
@@ -4569,7 +4582,7 @@
         "description": "Resource not found."
       },
       "Conflict": {
-        "description": "Data conflict."
+        "description": "Data conflict detected."
       },
       "TooManyRequests": {
         "description": "Too many requests."
