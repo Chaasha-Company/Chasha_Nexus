@@ -9,5 +9,6 @@ export interface FindAllPlatformAdminRoleResultQuery {
     platformAdminRoleDescriptionEn: string | null;
     platformAdminRoleIsActive: boolean;
     platformAdminRoleCreatedAt: Date;
+    platformAdminRoleUpdatedAt: Date;
   }[];
 }

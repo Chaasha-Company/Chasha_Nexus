@@ -252,3 +252,12 @@ Findings resolved: BOM artifacts introduced by PowerShell writes were detected i
 - Commit message: feat(authz): add platform admin role list
 - Commit hash: this commit
 - Remaining issues: (a) pre-existing list-option guard module typo breaks its permission match - needs operator decision; (b) integration-level coverage for validation/auth layers deferred until HTTP test harness approved; (c) older Swagger entries still document outdated pagination shape (out of scope).
+
+---
+
+## Amendment 1 (operator directive, 2026-08-23)
+
+- Route renamed from `/admin/authz/role/list` to `/admin/authz/role/get-all` (aligns with existing verb-phrase convention).
+- Response now includes `platformAdminRoleUpdatedAt`.
+- Applied across route, result interface, response DTO, handler mapping, tests (4/4), and Swagger (path key, item schema property, example).
+- proposed-improvement (not executed): rename permission resource value/key from `platform_admin_authz_role_list` / `authz.platform-admin-role.list.read` to a get-all-aligned slug for full consistency - deferred because the seed row may already exist in dev databases and renaming keys requires a data-conscious migration decision.

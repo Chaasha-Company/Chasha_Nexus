@@ -32,6 +32,8 @@ export const findAllPlatformAdminRoleQueryHandler = async (platformAdminRoleData
       platformAdminRoleIsActive: item.platformAdminRoleIsActive,
 
       platformAdminRoleCreatedAt: item.platformAdminRoleCreatedAt,
+
+      platformAdminRoleUpdatedAt: item.platformAdminRoleUpdatedAt,
     })),
   };
 };

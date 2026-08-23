@@ -8,7 +8,7 @@ import { Router } from 'express';
 const router = Router();
 
 router.get(
-  '/list',
+  '/get-all',
   permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'platform-admin-role', platformAdminPermissionAction: PermissionActionEnum.READ, platformAdminPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_LIST }),
   validateQueryMiddleware(GetAllPlatformAdminRoleQueryValidation),
   getAllPlatformAdminRoleController,

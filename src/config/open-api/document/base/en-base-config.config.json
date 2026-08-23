@@ -900,7 +900,7 @@
         }
       }
     },
-    "/{language_prefix}/admin/authz/role/list": {
+    "/{language_prefix}/admin/authz/role/get-all": {
       "get": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Get Platform Administrator role list",
@@ -990,7 +990,8 @@
                         "platformAdminRoleDescriptionFa": null,
                         "platformAdminRoleDescriptionEn": null,
                         "platformAdminRoleIsActive": true,
-                        "platformAdminRoleCreatedAt": "2026-08-16T18:30:00.000Z"
+                        "platformAdminRoleCreatedAt": "2026-08-16T18:30:00.000Z",
+                        "platformAdminRoleUpdatedAt": "2026-08-16T18:30:00.000Z"
                       }
                     ],
                     "paginationMeta": {
@@ -3077,6 +3078,10 @@
             "example": true
           },
           "platformAdminRoleCreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "platformAdminRoleUpdatedAt": {
             "type": "string",
             "format": "date-time"
           }

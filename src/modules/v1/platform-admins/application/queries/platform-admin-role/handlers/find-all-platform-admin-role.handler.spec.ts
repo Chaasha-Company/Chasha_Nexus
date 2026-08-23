@@ -32,6 +32,7 @@ const buildModelRow = (): PlatformAdminRolesModel =>
     platformAdminRoleDescriptionEn: null,
     platformAdminRoleIsActive: true,
     platformAdminRoleCreatedAt: new Date('2026-08-23T10:00:00.000Z'),
+    platformAdminRoleUpdatedAt: new Date('2026-08-23T11:30:00.000Z'),
   }) as unknown as PlatformAdminRolesModel;
 
 describe('findAllPlatformAdminRoleQueryHandler', () => {
@@ -66,6 +67,7 @@ describe('findAllPlatformAdminRoleQueryHandler', () => {
         platformAdminRoleDescriptionEn: null,
         platformAdminRoleIsActive: true,
         platformAdminRoleCreatedAt: new Date('2026-08-23T10:00:00.000Z'),
+        platformAdminRoleUpdatedAt: new Date('2026-08-23T11:30:00.000Z'),
       },
     ]);
   });
