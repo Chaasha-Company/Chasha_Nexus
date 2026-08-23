@@ -31,22 +31,20 @@ For each tested behavior cover, as applicable:
 
 ## R3. Conventions
 
-- Co-locate as `*.spec.ts` / `__tests__/` **inside `src/`** so jest `roots`/`testMatch` pick
-  them up, or move scaffolding from `__test__/` into scope — but whichever is chosen becomes
-  the convention and gets recorded here.
-- Reuse ts-jest + `@/` alias; no second runner/assertion library without approval.
-- Unit-scope tests mock repository contracts (they are plain functions — easy to stub via
-  module mocking); do not spin a full HTTP stack per unit test. If integration coverage is
-  wanted, propose it as its own task (it needs DB strategy decisions).
+- **Decided (operator, 2026-08-23): all tests live under the repo-root `__test__/` tree**,
+  organized as `__test__/unit|integration|e2e/` mirroring `src/` paths
+  (e.g. `__test__/unit/modules/v1/<context>/.../<name>.handler.spec.ts`).
+  Jest `roots` is set to `<rootDir>/__test__` only; specs placed anywhere else are not picked up.
+- Import tested code via the `@/` alias; mock module boundaries with explicit
+  `jest.mock('<alias-path>', () => ({ ... }))` factories — never automock, or the real
+  module graph (and env loading) loads.
+- Use globals imported from `@jest/globals`; no second runner/assertion library without approval.
+- Unit-scope tests stub repository-contract factories; do not spin a full HTTP stack per
+  unit test. Integration coverage is its own approved task (DB strategy decision).
+- ts-jest runs type diagnostics on executed specs; production `tsc --noEmit` does not cover
+  `__test__/` (`tsconfig.test.json` exists for that scope).
 
-## R4. Wiring duties for the first test task
-
-- Replace the failing placeholder `npm test` script with the real jest invocation.
-- Decide and document: file placement convention, mocking approach, DB strategy for
-  persistence tests (none | dev MySQL | throwaway schema).
-- Update this file and `context/engineering-context.md` to reflect the new state.
-
-## R5. Honesty rules
+## R4. Honesty rules
 
 - A green build is not a complete task if required tests were skipped — say so explicitly
   and get operator sign-off.

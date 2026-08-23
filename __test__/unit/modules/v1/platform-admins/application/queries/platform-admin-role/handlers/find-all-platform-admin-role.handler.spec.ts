@@ -5,7 +5,7 @@ import type { PlatformAdminRolesModel } from '@/shared/v1/database/schema/platfo
 
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 
-import { findAllPlatformAdminRoleQueryHandler } from './find-all-platform-admin-role.handler';
+import { findAllPlatformAdminRoleQueryHandler } from '@/modules/v1/platform-admins/application/queries/platform-admin-role/handlers/find-all-platform-admin-role.handler';
 
 import { findAllPlatformAdminRoleRepository } from '@/modules/v1/platform-admins/infrastructure';
 
