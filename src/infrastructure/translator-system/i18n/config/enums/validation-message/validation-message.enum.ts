@@ -450,4 +450,39 @@ export const ValidationMessages = {
     fa: 'خطا: نقش‌های ادمین - نقش موردنظر یافت نشد.',
     en: 'Error: Platform admin role - The requested role was not found.',
   },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_KEY_REQUIRED]: {
+    fa: 'خطا: نقش‌های ادمین - کلید نقش الزامی است.',
+    en: 'Error: Platform admin role - The role key is required.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_KEY_TOO_LONG]: {
+    fa: 'خطا: نقش‌های ادمین - کلید نقش نمی‌تواند بیش از ۱۰۰ کاراکتر باشد.',
+    en: 'Error: Platform admin role - The role key must not exceed 100 characters.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_NAME_FA_REQUIRED]: {
+    fa: 'خطا: نقش‌های ادمین - نام فارسی نقش الزامی است.',
+    en: 'Error: Platform admin role - The Persian role name is required.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_NAME_FA_TOO_LONG]: {
+    fa: 'خطا: نقش‌های ادمین - نام فارسی نقش نمی‌تواند بیش از ۲۵۵ کاراکتر باشد.',
+    en: 'Error: Platform admin role - The Persian role name must not exceed 255 characters.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_NAME_EN_REQUIRED]: {
+    fa: 'خطا: نقش‌های ادمین - نام انگلیسی نقش الزامی است.',
+    en: 'Error: Platform admin role - The English role name is required.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_NAME_EN_TOO_LONG]: {
+    fa: 'خطا: نقش‌های ادمین - نام انگلیسی نقش نمی‌تواند بیش از ۲۵۵ کاراکتر باشد.',
+    en: 'Error: Platform admin role - The English role name must not exceed 255 characters.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_ALREADY_EXISTS]: {
+    fa: 'خطا: نقش‌های ادمین - نقشی با این کلید از قبل وجود دارد.',
+    en: 'Error: Platform admin role - A role with this key already exists.',
+  },
 } as const;
