@@ -35,3 +35,4 @@ export * from '@/shared/v1/database/migrations/1787527674995-Add_Permission_Reso
 export * from '@/shared/v1/database/migrations/1787603720292-Add_Permission_Resource_Platform_Admin_Role_Delete';
 export * from '@/shared/v1/database/migrations/1787605989232-Add_Permission_Resource_Platform_Admin_Role_Assign_Permission';
 export * from '@/shared/v1/database/migrations/1787607373487-Add_Permission_Resource_Platform_Admin_Role_Remove_Permission';
+export * from '@/shared/v1/database/migrations/1787609774289-Add_Permission_Resource_Platform_Admin_Role_Get_Permissions';

@@ -1061,6 +1061,106 @@
         }
       }
     },
+    "/{language_prefix}/admin/authz/role/get-all-permissions": {
+      "get": {
+        "tags": ["Platform Admin Authentication"],
+        "summary": "Get Platform Administrator role permissions",
+        "description": "Retrieves the permissions currently assigned to a specific Platform Administrator role. The role is identified by the platformAdminRoleId query parameter. Returns a not-found response when the role does not exist and an empty list when the role has no assigned permissions. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_GET_PERMISSIONS permission.",
+        "operationId": "getPlatformAdminRolePermissions",
+        "security": [{ "CookieAuth": [] }, { "BearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "platformAdminRoleId",
+            "in": "query",
+            "required": true,
+            "description": "Unique identifier of the target Platform Administrator role.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Platform Administrator role permissions retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllPlatformAdminPermissionResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "MissingRoleId": {
+                    "summary": "Missing Role Id",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "platformAdminRoleId": ["Error: Platform admin role - The role id is required."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Platform Administrator role not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Resource not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "platformAdminRoleId": ["Error: Platform admin role - The requested role was not found."]
+                  },
+                  "timeStamp": "2026-08-24T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/admin/authz/role/delete": {
       "post": {
         "tags": ["Platform Admin Authentication"],
