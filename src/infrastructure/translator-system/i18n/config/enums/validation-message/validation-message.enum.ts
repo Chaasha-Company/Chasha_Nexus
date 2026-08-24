@@ -520,4 +520,9 @@ export const ValidationMessages = {
     fa: 'خطا: نقش‌های ادمین - این دسترسی قبلاً به نقش اختصاص یافته است.',
     en: 'Error: Platform admin role - This permission is already assigned to the role.',
   },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_PERMISSION_NOT_FOUND]: {
+    fa: 'خطا: نقش‌های ادمین - این دسترسی به نقش اختصاص نیافته است.',
+    en: 'Error: Platform admin role - This permission is not assigned to the role.',
+  },
 } as const;

@@ -6,6 +6,7 @@ import {
   detailPlatformAdminRoleController,
   getAllPlatformAdminRoleController,
   getListOptionPlatformAdminRoleController,
+  removePlatformAdminRolePermissionController,
   updatePlatformAdminRoleController,
 } from '@/modules/v1/authorizations/presentation/controllers';
 import { permissionGuardPlatformAdminMiddleware } from '@/modules/v1/authorizations/presentation/middlewares';
@@ -15,6 +16,7 @@ import {
   DeletePlatformAdminRoleValidation,
   DetailPlatformAdminRoleValidation,
   GetAllPlatformAdminRoleQueryValidation,
+  RemovePlatformAdminRolePermissionValidation,
   UpdatePlatformAdminRoleValidation,
 } from '@/modules/v1/authorizations/presentation/validations';
 import { validateBodyMiddleware, validateQueryMiddleware } from '@/shared/v1/middlewares/validation';
@@ -55,6 +57,13 @@ router.post(
   permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'platform-admin-role', platformAdminPermissionAction: PermissionActionEnum.CREATE, platformAdminPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_ASSIGN_PERMISSION }),
   validateBodyMiddleware(AssignPlatformAdminRolePermissionValidation),
   assignPlatformAdminRolePermissionController,
+);
+
+router.post(
+  '/remove-permission',
+  permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'platform-admin-role', platformAdminPermissionAction: PermissionActionEnum.DELETE, platformAdminPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_REMOVE_PERMISSION }),
+  validateBodyMiddleware(RemovePlatformAdminRolePermissionValidation),
+  removePlatformAdminRolePermissionController,
 );
 
 router.post(

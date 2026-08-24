@@ -271,6 +271,20 @@ export const createPermissionDataSeed = async (): Promise<void> => {
       permissionDescriptionEn: 'Access to the add permission to platform admin role API',
       permissionNavigation: null,
     },
+    {
+      permissionKey: 'authz.platform-admin-role.remove-permission.delete',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_REMOVE_PERMISSION,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-role',
+      permissionAction: PermissionActionEnum.DELETE,
+      permissionType: PermissionTypeEnum.ACTION,
+      permissionLabelFa: 'حذف دسترسی از نقش ادمین',
+      permissionLabelEn: 'Remove Permission from Platform Admin Role',
+      permissionDescriptionFa: 'دسترسی به API حذف دسترسی از نقش ادمین',
+      permissionDescriptionEn: 'Access to the remove permission from platform admin role API',
+      permissionNavigation: null,
+    },
   ];
 
   for (const permission of permissions) {

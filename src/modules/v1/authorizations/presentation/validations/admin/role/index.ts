@@ -4,3 +4,4 @@ export * from './create-platform-admin-role.validation';
 export * from './update-platform-admin-role.validation';
 export * from './delete-platform-admin-role.validation';
 export * from './assign-platform-admin-role-permission.validation';
+export * from './remove-platform-admin-role-permission.validation';

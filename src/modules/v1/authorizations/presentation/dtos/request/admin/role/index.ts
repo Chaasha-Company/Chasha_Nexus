@@ -4,3 +4,4 @@ export * from './create-platform-admin-role-request.dto';
 export * from './update-platform-admin-role-request.dto';
 export * from './delete-platform-admin-role-request.dto';
 export * from './assign-platform-admin-role-permission-request.dto';
+export * from './remove-platform-admin-role-permission-request.dto';

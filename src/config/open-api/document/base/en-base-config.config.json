@@ -1366,6 +1366,161 @@
         }
       }
     },
+    "/{language_prefix}/admin/authz/role/remove-permission": {
+      "post": {
+        "tags": ["Platform Admin Authentication"],
+        "summary": "Remove Permission from Platform Administrator role",
+        "description": "Removes an existing permission assignment from an existing Platform Administrator role without deleting the role or the permission records themselves. Both identifiers are provided in the JSON request body. Returns a not-found response when the role, the permission, or the assignment between them does not exist. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_REMOVE_PERMISSION permission.",
+        "operationId": "removePlatformAdminRolePermission",
+        "security": [{ "CookieAuth": [] }, { "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemovePlatformAdminRolePermissionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Permission removed from Platform Administrator role successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemovePlatformAdminRolePermissionResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Deleted successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-24T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoBodyData": {
+                    "summary": "No Request Body",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "MissingIds": {
+                    "summary": "Missing Identifiers",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "platformAdminRoleId": ["Error: Platform admin role - The role id is required."],
+                        "platformAdminPermissionId": ["Error: Platform admin role - The permission id is required."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Platform Administrator role, permission, or the assignment between them not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "RoleNotFound": {
+                    "summary": "Role Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "platformAdminRoleId": ["Error: Platform admin role - The requested role was not found."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "PermissionNotFound": {
+                    "summary": "Permission Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "platformAdminPermissionId": ["Error: Platform admin role - The requested permission was not found."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "AssignmentNotFound": {
+                    "summary": "Assignment Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "platformAdminPermissionId": ["Error: Platform admin role - This permission is not assigned to the role."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/admin/authz/role/detail": {
       "post": {
         "tags": ["Platform Admin Authentication"],
@@ -3938,6 +4093,55 @@
                 "example": "7c2d1e9a-1111-2222-3333-444455556666"
               }
             }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "RemovePlatformAdminRolePermissionRequest": {
+        "type": "object",
+        "required": ["platformAdminRoleId", "platformAdminPermissionId"],
+        "properties": {
+          "platformAdminRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          },
+          "platformAdminPermissionId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "8d3e2f0b-7777-8888-9999-000011112222"
+          }
+        }
+      },
+      "RemovePlatformAdminRolePermissionResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Deleted successfully."
+          },
+          "data": {
+            "nullable": true,
+            "example": null
           },
           "timeStamp": {
             "type": "string",
