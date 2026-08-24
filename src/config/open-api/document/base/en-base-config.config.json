@@ -1061,6 +1061,147 @@
         }
       }
     },
+    "/{language_prefix}/admin/authz/role/delete": {
+      "post": {
+        "tags": ["Platform Admin Authentication"],
+        "summary": "Delete Platform Administrator role",
+        "description": "Soft-deletes an existing Platform Administrator role together with its role-permission assignments. The role identifier is provided in the JSON request body. Returns a not-found response when the role does not exist and a conflict response when the role is currently referenced by active platform administrators. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_DELETE permission.",
+        "operationId": "deletePlatformAdminRole",
+        "security": [{ "CookieAuth": [] }, { "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeletePlatformAdminRoleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Platform Administrator role deleted successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletePlatformAdminRoleResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Deleted successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-24T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoBodyData": {
+                    "summary": "No Request Body",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "MissingRoleId": {
+                    "summary": "Missing Role Id",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "platformAdminRoleId": ["Error: Platform admin role - The role id is required."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Platform Administrator role not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Resource not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "platformAdminRoleId": ["Error: Platform admin role - The requested role was not found."]
+                  },
+                  "timeStamp": "2026-08-24T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Platform Administrator role is referenced by active platform administrators.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 409,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Data conflict detected.",
+                  "errorCode": "E1021",
+                  "errors": {
+                    "platformAdminRoleId": ["Error: Platform admin role - This role is currently in use by platform administrators and cannot be deleted."]
+                  },
+                  "timeStamp": "2026-08-24T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/admin/authz/role/detail": {
       "post": {
         "tags": ["Platform Admin Authentication"],
@@ -3574,6 +3715,50 @@
           "message": {
             "type": "string",
             "example": "Updated successfully."
+          },
+          "data": {
+            "nullable": true,
+            "example": null
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "DeletePlatformAdminRoleRequest": {
+        "type": "object",
+        "required": ["platformAdminRoleId"],
+        "properties": {
+          "platformAdminRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          }
+        }
+      },
+      "DeletePlatformAdminRoleResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Deleted successfully."
           },
           "data": {
             "nullable": true,

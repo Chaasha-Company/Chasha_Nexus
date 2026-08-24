@@ -3,3 +3,6 @@ export * from './find-all-platform-admin-role.repository';
 export * from './find-platform-admin-role-by-key.repository';
 export * from './create-platform-admin-role.repository';
 export * from './update-platform-admin-role.repository';
+export * from './count-platform-admin-role-admins.repository';
+export * from './delete-platform-admin-role-permissions.repository';
+export * from './delete-platform-admin-role.repository';

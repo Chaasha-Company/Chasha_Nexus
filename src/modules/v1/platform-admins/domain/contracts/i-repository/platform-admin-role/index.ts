@@ -3,3 +3,6 @@ export * from './find-all-platform-admin-role-repository.contract';
 export * from './find-platform-admin-role-by-key-repository.contract';
 export * from './create-platform-admin-role-repository.contract';
 export * from './update-platform-admin-role-repository.contract';
+export * from './count-platform-admin-role-admins-repository.contract';
+export * from './delete-platform-admin-role-permissions-repository.contract';
+export * from './delete-platform-admin-role-repository.contract';

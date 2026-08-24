@@ -451,6 +451,11 @@ export const ValidationMessages = {
     en: 'Error: Platform admin role - The requested role was not found.',
   },
 
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_ID_IN_USE]: {
+    fa: 'خطا: نقش‌های ادمین - این نقش توسط مدیرانی استفاده می‌شود و قابل حذف نیست.',
+    en: 'Error: Platform admin role - This role is currently in use by platform administrators and cannot be deleted.',
+  },
+
   [ValidationMessage.PLATFORM_ADMIN_ROLE_KEY_REQUIRED]: {
     fa: 'خطا: نقش‌های ادمین - کلید نقش الزامی است.',
     en: 'Error: Platform admin role - The role key is required.',

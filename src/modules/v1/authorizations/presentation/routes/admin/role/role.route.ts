@@ -1,7 +1,14 @@
 import { PermissionActionEnum, PermissionResourceEnum } from '@/modules/v1/authorizations/domain';
-import { createPlatformAdminRoleController, detailPlatformAdminRoleController, getAllPlatformAdminRoleController, getListOptionPlatformAdminRoleController, updatePlatformAdminRoleController } from '@/modules/v1/authorizations/presentation/controllers';
+import {
+  createPlatformAdminRoleController,
+  deletePlatformAdminRoleController,
+  detailPlatformAdminRoleController,
+  getAllPlatformAdminRoleController,
+  getListOptionPlatformAdminRoleController,
+  updatePlatformAdminRoleController,
+} from '@/modules/v1/authorizations/presentation/controllers';
 import { permissionGuardPlatformAdminMiddleware } from '@/modules/v1/authorizations/presentation/middlewares';
-import { CreatePlatformAdminRoleValidation, DetailPlatformAdminRoleValidation, GetAllPlatformAdminRoleQueryValidation, UpdatePlatformAdminRoleValidation } from '@/modules/v1/authorizations/presentation/validations';
+import { CreatePlatformAdminRoleValidation, DeletePlatformAdminRoleValidation, DetailPlatformAdminRoleValidation, GetAllPlatformAdminRoleQueryValidation, UpdatePlatformAdminRoleValidation } from '@/modules/v1/authorizations/presentation/validations';
 import { validateBodyMiddleware, validateQueryMiddleware } from '@/shared/v1/middlewares/validation';
 import { Router } from 'express';
 
@@ -26,6 +33,13 @@ router.get(
   permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'platform-admin-role', platformAdminPermissionAction: PermissionActionEnum.READ, platformAdminPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_LIST }),
   validateQueryMiddleware(GetAllPlatformAdminRoleQueryValidation),
   getAllPlatformAdminRoleController,
+);
+
+router.post(
+  '/delete',
+  permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'platform-admin-role', platformAdminPermissionAction: PermissionActionEnum.DELETE, platformAdminPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_DELETE }),
+  validateBodyMiddleware(DeletePlatformAdminRoleValidation),
+  deletePlatformAdminRoleController,
 );
 
 router.post(
