@@ -505,4 +505,19 @@ export const ValidationMessages = {
     fa: 'خطا: نقش‌های ادمین - توضیحات نقش نامعتبر است.',
     en: 'Error: Platform admin role - The role description is invalid.',
   },
+
+  [ValidationMessage.PLATFORM_ADMIN_PERMISSION_ID_REQUIRED]: {
+    fa: 'خطا: نقش‌های ادمین - شناسه دسترسی الزامی است.',
+    en: 'Error: Platform admin role - The permission id is required.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_PERMISSION_ID_NOT_FOUND]: {
+    fa: 'خطا: نقش‌های ادمین - دسترسی موردنظر یافت نشد.',
+    en: 'Error: Platform admin role - The requested permission was not found.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_PERMISSION_ALREADY_EXISTS]: {
+    fa: 'خطا: نقش‌های ادمین - این دسترسی قبلاً به نقش اختصاص یافته است.',
+    en: 'Error: Platform admin role - This permission is already assigned to the role.',
+  },
 } as const;

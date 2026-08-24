@@ -1,5 +1,6 @@
 import { PermissionActionEnum, PermissionResourceEnum } from '@/modules/v1/authorizations/domain';
 import {
+  assignPlatformAdminRolePermissionController,
   createPlatformAdminRoleController,
   deletePlatformAdminRoleController,
   detailPlatformAdminRoleController,
@@ -8,7 +9,14 @@ import {
   updatePlatformAdminRoleController,
 } from '@/modules/v1/authorizations/presentation/controllers';
 import { permissionGuardPlatformAdminMiddleware } from '@/modules/v1/authorizations/presentation/middlewares';
-import { CreatePlatformAdminRoleValidation, DeletePlatformAdminRoleValidation, DetailPlatformAdminRoleValidation, GetAllPlatformAdminRoleQueryValidation, UpdatePlatformAdminRoleValidation } from '@/modules/v1/authorizations/presentation/validations';
+import {
+  AssignPlatformAdminRolePermissionValidation,
+  CreatePlatformAdminRoleValidation,
+  DeletePlatformAdminRoleValidation,
+  DetailPlatformAdminRoleValidation,
+  GetAllPlatformAdminRoleQueryValidation,
+  UpdatePlatformAdminRoleValidation,
+} from '@/modules/v1/authorizations/presentation/validations';
 import { validateBodyMiddleware, validateQueryMiddleware } from '@/shared/v1/middlewares/validation';
 import { Router } from 'express';
 
@@ -40,6 +48,13 @@ router.post(
   permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'platform-admin-role', platformAdminPermissionAction: PermissionActionEnum.DELETE, platformAdminPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_DELETE }),
   validateBodyMiddleware(DeletePlatformAdminRoleValidation),
   deletePlatformAdminRoleController,
+);
+
+router.post(
+  '/assign-permission',
+  permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'platform-admin-role', platformAdminPermissionAction: PermissionActionEnum.CREATE, platformAdminPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_ASSIGN_PERMISSION }),
+  validateBodyMiddleware(AssignPlatformAdminRolePermissionValidation),
+  assignPlatformAdminRolePermissionController,
 );
 
 router.post(
