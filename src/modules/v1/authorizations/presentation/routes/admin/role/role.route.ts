@@ -8,6 +8,7 @@ import {
   getListOptionPlatformAdminRoleController,
   getPlatformAdminRolePermissionsController,
   removePlatformAdminRolePermissionController,
+  replacePlatformAdminRolePermissionsController,
   updatePlatformAdminRoleController,
 } from '@/modules/v1/authorizations/presentation/controllers';
 import { permissionGuardPlatformAdminMiddleware } from '@/modules/v1/authorizations/presentation/middlewares';
@@ -19,6 +20,7 @@ import {
   GetAllPlatformAdminRoleQueryValidation,
   GetPlatformAdminRolePermissionsQueryValidation,
   RemovePlatformAdminRolePermissionValidation,
+  ReplacePlatformAdminRolePermissionsValidation,
   UpdatePlatformAdminRoleValidation,
 } from '@/modules/v1/authorizations/presentation/validations';
 import { validateBodyMiddleware, validateQueryMiddleware } from '@/shared/v1/middlewares/validation';
@@ -73,6 +75,17 @@ router.get(
   permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'platform-admin-role', platformAdminPermissionAction: PermissionActionEnum.READ, platformAdminPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_GET_PERMISSIONS }),
   validateQueryMiddleware(GetPlatformAdminRolePermissionsQueryValidation),
   getPlatformAdminRolePermissionsController,
+);
+
+router.put(
+  '/permissions',
+  permissionGuardPlatformAdminMiddleware({
+    platformAdminPermissionModule: 'platform-admin-role',
+    platformAdminPermissionAction: PermissionActionEnum.UPDATE,
+    platformAdminPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_REPLACE_PERMISSIONS,
+  }),
+  validateBodyMiddleware(ReplacePlatformAdminRolePermissionsValidation),
+  replacePlatformAdminRolePermissionsController,
 );
 
 router.post(

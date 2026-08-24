@@ -525,4 +525,24 @@ export const ValidationMessages = {
     fa: 'خطا: نقش‌های ادمین - این دسترسی به نقش اختصاص نیافته است.',
     en: 'Error: Platform admin role - This permission is not assigned to the role.',
   },
+
+  [ValidationMessage.PLATFORM_ADMIN_PERMISSION_IDS_REQUIRED]: {
+    fa: 'خطا: نقش‌های ادمین - شناسه‌های دسترسی الزامی است.',
+    en: 'Error: Platform admin role - The permission ids are required.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_PERMISSION_IDS_INVALID]: {
+    fa: 'خطا: نقش‌های ادمین - شناسه‌های دسترسی نامعتبر است.',
+    en: 'Error: Platform admin role - The permission ids are invalid.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_PERMISSION_IDS_DUPLICATE]: {
+    fa: 'خطا: نقش‌های ادمین - شناسه‌های دسترسی تکراری مجاز نیست.',
+    en: 'Error: Platform admin role - Duplicate permission ids are not allowed.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_PERMISSION_IDS_NOT_FOUND]: {
+    fa: 'خطا: نقش‌های ادمین - یکی یا چند دسترسی درخواستی یافت نشد.',
+    en: 'Error: Platform admin role - One or more of the requested permissions were not found.',
+  },
 } as const;

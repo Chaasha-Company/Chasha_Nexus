@@ -1161,6 +1161,164 @@
         }
       }
     },
+    "/{language_prefix}/admin/authz/role/permissions": {
+      "put": {
+        "tags": ["Platform Admin Authentication"],
+        "summary": "Replace Platform Administrator role permissions",
+        "description": "Replaces the complete permission assignment of an existing Platform Administrator role with the permission set provided in the request body. Permissions that are not included are removed, permissions that remain requested are preserved, and new permissions are added. The operation is atomic and idempotent. An empty permissionIds array removes all permissions from the role. Returns a not-found response when the role or any of the requested permissions does not exist. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_REPLACE_PERMISSIONS permission.",
+        "operationId": "replacePlatformAdminRolePermissions",
+        "security": [{ "CookieAuth": [] }, { "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplacePlatformAdminRolePermissionsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Platform Administrator role permissions replaced successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplacePlatformAdminRolePermissionsResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Updated successfully.",
+                  "data": {
+                    "platformAdminRoleId": "9f8c7d6e-5b4a-3210-0112-233445566779",
+                    "platformAdminPermissionIds": ["8d3e2f0b-7777-8888-9999-000011112222", "7c2d1e9a-1111-2222-3333-444455556666"]
+                  },
+                  "timeStamp": "2026-08-25T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoBodyData": {
+                    "summary": "No Request Body",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-25T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "MissingFields": {
+                    "summary": "Missing Required Fields",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "platformAdminRoleId": ["Error: Platform admin role - The role id is required."],
+                        "permissionIds": ["Error: Platform admin role - The permission ids are required."]
+                      },
+                      "timeStamp": "2026-08-25T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "DuplicatePermissionIds": {
+                    "summary": "Duplicate Permission Ids",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "permissionIds": ["Error: Platform admin role - Duplicate permission ids are not allowed."]
+                      },
+                      "timeStamp": "2026-08-25T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Platform Administrator role or one of the requested permissions not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "RoleNotFound": {
+                    "summary": "Role Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "platformAdminRoleId": ["Error: Platform admin role - The requested role was not found."]
+                      },
+                      "timeStamp": "2026-08-25T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "PermissionsNotFound": {
+                    "summary": "Permissions Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "platformAdminPermissionIds": ["Error: Platform admin role - One or more of the requested permissions were not found."]
+                      },
+                      "timeStamp": "2026-08-25T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/{language_prefix}/admin/authz/role/delete": {
       "post": {
         "tags": ["Platform Admin Authentication"],
@@ -4242,6 +4400,70 @@
           "data": {
             "nullable": true,
             "example": null
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "ReplacePlatformAdminRolePermissionsRequest": {
+        "type": "object",
+        "required": ["platformAdminRoleId", "permissionIds"],
+        "properties": {
+          "platformAdminRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          },
+          "permissionIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": ["8d3e2f0b-7777-8888-9999-000011112222", "7c2d1e9a-1111-2222-3333-444455556666"]
+          }
+        }
+      },
+      "ReplacePlatformAdminRolePermissionsResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Updated successfully."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "platformAdminRoleId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "platformAdminPermissionIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
           },
           "timeStamp": {
             "type": "string",

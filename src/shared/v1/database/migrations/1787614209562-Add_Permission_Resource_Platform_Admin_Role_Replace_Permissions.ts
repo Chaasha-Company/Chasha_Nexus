@@ -1,0 +1,17 @@
+import type { MigrationInterface, QueryRunner } from 'typeorm';
+
+export class AddPermissionResourcePlatformAdminRoleReplacePermissions1787614209562 implements MigrationInterface {
+  name = 'AddPermissionResourcePlatformAdminRoleReplacePermissions1787614209562';
+
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(
+      "ALTER TABLE `permissions` CHANGE `permission_resource` `permission_resource` enum ('early_access_request_page', 'early_access_request_get_all', 'early_access_request_list_options', 'early_access_request_detail', 'early_access_request_update', 'platform_admin_authz_permission_get_all', 'business_employee_authz_permission_get_all', 'platform_admin_authz_role_list_option', 'platform_admin_authz_role_page', 'platform_admin_authz_role_list', 'platform_admin_authz_role_detail', 'platform_admin_authz_role_create', 'platform_admin_authz_role_update', 'platform_admin_authz_role_delete', 'platform_admin_authz_role_assign_permission', 'platform_admin_authz_role_remove_permission', 'platform_admin_authz_role_get_permissions', 'platform_admin_authz_role_replace_permissions') NOT NULL",
+    );
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(
+      "ALTER TABLE `permissions` CHANGE `permission_resource` `permission_resource` enum ('early_access_request_page', 'early_access_request_get_all', 'early_access_request_list_options', 'early_access_request_detail', 'early_access_request_update', 'platform_admin_authz_permission_get_all', 'business_employee_authz_permission_get_all', 'platform_admin_authz_role_list_option', 'platform_admin_authz_role_page', 'platform_admin_authz_role_list', 'platform_admin_authz_role_detail', 'platform_admin_authz_role_create', 'platform_admin_authz_role_update', 'platform_admin_authz_role_delete', 'platform_admin_authz_role_assign_permission', 'platform_admin_authz_role_remove_permission', 'platform_admin_authz_role_get_permissions') NOT NULL",
+    );
+  }
+}

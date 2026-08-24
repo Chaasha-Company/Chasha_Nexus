@@ -299,6 +299,20 @@ export const createPermissionDataSeed = async (): Promise<void> => {
       permissionDescriptionEn: 'Access to the get platform admin role permissions API',
       permissionNavigation: null,
     },
+    {
+      permissionKey: 'authz.platform-admin-role.replace-permissions.update',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_ROLE_REPLACE_PERMISSIONS,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-role',
+      permissionAction: PermissionActionEnum.UPDATE,
+      permissionType: PermissionTypeEnum.ACTION,
+      permissionLabelFa: 'جایگزینی دسترسی‌های نقش ادمین',
+      permissionLabelEn: 'Replace Platform Admin Role Permissions',
+      permissionDescriptionFa: 'دسترسی به API جایگزینی کامل دسترسی‌های نقش ادمین',
+      permissionDescriptionEn: 'Access to the replace platform admin role permissions API',
+      permissionNavigation: null,
+    },
   ];
 
   for (const permission of permissions) {
