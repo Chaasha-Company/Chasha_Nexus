@@ -61,7 +61,7 @@
     }
   ],
   "paths": {
-    "{language_prefix}/admin/auth/login/with-phone": {
+    "/{language_prefix}/admin/auth/login/with-phone": {
       "post": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Login with phone number",
@@ -211,7 +211,7 @@
         }
       }
     },
-    "{language_prefix}/admin/auth/login/with-phone/verify": {
+    "/{language_prefix}/admin/auth/login/with-phone/verify": {
       "post": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Verify login OTP",
@@ -421,7 +421,7 @@
         }
       }
     },
-    "{language_prefix}/admin/auth/login/with-phone/resend-otp": {
+    "/{language_prefix}/admin/auth/login/with-phone/resend-otp": {
       "post": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Resend login OTP",
@@ -499,7 +499,7 @@
         }
       }
     },
-    "{language_prefix}/admin/auth/refresh-token": {
+    "/{language_prefix}/admin/auth/refresh-token": {
       "post": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Refresh platform administrator authentication tokens",
@@ -577,7 +577,7 @@
         }
       }
     },
-    "{language_prefix}/admin/auth/me": {
+    "/{language_prefix}/admin/auth/me": {
       "get": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Check current platform administrator authentication status",
