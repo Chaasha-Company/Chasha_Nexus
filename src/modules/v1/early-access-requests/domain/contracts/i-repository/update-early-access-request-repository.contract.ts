@@ -1,4 +1,4 @@
 import type { UpdateEalryAccessRequestCommand } from '@/modules/v1/early-access-requests/application';
-import type { EntityManager } from 'typeorm';
+import type { TransactionContext } from '@/shared/v1/domain/contracts';
 
-export type UpdateEarlyAccessRequestRepositoryContract = (earlyAccessRequestData: UpdateEalryAccessRequestCommand, manager?: EntityManager) => Promise<void>;
+export type UpdateEarlyAccessRequestRepositoryContract = (earlyAccessRequestData: UpdateEalryAccessRequestCommand, ctx?: TransactionContext) => Promise<void>;

@@ -1,5 +1,6 @@
 import type { PlatformAdminRolePermissionsModel, PlatformAdminRolesModel } from '@/shared/v1/database/schema/platform_admins/childrens';
 import type { PermissionsModel } from '@/shared/v1/database/schema/permissions';
+import type { TransactionContext } from '@/shared/v1/domain/contracts';
 import type { EntityManager } from 'typeorm';
 
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
@@ -8,7 +9,6 @@ import { replacePlatformAdminRolePermissionsCommandHandler } from '@/modules/v1/
 
 import { createPlatformAdminRolePermissionRepository, deletePlatformAdminRolePermissionRepository, findPlatformAdminRoleByIdRepository } from '@/modules/v1/platform-admins/infrastructure';
 import { findAllPlatformAdminPermissionByRoleIdRepository, findPlatformAdminPermissionsByIdsRepository } from '@/modules/v1/authorizations/infrastructure';
-import { transactionManager } from '@/shared/v1/database/transaction';
 
 jest.mock('@/modules/v1/platform-admins/infrastructure', () => ({
   findPlatformAdminRoleByIdRepository: jest.fn(),
@@ -22,7 +22,7 @@ jest.mock('@/modules/v1/authorizations/infrastructure', () => ({
 }));
 
 const mockTransactionManager = jest.fn<(callback: (manager: EntityManager) => Promise<unknown>) => Promise<unknown>>();
-jest.mock('@/shared/v1/database/transaction', () => ({
+jest.mock('@/shared/v1/domain/contracts', () => ({
   transactionManager: (callback: (manager: EntityManager) => Promise<unknown>) => mockTransactionManager(callback),
 }));
 

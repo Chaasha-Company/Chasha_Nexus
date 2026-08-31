@@ -10,10 +10,6 @@
 - **Module:** Authorizations
 - **Dependencies:** None
 
-## Dependencies
-
-- None
-
 ---
 
 ## Required Skills

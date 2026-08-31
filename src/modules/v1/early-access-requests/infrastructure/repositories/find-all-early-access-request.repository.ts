@@ -1,18 +1,18 @@
 import type { FindAllEarlyAccessRequestQuery } from '@/modules/v1/early-access-requests/application';
 import type { FindAllEarlyAccessRequestRepositoryContract } from '@/modules/v1/early-access-requests/domain';
 
-import type { EntityManager } from 'typeorm';
+import type { TransactionContext } from '@/shared/v1/domain/contracts';
 import type { PaginationResponseRepository } from '@/shared/v1/database/types';
 
 import { AppDataSource } from '@/shared/v1/database/core';
 import { EarlyAccessRequestsModel } from '@/shared/v1/database/schema/early_access_requests';
 
-import { applyEarlyAccessRequestSearch } from '@/modules/v1/early-access-requests/list';
+import { applyEarlyAccessRequestSearch } from '@/modules/v1/early-access-requests/infrastructure/list';
 
 export const findAllEarlyAccessRequestRepository =
   (): FindAllEarlyAccessRequestRepositoryContract =>
-  async (earlyAccessData: FindAllEarlyAccessRequestQuery, manager?: EntityManager): Promise<PaginationResponseRepository<EarlyAccessRequestsModel>> => {
-    const repository = manager ? manager.getRepository(EarlyAccessRequestsModel) : AppDataSource.getRepository(EarlyAccessRequestsModel);
+  async (earlyAccessData: FindAllEarlyAccessRequestQuery, ctx?: TransactionContext): Promise<PaginationResponseRepository<EarlyAccessRequestsModel>> => {
+    const repository = ctx ? ctx.getRepository(EarlyAccessRequestsModel) : AppDataSource.getRepository(EarlyAccessRequestsModel);
 
     const queryBuilder = repository.createQueryBuilder('earlyAccessRequest');
 

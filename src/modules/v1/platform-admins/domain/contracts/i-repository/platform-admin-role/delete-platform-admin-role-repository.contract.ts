@@ -1,4 +1,4 @@
 import type { DeletePlatformAdminRoleCommand } from '@/modules/v1/platform-admins/application';
-import type { EntityManager } from 'typeorm';
+import type { TransactionContext } from '@/shared/v1/domain/contracts';
 
-export type DeletePlatformAdminRoleRepositoryContract = (deletePlatformAdminRoleData: DeletePlatformAdminRoleCommand, manager?: EntityManager) => Promise<void>;
+export type DeletePlatformAdminRoleRepositoryContract = (deletePlatformAdminRoleData: DeletePlatformAdminRoleCommand, ctx?: TransactionContext) => Promise<void>;

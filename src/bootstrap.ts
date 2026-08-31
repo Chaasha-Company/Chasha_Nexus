@@ -6,6 +6,9 @@ import { migrationLoaderHelper } from '@/shared/v1/database/migrations/helpers';
 import { seedLoaderHelper } from '@/shared/v1/database/seeds';
 import { geoIpDatabaseInitConfig } from '@/infrastructure/location-system/geo-ip';
 import { casbinAuthInitConfig } from '@/infrastructure/auth-system/casbin';
+import { setTransactionManager, setCacheInvalidation } from '@/shared/v1/domain/contracts';
+import { createTypeOrmTransactionManager } from '@/shared/v1/database/transaction/typeorm-transaction-manager';
+import { createTypeOrmCacheInvalidation } from '@/shared/v1/database/cache';
 // import {
 //   rabbitMqServerConfig,
 //   consumerLoaderBorker,
@@ -19,6 +22,10 @@ export const bootstrap = async (): Promise<void> => {
   await seedLoaderHelper();
   await geoIpDatabaseInitConfig();
   await casbinAuthInitConfig();
+
+  setTransactionManager(createTypeOrmTransactionManager());
+  setCacheInvalidation(createTypeOrmCacheInvalidation());
+
   // await rabbitMqServerConfig();
   // await consumerLoaderBorker();
 

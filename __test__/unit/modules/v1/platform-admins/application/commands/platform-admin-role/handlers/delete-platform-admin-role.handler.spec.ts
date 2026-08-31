@@ -9,18 +9,11 @@ import { countPlatformAdminRoleAdminsRepository, deletePlatformAdminRolePermissi
 
 const mockManager = {} as EntityManager;
 
-const mockCacheRemove = jest.fn<() => Promise<void>>();
-jest.mock('@/shared/v1/database/core', () => ({
-  AppDataSource: {
-    queryResultCache: {
-      remove: (...args: unknown[]) => mockCacheRemove(...(args as [])),
-    },
-  },
-}));
-
+const mockInvalidateCache = jest.fn<() => Promise<void>>();
 const mockTransactionManager = jest.fn<(callback: (manager: EntityManager) => Promise<unknown>) => Promise<unknown>>();
-jest.mock('@/shared/v1/database/transaction', () => ({
+jest.mock('@/shared/v1/domain/contracts', () => ({
   transactionManager: (callback: (manager: EntityManager) => Promise<unknown>) => mockTransactionManager(callback),
+  invalidateCache: (...args: unknown[]) => mockInvalidateCache(...(args as [])),
 }));
 
 jest.mock('@/modules/v1/platform-admins/infrastructure', () => ({
@@ -49,9 +42,9 @@ describe('deletePlatformAdminRoleCommandHandler', () => {
     mockDeletePermissions.mockReset();
     mockDeleteRole.mockReset();
     mockTransactionManager.mockClear();
-    mockCacheRemove.mockReset();
+    mockInvalidateCache.mockReset();
     mockTransactionManager.mockImplementation(async (callback) => callback(mockManager));
-    mockCacheRemove.mockResolvedValue(undefined);
+    mockInvalidateCache.mockResolvedValue(undefined);
   });
 
   it('soft-deletes role permissions and the role inside one transaction when no admin uses the role', async () => {
@@ -65,7 +58,7 @@ describe('deletePlatformAdminRoleCommandHandler', () => {
     expect(mockDeletePermissions).toHaveBeenCalledWith({ platformAdminRoleId: 'role-uuid-1' }, mockManager);
     expect(mockDeleteRole).toHaveBeenCalledWith({ platformAdminRoleId: 'role-uuid-1' }, mockManager);
     expect(mockDeletePermissions.mock.invocationCallOrder[0]).toBeLessThan(mockDeleteRole.mock.invocationCallOrder[0] ?? 0);
-    expect(mockCacheRemove).toHaveBeenCalledWith(['platform-admin-roles']);
+    expect(mockInvalidateCache).toHaveBeenCalledWith(['platform-admin-roles']);
   });
 
   it('throws a not-found exception and skips usage check and deletion when the role does not exist', async () => {
@@ -75,7 +68,7 @@ describe('deletePlatformAdminRoleCommandHandler', () => {
 
     expect(mockCountAdmins).not.toHaveBeenCalled();
     expect(mockTransactionManager).not.toHaveBeenCalled();
-    expect(mockCacheRemove).not.toHaveBeenCalled();
+    expect(mockInvalidateCache).not.toHaveBeenCalled();
   });
 
   it('throws a conflict exception and keeps data untouched when active admins still reference the role', async () => {
@@ -87,6 +80,6 @@ describe('deletePlatformAdminRoleCommandHandler', () => {
     expect(mockDeletePermissions).not.toHaveBeenCalled();
     expect(mockDeleteRole).not.toHaveBeenCalled();
     expect(mockTransactionManager).not.toHaveBeenCalled();
-    expect(mockCacheRemove).not.toHaveBeenCalled();
+    expect(mockInvalidateCache).not.toHaveBeenCalled();
   });
 });

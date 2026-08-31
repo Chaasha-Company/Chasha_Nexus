@@ -1,5 +1,5 @@
 import type { FindBusinessTypeBySlugQuery } from '@/modules/v1/businesses/application';
 import type { BusinessTypesModel } from '@/shared/v1/database/schema/businesses/childrens';
-import type { EntityManager } from 'typeorm';
+import type { TransactionContext } from '@/shared/v1/domain/contracts';
 
-export type FindBusinessTypeBySlugRepositoryContract = (businessTypeData: FindBusinessTypeBySlugQuery, manager?: EntityManager) => Promise<BusinessTypesModel | null>;
+export type FindBusinessTypeBySlugRepositoryContract = (businessTypeData: FindBusinessTypeBySlugQuery, ctx?: TransactionContext) => Promise<BusinessTypesModel | null>;

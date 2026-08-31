@@ -1,18 +1,18 @@
 import type { FindAllPlatformAdminRoleQuery } from '@/modules/v1/platform-admins/application';
 import type { FindAllPlatformAdminRoleRepositoryContract } from '@/modules/v1/platform-admins/domain';
 
-import type { EntityManager } from 'typeorm';
+import type { TransactionContext } from '@/shared/v1/domain/contracts';
 import type { PaginationResponseRepository } from '@/shared/v1/database/types';
 
 import { AppDataSource } from '@/shared/v1/database/core';
 import { PlatformAdminRolesModel } from '@/shared/v1/database/schema/platform_admins/childrens';
 
-import { applyPlatformAdminRoleSearch } from '@/modules/v1/platform-admins/list';
+import { applyPlatformAdminRoleSearch } from '@/modules/v1/platform-admins/infrastructure/list';
 
 export const findAllPlatformAdminRoleRepository =
   (): FindAllPlatformAdminRoleRepositoryContract =>
-  async (platformAdminRoleData: FindAllPlatformAdminRoleQuery, manager?: EntityManager): Promise<PaginationResponseRepository<PlatformAdminRolesModel>> => {
-    const repository = manager ? manager.getRepository(PlatformAdminRolesModel) : AppDataSource.getRepository(PlatformAdminRolesModel);
+  async (platformAdminRoleData: FindAllPlatformAdminRoleQuery, ctx?: TransactionContext): Promise<PaginationResponseRepository<PlatformAdminRolesModel>> => {
+    const repository = ctx ? ctx.getRepository(PlatformAdminRolesModel) : AppDataSource.getRepository(PlatformAdminRolesModel);
 
     const queryBuilder = repository.createQueryBuilder('platformAdminRole');
 

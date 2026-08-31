@@ -1,4 +1,4 @@
 import type { BusinessTypesModel } from '@/shared/v1/database/schema/businesses/childrens';
-import type { EntityManager } from 'typeorm';
+import type { TransactionContext } from '@/shared/v1/domain/contracts';
 
-export type GetAllBusinessTypeRepositoryContract = (manager?: EntityManager) => Promise<BusinessTypesModel[]>;
+export type GetAllBusinessTypeRepositoryContract = (ctx?: TransactionContext) => Promise<BusinessTypesModel[]>;

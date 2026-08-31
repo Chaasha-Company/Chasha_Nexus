@@ -3,8 +3,7 @@ import { countPlatformAdminRoleAdminsRepository, deletePlatformAdminRolePermissi
 import { throwNotFoundException, throwRequestConflictException } from '@/shared/v1/exceptions';
 import { ResponseMessages, t, ValidationMessages, type Language } from '@/infrastructure/translator-system/i18n';
 import { ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
-import { AppDataSource } from '@/shared/v1/database/core';
-import { transactionManager } from '@/shared/v1/database/transaction';
+import { invalidateCache, transactionManager } from '@/shared/v1/domain/contracts';
 
 export const deletePlatformAdminRoleCommandHandler = async (deletePlatformAdminRoleData: DeletePlatformAdminRoleCommand, lang: Language): Promise<void> => {
   const platformAdminRoleIsExist = await findPlatformAdminRoleByIdRepository()({
@@ -49,5 +48,5 @@ export const deletePlatformAdminRoleCommandHandler = async (deletePlatformAdminR
     );
   });
 
-  await AppDataSource.queryResultCache?.remove(['platform-admin-roles']);
+  await invalidateCache(['platform-admin-roles']);
 };

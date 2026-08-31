@@ -7,7 +7,7 @@ import { throwBadRequestException } from '@/shared/v1/exceptions';
 import { findBusinessEmployeeByPhoneNumberRepository, updateBusinessEmployeeRepository } from '@/modules/v1/business-employees';
 import { hashPasswordProvider } from '@/modules/v1/authentications/infrastructure';
 import { revokedAllBusinessEmployeeSessionByIdRepository } from '@/modules/v1/business-employee-sessions';
-import { transactionManager } from '@/shared/v1/database/transaction';
+import { transactionManager } from '@/shared/v1/domain/contracts';
 
 export const forgotPasswordVerifyBusinessCommandHandler = async (forgotPasswordVerifyData: ForgotPasswordVerifyBusinessCommand, lang: Language): Promise<void> => {
   const resetPasswordTokenHash = createHash('sha256').update(forgotPasswordVerifyData.forgotPasswordVerifyResetToken).digest('hex');

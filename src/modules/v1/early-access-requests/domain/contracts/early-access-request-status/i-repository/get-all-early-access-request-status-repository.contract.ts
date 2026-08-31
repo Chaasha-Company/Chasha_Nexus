@@ -1,4 +1,4 @@
 import type { EarlyAccessRequestStatusesModel } from '@/shared/v1/database/schema/early_access_requests/childrens';
-import type { EntityManager } from 'typeorm';
+import type { TransactionContext } from '@/shared/v1/domain/contracts';
 
-export type GetAllEarlyAccessRequestStatusRepositoryContract = (manager?: EntityManager) => Promise<EarlyAccessRequestStatusesModel[]>;
+export type GetAllEarlyAccessRequestStatusRepositoryContract = (ctx?: TransactionContext) => Promise<EarlyAccessRequestStatusesModel[]>;

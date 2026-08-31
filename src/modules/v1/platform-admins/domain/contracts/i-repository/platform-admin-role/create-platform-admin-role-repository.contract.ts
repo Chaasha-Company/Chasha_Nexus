@@ -1,4 +1,4 @@
 import type { CreatePlatformAdminRoleCommand } from '@/modules/v1/platform-admins/application';
-import type { EntityManager } from 'typeorm';
+import type { TransactionContext } from '@/shared/v1/domain/contracts';
 
-export type CreatePlatformAdminRoleRepositoryContract = (createPlatformAdminRoleData: CreatePlatformAdminRoleCommand, manager?: EntityManager) => Promise<{ platformAdminRoleId: string }>;
+export type CreatePlatformAdminRoleRepositoryContract = (createPlatformAdminRoleData: CreatePlatformAdminRoleCommand, ctx?: TransactionContext) => Promise<{ platformAdminRoleId: string }>;

@@ -2,12 +2,13 @@ import type { RevokedAllBusinessEmployeeSessionByIdCommand } from '@/modules/v1/
 import type { RevokedAllBusinessEmployeeSessionByIdRepositoryContract } from '@/modules/v1/business-employee-sessions/domain';
 import { BusinessEmployeeSessionsModel } from '@/shared/v1/database/schema/business_employees/childrens';
 import { AppDataSource } from '@/shared/v1/database/core';
-import { EntityManager, IsNull } from 'typeorm';
+import type { TransactionContext } from '@/shared/v1/domain/contracts';
+import { IsNull } from 'typeorm';
 
 export const revokedAllBusinessEmployeeSessionByIdRepository =
   (): RevokedAllBusinessEmployeeSessionByIdRepositoryContract =>
-  async (businessEmployeeSessionData: RevokedAllBusinessEmployeeSessionByIdCommand, manager?: EntityManager): Promise<void> => {
-    const businessEmployeeSessionRepository = manager ? manager.getRepository(BusinessEmployeeSessionsModel) : AppDataSource.getRepository(BusinessEmployeeSessionsModel);
+  async (businessEmployeeSessionData: RevokedAllBusinessEmployeeSessionByIdCommand, ctx?: TransactionContext): Promise<void> => {
+    const businessEmployeeSessionRepository = ctx ? ctx.getRepository(BusinessEmployeeSessionsModel) : AppDataSource.getRepository(BusinessEmployeeSessionsModel);
 
     await businessEmployeeSessionRepository.update(
       {

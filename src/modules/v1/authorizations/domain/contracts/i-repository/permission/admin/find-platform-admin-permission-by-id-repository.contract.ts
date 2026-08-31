@@ -1,5 +1,5 @@
 import type { findPlatformAdminPermissionByIdQuery } from '@/modules/v1/authorizations/application';
 import type { PermissionsModel } from '@/shared/v1/database/schema/permissions';
-import type { EntityManager } from 'typeorm';
+import type { TransactionContext } from '@/shared/v1/domain/contracts';
 
-export type FindPlatformAdminPermissionByIdRepositoryContract = (platformAdminPermissionData: findPlatformAdminPermissionByIdQuery, manager?: EntityManager) => Promise<PermissionsModel | null>;
+export type FindPlatformAdminPermissionByIdRepositoryContract = (platformAdminPermissionData: findPlatformAdminPermissionByIdQuery, ctx?: TransactionContext) => Promise<PermissionsModel | null>;

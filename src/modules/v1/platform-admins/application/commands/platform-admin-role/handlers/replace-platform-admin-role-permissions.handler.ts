@@ -5,7 +5,7 @@ import { findPlatformAdminPermissionsByIdsRepository, findAllPlatformAdminPermis
 import { throwNotFoundException } from '@/shared/v1/exceptions';
 import { ResponseMessages, t, ValidationMessages, type Language } from '@/infrastructure/translator-system/i18n';
 import { ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
-import { transactionManager } from '@/shared/v1/database/transaction';
+import { transactionManager } from '@/shared/v1/domain/contracts';
 
 export const replacePlatformAdminRolePermissionsCommandHandler = async (replacePlatformAdminRolePermissionsData: ReplacePlatformAdminRolePermissionsCommand, lang: Language): ReplacePlatformAdminRolePermissionsCommandResult => {
   const platformAdminRoleIsExist = await findPlatformAdminRoleByIdRepository()({
