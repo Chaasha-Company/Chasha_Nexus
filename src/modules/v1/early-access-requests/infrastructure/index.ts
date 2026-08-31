@@ -1,4 +1,4 @@
-export * from './repositories';
+export * from './persistence/typeorm/repositories';
 export * from './helpers';
 export * from './event-bus';
-export * from './list';
+export * from './persistence/typeorm/list';

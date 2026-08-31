@@ -28,12 +28,14 @@ describe('CreatePlatformAdminRoleValidation', () => {
   });
 
   it('rejects a body missing the role key', () => {
-    const { platformAdminRoleKey: _omitted, ...rest } = validBody;
+    const rest = { ...validBody };
+    delete rest.platformAdminRoleKey;
     expect(() => validate(rest)).toThrow();
   });
 
   it('rejects a body missing the Persian name', () => {
-    const { platformAdminRoleNameFa: _omitted, ...rest } = validBody;
+    const rest = { ...validBody };
+    delete rest.platformAdminRoleNameFa;
     expect(() => validate(rest)).toThrow();
   });
 

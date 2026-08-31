@@ -46,7 +46,7 @@ export const loginVerifyPlatformAdminCommandHandler = async (loginVerifyData: Lo
     });
   }
 
-  if (Number(loginVerifyData.loginVerifyOtp) !== 123456) {
+  if (Number(loginVerifyData.loginVerifyOtp) !== (session as LoginWithPhoneNumberPlatformAdminSession).platformAdminLoginWithPhoneNumberOtp) {
     throwBadRequestException({
       message: t(ResponseMessages, ResponseMessage.DATA_CONFLICT, lang),
       details: {

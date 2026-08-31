@@ -7,7 +7,7 @@ import { successResponseHandler } from '@/shared/v1/helpers/api/handlers';
 
 export const getAllGlobalFaqController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const result = await findAllFaqByTypeQueryHandler(req.query as unknown as GetAllGlobalFaqQueryRequestDTO);
+    const result = await findAllFaqByTypeQueryHandler(req.query as unknown as GetAllGlobalFaqQueryRequestDTO, req.lang);
     successResponseHandler<GetAllGlobalFaqResponseDTO[]>(req, res, HttpStatus.OK, result, t(ResponseMessages, ResponseMessage.SUCCESS, req.lang));
   } catch (error: unknown) {
     next(error);

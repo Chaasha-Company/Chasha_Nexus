@@ -1,2 +1,2 @@
-export * from './repositories';
-export * from './list';
+export * from './persistence/typeorm/repositories';
+export * from './persistence/typeorm/list';

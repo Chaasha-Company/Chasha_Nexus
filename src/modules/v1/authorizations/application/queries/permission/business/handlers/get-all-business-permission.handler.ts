@@ -1,6 +1,6 @@
 import type { FindAllBusinessPermissionByRoleIdQuery } from '@/modules/v1/authorizations/application';
 import type { GetAllBusienssPermissionQueryResult } from '../results/get-all-business-permission.results';
-import { findAllBusinessPermissionByRoleIdRepository } from '@/modules/v1/authorizations/infrastructure/repositories/permission';
+import { findAllBusinessPermissionByRoleIdRepository } from '@/modules/v1/authorizations/infrastructure';
 
 export const getAllBusinessPermissionQueryHandler = async (businessPermissionData: FindAllBusinessPermissionByRoleIdQuery): Promise<GetAllBusienssPermissionQueryResult> => {
   const data = await findAllBusinessPermissionByRoleIdRepository()({

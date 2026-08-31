@@ -21,3 +21,17 @@ their status changes. The directory is the status signal.
 - Task IDs are global, monotonic (`TASK-001`, `TASK-002`, ...), never reused; the next ID
   is highest existing + 1 across all directories.
 - Never delete task files — cancel by archiving with a note.
+
+## Task Storage
+
+Every task file must declare its physical location via a `## Task Storage` section at the
+end of the file. The path must match where the file actually lives. For example:
+
+```
+## Task Storage
+
+.opencode/tasks/active/2026-09-27/CHASHA-BE-TASK-011.md
+```
+
+When a task moves between directories (e.g. `active/` to `completed/`), update the storage
+section to reflect the new path.
