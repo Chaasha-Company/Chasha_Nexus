@@ -545,4 +545,14 @@ export const ValidationMessages = {
     fa: 'خطا: نقش‌های ادمین - یکی یا چند دسترسی درخواستی یافت نشد.',
     en: 'Error: Platform admin role - One or more of the requested permissions were not found.',
   },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_PERMISSION_ENABLED_REQUIRED]: {
+    fa: 'خطا: نقش‌های ادمین - وضعیت فعال‌سازی دسترسی الزامی است.',
+    en: 'Error: Platform admin role - The permission enabled status is required.',
+  },
+
+  [ValidationMessage.PLATFORM_ADMIN_ROLE_PERMISSION_ENABLED_INVALID]: {
+    fa: 'خطا: نقش‌های ادمین - وضعیت فعال‌سازی دسترسی باید true یا false باشد.',
+    en: 'Error: Platform admin role - The permission enabled status must be either true or false.',
+  },
 } as const;

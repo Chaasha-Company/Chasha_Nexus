@@ -5,3 +5,4 @@ export * from './detail-platform-admin-role-response.dto';
 export * from './create-platform-admin-role-response.dto';
 export * from './get-platform-admin-role-permissions-response.dto';
 export * from './replace-platform-admin-role-permissions-response.dto';
+export * from './update-platform-admin-role-permission-response.dto';

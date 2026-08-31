@@ -9,3 +9,4 @@ export * from './delete-platform-admin-role-repository.contract';
 export * from './find-platform-admin-role-permission-repository.contract';
 export * from './create-platform-admin-role-permission-repository.contract';
 export * from './delete-platform-admin-role-permission-repository.contract';
+export * from './restore-platform-admin-role-permission-repository.contract';

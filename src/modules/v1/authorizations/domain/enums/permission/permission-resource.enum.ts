@@ -22,4 +22,5 @@ export enum PermissionResourceEnum {
   PLATFORM_ADMIN_AUTHZ_ROLE_REMOVE_PERMISSION = 'platform_admin_authz_role_remove_permission',
   PLATFORM_ADMIN_AUTHZ_ROLE_GET_PERMISSIONS = 'platform_admin_authz_role_get_permissions',
   PLATFORM_ADMIN_AUTHZ_ROLE_REPLACE_PERMISSIONS = 'platform_admin_authz_role_replace_permissions',
+  PLATFORM_ADMIN_AUTHZ_ROLE_UPDATE_PERMISSION = 'platform_admin_authz_role_update_permission',
 }

@@ -7,3 +7,4 @@ export * from './assign-platform-admin-role-permission.validation';
 export * from './remove-platform-admin-role-permission.validation';
 export * from './get-platform-admin-role-permissions-query.validation';
 export * from './replace-platform-admin-role-permissions.validation';
+export * from './update-platform-admin-role-permission.validation';

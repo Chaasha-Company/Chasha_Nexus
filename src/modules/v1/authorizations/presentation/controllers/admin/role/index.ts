@@ -8,3 +8,4 @@ export * from './assign-platform-admin-role-permission.controller';
 export * from './remove-platform-admin-role-permission.controller';
 export * from './get-platform-admin-role-permissions.controller';
 export * from './replace-platform-admin-role-permissions.controller';
+export * from './update-platform-admin-role-permission.controller';

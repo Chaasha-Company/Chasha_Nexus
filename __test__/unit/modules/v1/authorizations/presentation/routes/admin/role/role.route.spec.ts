@@ -37,7 +37,7 @@ describe('platformAdminRoleRouter', () => {
 
   it('registers exactly the expected role management endpoints', () => {
     expect(routes.map((route) => `${route.methods[0]?.toUpperCase()} ${route.path}`).sort()).toEqual(
-      ['POST /create', 'PATCH /update', 'GET /get-all', 'POST /delete', 'POST /detail', 'POST /assign-permission', 'POST /remove-permission', 'PUT /permissions', 'GET /get-all-permissions', 'GET /list-option'].sort(),
+      ['POST /create', 'PATCH /update', 'GET /get-all', 'POST /delete', 'POST /detail', 'POST /assign-permission', 'POST /remove-permission', 'PUT /permissions', 'GET /get-all-permissions', 'GET /list-option', 'PATCH /permission'].sort(),
     );
   });
 
@@ -50,6 +50,7 @@ describe('platformAdminRoleRouter', () => {
       ['post', '/assign-permission', 'assignPlatformAdminRolePermissionController'],
       ['post', '/remove-permission', 'removePlatformAdminRolePermissionController'],
       ['put', '/permissions', 'replacePlatformAdminRolePermissionsController'],
+      ['patch', '/permission', 'updatePlatformAdminRolePermissionController'],
     ];
 
     for (const [method, path, controllerName] of expectations) {
