@@ -13,6 +13,12 @@ their status changes. The directory is the status signal.
 | `completed/` | Completed                 | Committed + reported; awaiting archival.             |
 | `archived/`  | Archived                  | Historical record only.                              |
 
+## Date subfolders
+
+Within each status directory, tasks are grouped by the date they are assigned/executed using a
+`YYYY-MM-DD/` subfolder (e.g. `backlog/2026-09-01/`, `active/2026-09-27/`, `completed/2026-08-24/`).
+This matches the physical location a task file declares in its `## Task Storage` section.
+
 ## Rules
 
 - Lifecycle, IDs, naming, transitions: see `workflow/task-workflow.md`.
