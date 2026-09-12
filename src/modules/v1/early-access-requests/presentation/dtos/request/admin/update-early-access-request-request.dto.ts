@@ -3,7 +3,7 @@ import type { ZodNumber, ZodOptional, ZodRecord, ZodString, ZodUnknown } from 'z
 export interface UpdateEarlyAccessRequestRequestDTO {
   earlyAccessRequestId: string | ZodString;
   earlyAccessRequestStatusId?: number | ZodOptional<ZodNumber>;
-  earlyAccessRequestBusinessTypeId?: string | ZodOptional<ZodString>;
+  earlyAccessRequestBusinessTypeId?: number | ZodOptional<ZodNumber>;
   earlyAccessRequestFullName?: string | ZodOptional<ZodString>;
   earlyAccessRequestPhoneNumber?: string | ZodOptional<ZodString>;
   earlyAccessRequestCode?: string | ZodOptional<ZodString>;

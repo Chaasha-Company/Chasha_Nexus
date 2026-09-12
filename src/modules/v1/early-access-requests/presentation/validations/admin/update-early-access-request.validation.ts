@@ -19,7 +19,7 @@ export const UpdateEarlyAccessRequestValidation = (lang: Language): Schema =>
         .optional(),
 
       earlyAccessRequestBusinessTypeId: z
-        .string({
+        .number({
           error: t(ValidationMessages, ValidationMessage.EARLY_ACCESS_REQUEST_BUSINESS_TYPE_ID_INVALID, lang),
         })
         .optional(),
