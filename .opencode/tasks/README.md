@@ -36,7 +36,7 @@ end of the file. The path must match where the file actually lives. For example:
 ```
 ## Task Storage
 
-.opencode/tasks/active/2026-09-27/CHASHA-BE-TASK-011.md
+.opencode/tasks/backlog/2026-09-01/CHASHA-BE-TASK-012.md
 ```
 
 When a task moves between directories (e.g. `active/` to `completed/`), update the storage
