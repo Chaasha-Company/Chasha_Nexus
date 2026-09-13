@@ -1,4 +1,5 @@
-import type { ErrorsResponse, UnAuthenticatedExceptionProps } from '@/shared/v1/types';
+import type { UnAuthenticatedExceptionProps } from '@/shared/v1/types/exception/un-authenticated';
+import type { ErrorsResponse } from '@/shared/v1/types/config';
 import { ErrorCode, HttpStatus, ResponseMessage } from '@/shared/v1/enums';
 
 export const throwUnAuthenticatedException = ({ message = ResponseMessage.UNAUTHORIZED, statusCode = HttpStatus.UNAUTHORIZED, errorCode = ErrorCode.UNAUTHORIZED, details = {} }: UnAuthenticatedExceptionProps): Error => {

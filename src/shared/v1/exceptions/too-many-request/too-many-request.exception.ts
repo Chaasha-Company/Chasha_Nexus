@@ -1,4 +1,5 @@
-import type { ErrorsResponse, TooManyRequestExceptionProps } from '@/shared/v1/types';
+import type { TooManyRequestExceptionProps } from '@/shared/v1/types/exception/too-many-request';
+import type { ErrorsResponse } from '@/shared/v1/types/config';
 import { ErrorCode, HttpStatus, ResponseMessage } from '@/shared/v1/enums';
 
 export const throwTooManyRequestException = ({ message = ResponseMessage.TOO_MANY_REQUESTS, statusCode = HttpStatus.TOO_MANY_REQUESTS, errorCode = ErrorCode.TOO_MANY_REQUESTS, details = {} }: TooManyRequestExceptionProps): Error => {

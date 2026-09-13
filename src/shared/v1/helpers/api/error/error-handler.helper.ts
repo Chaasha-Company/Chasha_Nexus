@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import type { ErrorsResponse } from '@/shared/v1/types';
+import type { ErrorsResponse } from '@/shared/v1/types/config';
 import type { AppError } from '@/shared/v1/interfaces';
 import multer from 'multer';
 

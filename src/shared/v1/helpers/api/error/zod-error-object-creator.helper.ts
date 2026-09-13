@@ -1,6 +1,6 @@
 import type { ZodError, ZodIssue } from 'zod';
 import type { Request } from 'express';
-import { type ErrorsResponse } from '@/shared/v1/types';
+import { type ErrorsResponse } from '@/shared/v1/types/config';
 
 import { ValidationMessage } from '@/shared/v1/enums';
 import { ValidationMessages, t } from '@/infrastructure/translator-system/i18n';

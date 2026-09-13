@@ -1,6 +1,6 @@
 import type { Request } from 'express';
 import type { AppError } from '@/shared/v1/interfaces';
-import type { ErrorsResponse } from '@/shared/v1/types';
+import type { ErrorsResponse } from '@/shared/v1/types/config';
 import { ResponseMessage } from '@/shared/v1/enums';
 import { ResponseMessages, t } from '@/infrastructure/translator-system/i18n';
 

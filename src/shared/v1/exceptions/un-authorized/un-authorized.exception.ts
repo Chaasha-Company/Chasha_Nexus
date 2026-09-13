@@ -1,4 +1,5 @@
-import type { ErrorsResponse, UnAuthorizedExceptionProps } from '@/shared/v1/types';
+import type { UnAuthorizedExceptionProps } from '@/shared/v1/types/exception/un-authorized';
+import type { ErrorsResponse } from '@/shared/v1/types/config';
 import { ErrorCode, HttpStatus, ResponseMessage } from '@/shared/v1/enums';
 
 export const throwUnAuthorizedException = ({ message = ResponseMessage.FORBIDDEN, statusCode = HttpStatus.FORBIDDEN, errorCode = ErrorCode.FORBIDDEN, details = {} }: UnAuthorizedExceptionProps): Error => {

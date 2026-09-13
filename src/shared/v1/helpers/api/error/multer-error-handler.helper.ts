@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import type multer from 'multer';
-import type { ErrorsResponse } from '@/shared/v1/types';
+import type { ErrorsResponse } from '@/shared/v1/types/config';
 import { ErrorCode, HttpStatus, ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
 import { ValidationMessages, ResponseMessages, t } from '@/infrastructure/translator-system/i18n';
 import { errorResponseHandler } from '@/shared/v1/helpers/api/handlers';
