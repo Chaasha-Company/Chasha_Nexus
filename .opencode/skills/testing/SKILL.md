@@ -3,14 +3,13 @@
 ## Purpose
 
 Responsible for behavior verification appropriate to risk, within the repo's current
-reality: Jest 30 + ts-jest configured (`roots: src/`, `@/` alias) but zero test files and
-`npm test` intentionally failing. Policy: `../../rules/testing-rules.md`.
+reality: Jest 30 + ts-jest configured (`roots: __test__/`, `@/` alias), 23 spec files
+/ 101 tests passing. Policy: `../../rules/testing-rules.md`.
 
 ## When This Skill Applies
 
 - Any task changing business behavior (handlers, validators, repositories, auth logic).
 - Bug fixes (regression test failing-before/passing-after whenever feasible).
-- The operator-approved task that wires the testing foundation (first test task).
 
 ## Responsibilities
 
@@ -23,8 +22,6 @@ reality: Jest 30 + ts-jest configured (`roots: src/`, `@/` alias) but zero test 
 - Use test doubles where the architecture makes it natural — repository contracts are
   plain functions; mock at module boundaries rather than spinning full HTTP stacks for
   unit scope.
-- For the first wiring task only: replace the `npm test` placeholder, fix placement
-  convention (`*.spec.ts` inside `src/`), record decisions in rules + context files.
 
 ## Required Knowledge
 
@@ -39,7 +36,7 @@ reality: Jest 30 + ts-jest configured (`roots: src/`, `@/` alias) but zero test 
 
 ## Repository Inspection
 
-1. Whether sibling tests exist to mirror (likely none yet — then follow rules/testing-rules).
+1. Whether sibling tests exist to mirror (check `__test__/` for existing specs).
 2. Handler dependencies to stub (repository factories, event emitter, translator catalogs).
 3. jest.config.ts constraints (roots/testMatch/moduleNameMapper) before choosing file paths.
 

@@ -24,7 +24,7 @@ This matches the physical location a task file declares in its `## Task Storage`
 - Lifecycle, IDs, naming, transitions: see `workflow/task-workflow.md`.
 - Templates: `templates/task-template.md`, plus feature/bugfix variants.
 - Every task file carries its own final report and review record once past review.
-- Task IDs are global, monotonic (`TASK-001`, `TASK-002`, ...), never reused; the next ID
+- Task IDs are global, monotonic (`CHASHA-BE-TASK-001`, `CHASHA-BE-TASK-002`, ...), never reused; the next ID
   is highest existing + 1 across all directories.
 - Never delete task files — cancel by archiving with a note.
 

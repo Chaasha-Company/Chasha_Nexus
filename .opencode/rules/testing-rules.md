@@ -1,9 +1,9 @@
 # Testing Rules
 
-Current reality (2026-08-23): Jest 30 + ts-jest are configured (`jest.config.ts`, roots
-`src/`, alias `@/`), but the repository contains **zero test files** and `npm test`
-intentionally fails. Testing is therefore introduced deliberately, one decision at a time,
-with operator approval — not improvised per feature.
+Current reality: Jest 30 + ts-jest are configured (`jest.config.ts`, roots
+`__test__/`, alias `@/`), with 23 spec files / 101 tests passing. Testing continues
+to be expanded deliberately, one decision at a time, with operator approval — not
+improvised per feature.
 
 ## R1. When tests are required
 

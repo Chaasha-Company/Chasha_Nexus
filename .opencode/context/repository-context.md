@@ -14,7 +14,7 @@
 - Observability: `pino`/`pino-http`, `prom-client` (metrics collected; no `/metrics` endpoint yet).
 - Messaging: in-process `EventEmitter`; `amqplib` present but dormant.
 - Build: Vite `8` + `vite-plugin-node` → ESM `dist/` with `preserveModulesRoot: 'src'`.
-- Tests: Jest `30` + `ts-jest` configured (`roots: src/`) but **no test files exist**; `npm test` intentionally fails.
+- Tests: Jest `30` + `ts-jest` configured (`roots: __test__/`), 23 spec files / 101 tests passing.
 
 ## Commands
 
@@ -30,7 +30,7 @@
 | `npm run migration:generate:dev`                            | Diff-driven migration against dev DB via `src/shared/v1/database/core/data-source.ts`.                                                       |
 | `npm run migration:run:dev`                                 | Run pending migrations (dev).                                                                                                                |
 | `migration:generate:production`, `migration:run:production` | Same but against compiled `dist` datasource path `./shared/v1/database/core/data-source.js` (no `src/` prefix — Vite `preserveModulesRoot`). |
-| `npm test`                                                  | Intentionally failing placeholder until tests are wired.                                                                                     |
+| `npm test`                                                  | Run test suite (23 spec files / 101 tests).                                                                                                  |
 
 ## Env loading gotcha
 
@@ -81,7 +81,7 @@ them unless a task explicitly covers them:
 4. A misplaced repository copy exists at
    `business-employees/infrastructure/repositories/find-platform-admin-by-phone-number.repository.ts`.
 5. `requestIdMiddleware` is defined but never applied; metrics middleware collects data but no `/metrics` endpoint exists; `prometheus.yml` scrapes a path nothing serves.
-6. Admin login OTP verify contains a hardcoded development OTP check (`123456`).
+6. ~~Admin login OTP verify contains a hardcoded development OTP check (`123456`).~~ Fixed in CHASHA-BE-TASK-011 — OTP verify now compares against the stored `platformAdminLoginWithPhoneNumberOtp`.
 7. The `super_admin` role-permission seed is marked in-source as temporary test data.
 8. Swagger doc for early-access create documents HTTP 200 while the controller returns 201; get-all example shows an outdated pagination shape.
 9. Some entity TS types lag reality (e.g. `BusinessesModel.businessTypeId!: number` holds a UUID).

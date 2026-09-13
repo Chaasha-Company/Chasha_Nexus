@@ -9,15 +9,15 @@ what is deliberately not done yet, and which working agreements govern day-to-da
 
 ## Current engineering state
 
-| Area               | State                                                                                                                                                                                                                                          |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Verification gates | `npm run npm:check` + `npm run lint` are the mandatory green bar. Pre-commit runs them repo-wide.                                                                                                                                              |
-| Tests              | Wired 2026-08-23: jest runs from `__test__/` (`roots: __test__`), first handler spec in place; `npm test` green. Convention + mocking rules recorded in `rules/testing-rules.md`. Integration/HTTP coverage still pending an approved harness. |
-| Swagger/OpenAPI    | Single static JSON spec, `en` only. Known drift items exist (see repository-context deviations #8). Every endpoint task must update the spec.                                                                                                  |
-| Permissions        | Seeded via upsert seeds at boot; route guards check DB permission rows. Adding a protected endpoint = adding permission seed + role assignment in the same task.                                                                               |
-| Migrations         | Auto-run at boot. New migrations must be added to `src/index.ts` re-exports (Vite bundling requirement).                                                                                                                                       |
-| Background jobs    | In-process EventEmitter only; RabbitMQ dormant by explicit decision ("server capacity"). Do not re-enable without operator approval.                                                                                                           |
-| Observability      | pino request logs + prom-client counters active; no metrics endpoint yet — adding one is a task, not a drive-by.                                                                                                                               |
+| Area               | State                                                                                                                                                                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Verification gates | `npm run npm:check` + `npm run lint` are the mandatory green bar. Pre-commit runs them repo-wide.                                                                                                                                  |
+| Tests              | Wired 2026-08-23: jest runs from `__test__/` (`roots: __test__`), 23 spec files / 101 tests passing. Convention + mocking rules recorded in `rules/testing-rules.md`. Integration/HTTP coverage still pending an approved harness. |
+| Swagger/OpenAPI    | Single static JSON spec, `en` only. Known drift items exist (see repository-context deviations #8). Every endpoint task must update the spec.                                                                                      |
+| Permissions        | Seeded via upsert seeds at boot; route guards check DB permission rows. Adding a protected endpoint = adding permission seed + role assignment in the same task.                                                                   |
+| Migrations         | Auto-run at boot. New migrations must be added to `src/index.ts` re-exports (Vite bundling requirement).                                                                                                                           |
+| Background jobs    | In-process EventEmitter only; RabbitMQ dormant by explicit decision ("server capacity"). Do not re-enable without operator approval.                                                                                               |
+| Observability      | pino request logs + prom-client counters active; no metrics endpoint yet — adding one is a task, not a drive-by.                                                                                                                   |
 
 ## Working agreements
 
@@ -35,9 +35,9 @@ what is deliberately not done yet, and which working agreements govern day-to-da
 ## How to treat known deviations
 
 The deviations listed in `repository-context.md` (typos, unmounted routers, spec drift,
-hardcoded dev OTP, temporary super_admin seeding) are recorded facts, not licenses. The
+temporary super_admin seeding) are recorded facts, not licenses. The
 agent does not fix them opportunistically; each becomes a task when the operator prioritizes it.
-Security-sensitive ones (dev OTP bypass, temporary permissions) should be flagged to the
+Security-sensitive ones (temporary permissions) should be flagged to the
 operator whenever touched work makes them more dangerous.
 
 ## Suggested backlog seeds (for the operator to approve, not for autonomous execution)

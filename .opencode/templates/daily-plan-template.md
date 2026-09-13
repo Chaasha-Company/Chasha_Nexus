@@ -8,19 +8,19 @@ Archive to `daily/archive/` at end of day after updating outcomes.
 ```markdown
 # Daily Plan — YYYY-MM-DD (Day NN)
 
-- Operator assignments: <list TASK IDs, 4–6 tasks>
+- Operator assignments: <list CHASHA-BE-TASK-NNN IDs, 4–6 tasks>
 - Agent: chasha-agent
 
 ## Task board
 
-| Task     | Title   | Type    | Priority | Start status | End status | Commit      |
-| -------- | ------- | ------- | -------- | ------------ | ---------- | ----------- |
-| TASK-0XX | <title> | feature | high     | Planned      | Completed  | <hash or —> |
-| TASK-0XY | <title> | bugfix  | medium   | Planned      | Review     | —           |
+| Task               | Title   | Type    | Priority | Start status | End status | Commit      |
+| ------------------ | ------- | ------- | -------- | ------------ | ---------- | ----------- |
+| CHASHA-BE-TASK-NNN | <title> | feature | high     | Planned      | Completed  | <hash or —> |
+| CHASHA-BE-TASK-NNN | <title> | bugfix  | medium   | Planned      | Review     | —           |
 
 ## Execution log
 
-### TASK-0XX — <title>
+### CHASHA-BE-TASK-NNN — <title>
 
 - Workflow used: feature-workflow
 - Analysis highlights: <2–4 bullets with claim labels>

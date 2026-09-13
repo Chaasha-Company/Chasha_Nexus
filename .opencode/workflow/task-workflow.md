@@ -35,13 +35,13 @@ always match the directory.
 
 ## Task IDs
 
-- Format `TASK-NNN`, three digits, global monotonic counter starting at `TASK-001`.
+- Format `CHASHA-BE-TASK-NNN`, three digits, global monotonic counter starting at `CHASHA-BE-TASK-001`.
 - Never reuse IDs, even for abandoned work (abandoned tasks go to `archived/`).
 - Next ID = highest existing ID + 1 across all task directories.
 
 ## File naming
 
-`TASK-NNN-<short-kebab-slug>.md`, e.g. `TASK-004-admin-faq-crud.md`.
+`CHASHA-BE-TASK-NNN.md`, e.g. `CHASHA-BE-TASK-004.md`. Files are stored in date-based subfolders: `tasks/backlog/2026-09-01/CHASHA-BE-TASK-012.md`.
 
 ## Creating a task
 

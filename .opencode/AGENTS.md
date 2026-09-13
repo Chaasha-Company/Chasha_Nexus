@@ -118,7 +118,7 @@ npm run lint        # eslint --max-warnings=0
 
 Notes:
 
-- `npm test` intentionally fails today (no test files wired). See [`rules/testing-rules.md`](./rules/testing-rules.md).
+- `npm test` runs the test suite (23 spec files / 101 tests). See [`rules/testing-rules.md`](./rules/testing-rules.md).
 - Pre-commit hooks run the full suite repo-wide and commitlint enforces Conventional Commits.
   Fix issues; never skip hooks.
 

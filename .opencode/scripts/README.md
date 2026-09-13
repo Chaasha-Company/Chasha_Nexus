@@ -6,7 +6,7 @@ Reserved for future automation helpers that support the `.opencode/` engineering
 
 | Idea                        | Purpose                                                                 |
 | --------------------------- | ----------------------------------------------------------------------- |
-| `next-task-id`              | Scan `tasks/**` and print the next free `TASK-NNN`.                     |
+| `next-task-id`              | Scan `tasks/**` and print the next free `CHASHA-BE-TASK-NNN`.           |
 | `validate-structure`        | Assert required directories/files of this system exist.                 |
 | `task-status <id> <status>` | Move a task file between lifecycle directories and update front-matter. |
 
