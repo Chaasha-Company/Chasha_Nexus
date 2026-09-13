@@ -70,6 +70,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "3.1037.0",
     "@maxmind/geoip2-node": "6.3.4",
     "@scalar/express-api-reference": "0.10.12",
     "@swc/core": "1.15.33",
@@ -80,6 +81,7 @@
     "casbin": "5.50.0",
     "cookie-parser": "1.4.7",
     "cors": "2.8.6",
+    "date-fns-jalali": "4.4.0-0",
     "dotenv": "17.4.2",
     "express": "5.2.1",
     "express-rate-limit": "8.5.1",
@@ -121,6 +123,7 @@
     "@types/mysql": "2.15.27",
     "@types/node": "25.6.2",
     "@types/swagger-ui-express": "4.1.8",
+    "@types/uuid": "10.0.0",
     "@typescript-eslint/eslint-plugin": "8.59.1",
     "@typescript-eslint/parser": "8.59.1",
     "chalk": "5.6.2",
