@@ -5,7 +5,7 @@
 - **Task ID:** CHASHA-BE-TASK-020
 - **Type:** Audit / Refactor
 - **Priority:** High
-- **Status:** Backlog
+- **Status:** Completed
 - **Domain:** Authorization / API Synchronization
 - **Module:** authorizations, businesses
 - **Scope:** Platform Admin + Business Employee
@@ -278,13 +278,62 @@ Platform Admin Role endpoints to evaluate:
 
 ## Implementation notes
 
-(empty until planning)
+**Audit findings:**
+- Platform Admin authz surface: 12 endpoints (`/permission/get-all` + 11 role endpoints).
+- Business Employee authz surface: originally 1 endpoint (`/permission/get-all`) — missing `/role` entirely.
+- Permission route triples were swapped: admin permission route used `business-employee-permission` resource, business permission route used `platform-admin-permission` resource.
+- Typo: `GetAllBusienssPermissionQueryResult`.
+- Casbin is initialized but unused by route guards (known existing state).
+
+**Fixes and additions:**
+- Fixed swapped permission route module/resource triples.
+- Fixed `GetAllBusienssPermissionQueryResult` → `GetAllBusinessPermissionQueryResult`.
+- Added `BUSINESS_EMPLOYEE_AUTHZ_ROLE_*` permission resources and seeds.
+- Added business role validation messages and translations.
+- Added complete business role layered implementation in `businesses` module:
+  - Repository contracts and TypeORM implementations (CRUD + permission assignment, scoped to `business_id`).
+  - Application commands, queries, handlers, and results.
+  - Presentation DTOs, validations, and controllers in `authorizations` module.
+  - Routes under `/business/authz/role` with 11 endpoints.
+- Synchronized Swagger/OpenAPI with new business role endpoints and corrected business permission docs.
+- Added unit tests for business role validations and route registration.
+
+**Intentional differences documented:**
+- Business roles are scoped to a business (`businessRoleBusinessId`); platform admin roles are global.
+- Business role key uniqueness is per business, not global.
+- Business role delete checks `business_employees` usage instead of `platform_admins`.
+- No default business role seed is created because business roles belong to specific businesses.
+- Casbin remains initialized but unused; the permission guard uses the `role_permissions` join tables directly.
 
 ---
 
 ## Final report
 
-(empty until completion)
+Task ID: CHASHA-BE-TASK-020
+Status: Completed
+Implementation summary: Audited and synchronized Platform Admin and Business Employee authorization API surfaces. Fixed permission route triple bugs, added the missing `/business/authz/role` surface with full layered implementation, synchronized permissions/seeds/Swagger, and added tests.
+Files created: 90+ (business role repositories, application handlers, DTOs, validations, controllers, routes, tests, Swagger updates)
+Files modified: 15+ (permission enum, seed, validation messages, route wiring, existing permission routes)
+Database changes: None (schema unchanged; new permission seed entries added)
+API changes:
+  - Fixed `/admin/authz/permission/get-all` permission triple
+  - Fixed `/business/authz/permission/get-all` permission triple
+  - Added `/business/authz/role/*` 11 endpoints
+Permission changes: Added 12 business employee role permission resources and seed entries
+Swagger changes: Added OpenAPI paths/schemas for business role endpoints and retagged business permission endpoint
+Tests:
+  - Added `__test__/unit/.../business/role/create-business-role.validation.spec.ts`
+  - Added `__test__/unit/.../business/role/update-business-role.validation.spec.ts`
+  - Added `__test__/unit/.../business/role/role.route.spec.ts`
+Validation results:
+  - `npm run npm:check` passes
+  - `npx tsc --noEmit` passes (0 errors)
+  - `npm run lint` passes (0 warnings)
+  - `npx prettier --check .` passes
+Commit message: (multiple stage commits — see commit history)
+Remaining issues:
+  - Casbin policies are not added because the route guards do not consume Casbin; this is a known architectural state.
+  - Platform Admin ↔ Role assignment remains out of scope (identified as a potential separate future task).
 
 ---
 
