@@ -6,13 +6,13 @@
 // export const apiRefrenceConfig: ApiReferenceConfiguration = {
 //   content: openApiDocument,
 //   metaData: {
-//     title: 'Mehkam Api V1 | Documention',
+//     title: 'Mehkam Api V1 | Documentation',
 //     description: 'Complete API documentation for the Mehkam platform developed by Mehkam Team.',
 //   },
 //   defaultHttpClient: {
 //     targetKey: 'dart',
 //     clientKey: 'fetch',
 //   },
-//   pageTitle: 'Mehkam Api V1 | Documention',
+//   pageTitle: 'Mehkam Api V1 | Documentation',
 //   //   cdn: ''
 // };

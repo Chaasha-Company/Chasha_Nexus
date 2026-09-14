@@ -4,7 +4,7 @@ import { findAllEarlyAccessRequestQueryHandler } from '@/modules/v1/early-access
 import { paginationResponseHandler } from '@/shared/v1/helpers/api/handlers';
 import { HttpStatus } from '@/shared/v1/enums';
 
-export const getAllEarlyAccessRequestContoller = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const getAllEarlyAccessRequestController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const query = req.query as unknown as GetAllEarlyAccessRequestQueryDTO;
     const result = await findAllEarlyAccessRequestQueryHandler({

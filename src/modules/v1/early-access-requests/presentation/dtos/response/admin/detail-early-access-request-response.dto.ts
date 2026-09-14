@@ -1,4 +1,4 @@
-export interface DetailEarlyAccessRequestReponseDTO {
+export interface DetailEarlyAccessRequestResponseDTO {
   earlyAccessRequestId: string;
 
   earlyAccessRequestStatus: {

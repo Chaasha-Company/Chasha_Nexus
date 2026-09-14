@@ -1,5 +1,5 @@
 import { PermissionActionEnum, permissionGuardPlatformAdminMiddleware, PermissionResourceEnum } from '@/modules/v1/authorizations';
-import { detailEarlyAccessRequestController, getAllEarlyAccessRequestContoller, getListOptionEarlyAccessRequestController, updateEarlyAccessRequestController } from '@/modules/v1/early-access-requests/presentation/controllers';
+import { detailEarlyAccessRequestController, getAllEarlyAccessRequestController, getListOptionEarlyAccessRequestController, updateEarlyAccessRequestController } from '@/modules/v1/early-access-requests/presentation/controllers';
 import { DetailEarlyAccessRequestValidation, GetAllEarlyAccessRequestQueryValidation, UpdateEarlyAccessRequestValidation } from '@/modules/v1/early-access-requests/presentation/validations';
 import { validateBodyMiddleware, validateQueryMiddleware } from '@/shared/v1/middlewares/validation';
 import { Router } from 'express';
@@ -16,7 +16,7 @@ router.get(
   '/get-all',
   permissionGuardPlatformAdminMiddleware({ platformAdminPermissionModule: 'early-access-requests', platformAdminPermissionAction: PermissionActionEnum.READ, platformAdminPermissionResource: PermissionResourceEnum.EARLY_ACCESS_REQUEST_GET_ALL }),
   validateQueryMiddleware(GetAllEarlyAccessRequestQueryValidation),
-  getAllEarlyAccessRequestContoller,
+  getAllEarlyAccessRequestController,
 );
 
 router.post(
