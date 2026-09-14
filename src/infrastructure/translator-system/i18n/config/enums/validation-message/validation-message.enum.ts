@@ -555,4 +555,140 @@ export const ValidationMessages = {
     fa: 'خطا: نقش‌های ادمین - وضعیت فعال‌سازی دسترسی باید true یا false باشد.',
     en: 'Error: Platform admin role - The permission enabled status must be either true or false.',
   },
+
+  // =========================Business Employee Role Validation=========================
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_IS_ACTIVE_INVALID]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - مقدار فیلتر وضعیت فعال باید true یا false باشد.',
+    en: 'Error: Business employee role - The active status filter must be either true or false.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_ID_REQUIRED]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - شناسه نقش الزامی است.',
+    en: 'Error: Business employee role - The role id is required.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_ID_NOT_FOUND]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - نقش موردنظر یافت نشد.',
+    en: 'Error: Business employee role - The requested role was not found.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_ID_IN_USE]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - این نقش توسط کارمندانی استفاده می‌شود و قابل حذف نیست.',
+    en: 'Error: Business employee role - This role is currently in use by business employees and cannot be deleted.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_KEY_REQUIRED]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - کلید نقش الزامی است.',
+    en: 'Error: Business employee role - The role key is required.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_KEY_TOO_LONG]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - کلید نقش نمی‌تواند بیش از ۱۰۰ کاراکتر باشد.',
+    en: 'Error: Business employee role - The role key must not exceed 100 characters.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_NAME_FA_REQUIRED]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - نام فارسی نقش الزامی است.',
+    en: 'Error: Business employee role - The Persian role name is required.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_NAME_FA_TOO_LONG]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - نام فارسی نقش نمی‌تواند بیش از ۲۵۵ کاراکتر باشد.',
+    en: 'Error: Business employee role - The Persian role name must not exceed 255 characters.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_NAME_EN_REQUIRED]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - نام انگلیسی نقش الزامی است.',
+    en: 'Error: Business employee role - The English role name is required.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_NAME_EN_TOO_LONG]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - نام انگلیسی نقش نمی‌تواند بیش از ۲۵۵ کاراکتر باشد.',
+    en: 'Error: Business employee role - The English role name must not exceed 255 characters.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_ALREADY_EXISTS]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - نقشی با این کلید از قبل وجود دارد.',
+    en: 'Error: Business employee role - A role with this key already exists.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_NAME_FA_INVALID]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - نام فارسی نقش نامعتبر است.',
+    en: 'Error: Business employee role - The Persian role name is invalid.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_NAME_EN_INVALID]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - نام انگلیسی نقش نامعتبر است.',
+    en: 'Error: Business employee role - The English role name is invalid.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_DESCRIPTION_INVALID]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - توضیحات نقش نامعتبر است.',
+    en: 'Error: Business employee role - The role description is invalid.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_BUSINESS_ID_REQUIRED]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - شناسه بیزنس الزامی است.',
+    en: 'Error: Business employee role - The business id is required.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_BUSINESS_ID_NOT_FOUND]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - بیزنس موردنظر یافت نشد.',
+    en: 'Error: Business employee role - The requested business was not found.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_ACCESS_DENIED]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - دسترسی به این نقش مجاز نیست.',
+    en: 'Error: Business employee role - Access to this role is not allowed.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_PERMISSION_ID_REQUIRED]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - شناسه دسترسی الزامی است.',
+    en: 'Error: Business employee role - The permission id is required.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_PERMISSION_ID_NOT_FOUND]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - دسترسی موردنظر یافت نشد.',
+    en: 'Error: Business employee role - The requested permission was not found.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_PERMISSION_ALREADY_EXISTS]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - این دسترسی قبلاً به نقش اختصاص یافته است.',
+    en: 'Error: Business employee role - This permission is already assigned to the role.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_PERMISSION_NOT_FOUND]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - این دسترسی به نقش اختصاص نیافته است.',
+    en: 'Error: Business employee role - This permission is not assigned to the role.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_PERMISSION_IDS_REQUIRED]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - شناسه‌های دسترسی الزامی است.',
+    en: 'Error: Business employee role - The permission ids are required.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_PERMISSION_IDS_INVALID]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - شناسه‌های دسترسی نامعتبر است.',
+    en: 'Error: Business employee role - The permission ids are invalid.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_PERMISSION_IDS_DUPLICATE]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - شناسه‌های دسترسی تکراری مجاز نیست.',
+    en: 'Error: Business employee role - Duplicate permission ids are not allowed.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_PERMISSION_IDS_NOT_FOUND]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - یکی یا چند دسترسی درخواستی یافت نشد.',
+    en: 'Error: Business employee role - One or more of the requested permissions were not found.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_PERMISSION_ENABLED_REQUIRED]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - وضعیت فعال‌سازی دسترسی الزامی است.',
+    en: 'Error: Business employee role - The permission enabled status is required.',
+  },
+
+  [ValidationMessage.BUSINESS_EMPLOYEE_ROLE_PERMISSION_ENABLED_INVALID]: {
+    fa: 'خطا: نقش‌های کارمند بیزنس - وضعیت فعال‌سازی دسترسی باید true یا false باشد.',
+    en: 'Error: Business employee role - The permission enabled status must be either true or false.',
+  },
 } as const;
