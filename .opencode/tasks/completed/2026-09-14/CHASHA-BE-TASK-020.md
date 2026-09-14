@@ -279,6 +279,7 @@ Platform Admin Role endpoints to evaluate:
 ## Implementation notes
 
 **Audit findings:**
+
 - Platform Admin authz surface: 12 endpoints (`/permission/get-all` + 11 role endpoints).
 - Business Employee authz surface: originally 1 endpoint (`/permission/get-all`) — missing `/role` entirely.
 - Permission route triples were swapped: admin permission route used `business-employee-permission` resource, business permission route used `platform-admin-permission` resource.
@@ -286,6 +287,7 @@ Platform Admin Role endpoints to evaluate:
 - Casbin is initialized but unused by route guards (known existing state).
 
 **Fixes and additions:**
+
 - Fixed swapped permission route module/resource triples.
 - Fixed `GetAllBusienssPermissionQueryResult` → `GetAllBusinessPermissionQueryResult`.
 - Added `BUSINESS_EMPLOYEE_AUTHZ_ROLE_*` permission resources and seeds.
@@ -299,6 +301,7 @@ Platform Admin Role endpoints to evaluate:
 - Added unit tests for business role validations and route registration.
 
 **Intentional differences documented:**
+
 - Business roles are scoped to a business (`businessRoleBusinessId`); platform admin roles are global.
 - Business role key uniqueness is per business, not global.
 - Business role delete checks `business_employees` usage instead of `platform_admins`.
@@ -316,24 +319,25 @@ Files created: 90+ (business role repositories, application handlers, DTOs, vali
 Files modified: 15+ (permission enum, seed, validation messages, route wiring, existing permission routes)
 Database changes: None (schema unchanged; new permission seed entries added)
 API changes:
-  - Fixed `/admin/authz/permission/get-all` permission triple
-  - Fixed `/business/authz/permission/get-all` permission triple
-  - Added `/business/authz/role/*` 11 endpoints
-Permission changes: Added 12 business employee role permission resources and seed entries
-Swagger changes: Added OpenAPI paths/schemas for business role endpoints and retagged business permission endpoint
-Tests:
-  - Added `__test__/unit/.../business/role/create-business-role.validation.spec.ts`
-  - Added `__test__/unit/.../business/role/update-business-role.validation.spec.ts`
-  - Added `__test__/unit/.../business/role/role.route.spec.ts`
-Validation results:
-  - `npm run npm:check` passes
-  - `npx tsc --noEmit` passes (0 errors)
-  - `npm run lint` passes (0 warnings)
-  - `npx prettier --check .` passes
-Commit message: (multiple stage commits — see commit history)
-Remaining issues:
-  - Casbin policies are not added because the route guards do not consume Casbin; this is a known architectural state.
-  - Platform Admin ↔ Role assignment remains out of scope (identified as a potential separate future task).
+
+- Fixed `/admin/authz/permission/get-all` permission triple
+- Fixed `/business/authz/permission/get-all` permission triple
+- Added `/business/authz/role/*` 11 endpoints
+  Permission changes: Added 12 business employee role permission resources and seed entries
+  Swagger changes: Added OpenAPI paths/schemas for business role endpoints and retagged business permission endpoint
+  Tests:
+- Added `__test__/unit/.../business/role/create-business-role.validation.spec.ts`
+- Added `__test__/unit/.../business/role/update-business-role.validation.spec.ts`
+- Added `__test__/unit/.../business/role/role.route.spec.ts`
+  Validation results:
+- `npm run npm:check` passes
+- `npx tsc --noEmit` passes (0 errors)
+- `npm run lint` passes (0 warnings)
+- `npx prettier --check .` passes
+  Commit message: (multiple stage commits — see commit history)
+  Remaining issues:
+- Casbin policies are not added because the route guards do not consume Casbin; this is a known architectural state.
+- Platform Admin ↔ Role assignment remains out of scope (identified as a potential separate future task).
 
 ---
 
