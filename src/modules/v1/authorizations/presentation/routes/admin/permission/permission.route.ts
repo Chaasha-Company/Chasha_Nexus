@@ -8,9 +8,9 @@ const router = Router();
 router.get(
   '/get-all',
   permissionGuardPlatformAdminMiddleware({
-    platformAdminPermissionModule: 'business-employee-permission',
+    platformAdminPermissionModule: 'platform-admin-permission',
     platformAdminPermissionAction: PermissionActionEnum.READ,
-    platformAdminPermissionResource: PermissionResourceEnum.BUSINESS_EMPLOYEE_AUTHZ_PERMISSION_GET_ALL,
+    platformAdminPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_PERMISSION_GET_ALL,
   }),
   getAllPlatformAdminPermissionController,
 );

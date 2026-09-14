@@ -7,7 +7,7 @@ const router = Router();
 
 router.get(
   '/get-all',
-  permissionGuardBusinessMiddleware({ businessPermissionModule: 'platform-admin-permission', businessPermissionAction: PermissionActionEnum.READ, businessPermissionResource: PermissionResourceEnum.PLATFORM_ADMIN_AUTHZ_PERMISSION_GET_ALL }),
+  permissionGuardBusinessMiddleware({ businessPermissionModule: 'business-employee-permission', businessPermissionAction: PermissionActionEnum.READ, businessPermissionResource: PermissionResourceEnum.BUSINESS_EMPLOYEE_AUTHZ_PERMISSION_GET_ALL }),
   getAllBusinessPermissionController,
 );
 

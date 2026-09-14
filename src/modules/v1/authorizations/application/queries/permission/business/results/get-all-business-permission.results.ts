@@ -1,4 +1,4 @@
-export type GetAllBusienssPermissionQueryResult = {
+export type GetAllBusinessPermissionQueryResult = {
   businessRolePermissionId: string;
   businessRolePermissionPermissionId: string;
 
