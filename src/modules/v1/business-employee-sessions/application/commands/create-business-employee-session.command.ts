@@ -1,4 +1,4 @@
-export interface CreatebusinessEmployeeSessionCommand {
+export interface CreateBusinessEmployeeSessionCommand {
   businessEmployeeSessionId: string;
   businessEmployeeSessionUserId: string;
   businessEmployeeSessionRefreshToken: string;

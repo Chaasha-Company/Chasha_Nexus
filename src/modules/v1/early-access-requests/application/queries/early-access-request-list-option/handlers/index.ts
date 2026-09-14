@@ -1,1 +1,1 @@
-export * from './get-list-option-early-access-request.query';
+export * from './get-list-option-early-access-request.handler';

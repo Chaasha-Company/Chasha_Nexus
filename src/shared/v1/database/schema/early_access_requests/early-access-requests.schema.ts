@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { BusinessTypesModel } from '@/shared/v1/database/schema/businesses/childrens';
-import { EarlyAccessRequestStatusesModel } from './childrens';
+import { BusinessTypesModel } from '@/shared/v1/database/schema/businesses/children';
+import { EarlyAccessRequestStatusesModel } from './children';
 
 @Entity({
   name: 'early_access_requests',

@@ -1,8 +1,8 @@
 import { BeforeInsert, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { PlatformAdminSessionsModel, PlatformAdminStatusesModel } from './childrens';
+import { PlatformAdminSessionsModel, PlatformAdminStatusesModel } from './children';
 import { generateChashaResetPasswordCodeHelper, hashPasswordProvider } from '@/modules/v1/authentications';
-import { PlatformAdminRolesModel } from './childrens/platform-admin-roles/platform-admin-roles.schema';
+import { PlatformAdminRolesModel } from './children/platform-admin-roles/platform-admin-roles.schema';
 
 @Entity({
   name: 'platform_admins',

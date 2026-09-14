@@ -1,5 +1,5 @@
 import type { Language } from '@/infrastructure/translator-system/i18n';
-import type { GetAllPlatformAdminRoleRequestQueryDTO } from '@/modules/v1/authorizations/presentation';
+import type { GetAllPlatformAdminRoleQueryDTO } from '@/modules/v1/authorizations/presentation';
 import { t, ValidationMessages } from '@/infrastructure/translator-system/i18n';
 
 import z, { type Schema } from 'zod';
@@ -8,7 +8,7 @@ import { ValidationMessage } from '@/shared/v1/enums';
 import { PaginationQueryValidation } from '@/shared/v1/validations/pagination';
 
 export const GetAllPlatformAdminRoleQueryValidation = (lang: Language): Schema =>
-  z.strictObject<GetAllPlatformAdminRoleRequestQueryDTO>({
+  z.strictObject<GetAllPlatformAdminRoleQueryDTO>({
     ...PaginationQueryValidation(lang).shape,
 
     platformAdminRoleSearch: z.string().optional(),

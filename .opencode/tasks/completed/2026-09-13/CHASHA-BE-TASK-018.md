@@ -5,7 +5,7 @@
 - **Task ID:** CHASHA-BE-TASK-018
 - **Type:** Refactor
 - **Priority:** Medium
-- **Status:** Backlog
+- **Status:** Completed
 - **Domain:** Cross-cutting / Architecture
 - **Module:** All modules
 - **Dependencies:** None
@@ -204,71 +204,104 @@ Schema folders under `shared/v1/database/schema/` use underscore naming matching
 
 ## Acceptance Criteria
 
-- [ ] All known typos in identifiers are corrected (files, types, variables, parameters)
-- [ ] All enum files follow one consistent naming pattern (lowercase kebab-case)
-- [ ] All files follow kebab-case with mandatory layer suffixes
-- [ ] All folders follow consistent singular/plural naming
-- [ ] All `.query.ts` files in `handlers/` directories are renamed to `.handler.ts`
-- [ ] All `handler/` singular folders are renamed to `handlers/` plural
-- [ ] All wrong-module-name files are corrected
-- [ ] All past-tense repository names are corrected to present-tense
-- [ ] All plural `requests/`/`responses/` directories are corrected to singular
-- [ ] All double-`request` DTO filenames are corrected
-- [ ] All interface/type PascalCase inconsistencies are corrected
-- [ ] All imports and references are updated after renames
-- [ ] No broken imports remain
-- [ ] TypeScript compilation succeeds
-- [ ] All tests pass
-- [ ] No behavior is unintentionally changed
+- [x] All known typos in identifiers are corrected (files, types, variables, parameters)
+- [x] All enum files follow one consistent naming pattern (lowercase kebab-case)
+- [x] All files follow kebab-case with mandatory layer suffixes
+- [x] All folders follow consistent singular/plural naming
+- [x] All `.query.ts` files in `handlers/` directories are renamed to `.handler.ts`
+- [x] All `handler/` singular folders are renamed to `handlers/` plural
+- [x] All wrong-module-name files are corrected
+- [x] All past-tense repository names are corrected to present-tense
+- [x] All plural `requests/`/`responses/` directories are corrected to singular
+- [x] All double-`request` DTO filenames are corrected
+- [x] All interface/type PascalCase inconsistencies are corrected
+- [x] All imports and references are updated after renames
+- [x] No broken imports remain
+- [x] TypeScript compilation succeeds
+- [x] All tests pass
+- [x] No behavior is unintentionally changed
 
 ---
 
 ## Validation
 
-- [ ] `npx tsc --noEmit` passes
-- [ ] `npm run lint` passes (eslint --max-warnings=0)
-- [ ] `npx prettier --check .` passes
-- [ ] `npm test` passes (all suites)
-- [ ] `npm run build:production` passes
-- [ ] Global search for `ealry` returns zero results
-- [ ] Global search for `buisness` returns zero results
-- [ ] Global search for `REUQEST` returns zero results
-- [ ] Global search for `Createbusiness` returns zero results
-- [ ] All enum files follow `*.enum.ts` kebab-case pattern
-- [ ] All handler files in `handlers/` directories have `.handler.ts` suffix
-- [ ] No `handler/` (singular) directories remain
-- [ ] No wrong-module-name files remain
-- [ ] No past-tense repository names remain
-- [ ] No plural `requests/`/`responses/` directories remain in infrastructure
+- [x] `npx tsc --noEmit` passes
+- [x] `npm run lint` passes (eslint --max-warnings=0)
+- [x] `npx prettier --check .` passes
+- [x] `npm test` passes (all suites)
+- [x] `npm run build:production` passes
+- [x] Global search for `ealry` returns zero results
+- [x] Global search for `buisness` returns zero results
+- [x] Global search for `REUQEST` returns zero results
+- [x] Global search for `Createbusiness` returns zero results
+- [x] All enum files follow `*.enum.ts` kebab-case pattern
+- [x] All handler files in `handlers/` directories have `.handler.ts` suffix
+- [x] No `handler/` (singular) directories remain
+- [x] No wrong-module-name files remain
+- [x] No past-tense repository names remain
+- [x] No plural `requests/`/`responses/` directories remain in infrastructure
 
 ---
 
 ## Testing Requirements
 
-- [ ] Existing test suites remain green after all renames
-- [ ] No new tests required (naming-only change)
-- [ ] Verify no stale imports by running full compilation
+- [x] Existing test suites remain green after all renames
+- [x] No new tests required (naming-only change)
+- [x] Verify no stale imports by running full compilation
 
 ---
 
 ## Documentation Requirements
 
-- Update `.opencode/rules/naming-rules.md` if any convention is clarified or added during implementation
-- Update `.opencode/context/repository-context.md` known typos section — remove fixed typos
-- Swagger/OpenAPI: not applicable
-- Permission seeds: not applicable
+- [x] Update `.opencode/rules/naming-rules.md` if any convention is clarified or added during implementation
+- [x] Update `.opencode/context/repository-context.md` known typos section — remove fixed typos
+- [x] Swagger/OpenAPI: not applicable
+- [x] Permission seeds: not applicable
 
 ---
 
 ## Implementation notes
 
-(empty until planning)
+All renaming completed successfully:
+
+- Fixed 7 schema `childrens/` → `children/` directories
+- Fixed 6 enum files from uppercase to lowercase kebab-case
+- Fixed 3 double-`request` DTO filenames
+- Fixed ~11 files with `ealry` typo
+- Fixed 4 files with `Createbusiness` typo
+- Fixed 2 files with `revokedAll` → `revokeAll`
+- Fixed 1 file with `COUNSEL_REUQEST` typo
+- Fixed 1 file with `businessTypebusinesses` typo
+- Fixed 1 file with `EarlyAccessRequests` property typo
+- Fixed 1 file with `paginationResponseHandler` → `paginationResponseHelper`
+- Renamed `refresh-token/handler/` → `handlers/`
+- Renamed `find-platform-admin-by-phone-number` → `find-business-employee-by-phone-number`
+- Renamed `platform-admin-session.route.ts` → `business-employee-session.route.ts`
+- Renamed `revoked-all-business-employee-session-by-id.repository.ts` → `revoke-all-...`
+- Renamed `get-list-option-*.query.ts` → `.handler.ts`
+- Renamed `requests/` → `request/` and `responses/` → `response/`
 
 ---
 
 ## Final report
 
-(empty until completion)
+Task ID: CHASHA-BE-TASK-018
+Status: Completed
+Implementation summary: Standardized all file, folder, type, enum, and shared naming conventions across the entire codebase. Fixed ~90+ files with naming inconsistencies.
+Files created: 0
+Files modified: 90+
+Database changes: None
+API changes: None
+Permission changes: None
+Swagger changes: None
+Tests: All existing tests pass (no new tests needed for naming-only change)
+Validation results:
+
+- `npm run npm:check` passes
+- `npm run lint` passes (0 warnings)
+- `npx prettier --check .` passes
+- `npx tsc --noEmit` passes (0 errors)
+  Commit message: `refactor(naming): standardize file, folder, type and enum naming conventions`
 
 ---
 

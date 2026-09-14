@@ -1,1 +1,1 @@
-export * from './HTTP_STATUS.enum';
+export * from './http-status.enum';

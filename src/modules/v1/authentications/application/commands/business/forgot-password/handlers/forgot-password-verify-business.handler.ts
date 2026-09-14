@@ -6,7 +6,7 @@ import { CacheKey, ResponseMessage, ValidationMessage } from '@/shared/v1/enums'
 import { throwBadRequestException } from '@/shared/v1/exceptions';
 import { findBusinessEmployeeByPhoneNumberRepository, updateBusinessEmployeeRepository } from '@/modules/v1/business-employees';
 import { hashPasswordProvider } from '@/modules/v1/authentications/infrastructure';
-import { revokedAllBusinessEmployeeSessionByIdRepository } from '@/modules/v1/business-employee-sessions';
+import { RevokeAllBusinessEmployeeSessionByIdRepository } from '@/modules/v1/business-employee-sessions';
 import { transactionManager } from '@/shared/v1/domain/contracts';
 
 export const forgotPasswordVerifyBusinessCommandHandler = async (forgotPasswordVerifyData: ForgotPasswordVerifyBusinessCommand, lang: Language): Promise<void> => {
@@ -49,7 +49,7 @@ export const forgotPasswordVerifyBusinessCommandHandler = async (forgotPasswordV
       manager,
     );
 
-    await revokedAllBusinessEmployeeSessionByIdRepository()(
+    await RevokeAllBusinessEmployeeSessionByIdRepository()(
       {
         businessEmployeeSessionUserId: resetPasswordSessionData?.forgotPasswordBusinessEmployeeId as string,
       },

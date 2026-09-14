@@ -1,5 +1,5 @@
 import { PermissionActionEnum, PermissionResourceEnum, PermissionSubjectEnum, PermissionTypeEnum } from '@/modules/v1/authorizations/domain';
-import { BusinessRolePermissionsModel } from '@/shared/v1/database/schema/businesses/childrens';
+import { BusinessRolePermissionsModel } from '@/shared/v1/database/schema/businesses/children';
 import { PlatformAdminRolePermissionsModel } from '@/shared/v1/database/schema/platform_admins';
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 

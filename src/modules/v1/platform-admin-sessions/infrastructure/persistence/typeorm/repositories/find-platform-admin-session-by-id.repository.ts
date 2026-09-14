@@ -2,7 +2,7 @@ import type { FindPlatformAdminSessionByIdQuery } from '@/modules/v1/platform-ad
 import type { FindPlatformAdminSessionByIdRepositoryContract } from '@/modules/v1/platform-admin-sessions/domain';
 import type { TransactionContext } from '@/shared/v1/domain/contracts';
 import { AppDataSource } from '@/shared/v1/database/core';
-import { PlatformAdminSessionsModel } from '@/shared/v1/database/schema/platform_admins/childrens';
+import { PlatformAdminSessionsModel } from '@/shared/v1/database/schema/platform_admins/children';
 
 export const findPlatformAdminSessionByIdRepository =
   (): FindPlatformAdminSessionByIdRepositoryContract =>

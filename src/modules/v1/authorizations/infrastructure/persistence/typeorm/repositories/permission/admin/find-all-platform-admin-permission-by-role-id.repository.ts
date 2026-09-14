@@ -1,7 +1,7 @@
 import type { FindAllPlatformAdminPermissionByRoleIdQuery } from '@/modules/v1/authorizations/application';
 import type { TransactionContext } from '@/shared/v1/domain/contracts';
 import type { FindAllPlatformAdminPermissionByRoleIdRepositoryContract } from '@/modules/v1/authorizations/domain';
-import { PlatformAdminRolePermissionsModel } from '@/shared/v1/database/schema/platform_admins/childrens/platform-admin-roles';
+import { PlatformAdminRolePermissionsModel } from '@/shared/v1/database/schema/platform_admins/children/platform-admin-roles';
 import { AppDataSource } from '@/shared/v1/database/core';
 
 export const findAllPlatformAdminPermissionByRoleIdRepository =

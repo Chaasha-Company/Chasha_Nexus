@@ -1,1 +1,1 @@
-export * from './get-list-option-platform-admin-role.query';
+export * from './get-list-option-platform-admin-role.handler';

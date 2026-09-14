@@ -1,1 +1,1 @@
-export * from './REGEX-PATTERN.enum';
+export * from './regex-pattern.enum';

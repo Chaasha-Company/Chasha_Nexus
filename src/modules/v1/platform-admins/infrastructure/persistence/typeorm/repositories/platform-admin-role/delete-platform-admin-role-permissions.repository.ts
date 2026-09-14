@@ -3,7 +3,7 @@ import type { DeletePlatformAdminRoleCommand } from '@/modules/v1/platform-admin
 import type { TransactionContext } from '@/shared/v1/domain/contracts';
 
 import { AppDataSource } from '@/shared/v1/database/core';
-import { PlatformAdminRolePermissionsModel } from '@/shared/v1/database/schema/platform_admins/childrens';
+import { PlatformAdminRolePermissionsModel } from '@/shared/v1/database/schema/platform_admins/children';
 
 export const deletePlatformAdminRolePermissionsRepository =
   (): DeletePlatformAdminRolePermissionsRepositoryContract =>

@@ -3,7 +3,7 @@ import { type CheckPermissionRequestDTO, getCasbinAuthEnforcer } from '@/infrast
 
 export const checkPermissionHelper =
   (): CheckPermissionFunctionContract =>
-  async (permissioData: CheckPermissionRequestDTO): Promise<boolean> => {
+  async (permissionData: CheckPermissionRequestDTO): Promise<boolean> => {
     const enforcer = getCasbinAuthEnforcer();
-    return await enforcer.enforce(permissioData.permissionUserId, permissioData.permissionCompanyId, permissioData.permissionResource, permissioData.permissionAction);
+    return await enforcer.enforce(permissionData.permissionUserId, permissionData.permissionCompanyId, permissionData.permissionResource, permissionData.permissionAction);
   };

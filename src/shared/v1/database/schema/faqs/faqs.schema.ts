@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { FaqTypesModel } from './childrens';
+import { FaqTypesModel } from './children';
 
 @Entity({
   name: 'faqs',

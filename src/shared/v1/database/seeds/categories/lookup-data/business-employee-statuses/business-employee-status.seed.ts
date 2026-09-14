@@ -1,6 +1,6 @@
 import { loggerConfig } from '@/config/logger';
 import { AppDataSource } from '@/shared/v1/database/core';
-import { BusinessEmployeeStatusesModel } from '@/shared/v1/database/schema/business_employees/childrens';
+import { BusinessEmployeeStatusesModel } from '@/shared/v1/database/schema/business_employees/children';
 
 export const createBusinessEmployeeStatusDataSeed = async (): Promise<void> => {
   const repository = AppDataSource.getRepository(BusinessEmployeeStatusesModel);

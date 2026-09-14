@@ -46,5 +46,5 @@ export const createPlatformAdminRoleDataSeed = async (): Promise<void> => {
 
   await repository.save(roles);
 
-  loggerConfig.info('Platform Admin Roles Table has no Data - Seed Runned and Data Inserted!');
+  loggerConfig.info('Platform Admin Roles Table has no Data - Seed Ran and Data Inserted!');
 };

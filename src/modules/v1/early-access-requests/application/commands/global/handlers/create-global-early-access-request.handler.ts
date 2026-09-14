@@ -30,7 +30,7 @@ export const createGlobalEarlyAccessRequestCommandHandler = async (createEarlyAc
     });
   }
 
-  const ealryAccessRequestPendingStatus = await findEarlyAccessRequestStatusBySlugRepository()({ earlyAccessRequestStatusSlug: 'pending' });
+  const earlyAccessRequestPendingStatus = await findEarlyAccessRequestStatusBySlugRepository()({ earlyAccessRequestStatusSlug: 'pending' });
   const earlyAccessRequestCode = generateChashaEarlyAccessRequestCodeHelper();
 
   await createEarlyAccessRequestRepository()({
@@ -38,7 +38,7 @@ export const createGlobalEarlyAccessRequestCommandHandler = async (createEarlyAc
     earlyAccessRequestFullName: createEarlyAccessRequestData.earlyAccessRequestFullName as string,
     earlyAccessRequestPhoneNumber: createEarlyAccessRequestData.earlyAccessRequestPhoneNumber as string,
     earlyAccessRequestBusinessName: createEarlyAccessRequestData.earlyAccessRequestBusinessName as string,
-    earlyAccessRequestStatusId: ealryAccessRequestPendingStatus?.earlyAccessRequestStatusId as number,
+    earlyAccessRequestStatusId: earlyAccessRequestPendingStatus?.earlyAccessRequestStatusId as number,
     earlyAccessRequestCode,
   });
 

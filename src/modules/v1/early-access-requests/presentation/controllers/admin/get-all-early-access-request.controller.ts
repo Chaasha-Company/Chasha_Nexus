@@ -1,12 +1,12 @@
 import type { Request, Response, NextFunction } from 'express';
-import type { GetAllEarlyAccessRequestRequestQueryDTO, GetAllEarlyAccessRequestResponseDTO } from '@/modules/v1/early-access-requests/presentation/dtos';
+import type { GetAllEarlyAccessRequestQueryDTO, GetAllEarlyAccessRequestResponseDTO } from '@/modules/v1/early-access-requests/presentation/dtos';
 import { findAllEarlyAccessRequestQueryHandler } from '@/modules/v1/early-access-requests/application';
 import { paginationResponseHandler } from '@/shared/v1/helpers/api/handlers';
 import { HttpStatus } from '@/shared/v1/enums';
 
 export const getAllEarlyAccessRequestContoller = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const query = req.query as unknown as GetAllEarlyAccessRequestRequestQueryDTO;
+    const query = req.query as unknown as GetAllEarlyAccessRequestQueryDTO;
     const result = await findAllEarlyAccessRequestQueryHandler({
       ...query,
     });

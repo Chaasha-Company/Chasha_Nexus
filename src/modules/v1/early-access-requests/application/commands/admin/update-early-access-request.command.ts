@@ -1,6 +1,6 @@
 import type { AtLeastOne } from '@/shared/v1/types/other';
 
-export type UpdateEalryAccessRequestCommand = AtLeastOne<{
+export type UpdateEarlyAccessRequestCommand = AtLeastOne<{
   earlyAccessRequestId: string;
   earlyAccessRequestStatusId?: number;
   earlyAccessRequestBusinessTypeId?: number;

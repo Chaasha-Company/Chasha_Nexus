@@ -1,6 +1,6 @@
 import { loggerConfig } from '@/config/logger';
 import { AppDataSource } from '@/shared/v1/database/core';
-import { EarlyAccessRequestStatusesModel } from '@/shared/v1/database/schema/early_access_requests/childrens';
+import { EarlyAccessRequestStatusesModel } from '@/shared/v1/database/schema/early_access_requests/children';
 
 export const createEarlyAccessStatusDataSeed = async (): Promise<void> => {
   const repository = AppDataSource.getRepository(EarlyAccessRequestStatusesModel);

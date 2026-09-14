@@ -15,9 +15,9 @@ import {
   PlatformAdminsModel,
   PlatformAdminStatusesModel,
 } from '@/shared/v1/database/schema';
-import { BusinessRolePermissionsModel, BusinessTypesModel } from '@/shared/v1/database/schema/businesses/childrens';
-import { BusinessRolesModel } from '@/shared/v1/database/schema/businesses/childrens/business-roles/business-roles.schema';
-import { EarlyAccessRequestStatusesModel } from '@/shared/v1/database/schema/early_access_requests/childrens';
+import { BusinessRolePermissionsModel, BusinessTypesModel } from '@/shared/v1/database/schema/businesses/children';
+import { BusinessRolesModel } from '@/shared/v1/database/schema/businesses/children/business-roles/business-roles.schema';
+import { EarlyAccessRequestStatusesModel } from '@/shared/v1/database/schema/early_access_requests/children';
 import { FaqsModel, FaqTypesModel } from '@/shared/v1/database/schema/faqs';
 import { DataSource } from 'typeorm';
 import { CasbinRule } from 'typeorm-adapter';

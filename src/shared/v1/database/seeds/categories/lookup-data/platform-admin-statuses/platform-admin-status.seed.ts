@@ -1,6 +1,6 @@
 import { loggerConfig } from '@/config/logger';
 import { AppDataSource } from '@/shared/v1/database/core';
-import { PlatformAdminStatusesModel } from '@/shared/v1/database/schema/platform_admins/childrens';
+import { PlatformAdminStatusesModel } from '@/shared/v1/database/schema/platform_admins/children';
 
 export const createPlatformAdminStatusDataSeed = async (): Promise<void> => {
   const repository = AppDataSource.getRepository(PlatformAdminStatusesModel);

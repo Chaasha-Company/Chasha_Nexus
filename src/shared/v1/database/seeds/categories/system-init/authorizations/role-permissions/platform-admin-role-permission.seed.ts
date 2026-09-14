@@ -3,7 +3,7 @@
 
 import { loggerConfig } from '@/config/logger';
 import { AppDataSource } from '@/shared/v1/database/core';
-import { PlatformAdminRolesModel, PlatformAdminRolePermissionsModel } from '@/shared/v1/database/schema/platform_admins/childrens';
+import { PlatformAdminRolesModel, PlatformAdminRolePermissionsModel } from '@/shared/v1/database/schema/platform_admins/children';
 import { PermissionsModel } from '@/shared/v1/database/schema/permissions';
 
 export const createPlatformAdminRolePermissionDataSeed = async (): Promise<void> => {
@@ -48,5 +48,5 @@ export const createPlatformAdminRolePermissionDataSeed = async (): Promise<void>
 
   await rolePermissionRepository.save(newRolePermissions);
 
-  loggerConfig.info('Platform Admin Role Permissions Table has no Data - Seed Runned and Data insert !');
+  loggerConfig.info('Platform Admin Role Permissions Table has no Data - Seed Ran and Data insert !');
 };

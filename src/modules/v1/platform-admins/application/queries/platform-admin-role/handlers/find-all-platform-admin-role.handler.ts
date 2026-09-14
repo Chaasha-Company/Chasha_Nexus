@@ -1,8 +1,8 @@
 import type { FindAllPlatformAdminRoleResultQuery } from '../results';
-import type { GetAllPlatformAdminRoleRequestQueryDTO } from '@/modules/v1/authorizations/presentation';
+import type { GetAllPlatformAdminRoleQueryDTO } from '@/modules/v1/authorizations/presentation';
 import { findAllPlatformAdminRoleRepository } from '@/modules/v1/platform-admins/infrastructure';
 
-export const findAllPlatformAdminRoleQueryHandler = async (platformAdminRoleData: GetAllPlatformAdminRoleRequestQueryDTO): Promise<FindAllPlatformAdminRoleResultQuery> => {
+export const findAllPlatformAdminRoleQueryHandler = async (platformAdminRoleData: GetAllPlatformAdminRoleQueryDTO): Promise<FindAllPlatformAdminRoleResultQuery> => {
   const paginationPage = Number(platformAdminRoleData.paginationPage);
   const paginationLimit = Number(platformAdminRoleData.paginationLimit);
   const paginationSkip = (paginationPage - 1) * paginationLimit;

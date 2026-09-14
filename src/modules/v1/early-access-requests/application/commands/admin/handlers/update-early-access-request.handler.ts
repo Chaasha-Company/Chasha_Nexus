@@ -1,13 +1,13 @@
 import { ResponseMessages, t, ValidationMessages, type Language } from '@/infrastructure/translator-system/i18n';
-import type { UpdateEalryAccessRequestCommand } from '../update-early-access-request.command';
+import type { UpdateEarlyAccessRequestCommand } from '../update-early-access-request.command';
 import { findEarlyAccessRequestByIdRepository, findEarlyAccessRequestStatusByIdRepository, updateEarlyAccessRequestRepository } from '@/modules/v1/early-access-requests/infrastructure';
 import { throwNotFoundException } from '@/shared/v1/exceptions';
 import { ResponseMessage, ValidationMessage } from '@/shared/v1/enums';
 import { findBusinessTypeByIdRepository } from '@/modules/v1/businesses';
 
-export const updateEarlyAccessRequestCommandHandler = async (ealryAccessRequestData: UpdateEalryAccessRequestCommand, lang: Language): Promise<void> => {
+export const updateEarlyAccessRequestCommandHandler = async (earlyAccessRequestData: UpdateEarlyAccessRequestCommand, lang: Language): Promise<void> => {
   const earlyAccessRequest = await findEarlyAccessRequestByIdRepository()({
-    earlyAccessRequestId: ealryAccessRequestData.earlyAccessRequestId as string,
+    earlyAccessRequestId: earlyAccessRequestData.earlyAccessRequestId as string,
   });
 
   if (earlyAccessRequest === null) {
@@ -19,12 +19,12 @@ export const updateEarlyAccessRequestCommandHandler = async (ealryAccessRequestD
     });
   }
 
-  if (ealryAccessRequestData.earlyAccessRequestStatusId) {
-    const ealryAccessRequestStatus = await findEarlyAccessRequestStatusByIdRepository()({
-      earlyAccessRequestStatusId: ealryAccessRequestData.earlyAccessRequestStatusId as number,
+  if (earlyAccessRequestData.earlyAccessRequestStatusId) {
+    const earlyAccessRequestStatus = await findEarlyAccessRequestStatusByIdRepository()({
+      earlyAccessRequestStatusId: earlyAccessRequestData.earlyAccessRequestStatusId as number,
     });
 
-    if (ealryAccessRequestStatus === null) {
+    if (earlyAccessRequestStatus === null) {
       throwNotFoundException({
         message: t(ResponseMessages, ResponseMessage.NOT_FOUND, lang),
         details: {
@@ -34,9 +34,9 @@ export const updateEarlyAccessRequestCommandHandler = async (ealryAccessRequestD
     }
   }
 
-  if (ealryAccessRequestData.earlyAccessRequestBusinessTypeId) {
+  if (earlyAccessRequestData.earlyAccessRequestBusinessTypeId) {
     const businessType = await findBusinessTypeByIdRepository()({
-      businessTypeId: ealryAccessRequestData.earlyAccessRequestBusinessTypeId as number,
+      businessTypeId: earlyAccessRequestData.earlyAccessRequestBusinessTypeId as number,
     });
 
     if (businessType === null) {
@@ -49,5 +49,5 @@ export const updateEarlyAccessRequestCommandHandler = async (ealryAccessRequestD
     }
   }
 
-  await updateEarlyAccessRequestRepository()(ealryAccessRequestData);
+  await updateEarlyAccessRequestRepository()(earlyAccessRequestData);
 };

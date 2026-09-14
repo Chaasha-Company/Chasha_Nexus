@@ -33,7 +33,7 @@ export const createPlatformAdminDataSeed = async (): Promise<void> => {
   const tableHasData = await repository.count();
 
   if (tableHasData > 0) {
-    loggerConfig.info('Platform Admin Table has Data - Seed Runned !');
+    loggerConfig.info('Platform Admin Table has Data - Seed Ran !');
     return;
   }
 
@@ -41,5 +41,5 @@ export const createPlatformAdminDataSeed = async (): Promise<void> => {
 
   await repository.save(platformAdminData);
 
-  loggerConfig.info('Platform Admin Table has no Data - Seed Runned and Data insert !');
+  loggerConfig.info('Platform Admin Table has no Data - Seed Ran and Data insert !');
 };

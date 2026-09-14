@@ -1,5 +1,5 @@
 import type { ZodString } from 'zod';
 
-export interface GetPlatformAdminRolePermissionsRequestQueryDTO {
+export interface GetPlatformAdminRolePermissionsQueryDTO {
   platformAdminRoleId: string | ZodString;
 }

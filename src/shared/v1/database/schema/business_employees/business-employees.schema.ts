@@ -1,8 +1,8 @@
 import { BeforeInsert, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { BusinessEmployeeSessionsModel, BusinessEmployeeStatusesModel } from './childrens';
+import { BusinessEmployeeSessionsModel, BusinessEmployeeStatusesModel } from './children';
 import { BusinessesModel } from '@/shared/v1/database/schema/businesses';
 import { generateChashaResetPasswordCodeHelper, hashPasswordProvider } from '@/modules/v1/authentications';
-import { BusinessRolesModel } from '@/shared/v1/database/schema/businesses/childrens/business-roles/business-roles.schema';
+import { BusinessRolesModel } from '@/shared/v1/database/schema/businesses/children/business-roles/business-roles.schema';
 
 @Entity({
   name: 'business_employees',

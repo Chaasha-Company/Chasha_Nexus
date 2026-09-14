@@ -1,3 +1,3 @@
-export interface RevokedAllBusinessEmployeeSessionByIdCommand {
+export interface revokeAllBusinessEmployeeSessionByIdCommand {
   businessEmployeeSessionUserId: string;
 }

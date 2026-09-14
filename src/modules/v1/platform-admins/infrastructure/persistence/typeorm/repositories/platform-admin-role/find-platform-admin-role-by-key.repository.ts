@@ -3,7 +3,7 @@ import type { FindPlatformAdminRoleByKeyRepositoryContract } from '@/modules/v1/
 import type { TransactionContext } from '@/shared/v1/domain/contracts';
 
 import { AppDataSource } from '@/shared/v1/database/core';
-import { PlatformAdminRolesModel } from '@/shared/v1/database/schema/platform_admins/childrens';
+import { PlatformAdminRolesModel } from '@/shared/v1/database/schema/platform_admins/children';
 
 export const findPlatformAdminRoleByKeyRepository =
   (): FindPlatformAdminRoleByKeyRepositoryContract =>

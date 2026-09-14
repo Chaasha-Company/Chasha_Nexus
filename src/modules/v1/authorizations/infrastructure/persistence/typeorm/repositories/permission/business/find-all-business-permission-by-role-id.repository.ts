@@ -2,7 +2,7 @@ import type { FindAllBusinessPermissionByRoleIdQuery } from '@/modules/v1/author
 import type { TransactionContext } from '@/shared/v1/domain/contracts';
 import type { FindAllBusinessPermissionByRoleIdRepositoryContract } from '@/modules/v1/authorizations/domain';
 import { AppDataSource } from '@/shared/v1/database/core';
-import { BusinessRolePermissionsModel } from '@/shared/v1/database/schema/businesses/childrens';
+import { BusinessRolePermissionsModel } from '@/shared/v1/database/schema/businesses/children';
 
 export const findAllBusinessPermissionByRoleIdRepository =
   (): FindAllBusinessPermissionByRoleIdRepositoryContract =>

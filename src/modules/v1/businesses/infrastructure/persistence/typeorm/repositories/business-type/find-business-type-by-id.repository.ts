@@ -1,7 +1,7 @@
 import type { FindBusinessTypeByIdQuery } from '@/modules/v1/businesses/application';
 import type { FindBusinessTypeByIdRepositoryContract } from '@/modules/v1/businesses/domain';
 import type { TransactionContext } from '@/shared/v1/domain/contracts';
-import { BusinessTypesModel } from '@/shared/v1/database/schema/businesses/childrens';
+import { BusinessTypesModel } from '@/shared/v1/database/schema/businesses/children';
 import { AppDataSource } from '@/shared/v1/database/core';
 
 export const findBusinessTypeByIdRepository =

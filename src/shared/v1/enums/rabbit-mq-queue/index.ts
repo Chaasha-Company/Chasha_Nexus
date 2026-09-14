@@ -1,1 +1,1 @@
-export * from './RABBIT_MQ_QUEUE.enum';
+export * from './rabbit-mq-queue.enum';

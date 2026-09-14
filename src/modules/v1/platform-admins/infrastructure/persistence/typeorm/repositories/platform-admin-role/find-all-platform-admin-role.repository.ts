@@ -5,7 +5,7 @@ import type { TransactionContext } from '@/shared/v1/domain/contracts';
 import type { PaginationResponseRepository } from '@/shared/v1/database/types';
 
 import { AppDataSource } from '@/shared/v1/database/core';
-import { PlatformAdminRolesModel } from '@/shared/v1/database/schema/platform_admins/childrens';
+import { PlatformAdminRolesModel } from '@/shared/v1/database/schema/platform_admins/children';
 
 import { applyPlatformAdminRoleSearch } from '@/modules/v1/platform-admins/infrastructure/persistence/typeorm/list';
 

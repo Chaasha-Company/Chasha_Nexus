@@ -9,7 +9,7 @@ export interface EarlyAccessRequestStatusesEntity {
   earlyAccessRequestStatusDescriptionFa: string | null;
   earlyAccessRequestStatusSortOrder: number;
   earlyAccessRequestStatusIsSystem: boolean;
-  EarlyAccessRequests: EarlyAccessRequestsEntity[];
+  earlyAccessRequests: EarlyAccessRequestsEntity[];
   earlyAccessRequestStatusCreatedAt: Date;
   earlyAccessRequestStatusUpdatedAt: Date;
   earlyAccessRequestStatusDeletedAt: Date | null;

@@ -3,7 +3,7 @@ import type { findPlatformAdminRolePermissionQuery } from '@/modules/v1/platform
 import type { TransactionContext } from '@/shared/v1/domain/contracts';
 
 import { AppDataSource } from '@/shared/v1/database/core';
-import { PlatformAdminRolePermissionsModel } from '@/shared/v1/database/schema/platform_admins/childrens/platform-admin-roles';
+import { PlatformAdminRolePermissionsModel } from '@/shared/v1/database/schema/platform_admins/children/platform-admin-roles';
 
 export const restorePlatformAdminRolePermissionRepository =
   (): RestorePlatformAdminRolePermissionRepositoryContract =>

@@ -1,8 +1,8 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, OneToMany, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 import { BusinessEmployeesModel } from '@/shared/v1/database/schema/business_employees';
-import { BusinessTypesModel } from './childrens';
-import { BusinessRolesModel } from './childrens/business-roles';
+import { BusinessTypesModel } from './children';
+import { BusinessRolesModel } from './children/business-roles';
 
 @Entity({
   name: 'businesses',

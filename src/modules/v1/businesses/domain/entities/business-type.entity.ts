@@ -7,7 +7,7 @@ export interface BusinessTypesEntity {
   businessTypeSlug: string;
   businessTypeSortOrder: number;
   businessTypeIsActive: boolean;
-  businessTypebusinesses: BusinessesEntity[];
+  businessTypeBusinesses: BusinessesEntity[];
   businessTypeCreatedAt: Date;
   businessTypeUpdatedAt: Date;
   businessTypeDeletedAt: Date | null;

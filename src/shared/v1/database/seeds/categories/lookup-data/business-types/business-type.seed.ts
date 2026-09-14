@@ -1,6 +1,6 @@
 import { loggerConfig } from '@/config/logger';
 import { AppDataSource } from '@/shared/v1/database/core';
-import { BusinessTypesModel } from '@/shared/v1/database/schema/businesses/childrens';
+import { BusinessTypesModel } from '@/shared/v1/database/schema/businesses/children';
 
 export const createBusinessTypeDataSeed = async (): Promise<void> => {
   const repository = AppDataSource.getRepository(BusinessTypesModel);

@@ -1,4 +1,4 @@
-export interface CreatebusinessEmployeeSessionRequestDTO {
+export interface CreateBusinessEmployeeSessionRequestDTO {
   businessEmployeeSessionId: string;
   businessEmployeeSessionUserId: string;
   businessEmployeeSessionRefreshToken: string;

@@ -1,4 +1,4 @@
-import type { PlatformAdminRolesModel } from '@/shared/v1/database/schema/platform_admins/childrens/platform-admin-roles';
+import type { PlatformAdminRolesModel } from '@/shared/v1/database/schema/platform_admins/children/platform-admin-roles';
 import type { SelectQueryBuilder } from 'typeorm';
 
 export const applyPlatformAdminRoleSearch = (queryBuilder: SelectQueryBuilder<PlatformAdminRolesModel>, search?: string) => {

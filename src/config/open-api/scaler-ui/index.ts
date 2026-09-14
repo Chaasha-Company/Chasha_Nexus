@@ -1,1 +1,1 @@
-// export * from './api-refrence.config';
+// export * from './api-reference.config';

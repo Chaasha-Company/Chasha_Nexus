@@ -1,1 +1,1 @@
-export * from './EVENT_NAME.enum';
+export * from './event-name.enum';

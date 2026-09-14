@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { BusinessRolesModel } from '@/shared/v1/database/schema/businesses/childrens/business-roles';
+import { BusinessRolesModel } from '@/shared/v1/database/schema/businesses/children/business-roles';
 import { PermissionsModel } from '@/shared/v1/database/schema/permissions';
 
 @Entity({

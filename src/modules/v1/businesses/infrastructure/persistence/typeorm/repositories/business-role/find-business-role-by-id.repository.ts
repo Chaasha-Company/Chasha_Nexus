@@ -1,7 +1,7 @@
 import type { FindBusinessRoleByIdRepositoryContract } from '@/modules/v1/businesses/domain';
 import type { findBusinessRoleByIdQuery } from '@/modules/v1/businesses/application/queries/business-role';
 import type { TransactionContext } from '@/shared/v1/domain/contracts';
-import { BusinessRolesModel } from '@/shared/v1/database/schema/businesses/childrens';
+import { BusinessRolesModel } from '@/shared/v1/database/schema/businesses/children';
 import { AppDataSource } from '@/shared/v1/database/core';
 
 export const findBusinessRoleByIdRepository =

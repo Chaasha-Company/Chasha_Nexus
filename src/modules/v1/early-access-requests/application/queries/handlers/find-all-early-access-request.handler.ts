@@ -1,8 +1,8 @@
 import type { FindAllEarlyAccessRequestResultQuery } from '../results';
-import type { GetAllEarlyAccessRequestRequestQueryDTO } from '@/modules/v1/early-access-requests/presentation';
+import type { GetAllEarlyAccessRequestQueryDTO } from '@/modules/v1/early-access-requests/presentation';
 import { findAllEarlyAccessRequestRepository } from '@/modules/v1/early-access-requests/infrastructure';
 
-export const findAllEarlyAccessRequestQueryHandler = async (earlyAccessData: GetAllEarlyAccessRequestRequestQueryDTO): Promise<FindAllEarlyAccessRequestResultQuery> => {
+export const findAllEarlyAccessRequestQueryHandler = async (earlyAccessData: GetAllEarlyAccessRequestQueryDTO): Promise<FindAllEarlyAccessRequestResultQuery> => {
   const paginationPage = Number(earlyAccessData.paginationPage);
   const paginationLimit = Number(earlyAccessData.paginationLimit);
   const paginationSkip = (paginationPage - 1) * paginationLimit;

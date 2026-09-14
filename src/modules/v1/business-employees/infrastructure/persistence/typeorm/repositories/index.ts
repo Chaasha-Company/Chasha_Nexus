@@ -1,2 +1,2 @@
-export * from './find-platform-admin-by-phone-number.repository';
+export * from './find-business-employee-by-phone-number.repository';
 export * from './update-business-employee.repository';
