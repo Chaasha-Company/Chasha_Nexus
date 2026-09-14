@@ -1,6 +1,6 @@
 # Task Template
 
-Copy to `tasks/backlog/YYYY-MM-DD/CHASHA-BE-TASK-NNN.md` and complete every section.
+Copy to `tasks/pending/YYYY-MM-DD/CHASHA-BE-TASK-NNN.md` and complete every section.
 Use `feature-template.md` / `bugfix-template.md` when the type is known (they extend this one).
 Task IDs are globally sequential — use the next available number (highest existing + 1).
 

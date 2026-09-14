@@ -100,4 +100,4 @@ Recommended: `feat(middleware): apply request id middleware globally` (or `refac
 
 ## Task Storage
 
-.opencode/tasks/backlog/2026-09-01/CHASHA-BE-TASK-013.md
+.opencode/tasks/pending/2026-09-01/CHASHA-BE-TASK-013.md

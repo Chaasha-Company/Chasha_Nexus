@@ -20,7 +20,7 @@ rules it must follow, how work flows from task to commit, and what "done" means.
 | `context/`                                       | Stable project knowledge: product, repository, architecture, engineering process.                                                                   |
 | `rules/`                                         | Enforceable engineering rules: architecture, coding, naming, API, database, validation, security, testing, quality, commits.                        |
 | `workflow/`                                      | Step-by-step workflows: development loop, task lifecycle, feature, bugfix, review, release.                                                         |
-| `tasks/`                                         | Task files, organized by lifecycle state: `backlog/`, `active/`, `review/`, `completed/`, `archived/`.                                              |
+| `tasks/`                                         | Task files, organized by lifecycle state: `pending/`, `in-progress/`, `review/`, `completed/`, `archive/`.                                          |
 | `daily/`                                         | Daily plans and logs for the 4–6 tasks per day cadence. Active plans live here; finished ones move to `archive/`.                                   |
 | `templates/`                                     | Fill-in templates for tasks (generic, feature, bugfix), reviews, and daily plans.                                                                   |
 | `scripts/`                                       | Reserved for future automation helpers. Nothing executable yet.                                                                                     |
@@ -39,7 +39,7 @@ rules it must follow, how work flows from task to commit, and what "done" means.
 
 ## How work is assigned (operator)
 
-- Drop a filled task file into `tasks/backlog/` (or describe the idea and ask the agent to draft the task file for approval).
+- Drop a filled task file into `tasks/pending/` (or describe the idea and ask the agent to draft the task file for approval).
 - Each day assign 4–6 tasks; the agent creates a daily plan in `daily/` from `templates/daily-plan-template.md` and executes the pipeline defined in `workflow/development-workflow.md`.
 
 ## Maintenance policy
@@ -47,7 +47,7 @@ rules it must follow, how work flows from task to commit, and what "done" means.
 - `context/` files contain verified facts about this repository. When architecture,
   conventions, or tooling materially change, update them in the same task that made the change.
 - Rules and workflows change only with operator approval, because they define agent behavior.
-- Never delete history: completed tasks move to `completed/`, then to `archived/`.
+- Never delete history: completed tasks move to `completed/`, then to `archive/`.
 
 ## Ground truth rule
 

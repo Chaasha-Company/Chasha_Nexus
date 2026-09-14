@@ -109,4 +109,4 @@ Recommended: `refactor(seeds): stabilize super admin seed and externalize creden
 
 ## Task Storage
 
-.opencode/tasks/backlog/2026-09-01/CHASHA-BE-TASK-016.md
+.opencode/tasks/pending/2026-09-01/CHASHA-BE-TASK-016.md

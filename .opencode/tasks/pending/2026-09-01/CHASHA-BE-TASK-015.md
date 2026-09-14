@@ -105,4 +105,4 @@ Recommended: `refactor(routes): remove empty unmounted module router stubs`
 
 ## Task Storage
 
-.opencode/tasks/backlog/2026-09-01/CHASHA-BE-TASK-015.md
+.opencode/tasks/pending/2026-09-01/CHASHA-BE-TASK-015.md

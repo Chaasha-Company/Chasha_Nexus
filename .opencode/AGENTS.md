@@ -75,8 +75,8 @@ All work originates from a task file under `.opencode/tasks/`. Lifecycle:
 Backlog → Planned → Active → Implementation → Review → Testing → Approved → Completed → Archived
 ```
 
-Directory mapping: `backlog/` (Backlog, Planned) · `active/` (Active, Implementation) ·
-`review/` (Review, Testing, Approved) · `completed/` (Completed) · `archived/` (Archived).
+Directory mapping: `pending/` (Backlog, Planned) · `in-progress/` (Active, Implementation) ·
+`review/` (Review, Testing, Approved) · `completed/` (Completed) · `archive/` (Archived).
 
 The agent must never silently treat an undocumented idea as completed work. Details:
 [`workflow/task-workflow.md`](./workflow/task-workflow.md).

@@ -105,4 +105,4 @@ Recommended: `feat(observability): expose prometheus metrics endpoint`
 
 ## Task Storage
 
-.opencode/tasks/backlog/2026-09-01/CHASHA-BE-TASK-012.md
+.opencode/tasks/pending/2026-09-01/CHASHA-BE-TASK-012.md

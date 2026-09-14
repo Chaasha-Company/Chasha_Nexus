@@ -22,13 +22,16 @@ Status semantics:
 
 ## Directory mapping
 
-| Directory          | Holds statuses            |
-| ------------------ | ------------------------- |
-| `tasks/backlog/`   | Backlog, Planned          |
-| `tasks/active/`    | Active, Implementation    |
-| `tasks/review/`    | Review, Testing, Approved |
-| `tasks/completed/` | Completed                 |
-| `tasks/archived/`  | Archived                  |
+| Directory                  | Holds statuses            |
+| -------------------------- | ------------------------- |
+| `tasks/pending/`           | Backlog, Planned          |
+| `tasks/in-progress/`       | Active, Implementation    |
+| `tasks/review/`            | Review, Testing, Approved |
+| `tasks/completed/`         | Completed                 |
+| `tasks/archive/`           | Archived                  |
+| `tasks/archive/obsolete/`  | Obsolete                  |
+| `tasks/archive/duplicate/` | Duplicate                 |
+| `tasks/archive/invalid/`   | Invalid                   |
 
 The file's location is the primary status signal; the front-matter `Status:` field must
 always match the directory.
@@ -36,17 +39,17 @@ always match the directory.
 ## Task IDs
 
 - Format `CHASHA-BE-TASK-NNN`, three digits, global monotonic counter starting at `CHASHA-BE-TASK-001`.
-- Never reuse IDs, even for abandoned work (abandoned tasks go to `archived/`).
+- Never reuse IDs, even for abandoned work (abandoned tasks go to `archive/`).
 - Next ID = highest existing ID + 1 across all task directories.
 
 ## File naming
 
-`CHASHA-BE-TASK-NNN.md`, e.g. `CHASHA-BE-TASK-004.md`. Files are stored in date-based subfolders: `tasks/backlog/2026-09-01/CHASHA-BE-TASK-012.md`.
+`CHASHA-BE-TASK-NNN.md`, e.g. `CHASHA-BE-TASK-004.md`. Files are stored in date-based subfolders: `tasks/pending/2026-09-01/CHASHA-BE-TASK-012.md`.
 
 ## Creating a task
 
 1. Copy `templates/task-template.md` (or feature/bugfix template when the type is known) into
-   `tasks/backlog/`.
+   `tasks/pending/`.
 2. Fill every section; unknowns stay explicit as `assumption` labels.
 3. The agent may draft task files from operator descriptions, but business requirements come
    only from the operator; the agent marks anything it derived.
@@ -68,4 +71,4 @@ always match the directory.
 - No implementation without a task file.
 - No silent scope changes: scope edits are recorded in the task file with a dated note;
   behavior-affecting changes need operator confirmation.
-- No deleted tasks: cancel by moving to `archived/` with a cancellation note.
+- No deleted tasks: cancel by moving to `archive/` with a cancellation note.

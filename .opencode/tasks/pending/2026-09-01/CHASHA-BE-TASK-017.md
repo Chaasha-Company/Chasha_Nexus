@@ -170,7 +170,7 @@ Recommended: `feat(auth): complete platform admin and business employee authenti
 
 ## Task Storage
 
-.opencode/tasks/backlog/2026-09-01/CHASHA-BE-TASK-017.md
+.opencode/tasks/pending/2026-09-01/CHASHA-BE-TASK-017.md
 
 ---
 

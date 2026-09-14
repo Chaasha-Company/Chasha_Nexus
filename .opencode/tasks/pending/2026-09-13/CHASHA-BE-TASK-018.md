@@ -286,4 +286,4 @@ If the existing git convention requires a different commit format, follow that c
 
 ## Task Storage
 
-.opencode/tasks/backlog/2026-09-13/CHASHA-BE-TASK-018.md
+.opencode/tasks/pending/2026-09-13/CHASHA-BE-TASK-018.md

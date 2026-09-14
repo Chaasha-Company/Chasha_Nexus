@@ -17,7 +17,7 @@ what is deliberately not done yet, and which working agreements govern day-to-da
 | Permissions        | Seeded via upsert seeds at boot; route guards check DB permission rows. Adding a protected endpoint = adding permission seed + role assignment in the same task.                                                                   |
 | Migrations         | Auto-run at boot. New migrations must be added to `src/index.ts` re-exports (Vite bundling requirement).                                                                                                                           |
 | Background jobs    | In-process EventEmitter only; RabbitMQ dormant by explicit decision ("server capacity"). Do not re-enable without operator approval.                                                                                               |
-| Observability      | pino request logs + prom-client counters active; no metrics endpoint yet — adding one is a task, not a drive-by.                                                                                                                   |
+| Observability      | pino request logs + prom-client counters active; no `/metrics` endpoint yet — CHASHA-BE-TASK-012 tracks this.                                                                                                                      |
 
 ## Working agreements
 
@@ -36,16 +36,14 @@ what is deliberately not done yet, and which working agreements govern day-to-da
 
 The deviations listed in `repository-context.md` (typos, unmounted routers, spec drift,
 temporary super_admin seeding) are recorded facts, not licenses. The
-agent does not fix them opportunistically; each becomes a task when the operator prioritizes it.
+agent does not fix them opportunistically; each becomes a task tracked in `.opencode/tasks/pending/`.
 Security-sensitive ones (temporary permissions) should be flagged to the
 operator whenever touched work makes them more dangerous.
 
-## Suggested backlog seeds (for the operator to approve, not for autonomous execution)
+## Open task locations
 
-These emerged from verified observations:
-
-- STATUS: captured as tasks for 2026-09-01 — Add `/metrics` endpoint exposing the prom-client registry → CHASHA-BE-TASK-012; apply/remove `requestIdMiddleware` in `app.ts` → CHASHA-BE-TASK-013; Swagger spec corrections (create → 201; pagination) → CHASHA-BE-TASK-014; remove/mount the unmounted module routers → CHASHA-BE-TASK-015; stabilize `super_admin` seed (replace "temporary test data" grant-all + hardcoded credential) → CHASHA-BE-TASK-016.
-- STATUS: already done (completed in earlier tasks) — wiring the Jest setup + handler tests (now 23 suites / 101 tests); replacing the hardcoded development OTP bypass (fixed in CHASHA-BE-TASK-011; OTP verify now compares the stored `platformAdminLoginWithPhoneNumberOtp`).
+All pending tasks are in `.opencode/tasks/pending/`. Completed tasks are in `.opencode/tasks/completed/`.
+See `.opencode/tasks/README.md` for the full task lifecycle and status definitions.
 
 ## Definition of done (short form)
 

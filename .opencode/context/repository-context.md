@@ -75,17 +75,19 @@ them unless a task explicitly covers them:
    `getAllEarlyAccessRequestContoller`, `DetailEarlyAccessRequestReponseDTO`,
    `UpdateEalryAccessRequestCommand`, `create-early-access-request.repositroy.ts`,
    `find-ealry-access-request-status-by-slug.*`.
+   These are tracked as CHASHA-BE-TASK-019.
 2. Several module routers are defined but never mounted (businesses, business-employees,
-   platform-admins, both session modules).
-3. `business-employee-sessions` contains a route file named like platform-admin-session (copy-paste artifact); it exports an empty router that is not mounted.
+   platform-admins, both session modules). Tracked as CHASHA-BE-TASK-015.
+3. `business-employee-sessions` contains a route file named like platform-admin-session (copy-paste artifact); it exports an empty router that is not mounted. Tracked as CHASHA-BE-TASK-019.
 4. A misplaced repository copy exists at
-   `business-employees/infrastructure/repositories/find-platform-admin-by-phone-number.repository.ts`.
-5. `requestIdMiddleware` is defined but never applied; metrics middleware collects data but no `/metrics` endpoint exists; `prometheus.yml` scrapes a path nothing serves.
+   `business-employees/infrastructure/repositories/find-platform-admin-by-phone-number.repository.ts`. Tracked as CHASHA-BE-TASK-019.
+5. `requestIdMiddleware` is defined but never applied; metrics middleware collects data but no `/metrics` endpoint exists; `prometheus.yml` scrapes a path nothing serves. Tracked as CHASHA-BE-TASK-012 and CHASHA-BE-TASK-013.
 6. ~~Admin login OTP verify contains a hardcoded development OTP check (`123456`).~~ Fixed in CHASHA-BE-TASK-011 — OTP verify now compares against the stored `platformAdminLoginWithPhoneNumberOtp`.
-7. The `super_admin` role-permission seed is marked in-source as temporary test data.
-8. Swagger doc for early-access create documents HTTP 200 while the controller returns 201; get-all example shows an outdated pagination shape.
+7. The `super_admin` role-permission seed is marked in-source as temporary test data, and the platform-admin seed contains hardcoded credentials (`erfan123456`, `09393929968`). Tracked as CHASHA-BE-TASK-016.
+8. Swagger doc for early-access create documents HTTP 200 while the controller returns 201; get-all example shows an outdated pagination shape. Tracked as CHASHA-BE-TASK-014.
 9. Some entity TS types lag reality (e.g. `BusinessesModel.businessTypeId!: number` holds a UUID).
 10. README prose describes aspirational infra (PostgreSQL/Redis/OpenTelemetry) — actual stack differs; trust code/config.
+11. Naming conventions violations: enum files use UPPER_SNAKE case (e.g. `REGEX-PATTERN.enum.ts`), `pagination-response.handler.ts` should be `.helper.ts`, `handler/` singular directories exist, and various identifier typos. Tracked as CHASHA-BE-TASK-018 and CHASHA-BE-TASK-019.
 
 ## Repo-root extras
 

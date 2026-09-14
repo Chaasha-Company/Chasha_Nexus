@@ -107,4 +107,4 @@ Recommended: `docs(api): document created responses and fix pagination examples`
 
 ## Task Storage
 
-.opencode/tasks/backlog/2026-09-01/CHASHA-BE-TASK-014.md
+.opencode/tasks/pending/2026-09-01/CHASHA-BE-TASK-014.md
