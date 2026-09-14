@@ -48,6 +48,10 @@
       "description": "Authentication endpoints for business employees including login, token generation, refresh and logout."
     },
     {
+      "name": "Business Authorization",
+      "description": "Authorization endpoints for Business Employees including role and permission management."
+    },
+    {
       "name": "Global Early Access Requests",
       "description": "Public endpoints for creating and managing Chasha Early Access requests."
     },
@@ -1067,7 +1071,14 @@
         "summary": "Get Platform Administrator role permissions",
         "description": "Retrieves the permissions currently assigned to a specific Platform Administrator role. The role is identified by the platformAdminRoleId query parameter. Returns a not-found response when the role does not exist and an empty list when the role has no assigned permissions. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_GET_PERMISSIONS permission.",
         "operationId": "getPlatformAdminRolePermissions",
-        "security": [{ "CookieAuth": [] }, { "BearerAuth": [] }],
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "platformAdminRoleId",
@@ -1167,7 +1178,14 @@
         "summary": "Replace Platform Administrator role permissions",
         "description": "Replaces the complete permission assignment of an existing Platform Administrator role with the permission set provided in the request body. Permissions that are not included are removed, permissions that remain requested are preserved, and new permissions are added. The operation is atomic and idempotent. An empty permissionIds array removes all permissions from the role. Returns a not-found response when the role or any of the requested permissions does not exist. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_REPLACE_PERMISSIONS permission.",
         "operationId": "replacePlatformAdminRolePermissions",
-        "security": [{ "CookieAuth": [] }, { "BearerAuth": [] }],
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1325,7 +1343,14 @@
         "summary": "Update Platform Administrator role permission",
         "description": "Updates a single permission assignment for an existing Platform Administrator role. When enabled is true, the permission is assigned to the role (or restored if soft-deleted). When enabled is false, the permission is removed from the role. The operation is atomic and idempotent. Returns a not-found response when the role or the permission does not exist. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_UPDATE_PERMISSION permission.",
         "operationId": "updatePlatformAdminRolePermission",
-        "security": [{ "CookieAuth": [] }, { "BearerAuth": [] }],
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1485,7 +1510,14 @@
         "summary": "Delete Platform Administrator role",
         "description": "Soft-deletes an existing Platform Administrator role together with its role-permission assignments. The role identifier is provided in the JSON request body. Returns a not-found response when the role does not exist and a conflict response when the role is currently referenced by active platform administrators. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_DELETE permission.",
         "operationId": "deletePlatformAdminRole",
-        "security": [{ "CookieAuth": [] }, { "BearerAuth": [] }],
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1626,7 +1658,14 @@
         "summary": "Add Permission to Platform Administrator role",
         "description": "Assigns an existing permission to an existing Platform Administrator role and persists the role-permission relationship. Both identifiers are provided in the JSON request body. Returns a not-found response when the role or the permission does not exist and a conflict response when the permission is already assigned to the role. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_ASSIGN_PERMISSION permission.",
         "operationId": "assignPlatformAdminRolePermission",
-        "security": [{ "CookieAuth": [] }, { "BearerAuth": [] }],
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1790,7 +1829,14 @@
         "summary": "Remove Permission from Platform Administrator role",
         "description": "Removes an existing permission assignment from an existing Platform Administrator role without deleting the role or the permission records themselves. Both identifiers are provided in the JSON request body. Returns a not-found response when the role, the permission, or the assignment between them does not exist. This endpoint is protected by Platform Administrator authentication and requires the PLATFORM_ADMIN_AUTHZ_ROLE_REMOVE_PERMISSION permission.",
         "operationId": "removePlatformAdminRolePermission",
-        "security": [{ "CookieAuth": [] }, { "BearerAuth": [] }],
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -2725,9 +2771,9 @@
     },
     "/{language_prefix}/business/authz/permission/get-all": {
       "get": {
-        "tags": ["Business Authentication"],
+        "tags": ["Business Authorization"],
         "summary": "Get all business employee permissions",
-        "description": "Retrieves a comprehensive list of all available permissions for Business Employees.\n\nThis endpoint is protected by Business Employee authentication and requires the 'platform-admin-permission' module with READ action on 'PLATFORM_ADMIN_AUTHZ_PERMISSION_GET_ALL' resource.\n\nThe response includes detailed permission metadata, localization labels (FA/EN), and navigation structure.",
+        "description": "Retrieves a comprehensive list of all available permissions for Business Employees.\n\nThis endpoint is protected by Business Employee authentication and requires the 'business-employee-permission' module with READ action on 'BUSINESS_EMPLOYEE_AUTHZ_PERMISSION_GET_ALL' resource.\n\nThe response includes detailed permission metadata, localization labels (FA/EN), and navigation structure.",
         "operationId": "getAllBusinessPermission",
         "security": [
           {
@@ -2792,6 +2838,1581 @@
                     }
                   ],
                   "timeStamp": "2026-08-20T10:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/authz/role/create": {
+      "post": {
+        "tags": ["Business Authorization"],
+        "summary": "Create a Business Employee role",
+        "description": "Creates a new Business Employee role with a unique role key and bilingual names. Optional bilingual descriptions can be provided. Creating a role with an already existing key is rejected with a conflict response. The new role starts without any permissions attached. The request schema is strict and unsupported fields are rejected. This endpoint is protected by Business Employee authentication and requires the BUSINESS_EMPLOYEE_AUTHZ_ROLE_CREATE permission.",
+        "operationId": "createBusinessRole",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBusinessRoleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Business Employee role created successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateBusinessRoleResponse"
+                },
+                "example": {
+                  "status": 201,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Item created successfully.",
+                  "data": {
+                    "businessRoleId": "9f8c7d6e-5b4a-3210-0112-233445566779"
+                  },
+                  "timeStamp": "2026-08-23T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoBodyData": {
+                    "summary": "No Request Body",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "MissingKey": {
+                    "summary": "Missing Role Key",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "businessRoleKey": ["Error: Business role - The role key is required."]
+                      },
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "409": {
+            "description": "A business employee role with the same key already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 409,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Data conflict detected.",
+                  "errorCode": "E1021",
+                  "errors": {
+                    "businessRoleKey": ["Error: Business role - A role with this key already exists."]
+                  },
+                  "timeStamp": "2026-08-23T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/authz/role/update": {
+      "patch": {
+        "tags": ["Business Authorization"],
+        "summary": "Update a Business Employee role",
+        "description": "Updates the editable data of an existing Business Employee role identified by its identifier in the JSON request body. Editable fields are the bilingual role names and the optional bilingual descriptions; at least one editable field must be provided. The role key and active status are not editable. Role permissions are not affected by this endpoint. Returns a not-found response when the role does not exist. The request schema is strict and unsupported fields are rejected. This endpoint is protected by Business Employee authentication and requires the BUSINESS_EMPLOYEE_AUTHZ_ROLE_UPDATE permission.",
+        "operationId": "updateBusinessRole",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBusinessRoleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Business Employee role updated successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBusinessRoleResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Updated successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-23T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoEditableFields": {
+                    "summary": "Only The Role Id Provided",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {},
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "NameTooLong": {
+                    "summary": "Role Name Too Long",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "businessRoleNameEn": ["Error: Business role - The English role name must not exceed 255 characters."]
+                      },
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Business Employee role not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Resource not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "businessRoleId": ["Error: Business role - The requested role was not found."]
+                  },
+                  "timeStamp": "2026-08-23T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/authz/role/get-all": {
+      "get": {
+        "tags": ["Business Authorization"],
+        "summary": "Get Business Employee role list",
+        "description": "Retrieves a paginated list of Business Employee roles for management purposes. The endpoint supports pagination, global search across the role key and bilingual names, and filtering by active status. The query schema is strict and unsupported query parameters are rejected. This endpoint is protected by Business Employee authentication and requires the BUSINESS_EMPLOYEE_AUTHZ_ROLE_LIST permission.",
+        "operationId": "getAllBusinessRole",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "paginationPage",
+            "in": "query",
+            "required": true,
+            "description": "Pagination page number.",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d+$",
+              "example": "1"
+            }
+          },
+          {
+            "name": "paginationLimit",
+            "in": "query",
+            "required": true,
+            "description": "Number of Business Employee roles to return per page.",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d+$",
+              "example": "20"
+            }
+          },
+          {
+            "name": "businessRoleSearch",
+            "in": "query",
+            "required": false,
+            "description": "Searches Business Employee roles by role key or bilingual role name.",
+            "schema": {
+              "type": "string",
+              "example": "manager"
+            }
+          },
+          {
+            "name": "businessRoleIsActive",
+            "in": "query",
+            "required": false,
+            "description": "Filters Business Employee roles by active status.",
+            "schema": {
+              "type": "string",
+              "enum": ["true", "false"],
+              "example": "true"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Business Employee roles retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllBusinessRolePaginationResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": {
+                    "paginationItems": [
+                      {
+                        "businessRoleId": "9f8c7d6e-5b4a-3210-0112-233445566779",
+                        "businessRoleKey": "manager",
+                        "businessRoleNameFa": "مدیر رستوران",
+                        "businessRoleNameEn": "Restaurant Manager",
+                        "businessRoleDescriptionFa": null,
+                        "businessRoleDescriptionEn": null,
+                        "businessRoleIsActive": true,
+                        "businessRoleCreatedAt": "2026-08-16T18:30:00.000Z",
+                        "businessRoleUpdatedAt": "2026-08-16T18:30:00.000Z"
+                      }
+                    ],
+                    "paginationMeta": {
+                      "paginationMetaPage": 1,
+                      "paginationMetaLimit": 20,
+                      "paginationMetaTotalItems": 1,
+                      "paginationMetaTotalPages": 1,
+                      "paginationMetaHasNextPage": false,
+                      "paginationMetaHasPreviousPage": false
+                    }
+                  },
+                  "timeStamp": "2026-08-23T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoQueryData": {
+                    "summary": "No Query Parameters",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "InvalidIsActiveFilter": {
+                    "summary": "Invalid Active Status Filter",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "businessRoleIsActive": ["Error: Business role - The active status filter must be either true or false."]
+                      },
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/authz/role/delete": {
+      "post": {
+        "tags": ["Business Authorization"],
+        "summary": "Delete Business Employee role",
+        "description": "Soft-deletes an existing Business Employee role together with its role-permission assignments. The role identifier is provided in the JSON request body. Returns a not-found response when the role does not exist and a conflict response when the role is currently referenced by active business employees. This endpoint is protected by Business Employee authentication and requires the BUSINESS_EMPLOYEE_AUTHZ_ROLE_DELETE permission.",
+        "operationId": "deleteBusinessRole",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteBusinessRoleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Business Employee role deleted successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteBusinessRoleResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Deleted successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-24T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoBodyData": {
+                    "summary": "No Request Body",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "MissingRoleId": {
+                    "summary": "Missing Role Id",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "businessRoleId": ["Error: Business role - The role id is required."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Business Employee role not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Resource not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "businessRoleId": ["Error: Business role - The requested role was not found."]
+                  },
+                  "timeStamp": "2026-08-24T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Business Employee role is referenced by active business employees.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 409,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Data conflict detected.",
+                  "errorCode": "E1021",
+                  "errors": {
+                    "businessRoleId": ["Error: Business role - This role is currently in use by business employees and cannot be deleted."]
+                  },
+                  "timeStamp": "2026-08-24T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/authz/role/assign-permission": {
+      "post": {
+        "tags": ["Business Authorization"],
+        "summary": "Add Permission to Business Employee role",
+        "description": "Assigns an existing permission to an existing Business Employee role and persists the role-permission relationship. Both identifiers are provided in the JSON request body. Returns a not-found response when the role or the permission does not exist and a conflict response when the permission is already assigned to the role. This endpoint is protected by Business Employee authentication and requires the BUSINESS_EMPLOYEE_AUTHZ_ROLE_ASSIGN_PERMISSION permission.",
+        "operationId": "assignBusinessRolePermission",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignBusinessRolePermissionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Permission assigned to Business Employee role successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssignBusinessRolePermissionResponse"
+                },
+                "example": {
+                  "status": 201,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Created successfully.",
+                  "data": {
+                    "businessRolePermissionId": "7c2d1e9a-1111-2222-3333-444455556666"
+                  },
+                  "timeStamp": "2026-08-24T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoBodyData": {
+                    "summary": "No Request Body",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "MissingIds": {
+                    "summary": "Missing Identifiers",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "businessRoleId": ["Error: Business role - The role id is required."],
+                        "businessPermissionId": ["Error: Business role - The permission id is required."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Business Employee role or permission not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "RoleNotFound": {
+                    "summary": "Role Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "businessRoleId": ["Error: Business role - The requested role was not found."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "PermissionNotFound": {
+                    "summary": "Permission Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "businessPermissionId": ["Error: Business role - The requested permission was not found."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The permission is already assigned to the role.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 409,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Data conflict detected.",
+                  "errorCode": "E1021",
+                  "errors": {
+                    "businessPermissionId": ["Error: Business role - This permission is already assigned to the role."]
+                  },
+                  "timeStamp": "2026-08-24T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/authz/role/remove-permission": {
+      "post": {
+        "tags": ["Business Authorization"],
+        "summary": "Remove Permission from Business Employee role",
+        "description": "Removes an existing permission assignment from an existing Business Employee role without deleting the role or the permission records themselves. Both identifiers are provided in the JSON request body. Returns a not-found response when the role, the permission, or the assignment between them does not exist. This endpoint is protected by Business Employee authentication and requires the BUSINESS_EMPLOYEE_AUTHZ_ROLE_REMOVE_PERMISSION permission.",
+        "operationId": "removeBusinessRolePermission",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveBusinessRolePermissionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Permission removed from Business Employee role successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoveBusinessRolePermissionResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Deleted successfully.",
+                  "data": null,
+                  "timeStamp": "2026-08-24T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoBodyData": {
+                    "summary": "No Request Body",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "MissingIds": {
+                    "summary": "Missing Identifiers",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "businessRoleId": ["Error: Business role - The role id is required."],
+                        "businessPermissionId": ["Error: Business role - The permission id is required."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Business Employee role, permission, or the assignment between them not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "RoleNotFound": {
+                    "summary": "Role Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "businessRoleId": ["Error: Business role - The requested role was not found."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "PermissionNotFound": {
+                    "summary": "Permission Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "businessPermissionId": ["Error: Business role - The requested permission was not found."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "AssignmentNotFound": {
+                    "summary": "Assignment Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "businessPermissionId": ["Error: Business role - This permission is not assigned to the role."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/authz/role/get-all-permissions": {
+      "get": {
+        "tags": ["Business Authorization"],
+        "summary": "Get Business Employee role permissions",
+        "description": "Retrieves the permissions currently assigned to a specific Business Employee role. The role is identified by the businessRoleId query parameter. Returns a not-found response when the role does not exist and an empty list when the role has no assigned permissions. This endpoint is protected by Business Employee authentication and requires the BUSINESS_EMPLOYEE_AUTHZ_ROLE_GET_PERMISSIONS permission.",
+        "operationId": "getBusinessRolePermissions",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "businessRoleId",
+            "in": "query",
+            "required": true,
+            "description": "Unique identifier of the target Business Employee role.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Business Employee role permissions retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBusinessRolePermissionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "MissingRoleId": {
+                    "summary": "Missing Role Id",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "businessRoleId": ["Error: Business role - The role id is required."]
+                      },
+                      "timeStamp": "2026-08-24T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Business Employee role not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Resource not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "businessRoleId": ["Error: Business role - The requested role was not found."]
+                  },
+                  "timeStamp": "2026-08-24T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/authz/role/permissions": {
+      "put": {
+        "tags": ["Business Authorization"],
+        "summary": "Replace Business Employee role permissions",
+        "description": "Replaces the complete permission assignment of an existing Business Employee role with the permission set provided in the request body. Permissions that are not included are removed, permissions that remain requested are preserved, and new permissions are added. The operation is atomic and idempotent. An empty businessPermissionIds array removes all permissions from the role. Returns a not-found response when the role or any of the requested permissions does not exist. This endpoint is protected by Business Employee authentication and requires the BUSINESS_EMPLOYEE_AUTHZ_ROLE_REPLACE_PERMISSIONS permission.",
+        "operationId": "replaceBusinessRolePermissions",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplaceBusinessRolePermissionsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Business Employee role permissions replaced successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceBusinessRolePermissionsResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Updated successfully.",
+                  "data": {
+                    "businessRoleId": "9f8c7d6e-5b4a-3210-0112-233445566779",
+                    "businessPermissionIds": ["8d3e2f0b-7777-8888-9999-000011112222", "7c2d1e9a-1111-2222-3333-444455556666"]
+                  },
+                  "timeStamp": "2026-08-25T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoBodyData": {
+                    "summary": "No Request Body",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-25T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "MissingFields": {
+                    "summary": "Missing Required Fields",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "businessRoleId": ["Error: Business role - The role id is required."],
+                        "businessPermissionIds": ["Error: Business role - The permission ids are required."]
+                      },
+                      "timeStamp": "2026-08-25T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "DuplicatePermissionIds": {
+                    "summary": "Duplicate Permission Ids",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "businessPermissionIds": ["Error: Business role - Duplicate permission ids are not allowed."]
+                      },
+                      "timeStamp": "2026-08-25T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Business Employee role or one of the requested permissions not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "RoleNotFound": {
+                    "summary": "Role Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "businessRoleId": ["Error: Business role - The requested role was not found."]
+                      },
+                      "timeStamp": "2026-08-25T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "PermissionsNotFound": {
+                    "summary": "Permissions Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "businessPermissionIds": ["Error: Business role - One or more of the requested permissions were not found."]
+                      },
+                      "timeStamp": "2026-08-25T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/authz/role/permission": {
+      "patch": {
+        "tags": ["Business Authorization"],
+        "summary": "Update Business Employee role permission",
+        "description": "Updates a single permission assignment for an existing Business Employee role. When enabled is true, the permission is assigned to the role (or restored if soft-deleted). When enabled is false, the permission is removed from the role. The operation is atomic and idempotent. Returns a not-found response when the role or the permission does not exist. This endpoint is protected by Business Employee authentication and requires the BUSINESS_EMPLOYEE_AUTHZ_ROLE_UPDATE_PERMISSION permission.",
+        "operationId": "updateBusinessRolePermission",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBusinessRolePermissionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Business Employee role permission updated successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBusinessRolePermissionResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Updated successfully.",
+                  "data": {
+                    "businessRoleId": "9f8c7d6e-5b4a-3210-0112-233445566779",
+                    "businessPermissionId": "8d3e2f0b-7777-8888-9999-000011112222",
+                    "enabled": true
+                  },
+                  "timeStamp": "2026-08-27T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoBodyData": {
+                    "summary": "No Request Body",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-27T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "MissingFields": {
+                    "summary": "Missing Required Fields",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "businessRoleId": ["Error: Business role - The role id is required."],
+                        "businessPermissionId": ["Error: Business role - The permission id is required."],
+                        "enabled": ["Error: Business role - The permission enabled status is required."]
+                      },
+                      "timeStamp": "2026-08-27T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "InvalidEnabled": {
+                    "summary": "Invalid Enabled Value",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "enabled": ["Error: Business role - The permission enabled status must be either true or false."]
+                      },
+                      "timeStamp": "2026-08-27T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Business Employee role or permission not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "RoleNotFound": {
+                    "summary": "Role Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "businessRoleId": ["Error: Business role - The requested role was not found."]
+                      },
+                      "timeStamp": "2026-08-27T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "PermissionNotFound": {
+                    "summary": "Permission Not Found",
+                    "value": {
+                      "status": 404,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Resource not found.",
+                      "errorCode": "E1020",
+                      "errors": {
+                        "businessPermissionId": ["Error: Business role - The requested permission was not found."]
+                      },
+                      "timeStamp": "2026-08-27T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/authz/role/detail": {
+      "post": {
+        "tags": ["Business Authorization"],
+        "summary": "Get Business Employee role detail",
+        "description": "Retrieves the complete information of a specific Business Employee role by its identifier, including the permissions assigned to the role. The role identifier is provided in the JSON request body. Returns a not-found response when the role does not exist. This endpoint is protected by Business Employee authentication and requires the BUSINESS_EMPLOYEE_AUTHZ_ROLE_DETAIL permission.",
+        "operationId": "getDetailBusinessRole",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetailBusinessRoleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Business Employee role detail retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailBusinessRoleResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": {
+                    "businessRoleId": "9f8c7d6e-5b4a-3210-0112-233445566779",
+                    "businessRoleKey": "manager",
+                    "businessRoleNameFa": "مدیر رستوران",
+                    "businessRoleNameEn": "Restaurant Manager",
+                    "businessRoleDescriptionFa": null,
+                    "businessRoleDescriptionEn": null,
+                    "businessRoleIsActive": true,
+                    "businessRoleCreatedAt": "2026-08-16T18:30:00.000Z",
+                    "businessRoleUpdatedAt": "2026-08-16T18:30:00.000Z",
+                    "businessRolePermissions": [
+                      {
+                        "businessRolePermissionId": "7c2d1e9a-1111-2222-3333-444455556666",
+                        "businessRolePermissionPermission": {
+                          "permissionId": "8d3e2f0b-7777-8888-9999-000011112222",
+                          "permissionKey": "order.create",
+                          "permissionSubject": "Order",
+                          "permissionResource": "ORDER",
+                          "permissionVersion": 1,
+                          "permissionModule": "orders",
+                          "permissionAction": "CREATE",
+                          "permissionType": "CRUD",
+                          "permissionLabelFa": "ایجاد سفارش",
+                          "permissionLabelEn": "Create Order",
+                          "permissionDescriptionFa": null,
+                          "permissionDescriptionEn": null,
+                          "permissionNavigation": null,
+                          "permissionIsActive": true
+                        }
+                      }
+                    ]
+                  },
+                  "timeStamp": "2026-08-23T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "NoBodyData": {
+                    "summary": "No Request Body",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "No data received.",
+                      "errorCode": "E1000",
+                      "errors": {},
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  },
+                  "MissingRoleId": {
+                    "summary": "Missing Role Id",
+                    "value": {
+                      "status": 400,
+                      "success": false,
+                      "author": "Mehkam_Company",
+                      "message": "Validation failed.",
+                      "errorCode": "E1001",
+                      "errors": {
+                        "businessRoleId": ["Error: Business role - The role id is required."]
+                      },
+                      "timeStamp": "2026-08-23T00:00:00.000Z",
+                      "version": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "Business Employee role not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "status": 404,
+                  "success": false,
+                  "author": "Mehkam_Company",
+                  "message": "Resource not found.",
+                  "errorCode": "E1020",
+                  "errors": {
+                    "businessRoleId": ["Error: Business role - The requested role was not found."]
+                  },
+                  "timeStamp": "2026-08-23T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{language_prefix}/business/authz/role/list-option": {
+      "get": {
+        "tags": ["Business Authorization"],
+        "summary": "Get Business Employee role list options",
+        "description": "Retrieves the available search fields and active status filter options for the Business Employee Role management interface. This endpoint is protected by Business Employee authentication and requires the BUSINESS_EMPLOYEE_AUTHZ_ROLE_LIST_OPTIONS permission.",
+        "operationId": "getListOptionBusinessRole",
+        "security": [
+          {
+            "CookieAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Business Employee role list options retrieved successfully.",
+            "headers": {
+              "x-request-id": {
+                "description": "Unique request identifier.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetListOptionBusinessRoleResponse"
+                },
+                "example": {
+                  "status": 200,
+                  "success": true,
+                  "author": "Mehkam_Company",
+                  "message": "Operation completed successfully.",
+                  "data": {
+                    "businessRoleSearch": [
+                      {
+                        "businessRoleSearchField": "name",
+                        "businessRoleSearchLabels": ["Role Name"]
+                      },
+                      {
+                        "businessRoleSearchField": "key",
+                        "businessRoleSearchLabels": ["Role Key"]
+                      }
+                    ],
+                    "businessRoleFilters": {
+                      "businessRoleIsActive": [
+                        {
+                          "businessRoleIsActiveValue": true,
+                          "businessRoleIsActiveLabels": {
+                            "fa": "فعال",
+                            "en": "Active"
+                          }
+                        },
+                        {
+                          "businessRoleIsActiveValue": false,
+                          "businessRoleIsActiveLabels": {
+                            "fa": "غیرفعال",
+                            "en": "Inactive"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "timeStamp": "2026-08-22T00:00:00.000Z",
                   "version": "1.0.0"
                 }
               }
@@ -5333,6 +6954,788 @@
             "businessRolePermissionPermission": {
               "$ref": "#/components/schemas/PermissionDetail"
             }
+          }
+        }
+      },
+      "CreateBusinessRoleRequest": {
+        "type": "object",
+        "required": ["businessRoleKey", "businessRoleNameFa", "businessRoleNameEn"],
+        "properties": {
+          "businessRoleKey": {
+            "type": "string",
+            "maxLength": 100,
+            "example": "manager"
+          },
+          "businessRoleNameFa": {
+            "type": "string",
+            "maxLength": 255,
+            "example": "مدیر رستوران"
+          },
+          "businessRoleNameEn": {
+            "type": "string",
+            "maxLength": 255,
+            "example": "Restaurant Manager"
+          },
+          "businessRoleDescriptionFa": {
+            "type": "string",
+            "nullable": true
+          },
+          "businessRoleDescriptionEn": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateBusinessRoleResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 201
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Item created successfully."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "businessRoleId": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "UpdateBusinessRoleRequest": {
+        "type": "object",
+        "required": ["businessRoleId"],
+        "properties": {
+          "businessRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          },
+          "businessRoleNameFa": {
+            "type": "string",
+            "maxLength": 255,
+            "example": "مدیر رستوران"
+          },
+          "businessRoleNameEn": {
+            "type": "string",
+            "maxLength": 255,
+            "example": "Restaurant Manager"
+          },
+          "businessRoleDescriptionFa": {
+            "type": "string",
+            "nullable": true
+          },
+          "businessRoleDescriptionEn": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateBusinessRoleResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Updated successfully."
+          },
+          "data": {
+            "nullable": true,
+            "example": null
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "DeleteBusinessRoleRequest": {
+        "type": "object",
+        "required": ["businessRoleId"],
+        "properties": {
+          "businessRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          }
+        }
+      },
+      "DeleteBusinessRoleResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Deleted successfully."
+          },
+          "data": {
+            "nullable": true,
+            "example": null
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "DetailBusinessRoleRequest": {
+        "type": "object",
+        "required": ["businessRoleId"],
+        "properties": {
+          "businessRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          }
+        }
+      },
+      "BusinessRolePermissionItem": {
+        "type": "object",
+        "properties": {
+          "businessRolePermissionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "businessRolePermissionPermission": {
+            "$ref": "#/components/schemas/PermissionDetail"
+          }
+        }
+      },
+      "DetailBusinessRoleResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "businessRoleId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "businessRoleKey": {
+                "type": "string",
+                "example": "manager"
+              },
+              "businessRoleNameFa": {
+                "type": "string"
+              },
+              "businessRoleNameEn": {
+                "type": "string",
+                "example": "Restaurant Manager"
+              },
+              "businessRoleDescriptionFa": {
+                "type": "string",
+                "nullable": true
+              },
+              "businessRoleDescriptionEn": {
+                "type": "string",
+                "nullable": true
+              },
+              "businessRoleIsActive": {
+                "type": "boolean",
+                "example": true
+              },
+              "businessRoleCreatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "businessRoleUpdatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "businessRolePermissions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/BusinessRolePermissionItem"
+                }
+              }
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "GetAllBusinessRoleQuery": {
+        "type": "object",
+        "properties": {
+          "paginationPage": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "example": "1"
+          },
+          "paginationLimit": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "example": "20"
+          },
+          "businessRoleSearch": {
+            "type": "string",
+            "example": "manager"
+          },
+          "businessRoleIsActive": {
+            "type": "string",
+            "enum": ["true", "false"],
+            "example": "true"
+          }
+        }
+      },
+      "GetAllBusinessRoleItem": {
+        "type": "object",
+        "properties": {
+          "businessRoleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "businessRoleKey": {
+            "type": "string",
+            "example": "manager"
+          },
+          "businessRoleNameFa": {
+            "type": "string",
+            "example": "مدیر رستوران"
+          },
+          "businessRoleNameEn": {
+            "type": "string",
+            "example": "Restaurant Manager"
+          },
+          "businessRoleDescriptionFa": {
+            "type": "string",
+            "nullable": true
+          },
+          "businessRoleDescriptionEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "businessRoleIsActive": {
+            "type": "boolean",
+            "example": true
+          },
+          "businessRoleCreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "businessRoleUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "GetAllBusinessRolePaginationResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "paginationItems": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/GetAllBusinessRoleItem"
+                }
+              },
+              "paginationMeta": {
+                "type": "object",
+                "properties": {
+                  "paginationMetaPage": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "paginationMetaLimit": {
+                    "type": "integer",
+                    "example": 20
+                  },
+                  "paginationMetaTotalItems": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "paginationMetaTotalPages": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "paginationMetaHasNextPage": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "paginationMetaHasPreviousPage": {
+                    "type": "boolean",
+                    "example": false
+                  }
+                }
+              }
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "GetListOptionBusinessRoleResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "$ref": "#/components/schemas/BusinessRoleListOptionData"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "BusinessRoleListOptionData": {
+        "type": "object",
+        "properties": {
+          "businessRoleSearch": {
+            "type": "array",
+            "description": "Available search fields for Business Employee Roles.",
+            "items": {
+              "$ref": "#/components/schemas/BusinessRoleSearchOption"
+            }
+          },
+          "businessRoleFilters": {
+            "$ref": "#/components/schemas/BusinessRoleFilterOptions"
+          }
+        }
+      },
+      "BusinessRoleSearchOption": {
+        "type": "object",
+        "properties": {
+          "businessRoleSearchField": {
+            "type": "string",
+            "description": "Logical search field identifier.",
+            "example": "name"
+          },
+          "businessRoleSearchLabels": {
+            "type": "array",
+            "description": "Localized labels for the search field.",
+            "items": {
+              "type": "string"
+            },
+            "example": ["Role Name"]
+          }
+        }
+      },
+      "BusinessRoleFilterOptions": {
+        "type": "object",
+        "properties": {
+          "businessRoleIsActive": {
+            "type": "array",
+            "description": "Available active status filter options for Business Employee Roles.",
+            "items": {
+              "$ref": "#/components/schemas/BusinessRoleIsActiveFilterOption"
+            }
+          }
+        }
+      },
+      "BusinessRoleIsActiveFilterOption": {
+        "type": "object",
+        "properties": {
+          "businessRoleIsActiveValue": {
+            "type": "boolean",
+            "description": "Active status value.",
+            "example": true
+          },
+          "businessRoleIsActiveLabels": {
+            "type": "object",
+            "description": "Localized active status labels.",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "fa": "فعال",
+              "en": "Active"
+            }
+          }
+        }
+      },
+      "AssignBusinessRolePermissionRequest": {
+        "type": "object",
+        "required": ["businessRoleId", "businessPermissionId"],
+        "properties": {
+          "businessRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          },
+          "businessPermissionId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "8d3e2f0b-7777-8888-9999-000011112222"
+          }
+        }
+      },
+      "AssignBusinessRolePermissionResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 201
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Created successfully."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "businessRolePermissionId": {
+                "type": "string",
+                "format": "uuid",
+                "example": "7c2d1e9a-1111-2222-3333-444455556666"
+              }
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "RemoveBusinessRolePermissionRequest": {
+        "type": "object",
+        "required": ["businessRoleId", "businessPermissionId"],
+        "properties": {
+          "businessRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          },
+          "businessPermissionId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "8d3e2f0b-7777-8888-9999-000011112222"
+          }
+        }
+      },
+      "RemoveBusinessRolePermissionResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Deleted successfully."
+          },
+          "data": {
+            "nullable": true,
+            "example": null
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "ReplaceBusinessRolePermissionsRequest": {
+        "type": "object",
+        "required": ["businessRoleId", "businessPermissionIds"],
+        "properties": {
+          "businessRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          },
+          "businessPermissionIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": ["8d3e2f0b-7777-8888-9999-000011112222", "7c2d1e9a-1111-2222-3333-444455556666"]
+          }
+        }
+      },
+      "ReplaceBusinessRolePermissionsResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Updated successfully."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "businessRoleId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "businessPermissionIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "UpdateBusinessRolePermissionRequest": {
+        "type": "object",
+        "required": ["businessRoleId", "businessPermissionId", "enabled"],
+        "properties": {
+          "businessRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          },
+          "businessPermissionId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "8d3e2f0b-7777-8888-9999-000011112222"
+          },
+          "enabled": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "UpdateBusinessRolePermissionResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Updated successfully."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "businessRoleId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "businessPermissionId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "enabled": {
+                "type": "boolean"
+              }
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
+        }
+      },
+      "GetBusinessRolePermissionsQuery": {
+        "type": "object",
+        "required": ["businessRoleId"],
+        "properties": {
+          "businessRoleId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "9f8c7d6e-5b4a-3210-0112-233445566779"
+          }
+        }
+      },
+      "GetBusinessRolePermissionsResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "author": {
+            "type": "string",
+            "example": "Mehkam_Company"
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAllBusinessPermissionResponseDTO"
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
           }
         }
       },
