@@ -1,4 +1,4 @@
-export interface findBusinessRoleByIdQuery {
+export interface getBusinessRolePermissionsQuery {
   businessRoleId: string;
   businessRoleBusinessId?: string;
 }

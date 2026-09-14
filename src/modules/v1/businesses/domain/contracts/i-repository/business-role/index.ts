@@ -1,2 +1,12 @@
 export * from './find-business-role-by-id-repository.contract';
-export type { FindBusinessRoleByIdRepositoryContract } from './find-business-role-by-id-repository.contract';
+export * from './find-all-business-role-repository.contract';
+export * from './find-business-role-by-key-repository.contract';
+export * from './create-business-role-repository.contract';
+export * from './update-business-role-repository.contract';
+export * from './count-business-role-employees-repository.contract';
+export * from './delete-business-role-permissions-repository.contract';
+export * from './delete-business-role-repository.contract';
+export * from './find-business-role-permission-repository.contract';
+export * from './create-business-role-permission-repository.contract';
+export * from './delete-business-role-permission-repository.contract';
+export * from './restore-business-role-permission-repository.contract';

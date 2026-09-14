@@ -1,1 +1,6 @@
 export * from './find-business-role-by-id.query';
+export * from './find-all-business-role.query';
+export * from './find-business-role-by-key.query';
+export * from './find-business-role-permission.query';
+export * from './get-business-role-permissions.query';
+export * from './count-business-role-employees.query';
