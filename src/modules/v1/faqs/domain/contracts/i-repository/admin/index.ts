@@ -6,3 +6,4 @@ export * from './find-all-admin-faq-type-repository.contract';
 export * from './create-admin-faq-repository.contract';
 export * from './update-admin-faq-repository.contract';
 export * from './delete-admin-faq-repository.contract';
+export * from './faq-type';

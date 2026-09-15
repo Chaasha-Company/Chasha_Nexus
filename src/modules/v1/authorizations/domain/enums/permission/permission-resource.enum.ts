@@ -15,6 +15,15 @@ export enum PermissionResourceEnum {
   FAQ_DELETE = 'faq_delete',
   FAQ_UPDATE = 'faq_update',
 
+  // =========================FAQ Type Management=========================
+  FAQ_TYPE_PAGE = 'faq_type_page',
+  FAQ_TYPE_GET_ALL = 'faq_type_get_all',
+  FAQ_TYPE_LIST_OPTIONS = 'faq_type_list_options',
+  FAQ_TYPE_DETAIL = 'faq_type_detail',
+  FAQ_TYPE_CREATE = 'faq_type_create',
+  FAQ_TYPE_DELETE = 'faq_type_delete',
+  FAQ_TYPE_UPDATE = 'faq_type_update',
+
   // =========================Authorization System - Permission Management=========================
   PLATFORM_ADMIN_AUTHZ_PERMISSION_GET_ALL = 'platform_admin_authz_permission_get_all',
   BUSINESS_EMPLOYEE_AUTHZ_PERMISSION_GET_ALL = 'business_employee_authz_permission_get_all',

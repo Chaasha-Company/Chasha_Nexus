@@ -6,3 +6,4 @@ export * from './find-all-admin-faq-type.repository';
 export * from './create-admin-faq.repository';
 export * from './update-admin-faq.repository';
 export * from './delete-admin-faq.repository';
+export * from './faq-type';

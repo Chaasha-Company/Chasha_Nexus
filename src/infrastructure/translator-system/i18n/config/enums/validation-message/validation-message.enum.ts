@@ -520,6 +520,51 @@ export const ValidationMessages = {
     en: 'Error: FAQ - The provided FAQ sort order is invalid.',
   },
 
+  [ValidationMessage.FAQ_TYPE_SLUG_REQUIRED]: {
+    fa: 'خطا: نوع سوالات متداول - شناسه یکتای نوع سوال الزامی است.',
+    en: 'Error: FAQ type - The FAQ type slug is required.',
+  },
+
+  [ValidationMessage.FAQ_TYPE_SLUG_INVALID]: {
+    fa: 'خطا: نوع سوالات متداول - شناسه یکتای نوع سوال ارسال شده معتبر نیست.',
+    en: 'Error: FAQ type - The provided FAQ type slug is invalid.',
+  },
+
+  [ValidationMessage.FAQ_TYPE_SLUG_ALREADY_EXISTS]: {
+    fa: 'خطا: نوع سوالات متداول - نوع سوالی با این شناسه یکتا قبلا ثبت شده است.',
+    en: 'Error: FAQ type - An FAQ type with this slug already exists.',
+  },
+
+  [ValidationMessage.FAQ_TYPE_NAME_FA_REQUIRED]: {
+    fa: 'خطا: نوع سوالات متداول - نام فارسی نوع سوال الزامی است.',
+    en: 'Error: FAQ type - The Persian FAQ type name is required.',
+  },
+
+  [ValidationMessage.FAQ_TYPE_NAME_FA_INVALID]: {
+    fa: 'خطا: نوع سوالات متداول - نام فارسی نوع سوال ارسال شده معتبر نیست.',
+    en: 'Error: FAQ type - The provided Persian FAQ type name is invalid.',
+  },
+
+  [ValidationMessage.FAQ_TYPE_NAME_EN_INVALID]: {
+    fa: 'خطا: نوع سوالات متداول - نام انگلیسی نوع سوال ارسال شده معتبر نیست.',
+    en: 'Error: FAQ type - The provided English FAQ type name is invalid.',
+  },
+
+  [ValidationMessage.FAQ_TYPE_DESCRIPTION_FA_REQUIRED]: {
+    fa: 'خطا: نوع سوالات متداول - توضیح فارسی نوع سوال الزامی است.',
+    en: 'Error: FAQ type - The Persian FAQ type description is required.',
+  },
+
+  [ValidationMessage.FAQ_TYPE_DESCRIPTION_FA_INVALID]: {
+    fa: 'خطا: نوع سوالات متداول - توضیح فارسی نوع سوال ارسال شده معتبر نیست.',
+    en: 'Error: FAQ type - The provided Persian FAQ type description is invalid.',
+  },
+
+  [ValidationMessage.FAQ_TYPE_DESCRIPTION_EN_INVALID]: {
+    fa: 'خطا: نوع سوالات متداول - توضیح انگلیسی نوع سوال ارسال شده معتبر نیست.',
+    en: 'Error: FAQ type - The provided English FAQ type description is invalid.',
+  },
+
   // =========================Platform Admin Role Validation=========================
   [ValidationMessage.PLATFORM_ADMIN_ROLE_IS_ACTIVE_INVALID]: {
     fa: 'خطا: نقش‌های ادمین - مقدار فیلتر وضعیت فعال باید true یا false باشد.',
