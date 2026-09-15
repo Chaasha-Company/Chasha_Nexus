@@ -111,6 +111,146 @@ export const createPermissionDataSeed = async (): Promise<void> => {
       permissionNavigation: null,
     },
 
+    // =========================FAQs - Page Permissions=========================
+    {
+      permissionKey: 'faqs.page.read',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_PAGE,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.PAGE,
+
+      permissionLabelFa: 'صفحه سوالات متداول',
+      permissionLabelEn: 'FAQs Page',
+
+      permissionDescriptionFa: 'دسترسی به صفحه سوالات متداول',
+      permissionDescriptionEn: 'Access to the FAQs page',
+
+      permissionNavigation: {
+        permissionNavigationVisible: true,
+        permissionNavigationGroupKey: 'faqs',
+        permissionNavigationGroupLabelFa: 'سوالات متداول',
+        permissionNavigationGroupLabelEn: 'FAQs',
+        permissionNavigationParentKey: null,
+        permissionNavigationLabelFa: 'سوالات متداول',
+        permissionNavigationLabelEn: 'FAQs',
+        permissionNavigationPath: '/faq/list',
+        permissionNavigationIcon: 'list',
+        permissionNavigationOrder: 2,
+      },
+    },
+
+    // =========================FAQs - Read Permissions=========================
+    {
+      permissionKey: 'faqs.get-all.read',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_GET_ALL,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'دریافت سوالات متداول',
+      permissionLabelEn: 'Get All FAQs',
+
+      permissionDescriptionFa: 'دسترسی به API دریافت سوالات متداول',
+      permissionDescriptionEn: 'Access to the get all FAQs API',
+
+      permissionNavigation: null,
+    },
+
+    {
+      permissionKey: 'faqs.list-options.read',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_LIST_OPTIONS,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'دریافت گزینه‌های لیست سوالات متداول',
+      permissionLabelEn: 'Get FAQ List Options',
+
+      permissionDescriptionFa: 'دسترسی به API دریافت گزینه‌های موردنیاز لیست سوالات متداول',
+      permissionDescriptionEn: 'Access to the FAQ list options API',
+
+      permissionNavigation: null,
+    },
+
+    {
+      permissionKey: 'faqs.detail.read',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_DETAIL,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'دریافت جزئیات سوال متداول',
+      permissionLabelEn: 'Get FAQ Detail',
+
+      permissionDescriptionFa: 'دسترسی به API دریافت جزئیات یک سوال متداول',
+      permissionDescriptionEn: 'Access to the FAQ detail API',
+
+      permissionNavigation: null,
+    },
+
+    // =========================FAQs - Mutation Permissions=========================
+    {
+      permissionKey: 'faqs.create.create',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_CREATE,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq',
+      permissionAction: PermissionActionEnum.CREATE,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'ایجاد سوال متداول',
+      permissionLabelEn: 'Create FAQ',
+
+      permissionDescriptionFa: 'دسترسی به API ایجاد سوال متداول',
+      permissionDescriptionEn: 'Access to the FAQ creation API',
+
+      permissionNavigation: null,
+    },
+
+    {
+      permissionKey: 'faqs.delete.delete',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_DELETE,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq',
+      permissionAction: PermissionActionEnum.DELETE,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'حذف سوال متداول',
+      permissionLabelEn: 'Delete FAQ',
+
+      permissionDescriptionFa: 'دسترسی به API حذف سوال متداول',
+      permissionDescriptionEn: 'Access to the FAQ deletion API',
+
+      permissionNavigation: null,
+    },
+
+    {
+      permissionKey: 'faqs.update.update',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_UPDATE,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq',
+      permissionAction: PermissionActionEnum.UPDATE,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'بروزرسانی سوال متداول',
+      permissionLabelEn: 'Update FAQ',
+
+      permissionDescriptionFa: 'دسترسی به API بروزرسانی یک سوال متداول',
+      permissionDescriptionEn: 'Access to the FAQ update API',
+
+      permissionNavigation: null,
+    },
+
     // =========================Authorization System - Permission Management=========================
     {
       permissionKey: 'authz.permission.get-all.read',
