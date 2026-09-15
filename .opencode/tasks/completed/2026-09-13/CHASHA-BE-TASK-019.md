@@ -248,4 +248,4 @@ If the existing git convention requires a different commit format, follow that c
 
 ## Task Storage
 
-.opencode/tasks/pending/2026-09-13/CHASHA-BE-TASK-019.md
+.opencode/tasks/completed/2026-09-13/CHASHA-BE-TASK-019.md

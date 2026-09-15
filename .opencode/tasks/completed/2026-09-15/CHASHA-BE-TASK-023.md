@@ -124,7 +124,7 @@ Commit messages:
 
 ## Task Storage
 
-.opencode/tasks/pending/2026-09-15/CHASHA-BE-TASK-023.md
+.opencode/tasks/completed/2026-09-15/CHASHA-BE-TASK-023.md
 
 ---
 

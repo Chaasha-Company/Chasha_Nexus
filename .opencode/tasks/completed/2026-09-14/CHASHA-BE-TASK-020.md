@@ -359,4 +359,4 @@ Add the 2026-09-14 task specification for synchronizing Platform Admin and Busin
 
 ## Task Storage
 
-.opencode/tasks/pending/2026-09-14/CHASHA-BE-TASK-020.md
+.opencode/tasks/completed/2026-09-14/CHASHA-BE-TASK-020.md
