@@ -16,7 +16,7 @@
 
 # Copyright Notice
 
-Copyright © 2026 Erfan Abouei.
+Copyright © 2026 Mehkam.
 
 All rights reserved.
 

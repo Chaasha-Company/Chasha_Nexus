@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2026 Mehkam.
+ * Proprietary and confidential.
+ *
+ * Part of the Chasha platform.
+ * Owned and maintained by Mehkam.
+ */
 import path from 'path';
 
 import cookieParser from 'cookie-parser';
