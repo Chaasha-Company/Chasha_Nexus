@@ -251,6 +251,146 @@ export const createPermissionDataSeed = async (): Promise<void> => {
       permissionNavigation: null,
     },
 
+    // =========================FAQ Type - Page Permissions=========================
+    {
+      permissionKey: 'faq-types.page.read',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_TYPE_PAGE,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq-type',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.PAGE,
+
+      permissionLabelFa: 'صفحه انواع سوالات متداول',
+      permissionLabelEn: 'FAQ Types Page',
+
+      permissionDescriptionFa: 'دسترسی به صفحه انواع سوالات متداول',
+      permissionDescriptionEn: 'Access to the FAQ types page',
+
+      permissionNavigation: {
+        permissionNavigationVisible: true,
+        permissionNavigationGroupKey: 'faqs',
+        permissionNavigationGroupLabelFa: 'سوالات متداول',
+        permissionNavigationGroupLabelEn: 'FAQs',
+        permissionNavigationParentKey: null,
+        permissionNavigationLabelFa: 'انواع سوالات متداول',
+        permissionNavigationLabelEn: 'FAQ Types',
+        permissionNavigationPath: '/faq-type/list',
+        permissionNavigationIcon: 'list',
+        permissionNavigationOrder: 3,
+      },
+    },
+
+    // =========================FAQ Type - Read Permissions=========================
+    {
+      permissionKey: 'faq-types.get-all.read',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_TYPE_GET_ALL,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq-type',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'دریافت انواع سوالات متداول',
+      permissionLabelEn: 'Get All FAQ Types',
+
+      permissionDescriptionFa: 'دسترسی به API دریافت انواع سوالات متداول',
+      permissionDescriptionEn: 'Access to the get all FAQ types API',
+
+      permissionNavigation: null,
+    },
+
+    {
+      permissionKey: 'faq-types.list-options.read',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_TYPE_LIST_OPTIONS,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq-type',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'دریافت گزینه‌های لیست انواع سوالات متداول',
+      permissionLabelEn: 'Get FAQ Type List Options',
+
+      permissionDescriptionFa: 'دسترسی به API دریافت گزینه‌های موردنیاز لیست انواع سوالات متداول',
+      permissionDescriptionEn: 'Access to the FAQ type list options API',
+
+      permissionNavigation: null,
+    },
+
+    {
+      permissionKey: 'faq-types.detail.read',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_TYPE_DETAIL,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq-type',
+      permissionAction: PermissionActionEnum.READ,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'دریافت جزئیات نوع سوال متداول',
+      permissionLabelEn: 'Get FAQ Type Detail',
+
+      permissionDescriptionFa: 'دسترسی به API دریافت جزئیات یک نوع سوال متداول',
+      permissionDescriptionEn: 'Access to the FAQ type detail API',
+
+      permissionNavigation: null,
+    },
+
+    // =========================FAQ Type - Mutation Permissions=========================
+    {
+      permissionKey: 'faq-types.create.create',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_TYPE_CREATE,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq-type',
+      permissionAction: PermissionActionEnum.CREATE,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'ایجاد نوع سوال متداول',
+      permissionLabelEn: 'Create FAQ Type',
+
+      permissionDescriptionFa: 'دسترسی به API ایجاد نوع سوال متداول',
+      permissionDescriptionEn: 'Access to the FAQ type creation API',
+
+      permissionNavigation: null,
+    },
+
+    {
+      permissionKey: 'faq-types.delete.delete',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_TYPE_DELETE,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq-type',
+      permissionAction: PermissionActionEnum.DELETE,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'حذف نوع سوال متداول',
+      permissionLabelEn: 'Delete FAQ Type',
+
+      permissionDescriptionFa: 'دسترسی به API حذف نوع سوال متداول',
+      permissionDescriptionEn: 'Access to the FAQ type deletion API',
+
+      permissionNavigation: null,
+    },
+
+    {
+      permissionKey: 'faq-types.update.update',
+      permissionSubject: PermissionSubjectEnum.PLATFORM_ADMIN,
+      permissionResource: PermissionResourceEnum.FAQ_TYPE_UPDATE,
+      permissionVersion: 1,
+      permissionModule: 'platform-admin-faq-type',
+      permissionAction: PermissionActionEnum.UPDATE,
+      permissionType: PermissionTypeEnum.ACTION,
+
+      permissionLabelFa: 'بروزرسانی نوع سوال متداول',
+      permissionLabelEn: 'Update FAQ Type',
+
+      permissionDescriptionFa: 'دسترسی به API بروزرسانی یک نوع سوال متداول',
+      permissionDescriptionEn: 'Access to the FAQ type update API',
+
+      permissionNavigation: null,
+    },
+
     // =========================Authorization System - Permission Management=========================
     {
       permissionKey: 'authz.permission.get-all.read',

@@ -46,3 +46,4 @@ export * from '@/shared/v1/database/migrations/1787607373487-Add_Permission_Reso
 export * from '@/shared/v1/database/migrations/1787609774289-Add_Permission_Resource_Platform_Admin_Role_Get_Permissions';
 export * from '@/shared/v1/database/migrations/1787614209562-Add_Permission_Resource_Platform_Admin_Role_Replace_Permissions';
 export * from '@/shared/v1/database/migrations/1787614209563-Add_Permission_Resource_Faq_System';
+export * from '@/shared/v1/database/migrations/1787614209564-Add_Permission_Resource_Faq_Type_System';
