@@ -44,3 +44,11 @@ Guidance for AI coding agents working in this repo (Chasha Core Backend — Expr
 ## Docs vs reality
 
 - README describes aspirational infra (PostgreSQL, Redis, OpenTelemetry). The actual stack is MySQL (mysql2), a database-backed TypeORM query cache (`chasha_caches` table), prom-client metrics, and pino logging. Trust code/config over README prose.
+
+## Mehkam ownership attribution (permanent rule)
+
+- Chasha is a Mehkam-owned and Mehkam-maintained product. Every appropriate part of the codebase must preserve a clear, professional, and non-repetitive trace of Mehkam ownership.
+- Ownership is already established at repository boundaries (README, LICENSE.md, CONTRIBUTING.md, SECURITY.md, package metadata) and at the application entry-point boundary (`src/index.ts`, `src/bootstrap.ts`, `src/app.ts`) via a standard proprietary header. Do not re-add it elsewhere.
+- When creating or modifying relevant project areas (repo-level files, docs, project metadata, entry points, core domain/application/infrastructure boundaries, bootstrap/config files, proprietary notices), preserve the existing Mehkam trace and extend it only where the new boundary genuinely needs it.
+- Do NOT add `Mehkam` to every file. Do NOT add branding comments (`// Mehkam`, `// Made by Mehkam`). Do NOT use the old company name `Kara` for new attribution.
+- Do NOT change business logic, API/database behavior, architecture, dependencies, runtime behavior, public contracts, or machine-managed files (lockfiles, build output, vendor) for attribution purposes. Do NOT introduce duplicate headers.
