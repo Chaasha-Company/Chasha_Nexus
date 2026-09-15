@@ -3,3 +3,4 @@ export * from './detail-admin-faq-request.dto';
 export * from './create-admin-faq-request.dto';
 export * from './delete-admin-faq-request.dto';
 export * from './update-admin-faq-request.dto';
+export * from './faq-type';
