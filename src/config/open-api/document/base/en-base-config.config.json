@@ -503,7 +503,7 @@
         }
       }
     },
-    "/{language_prefix}/admin/auth/refresh-token": {
+    "/{language_prefix}/admin/auth/refresh-token/refresh": {
       "post": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Refresh platform administrator authentication tokens",
@@ -581,7 +581,7 @@
         }
       }
     },
-    "/{language_prefix}/admin/auth/me": {
+    "/{language_prefix}/admin/auth/me/detail": {
       "get": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Check current platform administrator authentication status",
@@ -640,7 +640,7 @@
         }
       }
     },
-    "/{language_prefix}/admin/auth/logout": {
+    "/{language_prefix}/admin/auth/logout/logout": {
       "post": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Logout platform administrator",
@@ -1172,7 +1172,7 @@
         }
       }
     },
-    "/{language_prefix}/admin/authz/role/permissions": {
+    "/{language_prefix}/admin/authz/role/replace-permissions": {
       "put": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Replace Platform Administrator role permissions",
@@ -1337,7 +1337,7 @@
         }
       }
     },
-    "/{language_prefix}/admin/authz/role/permission": {
+    "/{language_prefix}/admin/authz/role/update-permission": {
       "patch": {
         "tags": ["Platform Admin Authentication"],
         "summary": "Update Platform Administrator role permission",
@@ -2535,7 +2535,7 @@
         }
       }
     },
-    "/{language_prefix}/business/auth/refresh-token": {
+    "/{language_prefix}/business/auth/refresh-token/refresh": {
       "post": {
         "tags": ["Business Authentication"],
         "summary": "Refresh business employee authentication tokens",
@@ -2615,7 +2615,7 @@
         }
       }
     },
-    "/{language_prefix}/business/auth/me": {
+    "/{language_prefix}/business/auth/me/detail": {
       "get": {
         "tags": ["Business Authentication"],
         "summary": "Check current business employee authentication status",
@@ -2674,7 +2674,7 @@
         }
       }
     },
-    "/{language_prefix}/business/auth/logout": {
+    "/{language_prefix}/business/auth/logout/logout": {
       "post": {
         "tags": ["Business Authentication"],
         "summary": "Logout business employee",
@@ -3858,7 +3858,7 @@
         }
       }
     },
-    "/{language_prefix}/business/authz/role/permissions": {
+    "/{language_prefix}/business/authz/role/replace-permissions": {
       "put": {
         "tags": ["Business Authorization"],
         "summary": "Replace Business Employee role permissions",
@@ -4023,7 +4023,7 @@
         }
       }
     },
-    "/{language_prefix}/business/authz/role/permission": {
+    "/{language_prefix}/business/authz/role/update-permission": {
       "patch": {
         "tags": ["Business Authorization"],
         "summary": "Update Business Employee role permission",
@@ -4430,7 +4430,7 @@
         }
       }
     },
-    "/{language_prefix}/business/auth/forgot-password": {
+    "/{language_prefix}/business/auth/forgot-password/request": {
       "post": {
         "tags": ["Business Authentication"],
         "summary": "Request business employee password reset",
@@ -5401,7 +5401,7 @@
         }
       }
     },
-    "/{language_prefix}/global/lockup/business-type": {
+    "/{language_prefix}/global/lockup/business-type/get-all": {
       "get": {
         "tags": ["Global Lockup"],
         "summary": "Get all business types",

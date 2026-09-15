@@ -37,7 +37,7 @@ describe('platformAdminRoleRouter', () => {
 
   it('registers exactly the expected role management endpoints', () => {
     expect(routes.map((route) => `${route.methods[0]?.toUpperCase()} ${route.path}`).sort()).toEqual(
-      ['POST /create', 'PATCH /update', 'GET /get-all', 'POST /delete', 'POST /detail', 'POST /assign-permission', 'POST /remove-permission', 'PUT /permissions', 'GET /get-all-permissions', 'GET /list-option', 'PATCH /permission'].sort(),
+      ['POST /create', 'PATCH /update', 'GET /get-all', 'POST /delete', 'POST /detail', 'POST /assign-permission', 'POST /remove-permission', 'PUT /replace-permissions', 'GET /get-all-permissions', 'GET /list-option', 'PATCH /update-permission'].sort(),
     );
   });
 
@@ -49,8 +49,8 @@ describe('platformAdminRoleRouter', () => {
       ['post', '/detail', 'detailPlatformAdminRoleController'],
       ['post', '/assign-permission', 'assignPlatformAdminRolePermissionController'],
       ['post', '/remove-permission', 'removePlatformAdminRolePermissionController'],
-      ['put', '/permissions', 'replacePlatformAdminRolePermissionsController'],
-      ['patch', '/permission', 'updatePlatformAdminRolePermissionController'],
+      ['put', '/replace-permissions', 'replacePlatformAdminRolePermissionsController'],
+      ['patch', '/update-permission', 'updatePlatformAdminRolePermissionController'],
     ];
 
     for (const [method, path, controllerName] of expectations) {
@@ -77,7 +77,7 @@ describe('platformAdminRoleRouter', () => {
   });
 
   it('mounts the permission guard before validation and controller on the replacement endpoint', () => {
-    const chain = find('put', '/permissions')!.handlers;
+    const chain = find('put', '/replace-permissions')!.handlers;
     expect(chain.length).toBe(3);
     expect(chain[0]).not.toBe('replacePlatformAdminRolePermissionsController');
     expect(chain[1]).not.toBe('replacePlatformAdminRolePermissionsController');

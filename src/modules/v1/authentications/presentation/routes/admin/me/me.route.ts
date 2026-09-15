@@ -3,6 +3,6 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get('/', mePlatformAdminController);
+router.get('/detail', mePlatformAdminController);
 
 export { router as platformAdminMeRouter };

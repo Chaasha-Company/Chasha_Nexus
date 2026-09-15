@@ -5,6 +5,6 @@ import { validateBodyMiddleware } from '@/shared/v1/middlewares/validation';
 
 const router = Router();
 
-router.post('/', validateBodyMiddleware(RefreshTokenBusinessValidation), refreshTokenBusinessController);
+router.post('/refresh', validateBodyMiddleware(RefreshTokenBusinessValidation), refreshTokenBusinessController);
 
 export { router as businessRefreshTokenRouter };

@@ -5,7 +5,7 @@ import { validateBodyMiddleware } from '@/shared/v1/middlewares/validation';
 
 const router = Router();
 
-router.post('/', validateBodyMiddleware(ForgotPasswordBusinessValidation), forgotPasswordBusinessController);
+router.post('/request', validateBodyMiddleware(ForgotPasswordBusinessValidation), forgotPasswordBusinessController);
 router.post('/verify', validateBodyMiddleware(ForgotPasswordVerifyBusinessValidation), forgotPasswordVerifyBusinessController);
 
 export { router as businessForgotPasswordRouter };

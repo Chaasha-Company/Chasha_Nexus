@@ -3,6 +3,6 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get('/', meBusinessController);
+router.get('/detail', meBusinessController);
 
 export { router as businessMeRouter };

@@ -80,7 +80,7 @@ router.get(
 );
 
 router.put(
-  '/permissions',
+  '/replace-permissions',
   permissionGuardPlatformAdminMiddleware({
     platformAdminPermissionModule: 'platform-admin-role',
     platformAdminPermissionAction: PermissionActionEnum.UPDATE,
@@ -91,7 +91,7 @@ router.put(
 );
 
 router.patch(
-  '/permission',
+  '/update-permission',
   permissionGuardPlatformAdminMiddleware({
     platformAdminPermissionModule: 'platform-admin-role',
     platformAdminPermissionAction: PermissionActionEnum.UPDATE,

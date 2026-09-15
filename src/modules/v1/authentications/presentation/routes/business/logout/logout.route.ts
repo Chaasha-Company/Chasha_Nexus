@@ -3,6 +3,6 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.post('/', logoutBusinessController);
+router.post('/logout', logoutBusinessController);
 
 export { router as businessLogoutRouter };

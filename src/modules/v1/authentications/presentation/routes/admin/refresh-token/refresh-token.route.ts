@@ -3,6 +3,6 @@ import { refreshTokenPlatformAdminController } from '@/modules/v1/authentication
 
 const router = Router();
 
-router.post('/', refreshTokenPlatformAdminController);
+router.post('/refresh', refreshTokenPlatformAdminController);
 
 export { router as platformAdminRefreshTokenRouter };

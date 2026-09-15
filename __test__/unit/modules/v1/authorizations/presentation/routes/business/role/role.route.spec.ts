@@ -37,7 +37,7 @@ describe('businessRoleRouter', () => {
 
   it('registers exactly the expected role management endpoints', () => {
     expect(routes.map((route) => `${route.methods[0]?.toUpperCase()} ${route.path}`).sort()).toEqual(
-      ['POST /create', 'PATCH /update', 'GET /get-all', 'POST /delete', 'POST /detail', 'POST /assign-permission', 'POST /remove-permission', 'PUT /permissions', 'GET /get-all-permissions', 'GET /list-option', 'PATCH /permission'].sort(),
+      ['POST /create', 'PATCH /update', 'GET /get-all', 'POST /delete', 'POST /detail', 'POST /assign-permission', 'POST /remove-permission', 'PUT /replace-permissions', 'GET /get-all-permissions', 'GET /list-option', 'PATCH /update-permission'].sort(),
     );
   });
 
@@ -49,8 +49,8 @@ describe('businessRoleRouter', () => {
       ['post', '/detail', 'detailBusinessRoleController'],
       ['post', '/assign-permission', 'assignBusinessRolePermissionController'],
       ['post', '/remove-permission', 'removeBusinessRolePermissionController'],
-      ['put', '/permissions', 'replaceBusinessRolePermissionsController'],
-      ['patch', '/permission', 'updateBusinessRolePermissionController'],
+      ['put', '/replace-permissions', 'replaceBusinessRolePermissionsController'],
+      ['patch', '/update-permission', 'updateBusinessRolePermissionController'],
     ];
 
     for (const [method, path, controllerName] of expectations) {

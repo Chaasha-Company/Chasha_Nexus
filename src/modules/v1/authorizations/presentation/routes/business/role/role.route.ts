@@ -80,7 +80,7 @@ router.get(
 );
 
 router.put(
-  '/permissions',
+  '/replace-permissions',
   permissionGuardBusinessMiddleware({
     businessPermissionModule: 'business-employee-role',
     businessPermissionAction: PermissionActionEnum.UPDATE,
@@ -91,7 +91,7 @@ router.put(
 );
 
 router.patch(
-  '/permission',
+  '/update-permission',
   permissionGuardBusinessMiddleware({
     businessPermissionModule: 'business-employee-role',
     businessPermissionAction: PermissionActionEnum.UPDATE,
