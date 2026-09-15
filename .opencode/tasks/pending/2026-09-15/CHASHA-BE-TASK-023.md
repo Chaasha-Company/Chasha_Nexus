@@ -5,7 +5,7 @@
 - **Task ID:** CHASHA-BE-TASK-023
 - **Type:** Feature
 - **Priority:** High
-- **Status:** In Progress
+- **Status:** Completed
 - **Domain:** API Engineering / Backend
 - **Module:** FAQs — Platform Admin
 - **Date:** 2026/09/15
@@ -93,7 +93,32 @@ PATCH /admin/faq/patch
 
 ## Implementation notes
 
-- To be filled during execution.
+`existing-behavior`: reused Early Access Request admin + Platform Admin Role patterns verbatim (POST detail/delete with body id, `PATCH /patch` per task spec, `AtLeastOne` + zod refine for at-least-one-field, TypeORM `softDelete`, `invalidateCache(['faqs'])`, per-route `permissionGuardPlatformAdminMiddleware`, permission migration + seed). `derived-decision`: guard module key is `platform-admin-faq` (authorization pattern, prefixed); update handler compares each supplied field against the persisted row and returns early with no repository call when nothing changed; optional English fields default to `''` on create (columns are non-nullable, schema untouched); `PUT /permissions` → `/replace-permissions` renames from the route-convention cleanup (`d1aaa39`) were respected — new FAQ routes use operation suffixes throughout. `assumption`: no max `paginationLimit` (consistent with existing endpoints).
+
+---
+
+## Final report
+
+Task ID: CHASHA-BE-TASK-023
+Status: Completed
+Implementation summary: Full Platform Admin FAQ CRUD + list-option across presentation/application/domain/infrastructure with 7 `faq_*` permission resources, migration, seeds, and 11 new test specs. Global FAQ untouched and green.
+Files created: 60+ (admin queries/commands/handlers/results, contracts, repos, DTOs, validations, controllers, admin route, migration, 11 specs — see commits).
+Files modified: `AGENTS.md` untouched; `admin.route.ts`, permission seed, `src/index.ts`, shared `ValidationMessage` enum + i18n, `PermissionResourceEnum`, FAQ barrels.
+Database changes: `1787614209563-Add_Permission_Resource_Faq_System` (permission enum only, additive up / restorative down). No schema changes.
+API changes: `GET /api/v1/:lang/admin/faq/get-all`, `GET .../list-option`, `POST .../detail`, `POST .../create`, `POST .../delete`, `PATCH .../patch` (Platform Admin auth + guard).
+Permission changes: `faq_page/get_all/list_options/detail/create/delete/update` resources, module `platform-admin-faq`, seeded for super_admin via grant-all seed.
+Swagger changes: None (admin endpoints are not in the OpenAPI doc — verified).
+Tests: 11 new specs; full suite 38 suites / 155 tests pass.
+Validation results: `tsc --noEmit` ✅, `eslint --max-warnings=0` ✅ (src + new specs), `prettier --check` ✅, `jest` ✅.
+Commit messages:
+
+- `feat(faq): add admin faq queries and repositories`
+- `feat(faq): add admin faq routes and controllers`
+- `feat(faq): add admin faq routes and permissions`
+- `test(faq): verify admin faq crud`
+  Remaining issues:
+- `proposed-improvement`: consider explicit max `paginationLimit`.
+- Pre-existing (out of scope): `platform_admin_authz_role_update_permission` (+business twin) exists in enum/seeds but was never added to the DB enum by any migration; untouched.
 
 ---
 
