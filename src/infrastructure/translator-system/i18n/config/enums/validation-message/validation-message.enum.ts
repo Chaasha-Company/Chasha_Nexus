@@ -435,6 +435,91 @@ export const ValidationMessages = {
     en: 'Error: FAQ type - The value must be either landing or business.',
   },
 
+  [ValidationMessage.FAQ_ID_REQUIRED]: {
+    fa: 'خطا: سوالات متداول - شناسه سوال الزامی است.',
+    en: 'Error: FAQ - The FAQ id is required.',
+  },
+
+  [ValidationMessage.FAQ_ID_INVALID]: {
+    fa: 'خطا: سوالات متداول - شناسه سوال ارسال شده معتبر نیست.',
+    en: 'Error: FAQ - The provided FAQ id is invalid.',
+  },
+
+  [ValidationMessage.FAQ_ID_NOT_FOUND]: {
+    fa: 'خطا: سوالات متداول - سوال موردنظر یافت نشد.',
+    en: 'Error: FAQ - The requested FAQ was not found.',
+  },
+
+  [ValidationMessage.FAQ_TYPE_ID_REQUIRED]: {
+    fa: 'خطا: سوالات متداول - شناسه نوع سوال الزامی است.',
+    en: 'Error: FAQ - The FAQ type id is required.',
+  },
+
+  [ValidationMessage.FAQ_TYPE_ID_INVALID]: {
+    fa: 'خطا: سوالات متداول - شناسه نوع سوال ارسال شده معتبر نیست.',
+    en: 'Error: FAQ - The provided FAQ type id is invalid.',
+  },
+
+  [ValidationMessage.FAQ_TYPE_ID_NOT_FOUND]: {
+    fa: 'خطا: سوالات متداول - نوع سوال موردنظر یافت نشد.',
+    en: 'Error: FAQ - The requested FAQ type was not found.',
+  },
+
+  [ValidationMessage.FAQ_QUESTION_FA_REQUIRED]: {
+    fa: 'خطا: سوالات متداول - متن فارسی سوال الزامی است.',
+    en: 'Error: FAQ - The Persian question text is required.',
+  },
+
+  [ValidationMessage.FAQ_QUESTION_FA_INVALID]: {
+    fa: 'خطا: سوالات متداول - متن فارسی سوال ارسال شده معتبر نیست.',
+    en: 'Error: FAQ - The provided Persian question text is invalid.',
+  },
+
+  [ValidationMessage.FAQ_QUESTION_EN_INVALID]: {
+    fa: 'خطا: سوالات متداول - متن انگلیسی سوال ارسال شده معتبر نیست.',
+    en: 'Error: FAQ - The provided English question text is invalid.',
+  },
+
+  [ValidationMessage.FAQ_ANSWER_FA_REQUIRED]: {
+    fa: 'خطا: سوالات متداول - متن فارسی پاسخ الزامی است.',
+    en: 'Error: FAQ - The Persian answer text is required.',
+  },
+
+  [ValidationMessage.FAQ_ANSWER_FA_INVALID]: {
+    fa: 'خطا: سوالات متداول - متن فارسی پاسخ ارسال شده معتبر نیست.',
+    en: 'Error: FAQ - The provided Persian answer text is invalid.',
+  },
+
+  [ValidationMessage.FAQ_ANSWER_EN_INVALID]: {
+    fa: 'خطا: سوالات متداول - متن انگلیسی پاسخ ارسال شده معتبر نیست.',
+    en: 'Error: FAQ - The provided English answer text is invalid.',
+  },
+
+  [ValidationMessage.FAQ_SLUG_REQUIRED]: {
+    fa: 'خطا: سوالات متداول - شناسه یکتای سوال الزامی است.',
+    en: 'Error: FAQ - The FAQ slug is required.',
+  },
+
+  [ValidationMessage.FAQ_SLUG_INVALID]: {
+    fa: 'خطا: سوالات متداول - شناسه یکتای سوال ارسال شده معتبر نیست.',
+    en: 'Error: FAQ - The provided FAQ slug is invalid.',
+  },
+
+  [ValidationMessage.FAQ_SLUG_ALREADY_EXISTS]: {
+    fa: 'خطا: سوالات متداول - سوالی با این شناسه یکتا قبلا ثبت شده است.',
+    en: 'Error: FAQ - An FAQ with this slug already exists.',
+  },
+
+  [ValidationMessage.FAQ_SORT_ORDER_REQUIRED]: {
+    fa: 'خطا: سوالات متداول - ترتیب نمایش سوال الزامی است.',
+    en: 'Error: FAQ - The FAQ sort order is required.',
+  },
+
+  [ValidationMessage.FAQ_SORT_ORDER_INVALID]: {
+    fa: 'خطا: سوالات متداول - ترتیب نمایش سوال ارسال شده معتبر نیست.',
+    en: 'Error: FAQ - The provided FAQ sort order is invalid.',
+  },
+
   // =========================Platform Admin Role Validation=========================
   [ValidationMessage.PLATFORM_ADMIN_ROLE_IS_ACTIVE_INVALID]: {
     fa: 'خطا: نقش‌های ادمین - مقدار فیلتر وضعیت فعال باید true یا false باشد.',

@@ -6,6 +6,15 @@ export enum PermissionResourceEnum {
   EARLY_ACCESS_REQUEST_DETAIL = 'early_access_request_detail',
   EARLY_ACCESS_REQUEST_UPDATE = 'early_access_request_update',
 
+  // =========================FAQ Management=========================
+  FAQ_PAGE = 'faq_page',
+  FAQ_GET_ALL = 'faq_get_all',
+  FAQ_LIST_OPTIONS = 'faq_list_options',
+  FAQ_DETAIL = 'faq_detail',
+  FAQ_CREATE = 'faq_create',
+  FAQ_DELETE = 'faq_delete',
+  FAQ_UPDATE = 'faq_update',
+
   // =========================Authorization System - Permission Management=========================
   PLATFORM_ADMIN_AUTHZ_PERMISSION_GET_ALL = 'platform_admin_authz_permission_get_all',
   BUSINESS_EMPLOYEE_AUTHZ_PERMISSION_GET_ALL = 'business_employee_authz_permission_get_all',
