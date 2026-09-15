@@ -11,7 +11,7 @@ export const PaginationQueryValidation = (lang: Language) =>
       .string({
         error: t(ValidationMessages, ValidationMessage.PAGINATION_PAGE_REQUIRED, lang),
       })
-      .regex(/^\d+$/, {
+      .regex(/^[1-9]\d*$/, {
         error: t(ValidationMessages, ValidationMessage.PAGINATION_PAGE_INVALID, lang),
       }),
 
@@ -19,7 +19,7 @@ export const PaginationQueryValidation = (lang: Language) =>
       .string({
         error: t(ValidationMessages, ValidationMessage.PAGINATION_LIMIT_REQUIRED, lang),
       })
-      .regex(/^\d+$/, {
+      .regex(/^[1-9]\d*$/, {
         error: t(ValidationMessages, ValidationMessage.PAGINATION_LIMIT_INVALID, lang),
       }),
   });
