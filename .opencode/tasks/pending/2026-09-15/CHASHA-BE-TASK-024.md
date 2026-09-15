@@ -5,7 +5,7 @@
 - **Task ID:** CHASHA-BE-TASK-024
 - **Type:** Feature
 - **Priority:** High
-- **Status:** In Progress
+- **Status:** Completed
 - **Domain:** API Engineering / Backend
 - **Module:** FAQs / FAQ Types — Platform Admin
 - **Date:** 2026/09/15
@@ -93,7 +93,32 @@ POST  /admin/faq-type/delete
 
 ## Implementation notes
 
-- To be filled during execution.
+`existing-behavior`: reused TASK-023 FAQ Admin patterns verbatim (POST detail/delete with body id, `PATCH /patch`, `AtLeastOne` + zod refine, `softDelete`, `invalidateCache`, per-route guard, migration + seed). `derived-decision`: guard module key is `platform-admin-faq-type`; new paginated type repository named `findPaginatedAdminFaqTypeRepository` to avoid collision with the existing unfiltered `findAllAdminFaqTypeRepository` (kept for FAQ list-option filters); existing `FindAdminFaqTypeByIdQuery` reused for detail instead of duplicating; optional English fields default to `''` (columns non-nullable, schema untouched); list-option returns static five-field metadata (no filter dimension exists for types); spec shorthand body `id` mapped to explicit `faqTypeId` per codebase convention.
+
+---
+
+## Final report
+
+Task ID: CHASHA-BE-TASK-024
+Status: Completed
+Implementation summary: Full Platform Admin FAQ Type CRUD + list-option across presentation/application/domain/infrastructure with 7 `faq_type_*` permission resources, migration, seeds, and 11 new test specs. FAQ + Global FAQ untouched and green.
+Files created: ~50 (faq-type queries/commands/handlers/results, contracts, repos, DTOs, validations, controllers, admin route, migration, 11 specs — see commits).
+Files modified: `admin.route.ts`, permission seed, `src/index.ts`, shared `ValidationMessage` enum + i18n, `PermissionResourceEnum`, FAQ barrels.
+Database changes: `1787614209564-Add_Permission_Resource_Faq_Type_System` (permission enum only, additive up / restorative down). No schema changes.
+API changes: `GET /api/v1/:lang/admin/faq-type/list-option`, `GET .../get-all`, `POST .../detail`, `POST .../create`, `PATCH .../patch`, `POST .../delete` (Platform Admin auth + guard).
+Permission changes: `faq_type_page/get_all/list_options/detail/create/delete/update` resources, module `platform-admin-faq-type`, seeded for super_admin via grant-all seed.
+Swagger changes: None (admin endpoints are not in the OpenAPI doc — verified).
+Tests: 11 new specs; full suite 49 suites / 187 tests pass.
+Validation results: `tsc --noEmit` ✅, `eslint --max-warnings=0` ✅ (src + new specs), `prettier --check` ✅, `jest` ✅.
+Commit messages:
+
+- `docs(tasks): add task 24 faq type admin crud`
+- `feat(faq-type): add faq type queries and repositories`
+- `feat(faq-type): add faq type mutations`
+- `feat(faq-type): add admin routes and controllers`
+- `feat(faq-type): add admin routes and permissions`
+- `test(faq-type): verify admin crud`
+  Remaining issues: None.
 
 ---
 
